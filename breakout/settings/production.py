@@ -9,8 +9,8 @@ ALLOWED_HOSTS = ['173.105.71.221',]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wagtaildjango',
-        'USER': 'wagtaildjango',
+        'NAME': config['DATABASE_NAME'],
+        'USER': config['DATABASE_USER'],
         'PASSWORD': config['DATABASE_PASSWORD'],
         'HOST': 'localhost',
         'PORT': '',
