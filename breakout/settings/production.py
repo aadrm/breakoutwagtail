@@ -4,6 +4,8 @@ DEBUG = False
 
 SECRET_KEY = config['SECRET_KEY'] 
 
+ALLOWED_HOSTS = ['173.105.71.221',]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
