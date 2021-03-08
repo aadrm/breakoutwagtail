@@ -1,0 +1,31 @@
+{% load i18n %}
+<div class="whocanplay">
+    <div>
+        <h3 class="  c-color-primary">{% trans "Who can play our Escape Rooms?" %}</h3>
+        <h4 class="  -lower c-color-primary">{% trans "Escape games: an experience in Augsburg fit for everyone" %}</h4>
+    </div>
+    <div class="who-examples-wrapper">
+        <div class="who-example">
+            <div class="who-icon">
+            {% include 'svg/team_building.svg' %}
+            </div>
+            <h4>{% trans "Company Events" %}</h4>
+            <p>{% trans "The best teambuilding activity" %}</p>
+            
+        </div>
+        <div class="who-example">
+            <div class="who-icon">
+            {% include 'svg/party.svg' %}
+            </div>
+            <h4>{% trans "Celebrate your birthday!" %}</h4>
+            <p>{% trans "Start your party with an unforgettable experience in a live escape game. " %}</p>
+        </div>
+        <div class="who-example">
+            <div class="who-icon">
+            {% include 'svg/family.svg' %}
+            </div>
+            <h4>{% trans "For friends and families" %}</h4>
+            <p>{% trans "Live escape games strengthen your bonds as a group" %}</p>
+        </div>
+    </div>
+</div>

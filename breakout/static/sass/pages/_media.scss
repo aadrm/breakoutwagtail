@@ -1,0 +1,70 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.icons-wrapper {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+}
+
+.media-icon-wrapper {
+    display: -ms-grid;
+    display: grid;
+    margin: 3rem 5vw;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    text-align: center;
+    font-size: 1.2rem;
+    -ms-grid-row-align: start;
+        align-self: start;
+    p {
+        margin-top: .3rem;
+        font-size: 1rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: 'Im Fell English', sans-serif;
+        @include break--sm {
+            font-size: 1.3rem;
+        }
+        @include break--md{
+            font-size: 1.8rem;
+        }
+    }
+}
+
+.media-icon {
+    -ms-grid-column-align: center;
+        justify-self: center;
+    display: -ms-grid;
+    display: grid;
+    max-width: 20vw;
+    width: 150px;
+    border-radius: 50%;
+    img {
+        -ms-grid-column-align: center;
+            justify-self: center;
+        -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
+        width: 100%;
+        -o-object-fit: cover;
+           object-fit: cover;
+        -webkit-filter: drop-shadow(7px 7px 5px $brand-dark-a);
+                filter: drop-shadow(7px 7px 5px $brand-dark-a);
+    }
+}

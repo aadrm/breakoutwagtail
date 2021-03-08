@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+{% include 'home/section_main-header.html' %}
+{% include 'booking/section_cart-overlay.html' %}
+<section class="c-section-dark">
+    <div id="rooms" class="c-id-offset"></div>
+    {% include 'home/section_rooms.html' %}
+</section>
+
+<section class="c-section-dark">
+    <div id="online" class="c-id-offset"></div>
+    {% include 'home/section_online.html' %}
+</section>
+
+<section class="c-section-primary">
+    <div id="whocan" class="c-id-offset"></div>
+    {% include 'home/section_whocan.html' %}
+</section>
+
+<section class="c-section-dark">
+    <div id="video" class="c-id-offset"></div>
+    {% include 'home/section_video.html' %}
+</section>
+
+<section class="c-section-primary">
+    <div id="prices" class="c-id-offset"></div>
+    {% include 'home/section_prices.html' %}
+</section>
+
+<section class="c-section-light">
+    <div id="contact" class="c-id-offset"></div>
+    {% comment %} {% include 'home/section_contact.html' %} {% endcomment %}
+    {% comment %} <br><br><br> {% endcomment %}
+    {% include 'home/section_location.html' %}
+</section>
+
+<section class="c-section-dark">
+    <div id="faq" class="c-id-offset"></div>
+    <div class="c-wrapper--md">
+        <h2 class="tac c-color-primary">{% trans "Frequently Asked Questions" %}</h2>
+        <br>
+        <div class="faq-wrapper">
+            {% for block in page.faq %}
+            {% include_block block %}
+            {% endfor %} 
+        </div>
+    </div>
+    {% comment %} {% include 'section_faq.html' %} {% endcomment %}
+</section>
+
+{% endblock content %}
+
+{% block extra_js %}
+    {{ block.super }}
+    <script src =" {% static 'js/accordion.js' %}"  type="text/javascript"></script>
+    <script src =" {% static 'js/deffer.js' %}"  type="text/javascript"></script>
+
+{% endblock extra_js %}

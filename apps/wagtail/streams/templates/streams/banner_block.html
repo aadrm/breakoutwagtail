@@ -1,0 +1,7 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<aside>
+<div class="c-section-banner-separator">
+    {% image self.image fill-1200x400 as img%}
+<img alt="Section separator with a background image." src="{{img.url}}" loading="lazy">
+</div>
+</aside>

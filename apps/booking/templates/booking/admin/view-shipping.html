@@ -1,0 +1,102 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}
+{% block content %}
+
+<div class="content">
+    <br>
+    <h1>Items to be shipped</h1>
+    <br><br>
+    <div id="content-main">
+
+    <table>
+    {% for item in items %}
+    <tr>
+        <td>
+            <form action="{% url 'admin:shipping' %}" method="POST"> 
+            {% csrf_token %}
+                <button type="sumbit" name="shipped" value="{{item.pk}}">Shipped</button>
+            </form>
+        </td>
+        <td>{{item.product}}</td>
+        <td>
+            <a href="{% url 'admin:booking_coupon_change' item.coupon.pk %}">
+                {{item.coupon.code}}
+            </a>
+        </td>
+        <td>{{item.cart.invoice.full_name}}</td>
+        <td>{{item.cart.invoice.street}}</td>
+        <td>{{item.cart.invoice.post}}</td>
+        <td>{{item.cart.invoice.city}}</td>
+        <td>{{item.cart.invoice.order_number}}</td>
+        <td>{{item.cart.invoice.phone}}</td>
+        <td>{{item.cart.invoice.email}}</td>
+        <td>{{item.cart.invoice.payment}}</td>
+        <td>{{item.cart.invoice.order_date}}</td>
+        <td>{{item.cart.total}}</td>
+        <td>{{item.cart.total_after_coupons}}</td>
+
+        <td>
+            <div class="hover-info">
+                Discount 
+                <ul class="hover-info__list">
+                {% for item in order.cart_coupons.all %}
+                    <li>
+                    {{item.coupon}}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+    <h2>Items Shipped (last 10)</h2>
+    <table>
+    {% for item in shipped %}
+    <tr>
+        <td>
+            <form action="{% url 'admin:shipping' %}" method="POST"> 
+            {% csrf_token %}
+                <button type="sumbit" name="not_shipped" value="{{item.pk}}">Not Shipped</button>
+            </form>
+        </td>
+        <td>{{item.product}}</td>
+        <td>
+            <a href="{% url 'admin:booking_coupon_change' item.coupon.pk %}">
+                {{item.coupon.code}}
+            </a>
+        </td>
+        <td>{{item.cart.invoice.full_name}}</td>
+        <td>{{item.cart.invoice.street}}</td>
+        <td>{{item.cart.invoice.post}}</td>
+        <td>{{item.cart.invoice.city}}</td>
+        <td>{{item.cart.invoice.order_number}}</td>
+        <td>{{item.cart.invoice.phone}}</td>
+        <td>{{item.cart.invoice.email}}</td>
+        <td>{{item.cart.invoice.payment}}</td>
+        <td>{{item.cart.invoice.order_date}}</td>
+        <td>{{item.cart.total}}</td>
+        <td>{{item.cart.total_after_coupons}}</td>
+
+        <td>
+            <div class="hover-info">
+                Discount 
+                <ul class="hover-info__list">
+                {% for item in order.cart_coupons.all %}
+                    <li>
+                    {{item.coupon}}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock content %}

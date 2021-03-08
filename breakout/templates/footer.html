@@ -1,0 +1,62 @@
+{% load i18n %}
+{% load menus_tags %}
+{% get_menu "footer-links" as links %}
+
+<div class="footer-content">
+
+    <div class="footer__social">
+        <h2 class="tac">{% trans "Connect with us:" %}</h2>
+        <br>
+        <div class="footer__social__icons">
+            <div class="footer__social__icon">
+                <a rel="nofollow" href="https://www.facebook.com/flypeakheli">
+                    {% include 'svg/icon-facebook.svg' %}
+                </a>
+            </div>
+            {% comment %} <div class="footer__social__icon">
+                <a rel="nofollow" href="https://twitter.com/flypeakheli">
+                    {% include 'svg/icon-twitter.svg' %}
+                </a>
+            </div> {% endcomment %}
+            <div class="footer__social__icon">
+                <a rel="nofollow" href="https://www.instagram.com/flypeakheli">
+                    {% include 'svg/icon-instagram.svg' %}
+                </a>
+            </div>
+            <div class="footer__social__icon">
+                <a rel="nofollow" href="">
+                    {% include 'svg/icon-youtube.svg' %}
+                </a>
+            </div>
+            <div class="footer__social__icon">
+                <a rel="nofollow" href="https://www.linkedin.com/company/peakhelicopter">
+                    {% include 'svg/icon-linkedin.svg' %}
+                </a>
+            </div>
+        </div>
+    </div> 
+    <div class="footer__links">
+        <ul>
+        {% for link in links.menu_items.all %}
+            <li>
+                <a href="{{ link.link }}">{{ link.title }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+
+    <div class="footer__info">
+        email: fly@peakhelicopter.com | {% trans "Tel: " %} +30 698 832 8919
+    </div>
+
+
+    <div class="footer__info">
+        <p>© Peak Helicopter Service GmbH 
+        <span> |
+        <a href="https://antonioadrian.dev" rel="nofollow">Site by Antonio Adrian</a>
+        </p>
+        </span> 
+    </div>
+
+</div>

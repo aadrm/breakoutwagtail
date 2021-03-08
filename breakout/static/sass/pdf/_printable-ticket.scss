@@ -1,0 +1,135 @@
+@page {
+    size: 210mm 297mm;
+    margin-top: 7mm;
+    margin-left: 12mm;
+    margin-right: 8mm;
+    margin-bottom: 0mm;
+}
+
+* {
+    // background-color: $brand-secondary;
+    // width: 360px;
+    padding: 0;
+    margin: 0;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+.p-ticket {
+    border: solid 1px $brand-primary;
+    opacity: .9;
+    position: relative;
+    font-family: Monaco;
+    height: 52mm;
+    width: 180mm;
+    padding: 2mm;
+    // overflow: hidden;
+    span {
+        font-weight: bold;
+        font-size: .85rem;
+        color: $brand-primary;
+    }
+    p {
+        text-transform: uppercase;
+        font-size: 1rem;
+        color: $brand-primary;
+    }
+}
+
+.p-ticket-head {
+    position: relative;
+    display: block;
+    width: 180mm;
+    height: 12mm;
+    // border: solid 1px red;
+    overflow: hidden;
+
+    .p-ticket-img {
+        // border: solid 1px black;
+        // position: absolute;
+        display: inline-block;
+        width: 12mm;
+        height: 12mm;
+        // top: 0;
+        // left: 0;
+        img {
+            height: 100%;
+        }
+    }
+    .p-ticket-ref {
+        position: relative;
+        top: -4mm;
+        // border: solid 1px black;
+        display: inline-block;
+        // margin-left: 12px;
+        width: 70mm;
+        height: 12mm;
+        // text-align: center;
+    }
+    .p-ticket-aircraft {
+        // border: solid 1px black;
+        display: inline-block;
+        position: relative;
+        height: 12mm;
+        width: 60mm;
+        top: -4mm;
+    }
+    .p-ticket-date {
+        // left: 242px;
+        // border: solid 1px black;
+        display: inline-block;
+        position: relative;
+        top: -4mm;
+        width: 28mm;
+        height: 12mm;
+        text-align: right;
+    }
+}
+
+
+.p-ticket-info {
+    position: relative;
+    display: inline-block;
+    // border: solid 1px blue;
+    height: 38mm;
+    width: 138mm;
+    overflow: hidden;
+    .p-ticket-route {
+        margin-top: 2mm;
+        line-height: 7mm;
+        position: relative;
+        display: block;
+    }
+    .p-ticket-passenger {
+        line-height: 7mm;
+        position: relative;
+        display: block;
+        margin-top: 2mm;
+    }
+    .p-ticket-luggage {
+        line-height: 7mm;
+        position: relative;
+        display: block;
+        margin-top: 2mm;
+    }
+    .p-ticket-schedule {
+        line-height: 7mm;
+        position: relative;
+        display: block;
+        margin-top: 2mm;
+    }
+}
+
+.p-ticket-code {
+    position: relative;
+    // border: solid 1px green;
+    display: inline-block;
+    width: 36mm;
+    height: 38mm;
+    overflow: hidden;
+}
+
+
+

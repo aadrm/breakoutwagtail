@@ -1,0 +1,104 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src =" {% static 'js/change_slot_list.js' %}"  type="text/javascript"></script>
+{% endblock extrahead %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}
+
+{% block content %}
+
+<div class="content">
+    <br>
+    <h1>Completed Orders</h1>
+    <br><br>
+    <div id="content-main">
+    <div>
+        <form action="{% url 'admin:order_summary' %}" method="POST">
+            {% csrf_token %}
+            {{form}} 
+            <button type="submit">Filter</button>
+        </form>
+        <form action="{% url 'admin:order_summary' %}">
+            {% csrf_token %}
+            <button type="submit">Reset</button>
+        </form>
+    </div>
+    <br>
+    <table>
+    {% for order in orders %}
+    <tr>
+        <td>{{order.invoice.order_number}}</td>
+        <td>{{order.invoice.full_name}}</td>
+        <td>{{order.invoice.email}}</td>
+        <td>{{order.invoice.phone}}</td>
+        <td>{{order.invoice.payment}}</td>
+        <td>{{order.invoice.order_date}}</td>
+        <td>{{order.total}}</td>
+        <td>{{order.total_after_coupons}}</td>
+        <td>
+            <div class="hover-info">
+                products
+                <ul class="hover-info__list">
+                    {% for item in order.get_valid_items %}
+                    <li>
+                    {{item.product}}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </td>
+        <td>
+            {% if order.get_appointment_items %}
+            <div class="hover-info">
+                appointments 
+                <ul class="hover-info__list">
+                {% for item in order.get_appointment_items %}
+                    <li>
+                        <button
+                            class="js-button-change-slot"
+                            data-order={{order.invoice.order_number}}
+                            data-customer={{order.invoice.full_name}}
+                            data-currentslot="{{ item.slot.pk }}"
+                            data-cartitem="{{item.pk}}"
+                            data-posturl="{% url 'admin:change_slot_list' %}"
+                            data-frompage="order_summary"
+                        >
+                            {{item.slot}}
+                        </button>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            ---
+            {% endif %}
+        </td>
+        <td>
+            {% if order.cart_coupons.all %}
+            <div class="hover-info">
+                Discount 
+                <ul class="hover-info__list">
+                {% for item in order.cart_coupons.all %}
+                    <li>
+                    {{item.coupon.code}} | {{item.discount}}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% else %}
+            ---
+            {% endif %}
+        </td>
+
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock content %}

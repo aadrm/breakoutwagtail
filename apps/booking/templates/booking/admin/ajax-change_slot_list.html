@@ -1,0 +1,33 @@
+<div class="js-change-slot-response change-slot-response">
+    <div class="change-slot-mask" onclick="closeList()">
+    </div>
+    <div class="change-slot-wrapper">
+        <div class="change-slot-current">
+            <p>{{order}} | {{customer}}</p>
+            <p><b> Current slot:<br>{{current_slot}}</b></p>
+        </div>
+        <div class="change-slot-available">
+            <P>Change to:</P>
+            <ul>
+                {% for slot in slots %}
+                {% if slot.is_available %}
+                <li>
+                    <form action="{% url 'admin:change_slot' %}" method="post">
+                    {% csrf_token %}
+                    <input name="cart_item" value="{{cart_item}}" type="hidden">
+                    <input name="new_slot" value="{{slot.pk}}" type="hidden">
+                    <input name="frompage" value="{{frompage}}" type="hidden">
+                    <button
+                    type="sumbit"
+                    name="{{from_page}}"
+                    >
+                        {{slot}}
+                    </button>
+                    </form>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

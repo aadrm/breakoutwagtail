@@ -1,0 +1,12 @@
+{% extends 'email/email_main.html' %}
+{% load i18n %}
+{% block body %}
+<p>
+{% trans "Dear" %} {{invoice.full_name}},
+</p>
+<p>
+{% trans "We have received your order. You can see a summary below." %}
+</p>
+{% include 'booking/section-completed_order.html' %}
+{% endblock body %}
+

@@ -1,0 +1,96 @@
+.info-wrapper {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.info-content {
+    margin: 2rem;
+    counter-reset: counter-info;
+}
+
+.info-date {
+    text-align: right;
+}
+
+.info-item {
+    margin-top: 2rem;
+}
+
+.info-title {
+    font-size: 1.8em;
+    margin-bottom: 1rem;
+}
+
+.info-paragraph {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+}
+
+.info-paragraph-enum {
+    &::before{
+        counter-increment: counter-info;
+        content: counter(counter-info)'. ';
+    }
+}
+
+.info-item-xl {
+    font-size: 1.3em;
+}
+
+.info-item-lg {
+    font-size: 1.1em;
+}
+
+.info-item-enum {
+    &::before{
+        counter-increment: counter-item;
+        content: counter(counter-item)'. ';
+    }
+}
+
+.info-item-bullet {
+    display: list-item;
+    list-style-type: disc;
+    list-style-position: inside;
+}
+
+
+/*
+imprint
+*/
+
+.imprint-company{
+    text-align: center;
+    h2, p {
+        font-family: sans-serif;
+        font-size: 1.1rem;
+    }
+}
+
+.imprint-details{
+
+    margin: 20px auto;
+}
+
+.imprint-separator{
+    height: 20px;
+}
+
+.imprint-line{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 5px 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    label{
+        text-align: right;
+
+        -ms-grid-column-align: end;
+
+            justify-self: end;
+        overflow: hidden;
+        &::after {
+            content: ":"
+        }
+    }
+}

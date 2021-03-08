@@ -1,0 +1,81 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.message {
+    position: relative;
+    padding: 12px 40px 12px 12px;
+}
+
+.message__close-message {
+    position: absolute;
+    display: block;
+    height: 30px;
+    width: 30px;
+    top: 50%;
+    right: 20px;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    &:hover {
+        cursor: pointer;
+    }
+    &::before,
+    &::after {
+        position: absolute;
+        content: '';
+        display: block;
+        height: 3px;
+        width: 50%;
+        background: #000;
+        top: 50%;
+        left: 50%;
+    }
+    &::before {
+        -webkit-transform: translateY(-50%) translateX(-50%) rotate(45deg);
+            -ms-transform: translateY(-50%) translateX(-50%) rotate(45deg);
+                transform: translateY(-50%) translateX(-50%) rotate(45deg);
+
+    }
+    &::after {
+        -webkit-transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+            -ms-transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+                transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+    }
+}
+
+.message-warning {
+    background: #ffc;
+    span {
+        &::before,
+        &::after {
+            background: #ee2;
+
+        }
+    }
+}
+
+.message-error {
+    background: #fcc;
+    span {
+        &::before,
+        &::after {
+            background: #e22;
+
+        }
+    }
+}
+
+.message-info {
+    background: #cfc;
+    span {
+        &::before,
+        &::after {
+            background: #2e2;
+
+        }
+    }
+}

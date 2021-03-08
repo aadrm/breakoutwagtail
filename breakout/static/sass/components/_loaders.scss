@@ -1,0 +1,65 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.loading-window {
+    height: 400px;
+    width: 400px;
+}
+
+.ld-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: $brand-dark-2;
+}
+
+.ld-spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+        &::after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        -webkit-animation: ld-dual-ring 1.2s linear infinite;
+                animation: ld-dual-ring 1.2s linear infinite;
+    }
+}
+
+@-webkit-keyframes ld-dual-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
+
+@keyframes ld-dual-ring {
+    0% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+    }
+}
+  

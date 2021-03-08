@@ -1,0 +1,24 @@
+<table>
+<tr class="available-slots-response">
+    <td colspan="7">
+        <div class="available-slots__data">
+            <h2 class="available-slots__data__title">{{slots.0.start|date}}</h2>
+            {% for slot in slots %}
+            {% if slot.is_available %}
+            <button 
+                data-slot="{{slot.pk}}"
+                data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
+                class="available-slots__data__slot"
+            >
+            {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+            </button> 
+            {% else %}
+            <div class="available-slots__data__slot__unavailable">
+            {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </td>
+</tr>
+</table>

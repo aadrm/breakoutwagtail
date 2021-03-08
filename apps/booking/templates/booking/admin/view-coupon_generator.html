@@ -1,0 +1,44 @@
+{% extends 'wagtailadmin/base.html' %}
+{% load wagtailadmin_tags i18n %}
+{% load static %}
+{% block titletag %}{% trans "Dashboard" %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+{% endblock %}
+
+{% block content %}
+    <header class="merged nice-padding">
+        <div class="row">
+            <div class="col1">
+            <div class="col9">
+                <h1>{% block branding_welcome %}{% blocktrans %}Coupon Generator{% endblocktrans %}{% endblock %}</h1>
+            </div>
+        </div>
+    </header>
+
+
+<div class="admin-content">
+    <div id="content-main">
+    <form class="" action="{% url 'booking:coupon_generator' %}" method="POST">
+    {% csrf_token %}
+    <table class="admin-table admin-form_as_table">
+    {{ form.as_table }}
+    </table>
+    <button class="button button-secondary button-small" type="Submit">Generate</button>
+    </form>
+    </div>
+</div>
+{% endblock content %}
+{% block extra_js %}
+<script src =" {% static 'js/change_slot_list.js' %}"  type="text/javascript"></script>
+{% endblock %}
+{% comment %} {% block content %} {% endcomment %}
+
+
+{% comment %} {% endblock content %} {% endcomment %}

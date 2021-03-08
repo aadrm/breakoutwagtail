@@ -1,0 +1,23 @@
+.cookie-bar {
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    padding: 2rem;
+    z-index: 99;
+    height: auto !important;
+    line-height: 25px;
+    background: #eee;
+}
+
+.cookie-bar__buttons {
+    display: block;
+    a {
+        margin: 1rem;
+        display: inline-block;
+        padding: .5rem 1rem;
+        box-shadow: 2px 2px 4px black;
+        &:hover {
+            background: $brand-primary;
+        }
+    }
+}

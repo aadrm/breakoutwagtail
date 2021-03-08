@@ -1,0 +1,21 @@
+{% load i18n %}
+<header class="main-header container">
+    <div class="header-overlay overlay-bottom"></div>
+    <div class="main-header-title-container">
+        <div class="main-header-title">
+            <h1 class="c-stamp"> 
+                <span class="main-header-breakout">Breakout  <br> Escape Room </span>
+                {% comment %} <span class="main-header-escaperoom"> <br> <strong>Escape Room<strong></span> {% endcomment %}
+                <span class="main-header-augsburg"> <br> Augsburg</span>
+            </h1>
+            <br class="padding-break">
+        </div>
+    </div>
+    <div class="banner">
+        <div class="banner-inner">
+            <p>{% trans "Complete your order in just a minute" %}</p>
+            <a href="{% url 'booking:coupons' %}" class="c-nav-anchor c-anchor-secondary">{% trans "Coupons" %}</a>
+            <a href="{% url 'booking:book' %}" class="c-nav-anchor c-anchor-secondary">{% trans "Book" %}</a>
+        </div>
+    </div>
+</header>

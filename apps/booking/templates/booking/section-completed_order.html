@@ -1,0 +1,104 @@
+    {% load i18n %}
+ <div class="c-inner-width--sm">
+    <h3 class="">{% trans "Order Number: " %} {{invoice.order_number}}</h3>
+
+    <br><br>
+    
+    {% if payment == 'transfer' %}
+    <br>
+    <p>
+    {% trans 'You have selected "Bank Transfer" as the payment method.' %}
+    <br>
+    {% blocktrans with transfer_amout=cart.total_after_coupons %}
+    Please transfer the amount of €{{transfer_amout}} to our bank account before your appointment.
+    {% endblocktrans %}
+    <br>
+    {% trans "See our bank account details below:" %}
+    </p>
+    <br>
+    <p><b>Breakout Escape Room GmbH</b></p>
+    <p><b>Deutche Bank</b></p>
+    <p><b>IBAN:</b> DE42 7207 0024 0035 3821 00</p>
+    <p><b>BIC:</b> DEUTDEDB720</p>
+    {% endif %}
+    <br>
+
+    <h4 class="">{% trans "Summary" %}</h4>
+    <table class="form-remove__table">
+        <tbody>
+            {% for item in cart.get_valid_items %}
+            <tr class="js-cart-item">
+                <td>{{item.product}}</td>
+                <td>€{{item.price}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <td><b>{% trans "Total:" %} €{{cart.total_after_coupons}}</b></td>
+        </tfoot>
+    </table>
+
+
+    <br><br>
+
+    {% if appointments|length > 1 %}
+    <h4 class="">{% trans "You have the following appointments" %}</h4>
+    {% elif appointments %}
+    <h4 class="">{% trans "You have the following appointment" %}</h4>
+    {% endif %}
+    {% if appointments %}
+    <br>
+
+    <table class="form-remove__table">
+        <tbody>
+
+            {% for appointment in appointments %}
+            <tr>
+                <td>
+                {{appointment.slot.start|date:'d F Y'}}
+                {% trans "at" %}
+                {{appointment.slot.start|date:'G:i'}}
+                {% trans "for the room" %}
+                {{appointment.slot.room}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody> 
+    </table>
+    <p>{% blocktrans %}
+    Remember that you have to arrive 15 minutes before your session begins to allow enough time for you to perpare 
+    and to give you a short explanation.
+    {% endblocktrans %}</p>
+    {% endif %}
+
+    <br><br>
+    
+    {% if coupons|length > 1 %}
+    <h4 class="">{% trans "Your Coupon Codes" %}</h4>
+    {% elif coupons %}
+    <h4 class="">{% trans "Your Coupon Code" %}</h4>
+    {% endif %}
+
+    <br>
+
+
+    <table class="form-remove__table">
+        <tbody>
+
+            {% for coupon in coupons %}
+            <tr>
+                <td>
+                {{coupon.coupon.code}}
+                {% trans "valued at" %}
+                €{{coupon.coupon.amount}}
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody> 
+    </table>
+    <p>{% blocktrans %}
+
+    {% endblocktrans %}</p>
+
+    </div>

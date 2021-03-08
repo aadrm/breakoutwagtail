@@ -1,0 +1,5 @@
+{% block body %}
+{% endblock body %}
+
+&copy; {% now "Y"%} Breakout Escape Room.
+Breakout Escape RoomGmbH, Riedingestrasse 26c, D-86152 Augsburg

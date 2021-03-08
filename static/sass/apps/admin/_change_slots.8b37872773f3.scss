@@ -1,0 +1,50 @@
+.change-slot-response {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+.change-slot-mask {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: $brand-secondary-3;
+    position: absolute;
+    z-index: 7;
+}
+
+.change-slot-wrapper {
+    z-index: 8;
+    border-radius: 4px;
+    background: $brand-light-c;
+    box-shadow: 3px 3px 8px black;
+    position: absolute;
+    max-width: 500px;
+    right: 50%;
+    bottom: 50%;
+    overflow: hidden;
+    transform: translateX(50%) translateY(50%)
+}
+
+.change-slot-current {
+    padding: 1rem;
+    background: lightgray;
+}
+
+.change-slot-available {
+    height: 500px;
+    padding: 1rem;
+    background: white;
+    ul {
+        overflow-y: scroll;
+        height: 400px;
+        margin: 0 auto;
+        li {
+            list-style-type: none;
+            button {
+                text-align: right;
+                width: 100%
+            }
+        }
+    }
+}

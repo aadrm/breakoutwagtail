@@ -1,0 +1,22 @@
+.continue-shopping__wrapper {
+    padding: 2rem;
+}
+
+.continue-shopping__buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    a {
+        display: inline-block;
+        padding: 1rem;
+        text-align: center;
+    }
+    @include break--sm {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.checkout-button--disabled {
+    width: 100%;
+    padding: 1rem;
+}

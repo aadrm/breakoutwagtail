@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+
+{% block content %}
+<header class="header--small">
+    <h2 class="">{% trans "Order Completed" %}</h2>
+</header>
+<main>
+    <section class="c-section-light">
+        <div class="c-wrapper--xs">
+            <p>{% trans "An email with the information in this page has been sent to the email you provided during the booking process, if you don't see it in your inbox it might be on it's way so please allow a couple of minutes, also make sure to check your spam folder." %}</p>
+            <br>
+            <br>
+            {% include 'booking/section-completed_order.html' %}
+        </div>
+    </section>
+</main>
+
+{% endblock content %}

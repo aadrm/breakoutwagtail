@@ -1,0 +1,96 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src =" {% static 'js/change_slot_list.js' %}"  type="text/javascript"></script>
+{% endblock extrahead %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}
+
+{% block content %}
+
+<div class="content">
+    <br>
+    <h1>Record Payments</h1>
+    <br><br>
+    <div id="content-main">
+    <br>
+    <h2>Due List</h2>
+    <table>
+    {% for inv in due_list %}
+    <tr>
+        <td>{{inv.invoice.order_number}}</td>
+        <td>{{inv.invoice.full_name}}</td>
+        <td>{{inv.invoice.email}}</td>
+        <td>{{inv.invoice.phone}}</td>
+        <td>{{inv.invoice.payment}}</td>
+        <td>{{inv.invoice.cart.total_after_coupons}}</td>
+        {% comment %} <td>
+            <a href="{% url 'admin:booking_invoice_change' invoice.pk %}">
+            <button>
+                Manual Change
+            </button>
+            </a>
+        </td> {% endcomment %}
+        <form action="{% url 'admin:record_payment' %}" method="POST">
+        {% csrf_token %}
+        <td>{{inv.form.invoice.as_hidden}}</td>
+        <td>{{inv.form.amount}}</td>
+        <td><button type=sumbit>save</button></td>
+        </form>
+        <td>
+            <div class="hover-info">
+                appointments 
+                <ul class="hover-info__list">
+                {% for item in inv.invoice.cart.get_appointment_items %}
+                -{{item.slot}}
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    <h2>To be paid list</h2>
+    <table>
+    {% for inv in inv_list %}
+    <tr>
+        <td>{{inv.invoice.order_number}}</td>
+        <td>{{inv.invoice.full_name}}</td>
+        <td>{{inv.invoice.email}}</td>
+        <td>{{inv.invoice.phone}}</td>
+        <td>{{inv.invoice.cart.total_after_coupons}}</td>
+        {% comment %} <td>
+            <a href="{% url 'admin:booking_invoice_change' invoice.pk %}">
+            <button>
+                Manual Change
+            </button>
+            </a>
+        </td> {% endcomment %}
+        <form action="{% url 'admin:record_payment' %}" method="POST">
+        {% csrf_token %}
+        <td>{{inv.form.invoice.as_hidden}}</td>
+        <td>{{inv.form.amount}}</td>
+        <td><button type=sumbit>save</button></td>
+        </form>
+        <td>
+            <div class="hover-info">
+                appointments 
+                <ul class="hover-info__list">
+                {% for item in inv.invoice.cart.get_appointment_items %}
+                -{{item.slot}}
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock content %}

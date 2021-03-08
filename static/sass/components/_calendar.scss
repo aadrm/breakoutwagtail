@@ -1,0 +1,267 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.calendar {
+    box-shadow: 3px 3px 8px $brand-dark-a;
+    
+    caption {
+        text-shadow: 0 0 10px $brand-dark;
+        box-shadow: 3px 3px 8px $brand-dark-a;;
+        caption-side: top;
+        color: $brand-light;
+    }
+    margin: 0 auto;
+    position: relative;
+    max-width: 660px;
+    width: 100%;
+}
+
+.cal-title {
+    padding: 1rem
+}
+
+.cal-image {
+    height: 150px;
+    overflow: hidden;
+    img {
+        width: 100%;
+        -o-object-position: 50% 50%;
+           object-position: 50% 50%;
+    }
+}
+
+.cal-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+}
+
+.cal-nav__btn {
+    cursor: pointer;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    padding: 1rem;
+    &:hover {
+        background: $brand-secondary-5;
+    }
+
+}
+
+
+.weekdays-row {
+    background: $brand-secondary;
+    color: $brand-light;
+    th {
+        padding: .5rem;
+    }
+}
+
+.cell {
+    width: 14.28%;
+    padding-top: 14.28%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    border: 1px solid $brand-secondary-3;
+    position: relative;
+}
+
+.cell--not-in-month {
+    background: $brand-secondary-1;
+}
+
+
+.cell__inner {
+    background: $brand-secondary-1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+    cursor: not-allowed;
+}
+
+.cell__day-number-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+}
+
+.cell__day-number {
+    width: 100%;
+    line-height: 100%;
+    text-align: center;
+}
+
+.cell__available-data {
+    position: absolute;
+    background: $brand-light;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    -webkit-transition: all $t--quick;
+    -o-transition: all $t--quick;
+    transition: all $t--quick;
+    &:hover {
+        background: $brand-primary;
+    }
+}
+
+
+.calendar-spinner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 91;
+}
+
+#cell--last-clicked {
+    background: $brand-secondary-3;
+    border-bottom: none;
+}
+.available-slots-response {
+    background: $brand-secondary-3;
+    width: 100%;
+    td {
+        padding: 1rem;
+    }
+}
+
+.available-slots__data {
+    padding: 1rem;
+    border-radius: .5rem;
+    background: $brand-light;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+}
+
+.available-slots__data__slot,
+.available-slots__data__slot__unavailable {
+    display: block;
+    color: $brand-light;
+    font-size: 1rem;
+    margin: .6rem auto;
+    padding: 1rem;
+    max-width: 800px;
+    width: 80%;
+    border-radius: 5px;
+    border: none;
+
+}
+
+.available-slots__data__slot {
+    background: $brand-primary;
+    cursor: pointer;
+    &:hover {
+        background: $brand-primary-9;
+    }
+}
+
+.available-slots__data__slot__unavailable {
+    border: 2px solid $brand-secondary-9;
+    color: $brand-secondary-9;
+    background: $brand-secondary-3;
+} 
+
+#available-spinner {
+    display: none;
+}
+
+.available-spinner__spinner-wrapper {
+    height: 200px;
+    width: 100%;
+}
+
+
+.booking-form-response {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+}
+
+.booking-form-blocker {
+    height: 100%;
+    width: 100%;
+    background: $brand-dark-6;
+}
+
+.booking-form-wrapper {
+    max-height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+        -ms-transform: translateY(-50%) translateX(-50%);
+            transform: translateY(-50%) translateX(-50%);
+    z-index: 91;
+    max-width: 100vw;
+    width: 450px;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.booking-form__exit-cross {
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+.booking-form__exit-cross__inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        background: $brand-light-a;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        border-radius: 3px;
+        top: 50%;
+        -webkit-transition: all $t--quick;
+        -o-transition: all $t--quick;
+        transition: all $t--quick;
+    }
+    &::before {
+        -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+    }
+    &::after{
+        -webkit-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+    }
+    &:hover {
+        &::before,
+        &::after {
+            background: $brand-light;
+        }
+    }
+}
+
+.booking-form-spinner {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    display: none;
+}

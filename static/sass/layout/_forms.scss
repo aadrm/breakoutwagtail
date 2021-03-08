@@ -1,0 +1,249 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+
+.standard-form {
+    background: #ddd;
+    border-radius: .3rem;
+    -webkit-box-shadow: 3px 3px 8px $brand-dark;
+            box-shadow: 3px 3px 8px $brand-dark;
+    overflow: hidden;
+    width: 100%;
+    p {
+        label {
+            display: block;
+            width: 100%;
+            margin-bottom: .2rem;
+        }
+        select {
+            display: block;
+            width: 100%;
+            padding: .8rem;
+            border-radius: .3rem;
+        }
+    }
+    input {
+        width: 100%;
+        padding: .8rem;
+        margin: .5rem auto;
+        border-radius: .3rem;
+    }
+}
+
+.standard-form__header {
+    background: $brand-primary;
+    color: $brand-light;
+    min-height: 30px;
+    padding: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    span {
+        text-transform: uppercase;
+    }
+}
+
+.standard-form__body {
+    padding: 1rem;
+}
+.standard-form__buttons {
+    margin: 2rem auto;
+}
+
+.standard-button {
+    display: block;
+    background: $brand-light;
+    -webkit-transition: all $t--quick;
+    -o-transition: all $t--quick;
+    transition: all $t--quick;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    &:hover {
+        cursor: pointer;
+        opacity: .7;
+    }
+}
+
+.standard-button--emphasis {
+    background: $brand-primary;
+    color: $brand-light;
+}
+
+.standard-button--secondary {
+    background: $brand-secondary;
+
+}
+
+.booking-form__slot-info {
+    text-align: center;
+    margin: 3rem 0 1rem;
+    padding: 1rem .5rem;
+    border-radius: .3rem;
+    width: 100%;
+    background: $brand-light;
+}
+
+.checkout-form__wrapper {
+    margin: 1rem auto;
+    padding: .5rem 1rem;
+    background: $brand-secondary-1;
+    max-width: $width--lg;
+}
+
+.redeem-form__body {
+    p {
+        width: 100%;
+        height: 2rem;
+        input {
+            width: calc(100% - 130px);
+            height: 100%;
+        }
+        button {
+            height: 100%;
+            width: 120px;
+            background: $brand-primary;
+            color: $brand-light;
+            &:hover {
+                background: $brand-primary-8;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.invoice-form__body {
+    p {
+        label {
+            margin-bottom: .2rem;
+        }
+        select {
+            display: block;
+            width: 100%;
+            padding: .8rem;
+            border-radius: .3rem;
+        }
+        input{
+            &[type=text],
+            &[type=email] {
+                width: 100%;
+                padding: .8rem;
+                margin: .5rem auto;
+                border-radius: .3rem;
+            }
+        }
+    }
+    ul {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    li {
+        line-height: 1.8em;
+    }
+
+}
+
+
+label{
+    &.required {
+        &::after {
+
+            content: '*';
+            color: red;
+        }
+    }
+}
+
+
+.form-remove__table {
+    width: 100%;
+    margin: 1rem auto;
+    border-top: 2px solid $brand-dark-1;
+    tbody{
+        tr {
+            height: 3rem;
+            border-bottom: 2px solid $brand-dark-1;
+        }
+    }
+    tfoot {
+        line-height: 1.8em;
+    }
+
+}
+
+.remove-button {
+    position: relative;
+    display: block;
+    float: right;
+    height: 20px;
+    width: 20px;
+    background: none;
+    opacity: .5;
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+    &::before,
+    &::after {
+        position: absolute;
+        display: block;
+        content: "";
+        background: red;
+        width: 100%;
+        height: 3px;
+        top: 50%;
+        left: 50%;
+    }
+    &::before {
+        -webkit-transform: translateY(-50%) translateX(-50%) rotate(45deg);
+            -ms-transform: translateY(-50%) translateX(-50%) rotate(45deg);
+                transform: translateY(-50%) translateX(-50%) rotate(45deg);
+
+    }
+    &::after {
+        -webkit-transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+            -ms-transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+                transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+    }
+}
+
+.payment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    span {
+        display: block;
+        background: $brand_secondary_8;
+        color: $brand_light;
+        padding: .5rem 1rem;
+        text-align: center;
+        border-radius: 3px;
+        min-width: 150px;
+    }
+    input {
+        display: none;
+        &:checked + span {
+            background: $brand_primary;
+        }
+        &:hover + span {
+            // border:4px solid $brand_light;
+            box-shadow: 0px 0px 20px $brand_primary;
+
+        }
+    }
+    @include break--sm {
+        flex-direction: row;
+    }
+
+}

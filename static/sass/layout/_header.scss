@@ -1,0 +1,124 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+.secondary-header {
+  position: relative;
+  // width: 100vw;
+  height: 50vh;
+  background: $brand-secondary-e;
+  color: $brand-light;
+  h1 {
+    padding: 1rem;
+    width: 100vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    text-shadow: 0 0 8px $brand-dark;
+    z-index: 3;
+  }
+}
+
+.secondary-header__image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+}
+
+.secondary-header__mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background: $brand-primary-3;
+  z-index: 2;
+}
+
+
+.main-header {
+  position: relative;
+  min-height: 100vh;
+  align-items: center;
+  color: $brand-light;
+  background-image: url(../img/photos/escape-room-lock.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  overflow: hidden;
+  z-index: 0;
+  box-shadow: inset 0 0 200px black;
+}
+
+.header-overlay {
+  position: absolute;
+  z-index: .1;
+}
+
+.overlay-bottom {
+  height: 25%;
+  width: 100%;
+  background: linear-gradient(transparent, $brand-dark 80%);
+  bottom: 0;
+}
+
+.header--small {
+  position: relative;
+  height: 350px;
+  background: $brand-secondary;
+  text-align: center;
+  h1,
+  h2 {
+    position: absolute;
+    line-height: 250px;
+    width: 100%;
+    top: 100px;
+    color: $brand-light;
+
+  }
+}
+
+/*
+Main header
+*/
+
+.main-header-title-container{
+  position: relative;
+  margin-top: 250px;
+  padding-top: calc(250px - 18vw);
+  left: calc(12vw - 42px);
+  z-index: 3;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+}
+
+.main-header-title {
+      align-self: center;
+  h1 {
+    color: white;
+    text-shadow: 0 0 8px black;
+    line-height: 0;
+  }
+  .main-header-breakout {
+    display: block;
+    font-size: responsive 36px 96px;
+    font-range: 420px 1200px;
+    line-height: 1em;
+
+  }
+  .main-header-augsburg {
+    font-size: responsive 20px 40px;
+    font-range: 420px 650px;
+    line-height: .2em;
+    display: inline-block;
+    float: right;
+   }
+}

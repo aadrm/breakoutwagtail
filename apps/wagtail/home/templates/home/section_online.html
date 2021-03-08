@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+<div class="section-online c-inner-width--sm">
+    <div class=" tac c-color-primary ">
+        <h2>{% trans "Play at home" %}</h2>
+    </div>
+    <br>
+    <div class="online-wrapper">
+            <a href="https://breakout-escaperoom-de.cluequest.co.uk">
+        <div class="online-image-wrapper">
+                <img src="{% static 'img/cluequest/pce-collection.jpg' %}" alt="Games Collection">
+        </div>
+            </a>
+        <div class="online-text-wrapper">
+            <div class="  -left">
+                <h3>{% trans "Online Game Series Print+Cut+Escape" %}</h2>
+            </div>
+            <p class="c-text-md">{% trans "Unique puzzles with a great balance of difficutlty. The story gets told through the puzzles and entertaining videos." %}</p>
+            <ul>
+                <li>{% trans "1.5-2 hours game play" %}</li> 
+                <li>{% trans "Play at home or via zoom" %}</li> 
+                <li>{% trans "Online game interface" %}</li> 
+                <li>{% trans "Fun for friends and families" %}</li> 
+            </ul>
+            <p>{% trans "*At the moment we can offer this series in English only." %}</p>
+        </div>
+    </div>
+    <div class="online-button-wrapper">
+        <a href="https://breakout-escaperoom-de.cluequest.co.uk" class="c-primary-anchor c-anchor c-text-md online-button" href="">{% trans "See offer" %}</a>
+    </div>
+</div>

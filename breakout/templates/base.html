@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
         <meta charset="utf-8" />
         <title>
             {% block title %}
@@ -17,8 +19,11 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {# Google Fonts #}
+        {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com"> {% endcomment %}
+        {% comment %} <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet"> {% endcomment %}
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/breakout.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -27,14 +32,18 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        {% include 'navbar.html' %}
 
         {% block content %}{% endblock %}
 
+    </body>
+    <footer>
+        {% include 'footer.html' %} 
+    </footer>
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/breakout.js' %}"></script>
-
+        {% include 'cookie_consent.html' %}
+        {% comment %} <script type="text/javascript" src="{% static 'js/peak.js' %}"></script> {% endcomment %}
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
-    </body>
 </html>

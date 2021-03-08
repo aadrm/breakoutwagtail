@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if cart.number_of_valid_items > 0 %}
+<aside class="cart-overlay">
+
+    <div class="cart-overlay__inner">
+        <a href="{% url 'booking:checkout' %}" class="cart-overlay__link">
+            <div class="cart-overlay__icon-wrapper">
+                {% include 'svg/cart.svg' %}
+            </div>
+            <p class="cart-overlay__items-amount">
+                {{cart.number_of_valid_items}}
+            </p>
+        </a>
+    </div>
+</aside>
+{% endif %}

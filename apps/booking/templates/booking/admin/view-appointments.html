@@ -1,0 +1,129 @@
+{% extends 'wagtailadmin/base.html' %}
+{% load wagtailadmin_tags i18n %}
+{% load static %}
+{% block titletag %}{% trans "Dashboard" %}{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+
+{% endblock %}
+
+{% block content %}
+    <header class="merged nice-padding">
+        <div class="row">
+            <div class="col1">
+            <div class="col9">
+                <h1>{% block branding_welcome %}{% blocktrans %}Appointments{% endblocktrans %}{% endblock %}</h1>
+            </div>
+        </div>
+    </header>
+
+
+<div class="admin-content">
+    <div id="content-main">
+    <div class="filters">
+        <form action="{% url 'admin:appointments' %}" method="POST">
+            {% csrf_token %}
+            <ul>
+                {{form.as_ul}} 
+            </ul>
+            <br>
+            <button class="button button-secondary button-small" type="submit">Filter</button>
+        </form>
+        <form action="{% url 'admin:appointments' %}">
+            {% csrf_token %}
+            <button class="button button-secondary button-small" type="submit">Reset</button>
+        </form>
+    </div>
+    <br>
+    <table class="admin-table">
+    <tr>
+    <th>Edit</th> 
+    <th>Date <br> Time</th>
+    <th> Room <br> Players </th>
+    <th> Order <br> Name</th>
+    <th>Email<br>Phone</th>
+    {% comment %} <th>Discounts</th>
+    <th>Appointments</th>
+    <th>Couponse</th> {% endcomment %}
+    </tr>
+    {% for appointment in appointments%}
+    <tr>
+        <td>
+            <button
+                class="js-button-change-slot button button-secondary button-small"
+                data-order={{appointment.cart.invoice.order_number}}
+                data-customer={{appointment.cart.invoice.full_name}}
+                data-currentslot="{{ appointment.slot.pk }}"
+                data-cartitem="{{appointment.pk}}"
+                data-posturl="{% url 'admin:change_slot_list' %}"
+                data-frompage="appointments"
+            >
+                Change
+            </button> 
+            <div></div>
+            <button class="button button-secondary button-small">
+                Advanced 
+            </button>
+        </td>
+        <td>{{appointment.slot.start|date:"Y M d"}} <br> {{appointment.slot.start|date:"H:i"}}</td>
+        <td>{{appointment.product.family.room}} <br> {{appointment.product.players}} players</td>
+        <td>Nr.:{{appointment.cart.invoice.order_number}} <br> {{appointment.cart.invoice.full_name}} </td>
+        <td>{{appointment.cart.invoice.email}} <br>{{appointment.cart.invoice.phone}} </td>
+        {% comment %} <td>{{appointment.created}}</td> {% endcomment %}
+        {% comment %} <td>
+            <a href="{% url 'admin:booking_cartitem_change' appointment.pk %}">
+
+            </a>
+        </td> {% endcomment %}
+        {% comment %} <td>
+            <div class="hover-info">
+                Discount 
+                <ul class="hover-info__list">
+                {% for item in appointments.cart_coupons.all %}
+                    <li>
+                    {{item.coupon}} |
+                    {{item.discount}}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div class="hover-info">
+                appointments 
+                <ul class="hover-info__list">
+                {% for item in order.get_appointment_items %}
+                -{{item.slot}}
+                {% endfor %}
+                </ul>
+            </div>
+        </td>
+        <td>
+            <div class="hover-info">
+                coupons 
+                <ul class="hover-info__list">
+                {% for item in order.cart_coupons.all %}
+                {{item.coupon}}
+                {% endfor %}
+                </ul>
+            </div>
+        </td> {% endcomment %}
+
+    </tr>
+    {% endfor %}
+    </table>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src =" {% static 'js/change_slot_list.js' %}"  type="text/javascript"></script>
+{% endblock %}
+{% comment %} {% block content %} {% endcomment %}
+
+
+{% comment %} {% endblock content %} {% endcomment %}

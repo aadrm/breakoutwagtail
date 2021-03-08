@@ -1,0 +1,33 @@
+{% load i18n %}
+<div class=" tac c-color-primary">
+    <h2>{% trans "Our escaper rooms in Augsburg" %}</h2>
+</div> 
+<br>
+
+
+<div class="c-inner-width--md">
+    <div class="rooms-wrapper">
+    
+        {% for room in rooms %}
+        <div class="rooms-room">
+            <a href="{% url 'booking:book' %}#{{room.pk}}">
+                <div class="rooms-picture-outer">
+                    <img src="{{room.photo.url}}" alt="Escape Room {{room.name}}">
+                    <div class="room-title">
+                        <div class="room-title-text">
+                            <h2 class="">{{room.name}}</h2>
+                        </div>
+                        <div class="rooms-booknow-wrapper">
+                            <p> {% trans "Book now" %}</p>
+                        </div>
+                    </div>
+                    <div class="room-text">
+                        <p>{{room.description}}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+        
+    </div>
+</div>

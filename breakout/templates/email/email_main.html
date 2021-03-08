@@ -1,0 +1,51 @@
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>email</title>
+<style>
+body {
+    background-color: #eee;
+    width: 450px;
+    margin: 0 auto;
+}
+section {
+    margin: 2rem auto;
+    background-color: #fff;
+}
+header {
+    padding: 1rem;
+    background-color: #465054;
+
+}
+main {
+    padding: 1rem;
+}
+footer {
+    color: #444;
+    background-color: #eee;
+    margin: 1rem auto;
+    text-align: center;
+    font-size: .8rem;
+}
+
+</style>
+</head>
+<body>
+<section>
+    {% comment %} <header>
+    <img src="127.0.0.1:8000/{% static 'base.htmlimg/svg/phs-logo.svg' %}" alt="">
+    <h1>Peak Helicopter Service</h1>
+    </header> {% endcomment %}
+    <main>
+        {% block body %}
+        {% endblock body %}
+    </main>
+    <footer>
+        <p>&copy; {% now "Y"%} Breakout Escape Room</p>
+        <p>Breakout Escape Room GmbH, Riedingerstrasse 26c, D-86153 Augsburg</p>
+    </footer>
+</section>
+
+</body>

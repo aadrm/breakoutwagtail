@@ -1,0 +1,15 @@
+{% load i18n %}
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="map__wrapper">
+    <div class="map__container">
+        <label class="map-click-to-activate">
+            <input type="checkbox" >
+            <span>
+                <p>
+                {% trans "click to activate map" %}
+                </p>
+            </span>
+        </label>
+        <iframe class="map__iframe" src="https://www.google.de/maps/d/u/0/embed?mid=1IJ3Gqi179OXLAAKAPwfu5YCPbsEnwZkF" frameborder="0" width="1280" height="600" allowfullscreen></iframe>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+{% load static %}
+{% load i18n %}
+
+<div id="contact" class="l-id-offset"></div>
+<section class="{% if self.background %}c-section-secondary{% else %}c-section-light{% endif %}">
+    <div class="contact">
+    {% if self.title %}
+    <h2 class="tac">{{ self.title }}</h2>
+    <br>
+    {% endif %}
+
+        <div class="contact__methods">
+            <a target="_blank" href="https://t.me/flypeakheli">
+            <div class="contact__methods__method">
+                <div class="contact__methods__method__icon">
+                    {% include "svg/icon-telegram.svg" %}
+                </div>
+                <div  class="contact__methods__method__label">
+                    <p>Telegram</p>
+                </div>
+            </div>
+            </a>
+
+            <a target="_blank" href="https://wa.me/306988328919">
+            <div class="contact__methods__method">
+                <div class="contact__methods__method__icon">
+                    {% include "svg/icon-whatsapp.svg" %}
+                </div>
+                <div  class="contact__methods__method__label">
+                    <p>WhatsApp</p>
+                </div>
+            </div>
+            </a>
+
+            <a target="_blank" href="viber://chat/?number=%2B306988328919">
+            <div class="contact__methods__method">
+                <div class="contact__methods__method__icon">
+                    {% include "svg/icon-viber.svg" %}
+                </div>
+                <div  class="contact__methods__method__label">
+                    <p>Viber</p>
+                </div>
+            </div>
+            </a>
+
+            <a target="_blank" href="tel:+306988328919">
+            <div class="contact__methods__method">
+                <div class="contact__methods__method__icon">
+                    {% include "svg/icon-phone.svg" %}
+                </div>
+                <div  class="contact__methods__method__label">
+                    <p>{% trans "Phone" %}</p>
+                </div>
+            </div>
+            </a>
+
+            <a target="_blank" href="">
+            <div class="contact__methods__method">
+                <div class="contact__methods__method__icon">
+                    {% include "svg/icon-email.svg" %}
+                </div>
+                <div  class="contact__methods__method__label">
+                    <p>Email</p>
+                </div>
+            </div>
+            </a>
+
+        </div>
+    </div>
+
+
+
+</section>

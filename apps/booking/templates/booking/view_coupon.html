@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block header %}
+    {{ block.super }}
+    <header class="header--small">
+        <h2 class="">{% trans "Coupons" %}</h2>
+    </header>
+    {% include 'booking/section_cart-overlay.html' %}
+{% endblock header %}
+
+{% block content %}
+<main class="coupons-main">
+    <section class="c-section-secondary">
+        <div class="c-section-inner-sm">
+            <div class="coupons-intro"> 
+                <div class="coupons-pictures">
+                    <img src="{% static 'img/coupons/coupon-front.jpg' %}" alt="{% trans "Image of the front side of our coupons" %}" class="coupons-pictures_pic2">
+                    <img src="{% static 'img/coupons/coupon-back.jpg' %}" alt="{% trans "Image of the back side of our coupons" %}" class="coupons-pictures_pic1">
+                </div>
+                <div class="coupons-info">
+                    <h2 class="">
+                    {% trans "Looking for an original gift idea?" %} 
+                    </h2>
+                    <br> 
+                    <p class="c-text-sm"> 
+                    {% trans "Then gift that special person a voucher for" %}
+                    <b>
+                    {% trans "Breakout Escape Room Augsburg" %}
+                    </b>
+                    </br>
+                    <br>
+                    <b>{% trans "It's quick and easy:" %}</b>
+                    {% trans "You can have your present ready in less than a Minute, valid for all Rooms." %}
+                    {% trans "Our coupons are valid for three years, and can be redeemed online." %}
+
+                    </p>
+                </div> 
+            </div>
+        </div>
+        {% include 'booking/section_coupons.html' %}
+    </section>
+    <section id="pdf-templates" class="c-section-light">
+        {% include 'booking/section_pdfcoupons.html' %}
+    </section>
+</main>
+
+{% endblock content %}

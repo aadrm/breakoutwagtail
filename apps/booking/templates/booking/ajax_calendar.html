@@ -1,0 +1,94 @@
+{% load i18n %}
+<table class="calendar" cellpadding="0" cellspacing="0" width="100%">
+    <caption style="background: rgb({{calendar.room.red}},{{calendar.room.green}},{{calendar.room.blue}})">
+        <div class="cal-title">
+            <h3 class="-sm">{{calendar.room}}</h3>
+        </div>
+        <div class="cal-image">
+            <img src="{{calendar.room.photo.url}}" alt="">
+        </div>
+        <div class="cal-nav">
+            <div 
+                class="cal-nav__btn js-cal-button" 
+                data-room="{{calendar.room.pk}}" 
+                data-month="{{calendar.previous_month}}"
+                data-year="{{calendar.previous_year}}"
+            >
+                <span>&lt;</span>
+            </div>
+            <div 
+                class="cal-nav__btn js-cal-button" 
+                data-room="{{calendar.room.pk}}" 
+            >
+                <span>{% trans "Today" %}</span>
+            </div>
+            <div 
+                class="cal-nav__btn js-cal-button" 
+                data-room="{{calendar.room.pk}}" 
+                data-month="{{calendar.next_month}}"
+                data-year="{{calendar.next_year}}"
+            >
+                <span>&gt;</span>
+            </div>
+        </div>
+        <div class="cal-title">
+            <P>{{ calendar.room }} - {{ calendar.first_day_month|date:"F Y"}}</P>
+        </div> 
+    </caption>
+    <tr class="weekdays-row">
+        <th>{% trans "Mo" %}</th>
+        <th>{% trans "Tu" %}</th>
+        <th>{% trans "We" %}</th>
+        <th>{% trans "Th" %}</th>
+        <th>{% trans "Fr" %}</th>
+        <th>{% trans "Sa" %}</th>
+        <th>{% trans "Su" %}</th>
+    </tr>
+    {% for week in calendar.month_days %}
+    <tr class="data-row">
+        {% for day in week %}
+
+        {% comment %} {% if day|date:"w"|add:'0' != 0 and day|date:"w"|add:'0' != 5 %} {% endcomment %}
+        {% if day.date|date:"m"|add:"0" == calendar.month|add:"0" %}
+        <td class="cell">
+            <div class="cell__inner">
+                {% if day.available %}
+                <button 
+                    class="cell__available-data js-day" 
+                    data-url="{% url 'booking:ajax_day_availability' %}" 
+                    data-year="{{day.date|date:"Y"}}" 
+                    data-month="{{day.date|date:"m"}}" 
+                    data-day="{{day.date|date:"d"}}" 
+                    data-room="{{calendar.room.pk}}" >
+                    <p class="cell__day-number">
+                        {{day.date|date:"j"}}
+                    </p>
+                    {% comment %} <span class="cell__inner__available_slots">{{ day.available_slots}} {% trans "available" %}</span> {% endcomment %}
+                </button>
+                {% else %}                
+                <div class="cell__day-number-wrapper">
+                    <p class="cell__day-number">
+                        {{day.date|date:"j"}}
+                        {{day.available}}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        {% else %}
+        <td class="cell cell--not-in-month">
+        {% endif %}
+
+        {% comment %} <ul>
+        {% for slot in slots %}
+            <p>
+            {% if day.date|date:"m"|add:"0" == slot.start|date:"m"|add:"0" %}
+            {% endif %} 
+            </p>
+        {% endfor %}
+        <p>{{ available }}</p>
+        </ul> {% endcomment %}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>

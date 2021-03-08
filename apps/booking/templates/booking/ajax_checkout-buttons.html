@@ -1,0 +1,6 @@
+{% load i18n %}
+{% if payment.method == "paypal" %}
+{{paypal_form.render}}
+{% else %}
+<button class="standard-button standard-button--emphasis" type="submit">{% trans "Confirm Purchase" %}</button> 
+{% endif %}

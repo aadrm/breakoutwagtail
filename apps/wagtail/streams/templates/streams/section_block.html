@@ -1,0 +1,17 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<section 
+class="
+{% if self.section_dark %}c-section-secondary {% else %} c-section-light{% endif %}">
+{% if self.uri_fragment %}
+<div id="{{ self.uri_fragment }}" class="c-section-id-offset"></div>
+{% endif %}
+<div class="c-wrapper--lg">
+<h2 class=" {% if self.center_title %}tac{% endif %} {% if self.decorate_title %}c-section__title{% endif %}">{{ self.title }}</h2>
+{% for block in self.stream %}
+    <br>
+    <div class="mystream">
+    {% include_block block %}
+    </div>
+{% endfor %}
+</div>
+</section>

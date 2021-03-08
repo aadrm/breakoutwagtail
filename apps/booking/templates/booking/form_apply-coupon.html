@@ -1,0 +1,15 @@
+{% load i18n %}
+<div class="redeem-form__body">
+<form action="javascript:void(0);">
+    <br>
+    <p>
+    {{apply_coupon_form.code}}
+    <button
+    type="" 
+    id="js-apply-coupon-button" 
+    data-applycouponurl="{% url 'booking:ajax_apply_coupon' %}"
+    onclick="applyCoupon()">
+    {% trans "Redeem" %}</button> 
+    </p>
+</form>
+</div>

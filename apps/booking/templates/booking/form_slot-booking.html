@@ -1,0 +1,13 @@
+{% load i18n %}
+<form action="{% url 'booking:slot_to_cart' %}" method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_product">{% trans "Players" %}</label>
+        {{slot_booking_form.product}}            
+    </p>
+    {{slot_booking_form.slot_id.as_hidden}}
+    <div class="standard-form__buttons">
+        <button class="standard-button standard-button--emphasis" type="submit">{% trans "Book Session" %}</button> 
+        <button class="standard-button js-close-onclick" >{% trans "Cancel" %}</button>
+    </div>
+</form>

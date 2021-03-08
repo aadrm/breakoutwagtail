@@ -1,0 +1,38 @@
+{% load static %}
+{% load i18n %} 
+ <div class="p-coupon">
+    <div class="p-coupon__logo">
+        <img src="{% static 'img/brand/logo_breakout_white.png' %}" alt="logo">
+    </div>
+    <div class="divider divider--right"></div>
+    <div class="p-coupon__title">
+        <div class="p-coupon__title__text">
+            <div>
+                <p>{% trans "GIFT VOUCHER" %}</p>
+            </div>
+        </div>
+        {% comment %} <div class="p-coupon__players">
+            <div class="p-coupon__players__wrapper">
+                <img src=" {% static 'img/icons/player.png' %} " alt="">
+                <div>
+                <p>2</p>
+                </div>
+            </div>
+        </div> {% endcomment %}
+    </div>
+    <div class="divider divider--left"></div>
+    <div class="p-coupon__image">
+        <img src=" {% static 'img/photos/escape-room-lock.jpg' %} " alt="img">
+    </div>
+    <div class="p-coupon__body">
+        <p class="text-sm">{% trans "visit our site under:" %}</p>
+        <p class="text-md"><a href="https://www.breakout-escaperoom.de">www.breakout-escaperoom.de</a></p>
+        <p class="text-sm">{% trans "and book your game with the code:" %}</p>
+    </div>
+    <div class="p-coupon__code">
+        <div class="p-coupon__code__field">
+            <p>{{coupon.code}}</p> 
+        </div> 
+    </div>
+</div>
+

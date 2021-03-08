@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'breakout';
+    src: 
+        // url(../fonts/capture_it/capture_it.woff2) format('woff2'),
+        url(static/fonts/capture_it/capture_it.woff2) format('woff2'),
+        url(../fonts/capture_it/capture_it.woff) format('woff'),
+        url(../fonts/capture_it/capture_it.ttf) format('truetype'),
+        ;
+}

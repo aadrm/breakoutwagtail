@@ -1,0 +1,179 @@
+{% load static %}
+{% load i18n %}
+<div class="coupons-wrapper c-section-inner-sm">
+    <div class="coupons-columns c-text-md">
+
+        <div class="coupon-method">
+            <!-- <div class="coupon-method__header"> -->
+                    <div class="coupon-method_mainico">
+                        {% include 'svg/cp-via_email.svg' %}
+                    </div>
+                    <div class="coupon-title">
+                        <h3>{% trans "Email coupon" %}</h3>
+                        <br>
+                    </div>
+                <div class="coupon-step">
+                    <div class="coupon-step_icon">
+                        {% include 'svg/cp-order_online.svg' %}
+                        <div class="coupon-intrastep"></div>
+                    </div>
+                    <div class="coupon-step_instruction">
+                        <p>
+                        {% trans "Order online" %}
+                        </p>
+                    </div>
+                </div>
+                <!-- <div class="coupon-intrastep"></div> -->
+                <div class="coupon-step">
+                    <div class="coupon-step_icon">
+                        {% include 'svg/cp-code.svg' %}
+                        <div class="coupon-intrastep"></div>
+                    </div>
+                    <div class="coupon-step_instruction">
+                        <p>
+                        {% trans "Immediately get your code" %}
+                        </p>
+                    </div>
+                </div>
+                <!-- <div class="coupon-intrastep"></div> -->
+                <div class="coupon-step">
+                    <div class="coupon-step_icon">
+                    {% include 'svg/cp-print.svg' %}
+                    </div>
+                    <div class="coupon-step_instruction">
+                        <p>
+                        {% trans "Print a pdf template" %}
+                        </p>
+                    </div>
+                </div>
+                
+            <div class="paypal-multi-button">
+                <form action="{% url 'booking:add_product' %}" method="POST">
+                    {% csrf_token %}
+                    {{online_coupon_form}}
+                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Add to cart" %}</button> 
+                </form>
+            </div>
+        </div>
+
+        <div class="coupon-method">
+            <div class="coupon-method_mainico">
+            {% include 'svg/cp-via_post.svg' %}
+            </div>
+            <div class="coupon-title">
+                <h3>{% trans "Get by mail" %}</h3>
+                <br>
+            </div>
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-order_online.svg' %}
+                    <div class="coupon-intrastep"></div>
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Order online" %}
+                    </p>
+                </div>
+            </div>
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-code.svg' %}
+                    <div class="coupon-intrastep"></div>
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Immediately receive your code" %}
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="coupon-intrastep"></div> -->
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-mailbox.svg' %}
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Receive at home" %}
+                    </p>
+                </div>
+            </div>
+            <div class="paypal-multi-button">
+                <form action="{% url 'booking:add_product' %}" method="POST">
+                    {% csrf_token %}
+                    {{voucher_form}}
+                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Add to cart" %}</button> 
+                </form>
+            </div>
+        </div>
+
+        <div class="coupon-method">
+            <div class="coupon-method_mainico">
+                {% include 'svg/cp-via_fetch.svg' %}
+            </div>
+            <div class="coupon-title">
+                <h3>{% trans "Pick it up" %}</h3>
+
+                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et maxime impedit eos at.</p> -->
+                <br>
+            </div>
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-phone.svg' %}
+                    <div class="coupon-intrastep"></div>
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Contact us" %}
+                    </p>
+                </div>
+            </div>
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-visit.svg' %}
+                    <div class="coupon-intrastep"></div>
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Pay us a visit" %}
+                    </p>
+                </div>
+            </div>
+            <div class="coupon-step">
+                <div class="coupon-step_icon">
+                    {% include 'svg/cp-handed.svg' %}
+                </div>
+                <div class="coupon-step_instruction">
+                    <p>
+                    {% trans "Receive your coupon" %}
+                    </p>
+                </div>
+            </div>
+            <div class="paypal-multi-button">
+                <p class="c-text-sm">
+                {% trans "We are at the escape room only when there are sessions, please make sure we are there if you would like to pick up your coupon" %}
+                    <a href="/#contact" class="standard-button standard-button--emphasis" type="submit">{% trans "Contact us" %}</a> 
+                </form>
+                </p>
+            </div>
+        </div>
+  
+        <!-- <div class="coupon-method">
+            <div class="coupon-title">
+                <h3>Gutschein per post bekommen</br>(+ 5.00 EUR Versand)</h3>
+            </div>
+            <div class="coupon-info">
+                <img src="/static/img/icon/escaperoom-post.svg" alt="Escape room gutscheine via post">
+                <p>Wenn Du den Gutschein auch als Geschenkkarte per Post erhalten möchtest, wähle diese Option. Wir senden diese innerhalb von 3 Tagen zu (Versandkosten: 5 Euro). Sie erhalten außerdem eine E-Mail mit Ihrem Gutscheincode, der sofort gültig ist.
+                </p>
+            </div>
+            <div class="paypal-multi-button">
+                <?php 
+                // include_once $_SERVER['DOCUMENT_ROOT'] . '/static/includes/paypal-buttons/' . 'paypal-button-coupon.php'
+                ?>
+            </div>
+            
+        </div> -->
+        
+            
+    </div>
+</div>

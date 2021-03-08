@@ -1,0 +1,117 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.c-nav-anchor {
+    text-transform: uppercase;
+    text-shadow: 0 0 3px $brand-dark;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    color: $brand-light-b;
+    position: relative;
+    padding: .6rem;
+    font-weight: bold;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        -webkit-transition: all .2s;
+        -o-transition: all .2s;
+        transition: all .2s;
+        opacity: 0;
+        height: 24px;
+        width: 24px;
+    }
+    &::before {
+        left: 12px;
+        top: 12px;
+        border-top: 3px solid $brand-primary;
+        border-left: 3px solid $brand-primary;
+        
+    }
+    &::after {
+        right: 12px;
+        bottom: 12px;
+        border-bottom: 3px solid $brand-primary;
+        border-right: 3px solid $brand-primary;
+    }
+    &:hover {
+        color: $brand-light;
+        &::before,
+        &::after {
+            opacity: 1;
+        }
+        &::before {
+            left: 0;
+            top: 0;
+        }
+        &::after {
+            right: 0;
+            bottom: 0;
+        }
+    }
+}        
+
+.c-anchor {
+    text-align: center;
+    display: block;
+    padding: .5rem 2rem;
+    box-sizing: border-box;
+    border: 3px solid transparent;
+}
+
+.c-primary-anchor {
+    background: $brand-primary;
+    color: $brand-dark;
+    text-shadow: none;
+    &:hover {
+        color: $brand-primary;
+        background: transparent;
+        border: 3px solid $brand-primary;
+        &::before,
+        &::after {
+            content: none;
+        }
+    }
+}
+
+
+.c-anchor-secondary {
+    color: $brand-light;
+    background: $brand-secondary-a;
+    &::before,
+    &::after {
+        content: none;
+    }
+    &:visited {
+        color: $brand-light;
+    }
+    &:hover {
+        background: $brand-primary;
+    }
+}
+
+.c-anchor-disabled {
+    color: $brand-light;
+    background: $brand-secondary-7;
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+
+.c-inline-button {
+    border-radius: 5px;
+    color: $brand-primary;
+    cursor: pointer;
+    font-weight: 800;
+    padding: 6px;
+    &:hover {
+        color: $brand-dark;
+    }
+}

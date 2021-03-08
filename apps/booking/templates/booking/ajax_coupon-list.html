@@ -1,0 +1,38 @@
+
+{% load i18n %}
+<div id="js-coupons-in-cart" class="">
+{% if messages %}
+    <ul class="messagelist js-coupon-messages">
+    {% for message in messages %}
+    <li class="message message-{{ message.tags }}">{{ message }} <span class="message__close-message" onclick="removeMessage(this)"></span> </li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% if cart.cart_coupons.all.count > 0 %}
+<table class="form-remove__table c-text-sm">
+{% for cart_coupon in cart.cart_coupons.all %}
+<tr>
+    <td>{{cart_coupon.coupon.code}}</td>
+    {% if cart_coupon.discount > 0 %}
+    <td class="s-cgreen s-tar">
+    -€{{cart_coupon.discount}}
+    {% else %}
+    <td class="s-cred s-tar">
+    {% trans "Coupon not applicable to your cart" %}
+    {% endif %}
+    </td>
+    
+    <td>
+        <button 
+        data-removecouponurl="{% url 'booking:ajax_remove_coupon' %}"
+        data-cart="{{cart.pk}}"
+        data-coupon="{{cart_coupon.pk}}"
+        class="remove-button"
+        onclick="removeCoupon(this)"
+        type="submit"></button> 
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+</div>

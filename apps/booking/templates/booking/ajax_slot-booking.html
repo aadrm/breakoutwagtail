@@ -1,0 +1,22 @@
+{% load i18n %}
+<div class="booking-form-response">
+    <div class="booking-form-blocker js-close-onclick"></div>
+    <div action="" class="booking-form-wrapper">
+        <div class="standard-form">
+            <div class="standard-form__header">
+                <span>{% trans "Book Session" %}</span>
+                <div class="booking-form__exit-cross js-close-onclick">
+                    <div class="booking-form__exit-cross__inner"></div>
+                </div>
+            </div>
+            <div class="standard-form__body">
+                <div class="booking-form__slot-info">
+                    <p class="-sm">{{slot.room}}</p>
+                    <p>{{slot.start|date:"M"}} {{slot.start|date:"d"}} - {{slot.start|date:"H:i"}}</p>
+                    <p>{{slot.duration}} {% trans "minutes" %}</p>
+                </div>
+                {% include 'booking/form_slot-booking.html' %}
+            </div>
+        </div>
+    </div>
+</div>

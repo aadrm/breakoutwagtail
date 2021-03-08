@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="stream__card">
+    <div class="stream__card__head">
+        {% image self.image width-512  as card_image %}
+        <h3 class="stream__card__head__title">{{ self.title }}</h3>
+        <img class="stream__card__head__img" src="{{ card_image.url }}" alt="{{card_image.alt}}"> 
+    </div>
+    <div class="stream__card__body">
+        <p class="stream__card__body__text">{{ self.text }}</p>
+        {% if self.button %}
+        <br>
+        <a href="{{ self.button.url }}"class="button button--primary"><span>{{ self.button_text }}</span></a>
+        {% endif %}
+    </div>
+</div>

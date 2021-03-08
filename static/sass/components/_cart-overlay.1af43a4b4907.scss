@@ -1,0 +1,72 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+.cart-overlay {
+    position: fixed;
+    top: 80px;
+    right: 2rem;
+    background: $brand-dark;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    color: $brand-light;
+    overflow: hidden;
+    z-index: 99;
+    border: 2px solid $brand-secondary-6;
+    opacity: .7;
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+}
+
+.cart-overlay__inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.cart-overlay__link {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.cart-overlay__icon-wrapper {
+    position: absolute;
+    height: 60%;
+    width: 60%;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+        -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+    border-radius: 50%;
+    svg {
+        height: 100%;
+        width: 100%;
+        fill: $brand-light;
+    }
+}
+
+.cart-overlay__items-amount,
+.cart-overlay__items-amount--empty {
+    background: red;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 1.6rem;
+    top: .8rem;
+    right: .8rem;
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.cart-overlay__items-amount--empty {
+    background: $brand-secondary;
+
+}

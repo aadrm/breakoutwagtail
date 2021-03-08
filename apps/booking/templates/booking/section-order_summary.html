@@ -1,0 +1,17 @@
+    {% load i18n %}
+<div id="">
+<h4 class="">{% trans "Summary" %}</h4>
+<table class="form-remove__table">
+<tbody>
+{% for item in cart.get_valid_items %}
+<tr class="js-cart-item">
+    <td>{{item.product}}</td>
+    <td>€{{item.price}}</td>
+</tr>
+{% endfor %}
+</tbody>
+<tfoot>
+    <td><b>{% trans "Total:" %} €{{cart.total_after_coupons}}</b></td>
+</tfoot>
+</table>
+</div>
