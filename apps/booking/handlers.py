@@ -32,7 +32,6 @@ def show_me_the_money(sender, **kwargs):
             if invoice:
                 invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
                 invoice.phone=ipn_obj.contact_phone,
-                invoice.email=ipn_obj.payer_email,
                 invoice.street=ipn_obj.address_street,
                 invoice.post=ipn_obj.address_zip,
                 invoice.city=ipn_obj.address_city,
