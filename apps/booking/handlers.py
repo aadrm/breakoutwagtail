@@ -10,7 +10,7 @@ def show_me_the_money(sender, **kwargs):
     print('ipn signal received')
     ipn_obj = sender
     print(ipn_obj.payment_status)
-    if ipn_obj.payment_status == ST_PP_COMPLETED:
+    if ipn_obj.payment_status == ST_PP_COMPLETED or ipn_obj.payment_status == ST_PP_PENDING:
         # WARNING !
         # Check that the receiver email is the same we previously
         # set on the `business` field. (The user could tamper with
@@ -28,18 +28,30 @@ def show_me_the_money(sender, **kwargs):
         print(ipn_obj.mc_gross, price)
         if ipn_obj.mc_gross == price and ipn_obj.mc_currency == 'EUR':
             payment = PaymentMethod.objects.get(method='paypal')
-            invoice = Invoice(
-                full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
-                phone=ipn_obj.contact_phone,
-                email=ipn_obj.payer_email,
-                street=ipn_obj.address_street,
-                post=ipn_obj.address_zip,
-                city=ipn_obj.address_city,
-                company='Through paypal',
-                is_terms=True,
-                is_privacy=True,
-                payment=payment,
-            )
+            invoice = cart.invoice
+            if invoice:
+                invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
+                invoice.phone=ipn_obj.contact_phone,
+                invoice.email=ipn_obj.payer_email,
+                invoice.street=ipn_obj.address_street,
+                invoice.post=ipn_obj.address_zip,
+                invoice.city=ipn_obj.address_city,
+                invoice.is_terms=True,
+                invoice.is_privacy=True,
+                invoice.payment=payment,
+            else:
+                invoice = Invoice(
+                    full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
+                    phone=ipn_obj.contact_phone,
+                    email=ipn_obj.payer_email,
+                    street=ipn_obj.address_street,
+                    post=ipn_obj.address_zip,
+                    city=ipn_obj.address_city,
+                    is_terms=True,
+                    is_privacy=True,
+                    payment=payment,
+                )
+
             print(invoice)
             invoice.save()
             cart.invoice = invoice

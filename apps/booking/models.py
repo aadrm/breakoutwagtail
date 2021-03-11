@@ -214,9 +214,10 @@ class Cart(models.Model):
             item.save()
 
     def paypal_preapprove(self):
-        self.status = 2
-        self.invoice.commit_order()
-        self.save()
+        if self.status < 1:
+            self.status = 2
+            self.invoice.commit_order()
+            self.save()
 
     def approve_cart(self):
         """

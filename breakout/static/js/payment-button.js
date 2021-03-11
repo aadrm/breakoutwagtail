@@ -25,7 +25,7 @@ function changeInCheckoutForm() {
     console.log(emailok);
     buttonDiv.innerHTML = "";
     buttonDiv.appendChild(disabledButton);
-    let customer_email = document.getElementById('id_email')
+    let customer_email = document.getElementById('id_email').value
     if (isRequiredFilled(checkoutForm) && emailok) {
         loadPaymentButton(checkoutForm, buttonDiv, paymentMethod, customer_email);
     }
