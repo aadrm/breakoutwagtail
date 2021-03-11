@@ -31,12 +31,13 @@ def show_me_the_money(sender, **kwargs):
             print(payment)
             invoice = cart.invoice
             if invoice:
-                print('invoice existed')
-                invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
-                invoice.phone=ipn_obj.contact_phone,
-                invoice.street=ipn_obj.address_street,
-                invoice.post=ipn_obj.address_zip,
-                invoice.city=ipn_obj.address_city,
+                # if the Invoice's attributes ar updated this way the ipn atttributes come as 
+                # a tuple, still have to figure out why
+                invoice.full_name=ipn_obj.first_name[0] + ' ' + ipn_obj.last_name[0],
+                invoice.phone=ipn_obj.contact_phone[0],
+                invoice.street=ipn_obj.address_street[0],
+                invoice.post=ipn_obj.address_zip[0],
+                invoice.city=ipn_obj.address_city[0],
                 invoice.is_terms=True,
                 invoice.is_privacy=True,
                 print('invoice updated ipn object ')
