@@ -30,8 +30,8 @@ def show_me_the_money(sender, **kwargs):
             payment = PaymentMethod.objects.get(method='paypal')
             print(payment)
             invoice = cart.invoice
-            print(invoice)
             if invoice:
+                print('invoice existed')
                 invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
                 invoice.phone=ipn_obj.contact_phone,
                 invoice.street=ipn_obj.address_street,
@@ -39,7 +39,11 @@ def show_me_the_money(sender, **kwargs):
                 invoice.city=ipn_obj.address_city,
                 invoice.is_terms=True,
                 invoice.is_privacy=True,
+                print('invoice updated ipn object ')
+                print(invoice.__dict__)
             else:
+                print('invoice created on ipn received')
+                print(invoice.__dict__)
                 invoice = Invoice(
                     full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
                     phone=ipn_obj.contact_phone,
@@ -52,6 +56,8 @@ def show_me_the_money(sender, **kwargs):
                     payment=payment,
                 )
 
+            print('invoice before save')
+            print(invoice.__dict__)
             invoice.save()
             cart.invoice = invoice
             cart.save()
