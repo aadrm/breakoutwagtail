@@ -28,29 +28,16 @@ def show_me_the_money(sender, **kwargs):
         print(ipn_obj.mc_gross, price)
         if ipn_obj.mc_gross == price and ipn_obj.mc_currency == 'EUR':
             payment = PaymentMethod.objects.get(method='paypal')
-            print(payment)
             invoice = cart.invoice
             if invoice:
-                # if the Invoice's attributes ar updated this way the ipn atttributes come as 
-                # a tuple, still have to figure out why
-                print('first_name', ipn_obj.first_name, type(ipn_obj.first_name))
-                print('last_name', ipn_obj.last_name, type(ipn_obj.last_name))
-                invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
-                print('contact_phone', ipn_obj.contact_phone, type(ipn_obj.contact_phone))
-                invoice.phone=ipn_obj.contact_phone,
-                print('address_street', ipn_obj.address_street, type(ipn_obj.address_street))
-                invoice.street=ipn_obj.address_street,
-                print('address_zip', ipn_obj.address_zip, type(ipn_obj.address_zip))
-                invoice.post=ipn_obj.address_zip,
-                print('adress_city', ipn_obj.address_city, type(ipn_obj.address_city))
-                invoice.city=ipn_obj.address_city,
-                invoice.is_terms=True,
-                invoice.is_privacy=True,
-                print('invoice updated ipn object ')
-                print(invoice.__dict__)
+                invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name
+                invoice.phone=ipn_obj.contact_phone
+                invoice.street=ipn_obj.address_street
+                invoice.post=ipn_obj.address_zip
+                invoice.city=ipn_obj.address_city
+                invoice.is_terms=True
+                invoice.is_privacy=True
             else:
-                print('invoice created on ipn received')
-                print(invoice.__dict__)
                 invoice = Invoice(
                     full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
                     phone=ipn_obj.contact_phone,
@@ -63,7 +50,6 @@ def show_me_the_money(sender, **kwargs):
                     payment=payment,
                 )
 
-            print('invoice before save')
             print(invoice.__dict__)
             print(invoice.full_name, type(invoice.full_name))
             print(invoice.phone, type(invoice.phone))
