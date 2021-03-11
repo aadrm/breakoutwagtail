@@ -1,10 +1,10 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True 
 
 SECRET_KEY = config['SECRET_KEY'] 
 
-ALLOWED_HOSTS = ['173.105.71.221',]
+ALLOWED_HOSTS = ['172.105.71.221',]
 
 DATABASES = {
     'default': {

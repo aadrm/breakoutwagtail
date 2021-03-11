@@ -28,7 +28,9 @@ def show_me_the_money(sender, **kwargs):
         print(ipn_obj.mc_gross, price)
         if ipn_obj.mc_gross == price and ipn_obj.mc_currency == 'EUR':
             payment = PaymentMethod.objects.get(method='paypal')
+            print(payment)
             invoice = cart.invoice
+            print(invoice)
             if invoice:
                 invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
                 invoice.phone=ipn_obj.contact_phone,
@@ -37,7 +39,6 @@ def show_me_the_money(sender, **kwargs):
                 invoice.city=ipn_obj.address_city,
                 invoice.is_terms=True,
                 invoice.is_privacy=True,
-                invoice.payment=payment,
             else:
                 invoice = Invoice(
                     full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
@@ -51,7 +52,6 @@ def show_me_the_money(sender, **kwargs):
                     payment=payment,
                 )
 
-            print(invoice)
             invoice.save()
             cart.invoice = invoice
             cart.save()

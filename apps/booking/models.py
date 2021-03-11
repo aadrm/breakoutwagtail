@@ -731,7 +731,7 @@ class Invoice(models.Model):
 
     def __str__(self):
         object_string = str(self.order_number)
-        object_string += self.full_name
+        object_string += str(self.full_name)
 
         return object_string
 
