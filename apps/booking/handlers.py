@@ -42,7 +42,7 @@ def show_me_the_money(sender, **kwargs):
                 invoice.street=ipn_obj.address_street,
                 print('address_zip', ipn_obj.address_zip, type(ipn_obj.address_zip))
                 invoice.post=ipn_obj.address_zip,
-                print('adress_city', ipn_obj.adress_city, type(ipn_obj.adress_city))
+                print('adress_city', ipn_obj.address_city, type(ipn_obj.address_city))
                 invoice.city=ipn_obj.address_city,
                 invoice.is_terms=True,
                 invoice.is_privacy=True,
@@ -65,6 +65,13 @@ def show_me_the_money(sender, **kwargs):
 
             print('invoice before save')
             print(invoice.__dict__)
+            print(invoice.full_name, type(invoice.full_name))
+            print(invoice.phone, type(invoice.phone))
+            print(invoice.street, type(invoice.street))
+            print(invoice.post, type(invoice.post))
+            print(invoice.city, type(invoice.city))
+            print(invoice.is_terms, type(invoice.is_terms))
+            print(invoice.is_privacy, type(invoice.is_privacy))
             invoice.save()
             cart.invoice = invoice
             cart.save()
