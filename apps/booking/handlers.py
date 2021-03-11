@@ -9,7 +9,7 @@ from django.dispatch import receiver
 def show_me_the_money(sender, **kwargs):
     print('ipn signal received')
     ipn_obj = sender
-    print(ipn_obj.payment_status)
+    print(ipn_obj)
     if ipn_obj.payment_status == ST_PP_COMPLETED or ipn_obj.payment_status == ST_PP_PENDING:
         # WARNING !
         # Check that the receiver email is the same we previously
@@ -33,11 +33,17 @@ def show_me_the_money(sender, **kwargs):
             if invoice:
                 # if the Invoice's attributes ar updated this way the ipn atttributes come as 
                 # a tuple, still have to figure out why
-                invoice.full_name=ipn_obj.first_name[0] + ' ' + ipn_obj.last_name[0],
-                invoice.phone=ipn_obj.contact_phone[0],
-                invoice.street=ipn_obj.address_street[0],
-                invoice.post=ipn_obj.address_zip[0],
-                invoice.city=ipn_obj.address_city[0],
+                print('first_name', ipn_obj.first_name, type(ipn_obj.first_name))
+                print('last_name', ipn_obj.last_name, type(ipn_obj.last_name))
+                invoice.full_name=ipn_obj.first_name + ' ' + ipn_obj.last_name,
+                print('contact_phone', ipn_obj.contact_phone, type(ipn_obj.contact_phone))
+                invoice.phone=ipn_obj.contact_phone,
+                print('address_street', ipn_obj.address_street, type(ipn_obj.address_street))
+                invoice.street=ipn_obj.address_street,
+                print('address_zip', ipn_obj.address_zip, type(ipn_obj.address_zip))
+                invoice.post=ipn_obj.address_zip,
+                print('adress_city', ipn_obj.adress_city, type(ipn_obj.adress_city))
+                invoice.city=ipn_obj.address_city,
                 invoice.is_terms=True,
                 invoice.is_privacy=True,
                 print('invoice updated ipn object ')
