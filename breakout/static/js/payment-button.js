@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener('load', function() {
     console.log(disabledButton)
     changeInCheckoutForm();
@@ -23,22 +25,28 @@ function changeInCheckoutForm() {
     console.log(emailok);
     buttonDiv.innerHTML = "";
     buttonDiv.appendChild(disabledButton);
+    let customer_email = document.getElementById('id_email')
     if (isRequiredFilled(checkoutForm) && emailok) {
-        loadPaymentButton(checkoutForm, buttonDiv, paymentMethod);
+        loadPaymentButton(checkoutForm, buttonDiv, paymentMethod, customer_email);
     }
     errorMessage();
 };
 
-function loadPaymentButton(checkoutForm, buttonDiv, paymentMethod) {
-    let request
-    let params = "payment=" + paymentMethod
+function loadPaymentButton(checkoutForm, buttonDiv, paymentMethod, email) {
+    let request;
+    let params = "payment=" + paymentMethod + "&customer_email=" + email
     request = new XMLHttpRequest();
-    request.open("GET", checkoutForm.dataset.url + "?" + params, true)
+    request.open("POST", checkoutForm.dataset.url, true)
     request.responseType = "document";
-    request.send();
+    request.send(JSON.stringify(
+        {
+            "payment": paymentMethod,
+            "email": email,
+        }
+    ));
     request.onreadystatechange = function(self) {
         if(request.readyState == 4) {
-            childrenToAdd = this.response.body.children
+            let childrenToAdd = this.response.body.children
             console.log(childrenToAdd)
             buttonDiv.innerHTML = "";
             for (let i = 0; i < childrenToAdd.length; i++) {

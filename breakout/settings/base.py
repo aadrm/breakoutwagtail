@@ -248,8 +248,9 @@ EMAIL_USE_TLS = True
 
 #paypal
 PAYPAL_TEST = True
-PAYPAL_RECEIVER_EMAIL = 'info@breakout-escaperoom.de'
 if PAYPAL_TEST:
     PAYPAL_IPN_POST_TO_ADDRESS = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr'
+    PAYPAL_RECEIVER_EMAIL = 'sb-g47btr4711513@business.example.com'
 else:
     PAYPAL_IPN_POST_TO_ADDRESS = 'https://ipnpb.paypal.com/cgi-bin/webscr'
+    PAYPAL_RECEIVER_EMAIL = 'info@breakout-escaperoom.de'

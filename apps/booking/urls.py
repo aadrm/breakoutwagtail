@@ -20,7 +20,7 @@ urlpatterns = [
 
     path('add_product/', views.add_product, name='add_product'),
 
-    path('test_paypal_ipn/', views.test_paypal_ipn, name='test_paypal_ipn'),
+    path('paypal_return/<str:cart>/<str:email>', views.paypal_return, name='paypal_return'),
     path('day_availability/', views.ajax_day_available_slots, name='ajax_day_availability'),
 
     path('pdf_coupon_code/', views.pdf_coupon_code, name='pdf_coupon_code'),
@@ -32,9 +32,6 @@ urlpatterns = [
     path('ajax_remove_coupon', views.ajax_remove_coupon, name='ajax_remove_coupon'),
     path('ajax_refresh_coupon', views.ajax_refresh_coupon, name='ajax_refresh_coupon'),
     path('ajax_refresh_invoice', views.ajax_refresh_invoice, name='ajax_refresh_invoice'),
-
-    # path('ajax_slot_booking_test/', views.slot_booking_test, name='ajax_slot_booking_test'),
-    path('calendartest/', views.ajax_calendar_test, name='ajax_calendar_test'),
 
     #admin extension views
     path('appointments_list', views.appointments, name='appointments_list'),

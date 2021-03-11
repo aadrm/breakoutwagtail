@@ -10,7 +10,7 @@ def show_me_the_money(sender, **kwargs):
     print('ipn signal received')
     ipn_obj = sender
     print(ipn_obj.payment_status)
-    if ipn_obj.payment_status == ST_PP_PENDING:
+    if ipn_obj.payment_status == ST_PP_COMPLETED:
         # WARNING !
         # Check that the receiver email is the same we previously
         # set on the `business` field. (The user could tamper with

@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener('load',function() {
     startTimers();
     setInterval(function(){
@@ -24,13 +26,13 @@ function startTimers() {
         if (timers.length) {
             prefix = timers[0].dataset.prefix;
             let expire = false;
-            for (i = 0; i < timers.length; i++) {
+            for (let i = 0; i < timers.length; i++) {
                 newTime = parseInt(timers[i].dataset.remaining) - 1; 
                 if (newTime <= 0 || isNaN(newTime)) {
                     newTime = 0;
                 }
-                minutes = Math.floor(newTime / 60);
-                seconds = newTime % 60;
+                let minutes = Math.floor(newTime / 60);
+                let seconds = newTime % 60;
                 minutes = padNumber(minutes, 2);
                 seconds = padNumber(seconds, 2);
 
@@ -126,7 +128,7 @@ function removeCoupon(e) {
     xhr.send(JSON.stringify({"cart_coupon": e.dataset.coupon, "cart": e.dataset.cart}));
     xhr.parent = this;
     xhr.onreadystatechange = couponListCallback;
-}
+};
 
 function refreshCoupon() {
     xhr = new XMLHttpRequest();
@@ -134,7 +136,7 @@ function refreshCoupon() {
     xhr.send(JSON.stringify({"refresh": true}));
     xhr.parent = this;
     xhr.onreadystatechange = couponListCallback;
-}
+};
 
 function couponListCallback() {
    if(xhr.readyState == 4) {
@@ -156,7 +158,7 @@ function refreshInvoice() {
     xhr.parent = this;
     xhr.send();
     xhr.onreadystatechange = invoiceCallback;
-}
+};
 
 function invoiceCallback() {
    if(xhr.readyState == 4) {

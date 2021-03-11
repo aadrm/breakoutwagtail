@@ -149,8 +149,23 @@ def order_completed(request, order):
     }
     return render(request, 'booking/view-order.html', context)
 
-def paypal_ipn_listener(request):
-    pass
+def paypal_return(request, cart, email):
+    print(request)
+    print(cart)
+    cart = Cart.objects.get(pk=int(cart))
+    cart.invoice = Invoice(
+        payment=PaymentMethod.objects.get(method='paypal'),
+        full_name=email,
+        email=email,
+        phone=email,
+        is_privacy=True,
+        is_terms=True,
+    )
+    cart.invoice.save()
+    cart.paypal_preapprove()
+    cart.extend_items_expiration()
+    print(cart.invoice.order_number)
+    return HttpResponseRedirect(reverse('booking:order', kwargs={'order': cart.invoice.order_number}))
 
 def add_product(request):
     if request.method == 'POST':
@@ -242,34 +257,6 @@ def pdf_coupon_code(request):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = 'inline; filename="coupon.pdf"'
     return response
-
-def ajax_checkout_buttons(request):
-    cart = get_cart(request)
-    cart.apply_coupons()
-    payment_id = int(request.GET.get('payment', ''))
-    payment = PaymentMethod.objects.get(pk=payment_id)
-    shipping = 0
-    if cart.is_require_shipping_address:
-        shipping = 2
-    print('shipping  = ', shipping)
-    paypal_dict = {
-        'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': cart.total_after_coupons,
-        'item_number': cart.pk,
-        'item_name': 'Breakout Escape Room',
-        'currency_code': 'EUR',
-        'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
-        'return': request.build_absolute_uri(reverse('booking:book')),
-        'cancel': request.build_absolute_uri(reverse('booking:checkout')),
-        'no_shipping': shipping
-    }
-    paypal_form = CustomPaypal(initial=paypal_dict)
-    context = {
-        'payment': payment,
-        'paypal_form': paypal_form,
-    }
-    return render(request, 'booking/ajax_checkout-buttons.html', context)
-
 
 
 #  ajax
@@ -402,21 +389,37 @@ def ajax_remove_coupon(request):
     }
     return render(request, 'booking/ajax_coupon-list.html', context)
 
-def ajax_calendar_test(request):
-    room = 1
-    year = 2021
-    month = 1 
-    calendar_data = calendar_from_room(year, month, room)
-    n = datetime.today()
-    today_date = datetime(n.year, n.month, n.day, 0, 0, 0, 0)
-    # slots = Slot.objects.filter(start__date__gte=today_date)
-    # print (slots)
+@csrf_exempt
+def ajax_checkout_buttons(request):
+    if request.method == 'POST':
+        cart = get_cart(request)
+        cart.extend_items_expiration()
+        data = json.loads(request.body)
+        email = data.get('email')
+        payment_id = data.get('payment')
+        payment = PaymentMethod.objects.get(pk=payment_id)
+        shipping = 0
+        if cart.is_require_shipping_address:
+            shipping = 2
+
+        cart.apply_coupons()
+        paypal_dict = {
+            'business': settings.PAYPAL_RECEIVER_EMAIL,
+            'amount': cart.total_after_coupons,
+            'item_number': cart.pk,
+            'item_name': 'Breakout Escape Room',
+            'currency_code': 'EUR',
+            'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
+            'return': request.build_absolute_uri(reverse('booking:paypal_return', kwargs={'cart': cart.pk, 'email': email},)),
+            'cancel': request.build_absolute_uri(reverse('booking:checkout')),
+            'no_shipping': shipping
+        }
+    paypal_form = CustomPaypal(initial=paypal_dict)
     context = {
-        # 'slots': slots,
-        # 'available_counter': 0,
-        'calendar': calendar_data,
+        'payment': payment,
+        'paypal_form': paypal_form,
     }
-    return render(request, 'booking/view_calendar_test.html', context)
+    return render(request, 'booking/ajax_checkout-buttons.html', context)
 
 
 def test_paypal_ipn(request):

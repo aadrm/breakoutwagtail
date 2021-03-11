@@ -11,7 +11,11 @@
 <main>
     <section class="c-section-light">
         <div class="c-wrapper--xs">
+            {% if cart.status == 2 %}
+            <p>{% trans "Your paypal purchase is being processed. As soon as Paypal sends us your payment confirmation you will receive an email with the information in this page, if you don't receive any e-mail within 15 minutes please contact us to confirm everything is fine with your order, remember to check your spam folder." %}</p>
+            {% else %}
             <p>{% trans "An email with the information in this page has been sent to the email you provided during the booking process, if you don't see it in your inbox it might be on it's way so please allow a couple of minutes, also make sure to check your spam folder." %}</p>
+            {% endif %}
             <br>
             <br>
             {% include 'booking/section-completed_order.html' %}

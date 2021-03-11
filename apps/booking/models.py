@@ -127,8 +127,6 @@ class Cart(models.Model):
             print(f'{item}: price {item.price} base {item.base_price}')
 
     def get_valid_payment_methods(self):
-        print('valid payment methods')
-        print(self.total_after_coupons())
         methods_prev = PaymentMethod.objects.filter(method='coupon')
         if self.total_after_coupons() > 0:
             items = self.get_valid_items()
@@ -215,6 +213,11 @@ class Cart(models.Model):
             item.coupon = coupon
             item.save()
 
+    def paypal_preapprove(self):
+        self.status = 2
+        self.invoice.commit_order()
+        self.save()
+
     def approve_cart(self):
         """
         sets the status of the cart to 1 which means that the order should be confirmed
@@ -225,17 +228,14 @@ class Cart(models.Model):
         self.save()
 
     def process_purchase(self):
-        if self.status == 0:
-            try:
-                self.approve_cart()
-                self.invoice.commit_order()
-                self.create_cart_coupons()
-                self.send_cart_emails()
-                return True
-            except Exception as e:
-                print(e)
-                return False
-        else:
+        try:
+            self.approve_cart()
+            self.invoice.commit_order()
+            self.create_cart_coupons()
+            self.send_cart_emails()
+            return True
+        except Exception as e:
+            print(e)
             return False
 
     def send_cart_emails(self):
@@ -323,11 +323,13 @@ class CartItem(models.Model):
 
     @property
     def is_slot_booked(self):
-        """Returns true if there is a slot associated with this item and either 
+        """
+        Returns True if there is a slot associated with this item and either 
         the booking was completed or is being booked and the expiry time has not been reached
         """
         if self.slot:
             this_moment = make_aware(datetime.today())
+
             if self.status > 0:
                 return True
             elif self.status == 0 and this_moment < self.slot_expiry:
@@ -364,7 +366,11 @@ class CartItem(models.Model):
         if self.slot and self.status == 0:
             this_moment = make_aware(datetime.today())
             expiry = self.created + timedelta(minutes=get_booking_settings().slot_reservation_hold_minutes)
-            return (expiry - this_moment).total_seconds()
+            # this condition allows some extra time for orders carried out via paypal IPN
+            if self.cart.status > 0:
+                return ((expiry + timedelta(minutes=40)) - this_moment).total_seconds()
+            else:
+                return (expiry - this_moment).total_seconds()
         else:
             return 0
 
@@ -754,10 +760,11 @@ class Invoice(models.Model):
         """
         Records the current datetime as the order date as well as designating an order number
         """
-        self.order_date = datetime.now()
-        self.order_int = self.order_next_int()
-        print(self.order_int)
-        self.order_number = self.create_order_number()
+        if not self.order_date:
+            self.order_date = datetime.now()
+        if not self.order_number:
+            self.order_int = self.order_next_int()
+            self.order_number = self.create_order_number()
         self.save()
 
 
