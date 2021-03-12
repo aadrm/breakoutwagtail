@@ -32,12 +32,12 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 # Use /app folder as a directory where the source code is stored.
-WORKDIR /app
+WORKDIR /breakout
 
 # Set this directory to be owned by the "wagtail" user. This Wagtail project
 # uses SQLite, the folder needs to be owned by the user that
 # will be writing to the database file.
-RUN chown wagtail:wagtail /app
+RUN chown wagtail:wagtail /breakout
 
 # Copy the source code of the project into the container.
 COPY --chown=wagtail:wagtail . .
