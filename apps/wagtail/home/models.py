@@ -30,7 +30,7 @@ class HomePage(Page):
 
     group = StreamField(
         [
-            'offers', blocks.TeamCardsBlock
+            ('offers', blocks.TeamCardsBlock()),
         ],
         null=True,
         blank=True,
