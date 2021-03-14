@@ -67,6 +67,7 @@ LOGGING = {
             'propagate': False,
         },
     }
+}
 
 
 try:
