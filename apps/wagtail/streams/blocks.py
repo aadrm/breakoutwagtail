@@ -5,7 +5,6 @@ from wagtail.core import blocks
 from wagtail.images import blocks as images_blocks
 
 from wagtail.contrib.table_block.blocks import TableBlock
-from wagtail_svgmap import blocks as svgblocks
 
 
 class SpacerBlock(blocks.IntegerBlock):
@@ -127,8 +126,8 @@ class OfferCardsBlock(blocks.StructBlock):
     cards = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ('icon', svgblocks.ImageMapBlock()),
 
+                ('name', blocks.CharBlock(max_length=48, required=False)),
             ]
         )
     )

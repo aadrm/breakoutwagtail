@@ -31,7 +31,11 @@ class HomePage(Page):
     group_offers = StreamField(
         StreamBlock([
             ('offers', blocks.OfferCardsBlock())
-        ], min_num=1, max_num=1)
+        ], 
+        null=True,
+        blank=True,
+        min_num=1,
+        max_num=1)
     )
 
     faq = StreamField(
