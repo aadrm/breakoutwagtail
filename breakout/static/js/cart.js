@@ -65,7 +65,7 @@ function padNumber(n, width) {
 var itemListWrapper = document.getElementById('js-item-list-wrapper');
 
 function refreshItem() {
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", itemsUrl, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify({"refresh": true}));
@@ -75,7 +75,7 @@ function refreshItem() {
 
 function removeItem(e) {
     console.log('remove item')
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", itemsUrl, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify({"item": e.dataset.item, "cart": e.dataset.cart}));
@@ -84,10 +84,10 @@ function removeItem(e) {
 }
 
 function itemListCallback() {
-   if(xhr.readyState == 4) {
+   if(this.readyState == 4) {
         let parser = new DOMParser ();
         let responseDoc = parser.parseFromString(this.responseText, "text/html");
-        itemsInCartDiv = responseDoc.getElementById('js-items-in-cart');
+        let itemsInCartDiv = responseDoc.getElementById('js-items-in-cart');
         itemListWrapper.firstElementChild.remove();
         itemListWrapper.appendChild(itemsInCartDiv);
         // function in different file
@@ -108,9 +108,9 @@ var couponListWrapper = document.getElementById("js-coupon-list-wrapper");
 var invoiceDetailsDiv = document.getElementById("js-invoice-div");
 
 function applyCoupon() {
-    codeField = document.getElementById("id_code") // id dependant on django form name
-    code = codeField.value;
-    xhr = new XMLHttpRequest();
+    let codeField = document.getElementById("id_code") // id dependant on django form name
+    let code = codeField.value;
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", couponsUrl, true);
     // xhr.open("POST", this.applyCouponButton.dataset.applycouponurl, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -152,7 +152,7 @@ function couponListCallback() {
 };
 
 function refreshInvoice() {
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", invoiceUrl, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.parent = this;
@@ -161,10 +161,10 @@ function refreshInvoice() {
 };
 
 function invoiceCallback() {
-   if(xhr.readyState == 4) {
+   if(this.readyState == 4) {
         let parser = new DOMParser ();
         let responseDoc = parser.parseFromString(this.responseText, "text/html");
-        invoiceResponse = responseDoc.getElementById('js-invoice-response');
+        let invoiceResponse = responseDoc.getElementById('js-invoice-response');
         try {
             invoiceDetailsDiv.firstElementChild.remove();
         } finally {
@@ -184,7 +184,7 @@ var cartError = document.getElementById("js-cart-error");
 function displayCartError() {
     if (cartValid == true) {
         cartValid = false;
-        invoiceDetails = document.getElementById("js-invoice-details");
+        let invoiceDetails = document.getElementById("js-invoice-details");
         invoiceDetails.remove();
         cartError.classList.remove("u-visually-hidden");
     }
