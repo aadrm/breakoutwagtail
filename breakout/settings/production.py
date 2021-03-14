@@ -4,7 +4,7 @@ DEBUG = False
 
 SECRET_KEY = config['SECRET_KEY'] 
 
-ALLOWED_HOSTS = ['172.105.71.221', 'localhost',]
+ALLOWED_HOSTS = ['*']
 
 DATABASES = {
     'default': {
