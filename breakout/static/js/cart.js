@@ -139,10 +139,10 @@ function refreshCoupon() {
 };
 
 function couponListCallback() {
-   if(xhr.readyState == 4) {
+   if(this.readyState == 4) {
         let parser = new DOMParser ();
         let responseDoc = parser.parseFromString(this.responseText, "text/html");
-        couponsInCartDiv = responseDoc.getElementById('js-coupons-in-cart');
+        let couponsInCartDiv = responseDoc.getElementById('js-coupons-in-cart');
         couponListWrapper.firstElementChild.remove();
         couponListWrapper.appendChild(couponsInCartDiv);
         // if (refresh){
