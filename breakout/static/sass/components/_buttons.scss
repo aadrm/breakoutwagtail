@@ -9,7 +9,7 @@
     text-transform: uppercase;
     text-shadow: 0 0 3px $brand-dark;
     transition: all .3s;
-    color: $brand-light-b;
+    color: $brand-light-f;
     position: relative;
     padding: .6rem;
     font-weight: bold;
@@ -82,7 +82,7 @@
 .c-anchor-secondary {
     color: $brand-light;
     border: 3px solid transparent;
-    background: $brand-secondary-a;
+    background: $brand-secondary-c;
     &::before,
     &::after {
         content: none;

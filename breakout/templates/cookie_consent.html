@@ -1,18 +1,18 @@
 {% load cookie_consent_tags %}
 {% load static %}
 {% load i18n %}
-<script type="text/javascript" src=" {% static 'js/cookiebar.js' %}"></script>
+<script  src=" {% static 'js/cookiebar.js' %}"></script>
 
 {% if request|cookie_consent_enabled %}
     {% not_accepted_or_declined_cookie_groups request as cookie_groups %}
-    {% comment %} <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.2/jquery.min.js" ></script> {% endcomment %}
-    <script type="text/javascript" src=" {% static 'js/cookiebar.js' %}"></script>
+    {% comment %} <script  src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.2/jquery.min.js" ></script> {% endcomment %}
+    <script  src=" {% static 'js/cookiebar.js' %}"></script>
 
     {% if cookie_groups %}
         {% url "cookie_consent_cookie_group_list" as url_cookies %}
         {% cookie_consent_accept_url cookie_groups as url_accept %}
         {% cookie_consent_decline_url cookie_groups as url_decline %}
-        <script type="text/javascript">
+        <script >
         var cookie_groups = [];
         {% for cookie_group in cookie_groups %}
             cookie_groups.push("{{ cookie_group.varname }}");
@@ -33,7 +33,7 @@
 
         ready(function() {
             showCookieBar({
-            content: "{% filter escapejs %}{% with cookie_groups=cookie_groups|join:", " %}<div class="cookie-bar"> <p class="font--sm">{% trans "This site uses" %} {{cookie_groups}} {% trans "cookies for better performance and user experience. Do you agree to using cookies other than only the essential cookies?" %}</p><div class="cookie-bar__buttons"><a href="{{ url_accept }}" class="cc-cookie-accept font--sm">{% trans "Accept" %}</a> <a href="{{ url_decline }}" class="cc-cookie-decline font--sm">{% trans "Decline" %}</a> <a href="{{ url_cookies }}" class="font--sm">{% trans "Cookies info" %} </a></div> </div>{% endwith %}{% endfilter %}",
+            content: "{% filter escapejs %}{% with cookie_groups=cookie_groups|join:", " %}<div class="cookie-bar"> <p>{% trans "This site uses" %} {{cookie_groups}} {% trans "cookies for better performance and user experience. Do you agree to using cookies other than only the essential cookies?" %}</p><div class="cookie-bar__buttons"><a href="{{ url_accept }}" class="cc-cookie-accept">{% trans "Accept" %}</a> <a href="{{ url_decline }}" class="cc-cookie-decline">{% trans "Decline" %}</a> <a href="{{ url_cookies }}" >{% trans "Cookies info" %} </a></div> </div>{% endwith %}{% endfilter %}",
             cookie_groups: cookie_groups,
             cookie_decline: "{% get_decline_cookie_groups_cookie_string request cookie_groups %}",
             beforeDeclined: function() {

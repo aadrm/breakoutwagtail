@@ -5,43 +5,25 @@
 * Browsers: last 4 version
 */
 
-.who-title {
-}
-
-.who-subtitle {
-    font-size: .8rem;
-    color: $brand-light;
-    font-weight: 800;
-}
 .who-examples-wrapper {
-    margin: 0 auto;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    margin: 1rem auto 0;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    max-width: 90vw;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    @include break--md {
+        flex-direction: row;
+    }
 }
 
 .who-example {
-    max-width: 300px;
-    margin: 30px;
+    max-width: 288px;
+    margin: .7rem;
     text-align: center;
-    img {
+    svg, img {
         height: 100px;
-        margin: 1em;
-    }
-    h4 {
-        font-size: 1.8rem;
-    }
-    p {
-        font-size: 1.2rem;
-        opacity: .8;
+        margin-bottom: 1em;
     }
 }
 
@@ -49,10 +31,10 @@
     margin: 0 auto;
     width: 150px;
     svg {
+        fill: $brand-dark;
+        opacity: .85;
         height: 100%;
         width: 100%;
-        -webkit-filter: drop-shadow(7px 7px 5px $brand-dark-a);
-                filter: drop-shadow(7px 7px 5px $brand-dark-a);
-
+        filter: drop-shadow(4px 4px 3px $brand-dark-a);
     }
 }

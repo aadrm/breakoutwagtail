@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg id="youtubea" width="43.1" height="32" version="1.1" viewBox="0 0 43.1 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><metadata id="youtubeb"><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/><dc:title/></cc:Work></rdf:RDF></metadata>
-<g id="youtubec" transform="translate(-3,-9)">
-	<path id="youtubed" d="m44.9 14.5c-0.4-2.2-2.3-3.8-4.5-4.3-3.3-0.7-9.4-1.2-16-1.2s-12.8 0.5-16.1 1.2c-2.2 0.5-4.1 2-4.5 4.3-0.4 2.5-0.8 6-0.8 10.5s0.4 8 0.9 10.5c0.4 2.2 2.3 3.8 4.5 4.3 3.5 0.7 9.5 1.2 16.1 1.2s12.6-0.5 16.1-1.2c2.2-0.5 4.1-2 4.5-4.3 0.4-2.5 0.9-6.1 1-10.5-0.2-4.5-0.7-8-1.2-10.5zm-25.9 17.5v-14l12.2 7z"/>
+<svg version="1.1" viewBox="0 0 43.1 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><title>Youtube</title>
+<g transform="translate(-3,-9)">
+	<path d="m44.9 14.5c-0.4-2.2-2.3-3.8-4.5-4.3-3.3-0.7-9.4-1.2-16-1.2s-12.8 0.5-16.1 1.2c-2.2 0.5-4.1 2-4.5 4.3-0.4 2.5-0.8 6-0.8 10.5s0.4 8 0.9 10.5c0.4 2.2 2.3 3.8 4.5 4.3 3.5 0.7 9.5 1.2 16.1 1.2s12.6-0.5 16.1-1.2c2.2-0.5 4.1-2 4.5-4.3 0.4-2.5 0.9-6.1 1-10.5-0.2-4.5-0.7-8-1.2-10.5zm-25.9 17.5v-14l12.2 7z"/>
 </g>
 </svg>

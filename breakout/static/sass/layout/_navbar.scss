@@ -46,19 +46,18 @@
     left: 1rem;
     height: 96px;
     width: 150px;
-    display: -ms-grid;
-    display: grid;
-    justify-content: flex-start;
+    display: flex;
+    align-items: center;
     overflow: hidden;
     z-index:  98;
-    img {
+    svg, img {
         max-width: 33vw;
         left: 0;
     }
 }
 
 /*    
-naw items toogle
+nav items toogle
 */
 
 .nav-toggle-label {
@@ -175,7 +174,7 @@ naw items toogle
             text-transform: uppercase;
         }
 
-        img {
+        svg, img {
             height: 50px;
         }
     }
@@ -209,8 +208,7 @@ naw items toogle
     top: 100px;
     left: 10%;
     height: 200px;
-    -webkit-box-shadow: inset 0 5px 12px $brand-dark;
-            box-shadow: inset 0 5px 12px $brand-dark;
+    box-shadow: inset 0 5px 12px $brand-dark;
     &::before,
     &::after {
         content: '';
@@ -234,16 +232,17 @@ naw items toogle
 }
 
 .banner-inner {
-    color: $brand-secondary;
+    color: $brand-dark;
     position: absolute;
     border-left: 3px dashed $brand-secondary;
     border-right: 3px dashed $brand-secondary;
     height: calc(100% - 1rem);
     margin: .5rem;
-    padding: 1rem;
+    padding: .5rem;
     text-align: center;
     z-index: 3;
     p {
+        font-size: medium;
         font-weight: bold;
     }
     &::before,
@@ -259,15 +258,11 @@ naw items toogle
     }
     &::before {
         left: 4px;
-        -webkit-transform: skewY(25deg);
-            -ms-transform: skewY(25deg);
-                transform: skewY(25deg);
+        transform: skewY(25deg);
     }
     &::after {
         right: 4px;
-        -webkit-transform: skewY(-25deg);
-            -ms-transform: skewY(-25deg);
-                transform: skewY(-25deg);
+        transform: skewY(-25deg);
     }
     a {
         display: block;

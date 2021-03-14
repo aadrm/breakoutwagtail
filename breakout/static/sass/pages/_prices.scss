@@ -7,43 +7,27 @@
 
 .prices-wrapper {
     margin: 0 auto;
-    max-width: 90vw;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    display: -ms-grid;
+    align-content: center;
+    justify-content: center;
     display: grid;
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-    @include break--xs {
-        -ms-grid-columns: repeat(2, 1fr);
-        grid-template-columns: repeat(2, 1fr);
-    }
-    @include break--sm {
-        -ms-grid-columns: repeat(3, 1fr);
-        grid-template-columns: repeat(3, 1fr);
-    }
-    @include break--xl {
-        -ms-grid-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    @include break--md {
         grid-template-columns: repeat(6, 1fr);
     }
-
 }
 
 .price {
-    border: 2px solid $brand-primary;
-    margin: 20px auto;
-    width: 200px;
+    margin: 20px;
     text-align: center;
     font-weight: bold;
-    h4 {
-        font-size: 2rem;
+    span {
+        font-size: $font--md;
         text-transform: uppercase;
+        white-space: nowrap;
     }
     p {
-        font-size: 1.2rem;
+        font-size: $font--sm;
+        white-space: nowrap;
     }
 }
 
@@ -81,15 +65,10 @@
     width: 150px;
     border-radius: 50%;
     img {
-        -ms-grid-column-align: center;
-            justify-self: center;
-        -ms-flex-item-align: center;
-            -ms-grid-row-align: center;
-            align-self: center;
+        justify-self: center;
+        align-self: center;
         width: 100%;
-        -o-object-fit: cover;
-           object-fit: cover;
-        -webkit-filter: drop-shadow(7px 7px 5px $brand-dark-a);
-                filter: drop-shadow(7px 7px 5px $brand-dark-a);
+        object-fit: cover;
+        filter: drop-shadow(7px 7px 5px $brand-dark-a);
     }
 }

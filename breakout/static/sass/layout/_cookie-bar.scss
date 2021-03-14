@@ -1,23 +1,99 @@
+@keyframes slideInFromBottom {
+    0% {
+      transform: translateY(100%);
+    }
+    50% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
 .cookie-bar {
+    opacity: .95;
     text-align: center;
     width: 100%;
     position: fixed;
-    padding: 2rem;
+    padding: 1rem 2rem;
     z-index: 99;
-    height: auto !important;
-    line-height: 25px;
-    background: #eee;
+    line-height: 24px;
+    color: $brand-light;
+    background: #ba4a00;
+    background: $brand-secondary;
+    bottom: 0;
+    animation: 2s ease-out 0s slideInFromBottom;
+    p {
+        font-size: medium;
+    }
+    .cookie-bar__buttons {
+        display: block;
+        a {
+            margin: .6rem;
+            border-radius: 5px;
+            display: inline-block;
+            padding: .2rem .4rem;
+            box-shadow: 2px 2px 4px black;
+            background: $brand-secondary;
+            &:hover {
+                background: transparent;
+            }
+        }
+
+        a:first-child {
+            background: $brand-primary;
+            color: $brand-dark;
+            padding: .2rem 2rem;
+        }
+    }
 }
 
-.cookie-bar__buttons {
-    display: block;
-    a {
-        margin: 1rem;
-        display: inline-block;
-        padding: .5rem 1rem;
-        box-shadow: 2px 2px 4px black;
-        &:hover {
-            background: $brand-primary;
+
+
+.cookie-group {
+    margin: 2rem 0;
+    .cookie-group-title {
+        h3 {
+            margin-bottom: 0.8rem;
+        }
+        margin: 1rem 0;
+        gap: 1rem;
+        .cookie-group-form {
+            display: flex;
+            .cookie-consent-accept,
+            .cookie-consent-decline {
+                input {
+                    padding: .5rem 1rem;
+                    background: gray;
+                    color: $brand-light;
+                    &:hover {
+                        background: lightgray;
+                        cursor: pointer;
+                    }
+                }
+            }
+            .cookie-consent-accepted,
+            .cookie-consent-declined {
+                padding: .5rem 1rem;
+            }
+        }
+    }
+    p {
+        margin-bottom: 1rem;
+    }
+    table {
+        tr {
+            th {
+                padding: .8rem;
+            }
+            td {
+                padding: .8rem;
+                width: 100%;
+            }
+        }
+        tr:nth-child(odd) {
+            background: #eee;
         }
     }
 }

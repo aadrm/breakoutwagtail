@@ -4,7 +4,8 @@
 <html class="no-js" lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
+        {% comment %} <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/> {% endcomment %}
+        <link rel="canonical" href="http://127.0.0.1:8000{{request.path}}"/>
         <meta charset="utf-8" />
         <title>
             {% block title %}
@@ -16,13 +17,14 @@
                 {% endwith %}
             {% endblock %}
         </title>
-        <meta name="description" content="" />
+        {% if self.search_description %}
+            <meta name="description" content="{{ self.search_description }}" />
+        {% else %}
+            <meta name="description" content="Breakout Escape Room Augsburg" />
+        {% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        {# Google Fonts #}
-        {% comment %} <link rel="preconnect" href="https://fonts.gstatic.com"> {% endcomment %}
-        {% comment %} <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet"> {% endcomment %}
-        {# Global stylesheets #}
+        <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="{% static 'fonts/capture_it/capture_it.woff2' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}
@@ -35,15 +37,15 @@
         {% include 'navbar.html' %}
 
         {% block content %}{% endblock %}
+        <footer>
+            {% include 'footer.html' %} 
+        </footer>
 
-    </body>
-    <footer>
-        {% include 'footer.html' %} 
-    </footer>
         {# Global javascript #}
         {% include 'cookie_consent.html' %}
-        {% comment %} <script type="text/javascript" src="{% static 'js/peak.js' %}"></script> {% endcomment %}
+        {% comment %} <script  src="{% static 'js/peak.js' %}"></script> {% endcomment %}
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+    </body>
 </html>

@@ -7,74 +7,49 @@
 
 .contact-methods {
     width: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    margin: 2rem auto;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    align-content: center;
+    justify-content: center;
 }
 
 .contact-link {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+    flex: 1;
 }
 
 .contact-method {
     position: relative;
     background: $brand-primary;
-    border: 3px solid $brand-light;
     padding: 1rem;
     border-radius: 50%;
     color: $brand-light;
     text-align: center;
     margin: 1rem auto;
-    height: 128px;
-    width: 128px;
-    -webkit-transition: color .3s, background .3s;
-    -o-transition: color .3s, background .3s;
+    height: 64px;
+    width: 64px;
     transition: color .3s, background .3s;
-    display: -ms-grid;
     display: grid;
-    -ms-flex-line-pack: center;
-        align-content: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    align-content: center;
+    justify-content: center;
+
     svg {
         fill: $brand-light;
-        width: 64px;
-        -webkit-transition: fill .3s;
-        -o-transition: fill .3s;
+        width: 32px;
         transition: fill .3s;
 
     }
-    // p {
-    //     display: block;
-    //     position: absolute;
-    //     top: calc(50% + 42px);
-    //     left: 50%;
-    //     font-size: 22px;
-    //     -webkit-transform: translateY(-50%) translateX(-50%);
-    //         -ms-transform: translateY(-50%) translateX(-50%);
-    //             transform: translateY(-50%) translateX(-50%);
-    //     opacity: 0;
-    // }
     &:hover {
-        border: 3px solid $brand-secondary;
         background: $brand-secondary;
         color: $brand-primary;
         svg {
             fill: $brand-primary;
         }
-        // p {
-        //     color: $brand-primary;
-        //     opacity: 1;
-        // }
+    }
+    @include break--xs {
+        height: 96px;
+        width: 96px;
+        svg {
+            width: 48px
+        }
     }
 }

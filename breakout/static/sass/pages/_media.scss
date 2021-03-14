@@ -19,52 +19,32 @@
 }
 
 .media-icon-wrapper {
-    display: -ms-grid;
     display: grid;
     margin: 3rem 5vw;
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    flex: 1;
+    justify-content: center;
     text-align: center;
     font-size: 1.2rem;
-    -ms-grid-row-align: start;
-        align-self: start;
+    align-self: start;
     p {
         margin-top: .3rem;
         font-size: 1rem;
         font-weight: bold;
         text-transform: uppercase;
-        font-family: 'Im Fell English', sans-serif;
-        @include break--sm {
-            font-size: 1.3rem;
-        }
-        @include break--md{
-            font-size: 1.8rem;
-        }
     }
 }
 
 .media-icon {
-    -ms-grid-column-align: center;
-        justify-self: center;
+    justify-self: center;
     display: -ms-grid;
     display: grid;
     max-width: 20vw;
     width: 150px;
     border-radius: 50%;
     img {
-        -ms-grid-column-align: center;
-            justify-self: center;
-        -ms-flex-item-align: center;
-            -ms-grid-row-align: center;
-            align-self: center;
+        justify-self: center;
+        align-self: center;
         width: 100%;
-        -o-object-fit: cover;
-           object-fit: cover;
-        -webkit-filter: drop-shadow(7px 7px 5px $brand-dark-a);
-                filter: drop-shadow(7px 7px 5px $brand-dark-a);
+        filter: drop-shadow(7px 7px 5px $brand-dark-a);
     }
 }

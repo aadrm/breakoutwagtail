@@ -1,5 +1,5 @@
 $brand-primary:             #abca44;
-$brand-secondary:           #465054;
+$brand-secondary:           #505054;
 // $brand-primary:             #abc943;
 // $brand-secondary:           #130304;
 $brand-light:               #fafafa;
@@ -106,19 +106,17 @@ $t--slower: 2s;
 $t--slowest: 4s;
 
 $font--ll: responsive 36px 72px;
-$font--xl: responsive 24px 48px;
-$font--lg: responsive 20px 28px;
+$font--xl: responsive 32px 48px;
+$font--lg: responsive 24px 28px;
 $font--md: responsive 14px 24px;
-$font--sm: responsive 12px 28px;
+$font--sm: responsive 12px 18px;
 $font--xs: responsive 10px 14px;
 $font--ss: responsive 8px 10px;
 
 $font--md--fix: 28px;
 
-$fonts: 'Raleway', sans-serif; // GF Quicksand 
+$fonts: sans-serif; // GF Quicksand 
 
 $fonts-space: 'Breakout', sans-serif; // GF Quicksand 
 $fonts-wanted: "Im Fell English", sans-serif; // GF Quicksand 
-// $fonts-wanted: 'breakout', serif; // GF Quicksand 
-// $fonts-headers: 'umbragerregular', serif; // GF Quicksand 
 
