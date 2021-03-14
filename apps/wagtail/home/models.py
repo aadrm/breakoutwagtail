@@ -28,7 +28,13 @@ class HomePage(Page):
         related_name="+",
     )
 
-
+    group = StreamField(
+        [
+            'offers', blocks.TeamCardsBlock
+        ],
+        null=True,
+        blank=True,
+    )
 
     faq = StreamField(
         [

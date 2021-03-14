@@ -4,6 +4,9 @@
         <h2 class="tac">{% trans "Group offers and special discounts" %}</h2>
     </div>
     <div class="who-examples-wrapper">
+        {% for group in groups %}{% endfor %} 
+    </div>
+    <div class="who-examples-wrapper">
         <div class="who-example">
             <div class="who-icon">
             {% include 'svg/team_building.svg' %}

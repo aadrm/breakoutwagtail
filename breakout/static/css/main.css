@@ -2301,6 +2301,7 @@ Main header
   overflow: hidden;
   z-index: 98; }
   .logo svg, .logo img {
+    width: 100%;
     max-width: 33vw;
     left: 0; }
 
