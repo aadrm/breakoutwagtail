@@ -5,6 +5,8 @@ from wagtail.core import blocks
 from wagtail.images import blocks as images_blocks
 
 from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail_svgmap import blocks as svgblocks
+
 
 class SpacerBlock(blocks.IntegerBlock):
     def __init__(self, *args, **kwargs):
@@ -106,8 +108,8 @@ class TeamCardsBlock(blocks.StructBlock):
                     required=True,
                     help_text='Use a 400x300px picture,'
                     )),
-                ('name', blocks.CharBlock(max_length=48)),
-                ('position', blocks.TextBlock(max_length=48)),
+                ('name', blocks.CharBlock(max_length=48, required=False)),
+                ('position', blocks.TextBlock(max_length=48, required=False)),
                 ('text', blocks.TextBlock(max_length=256, required=False)),
             ]
         )
@@ -117,6 +119,25 @@ class TeamCardsBlock(blocks.StructBlock):
         template = 'streams/team_block.html'
         icon = 'fa-address-card'
         label = 'Staff cards'
+
+
+class OfferCardsBlock(blocks.StructBlock):
+    """ Cards with image title subtitle and text """
+
+    cards = blocks.ListBlock(
+        blocks.StructBlock(
+            [
+                ('icon', svgblocks.ImageMapBlock()),
+
+            ]
+        )
+    )
+
+    class Meta: 
+        template = 'streams/offer_block.html'
+        icon = 'fa-address-card'
+        label = 'Offer Card Block'
+
 
 
 class ServicesCard(blocks.StructBlock):

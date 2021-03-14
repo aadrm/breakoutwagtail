@@ -1,0 +1,18 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<p class="tac font--lg">{{ self.title }}</p>
+<br><br>
+<div class="cards__wrapper">
+    {% for block in self.cards %}
+    <div class="offercard">
+        <div class="offercard__head">
+            {% image block.image width-512  as card_image %}
+            <img src="{{ card_image.url }}" alt="{{card_image.alt}}"> 
+        </div>
+        <div class="offercard__content">
+            <p class="offercard__content__name">{{ block.name }}</p>
+            <p class="offercard__content__position">{{ block.position}}</p>
+            <p class="offercard__content__text">{{ block.text }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -28,12 +28,10 @@ class HomePage(Page):
         related_name="+",
     )
 
-    group = StreamField(
-        [
-            ('offers', blocks.TeamCardsBlock()),
-        ],
-        null=True,
-        blank=True,
+    group_offers = StreamField(
+        StreamBlock([
+            ('offers', blocks.OfferCardsBlock())
+        ], min_num=1, max_num=1)
     )
 
     faq = StreamField(
@@ -45,7 +43,8 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel("header_image"),
+        # ImageChooserPanel("header_image"),
+        StreamFieldPanel('group_offers'),
         StreamFieldPanel('faq'),
     ]
 

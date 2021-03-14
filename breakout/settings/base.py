@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     'paypal.standard.ipn',
     'cookie_consent',
     'blog',
+    'wagtail_svgmap',
     # 'django-crontab',
 ]
 
@@ -108,7 +109,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'breakout.urls'
-
+WAGTAIL_SVGMAP_IE_COMPAT: False
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
