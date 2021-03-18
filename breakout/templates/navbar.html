@@ -16,7 +16,10 @@
         <ul class="nav-items">
             {% for item in navigation.menu_items.all %}
             <li class="nav-item_container">
-                <a class="nav-link nav-link-anchor c-nav-anchor" href="{{ item.link }}">{{ item.title }}</a>
+                <a class="nav-link nav-link-anchor c-nav-anchor" 
+                href="{{ item.link }}{{item.uri_fragment}}">
+                    {{ item.title }}
+                </a>
             </li>
             {% endfor %}
             <li class="nav-item_book ">

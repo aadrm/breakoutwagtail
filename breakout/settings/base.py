@@ -95,7 +95,7 @@ INSTALLED_APPS = DJANGO_CORE_APPS + THIRD_PARTY_APPS + MY_APPS
 COOKIE_CONSENT_NAME = "cookie_consent"
 
 MIDDLEWARE = [
-    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',  # should be after SessionMiddleware and before CommonMiddleware
     'django.middleware.common.CommonMiddleware',

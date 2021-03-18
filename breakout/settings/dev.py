@@ -11,7 +11,7 @@ ALLOWED_HOSTS = ['*']
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 DEV_THIRD_PARTY_APPS  = [
-    # 'debug_toolbar',
+    'debug_toolbar',
 ]
 
 DEV_MY_APPS = [

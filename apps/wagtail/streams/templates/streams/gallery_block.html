@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="block_gallery">
+    {% for image in self.gallery %}
+    {% image image fill-400x300 as img%}
+    <label for="image{{forloop.counter}}">
+        <input id="image{{forloop.counter}}" class="u-visually-hidden" type="checkbox">
+        <div class="image_mask">
+            <div class="image_wrapper">
+                <img alt="Section separator with a background image." src="{{img.url}}" loading="lazy">
+            </div>
+        </div>
+    </label>
+    {% endfor %}
+</div>

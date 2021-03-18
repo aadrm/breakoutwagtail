@@ -2,12 +2,14 @@ from django.db import models
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from wagtail.core import blocks
+from wagtail.core import fields
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel, ImageFieldComparison
 from wagtail.core.fields import StreamField, StreamBlock, BlockField, RichTextField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from apps.wagtail.streams import blocks
+from apps.wagtail.streams import blocks as myblocks
 
 from apps.booking.models import Room
 
@@ -35,7 +37,7 @@ class HomePage(Page):
 
     group_offers = StreamField(
         StreamBlock([
-            ('offers', blocks.OfferCardsBlock())
+            ('offers', myblocks.OfferCardsBlock())
         ], 
         null=True,
         blank=True,
@@ -45,7 +47,7 @@ class HomePage(Page):
 
     faq = StreamField(
         [
-            ('question', blocks.AccordionBlock()),
+            ('question', myblocks.AccordionBlock()),
         ],
         null=True,
         blank=True,
@@ -70,6 +72,28 @@ class HomePage(Page):
         context['cart'] = get_cart(request)
         return context
 
+
+class RoomPage(Page):
+
+    room = models.ForeignKey('booking.Room', null=True, blank=True, on_delete=models.SET_NULL)
+    gallery = StreamField(
+        StreamBlock([
+            ('gallery', myblocks.ImageGalleryBlock())
+        ],
+        max_num=1,
+        ),
+        null=True,
+        blank=True,
+    ) 
+
+    video = models.CharField(max_length=50, null=True, blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('room'),
+        FieldPanel('video'),
+        StreamFieldPanel('gallery'),
+    ]
+    
 
 
 class BooknowPage(Page):

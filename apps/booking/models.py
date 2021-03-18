@@ -913,11 +913,11 @@ class Schedule(models.Model):
                 dow_integer_list.append(i)
         return dow_integer_list
 
-    def save(self, request=None, *args, **kwargs):
+    def save(self, *args, **kwargs):
         """custom save method, checks for collisions with other schedules and creates 
         slots acording to the schedule""" 
         if self.schedule_collision().exists():
-            messages.add_message(request, messages.INFO, "Model was not changed")
+            pass
 
         else:
             super(Schedule, self).save(*args, **kwargs)

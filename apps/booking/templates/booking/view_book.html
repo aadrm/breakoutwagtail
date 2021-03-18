@@ -10,16 +10,18 @@
 {% include 'booking/section_cart-overlay.html' %}
 
 <section class="c-section-light">
-    <div class="s-tac booking-instructions">
-    <h3 class=" ">{% trans "Our Escape Rooms" %}</h3>
-    <br>
-    <p class="c-text-lg">{% trans "Choose your favourite adventure and select an appointment to book." %}</p>
-    </div>
-    <br><br><br>
-    <div class="calendars">
-        {% for room in rooms %}
-        <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
-        {% endfor %}
+    <div class="c-wrapper--lg">
+        <div class="s-tac booking-instructions">
+        <h3 class=" ">{% trans "Our Escape Rooms" %}</h3>
+        <br>
+        <p class="c-text-lg">{% trans "Choose your favourite adventure and select an appointment to book." %}</p>
+        </div>
+        <br><br><br>
+        <div class="calendars">
+            {% for room in rooms %}
+            <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 

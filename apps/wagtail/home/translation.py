@@ -1,5 +1,6 @@
 from .models import (
     HomePage,
+    RoomPage,
     BooknowPage,
     CookieSettingsPage,
 )
@@ -14,6 +15,11 @@ class HomePageTR(TranslationOptions):
         'our_rooms_header',
         'our_rooms_text',
         'faq',
+    )
+
+@register(RoomPage)
+class HomePageTR(TranslationOptions):
+    fields = (
     )
 
 @register(BooknowPage)

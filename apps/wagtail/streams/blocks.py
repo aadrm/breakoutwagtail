@@ -66,6 +66,15 @@ class SimpleRichTextBlock(blocks.RichTextBlock):
         icon = 'edit'
         label = 'Simple RichText'
 
+class ImageGalleryBlock(blocks.StructBlock):
+    gallery = blocks.ListBlock(
+        images_blocks.ImageChooserBlock(),
+    )
+
+    class Meta:
+        template = 'streams/gallery_block.html'
+        icon = 'image'
+        label = 'Image Gallery'
 
 class HorizontalCardsBlock(blocks.StructBlock):
     """ Cards with image and title else """
@@ -232,7 +241,15 @@ class MyMapsBlock(blocks.URLBlock):
     class Meta:
         template = 'streams/mymaps_block.html'
         icon = 'site'
-        label = 'Google my maps'
+        label = 'MyMaps block'
+
+class IframeBlock(blocks.URLBlock):
+
+    class Meta:
+        template = 'stream/iframe_blocks.html'
+        icon = 'site'
+        label = 'iframe block'
+
 
 
 class SectionBlock(blocks.StructBlock):
