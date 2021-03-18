@@ -1,11 +1,13 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
+.c-anchor-standard {
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+        color: $brand-primary;
+    }
+}
 
 .c-nav-anchor {
+    text-decoration: none;
     text-transform: uppercase;
     text-shadow: 0 0 3px $brand-dark;
     transition: all .3s;
@@ -55,6 +57,7 @@
 }        
 
 .c-anchor {
+    text-decoration: none;
     text-align: center;
     display: block;
     padding: .5rem 2rem;

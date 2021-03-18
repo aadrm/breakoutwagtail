@@ -39,7 +39,7 @@
         <ul>
         {% for link in links.menu_items.all %}
             <li>
-                <a href="{{ link.link }}">{{ link.title }}</a>
+                <a class="c-anchor-standard" href="{{ link.link }}">{{ link.title }}</a>
             </li>
         {% endfor %}
         </ul>

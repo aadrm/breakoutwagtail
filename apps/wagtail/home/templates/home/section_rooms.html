@@ -1,6 +1,7 @@
 {% load i18n %}
 <div class=" tac c-color-primary">
-    <h2>{% trans "Our escaper rooms in Augsburg" %}</h2>
+    <h2>{{ page.our_rooms_header }}</h2>
+    <p>{{ page.our_rooms_text }}</p>
 </div> 
 <br>
 
@@ -22,7 +23,7 @@
                         </div>
                     </div>
                     <div class="room-text">
-                        <p>{{room.description}}</p>
+                        <p>{{room.description|truncatechars:200}}</p>
                     </div>
                 </div>
             </a>

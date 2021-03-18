@@ -5,15 +5,10 @@
     <div>
         <h2 class="tac">{% trans "Group offers and special discounts" %}</h2>
     </div>
-    <div class="who-examples-wrapper">
         {% for group in page.group_offers %}
-        <div class="who-example">
             {% include_block group %}
-        </div>
-        
         {% endfor %} 
-    </div>
-    <div class="who-examples-wrapper">
+    {% comment %} <div class="who-examples-wrapper">
         <div class="who-example">
             <div class="who-icon">
             {% include 'svg/team_building.svg' %}
@@ -36,5 +31,5 @@
             <h3>{% trans "For friends and families" %}</h3>
             <p>{% trans "Live escape games strengthen your bonds as a group" %}</p>
         </div>
-    </div>
+    </div> {% endcomment %}
 </div>

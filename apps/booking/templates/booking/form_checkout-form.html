@@ -38,12 +38,19 @@
         {% endfor %}
     </ul>
     <p>
-        {{ invoice_form.is_terms.label_tag }}
+        {{ invoice_form.is_terms.label_tag.label_for }}
+        <label class="required" for="id_is_terms">
+        {% trans "I have read and accept Breakout Escape Room's " %} 
+        <a class="c-anchor-standard" taget="_blank" href="/terms-and-conditions">{% trans "Terms and Conditions" %}</a>
+        </label>
         {{ invoice_form.is_terms.errors}}
         {{ invoice_form.is_terms }}
     </p>
     <p>
-        {{ invoice_form.is_privacy.label_tag }}
+        <label class="required" for="id_is_privacy">
+        {% trans "I have read and accept Breakout Escape Room's " %} 
+        <a class="c-anchor-standard" target="_blank" href="/privacy-policy">{% trans "Privacy Policy" %}</a>
+        </label>
         {{ invoice_form.is_privacy.errors}}
         {{ invoice_form.is_privacy }}
     </p>

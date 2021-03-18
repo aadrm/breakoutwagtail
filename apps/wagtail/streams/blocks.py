@@ -23,9 +23,11 @@ class LinkBlock(blocks.StructBlock):
     
     page_link = blocks.PageChooserBlock(required=False)
     url_link = blocks.URLBlock(required=False)
-    text = blocks.CharBlock(max_length=32, required=True)
+    button_text = blocks.CharBlock(max_length=64, required=False)
 
     class Meta:
+        template = 'streams/link_block.html'
+        label = 'Link'
         icon = 'user'
 
 
@@ -126,8 +128,10 @@ class OfferCardsBlock(blocks.StructBlock):
     cards = blocks.ListBlock(
         blocks.StructBlock(
             [
-
-                ('name', blocks.CharBlock(max_length=48, required=False)),
+                ('icon', blocks.RawHTMLBlock()),
+                ('title', blocks.CharBlock(max_length=48, required=False)),
+                ('text', blocks.RichTextBlock(features=['bold', 'link'], required=False)),
+                ('link', LinkBlock()),
             ]
         )
     )

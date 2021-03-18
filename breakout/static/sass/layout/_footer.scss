@@ -32,12 +32,6 @@ footer {
     li {
         margin: 1rem;
     }
-    a {
-        text-decoration: underline;
-        &:hover {
-            color: $brand-primary;
-        }
-    }
 }
 
 .footer__social__icons {

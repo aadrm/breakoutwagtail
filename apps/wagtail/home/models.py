@@ -3,11 +3,13 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel, ImageFieldComparison
-from wagtail.core.fields import StreamField, StreamBlock, BlockField
+from wagtail.core.fields import StreamField, StreamBlock, BlockField, RichTextField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from apps.wagtail.streams import blocks
+
+from apps.booking.models import Room
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -27,6 +29,9 @@ class HomePage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+
+    our_rooms_header = models.CharField(max_length=50, blank=True, null=True)
+    our_rooms_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
 
     group_offers = StreamField(
         StreamBlock([
@@ -48,6 +53,13 @@ class HomePage(Page):
 
     content_panels = Page.content_panels + [
         # ImageChooserPanel("header_image"),
+        MultiFieldPanel(
+            heading="Our Rooms",
+            children=[
+                FieldPanel('our_rooms_header'),
+                FieldPanel('our_rooms_text'),
+            ]
+        ),
         StreamFieldPanel('group_offers'),
         StreamFieldPanel('faq'),
     ]

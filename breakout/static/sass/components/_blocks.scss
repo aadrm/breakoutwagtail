@@ -10,6 +10,43 @@
     display: flex;
 }
 
+.offercards{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 2rem;
+  @include break--md {
+    flex-direction: row;
+  }
+  .offercard {
+    max-width: 300px;
+    .offercard__head {
+      margin: 1rem auto;
+      width: 150px;
+      svg {
+        padding: 2;
+        fill: $brand-light;
+        opacity: .85;
+        height: 100%;
+        width: 100%;
+        // filter: drop-shadow(4px 4px 3px $brand-dark-a);
+      }
+    }
+    .offercard__body {
+      h3 {
+        text-align: center;
+        color: $brand-dark;
+        font-weight: bold;
+      }
+      p {
+        text-align: center;
+      }
+    }
+  }
+}
+
+
 .stream__card {
     max-width: 400px;
     border-radius: 4px;
