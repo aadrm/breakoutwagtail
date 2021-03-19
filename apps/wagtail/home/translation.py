@@ -2,6 +2,7 @@ from .models import (
     HomePage,
     RoomPage,
     BooknowPage,
+    CouponsPage,
     CookieSettingsPage,
 )
 from blog.models import BlogIndexPage, BlogPage
@@ -18,6 +19,11 @@ class HomePageTR(TranslationOptions):
     )
 
 @register(RoomPage)
+class HomePageTR(TranslationOptions):
+    fields = (
+    )
+
+@register(CouponsPage)
 class HomePageTR(TranslationOptions):
     fields = (
     )

@@ -78,8 +78,14 @@ def booking_calendars(request):
 def coupons(request):
 
     cart = get_cart(request)
-    online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
-    voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+    try:
+        online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
+    except Exeption:
+        pass
+    try:
+        voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+    except Exeption:
+        pass
     online_coupon_form = AddProductToCartForm(family=online_coupon_family)
     voucher_form = AddProductToCartForm(family=voucher_family)
     context = {

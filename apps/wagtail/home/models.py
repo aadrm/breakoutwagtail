@@ -117,13 +117,17 @@ class RoomPage(Page):
     ]
     
 
-
 class BooknowPage(Page):
 
     max_count = 1
     def serve(self, request):
         return HttpResponseRedirect(reverse('booking:book'))
 
+class CouponsPage(Page):
+
+    max_count = 1
+    def serve(self, request):
+        return HttpResponseRedirect(reverse('booking:coupons'))
 
 class CookieSettingsPage(Page):
 
