@@ -16,7 +16,7 @@
 </header>
 <main>
     <div class="room-page-content">
-        <aside>
+        <aside class="aside_gallery">
             <h2 class="font--md">{% trans "Promo Video" %}</h2>
             <div class="video-wrapper">
                 <iframe title="Youtube Promo Video {{page.title}}" loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ page.video }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -34,8 +34,12 @@
                 <div id="{{page.room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ page.room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
             </div>
         </div>
-        <aside>
-
+        <aside class="room-reviews">
+        {% if page.reviews %}
+            {% for block in page.reviews %}
+                {% include_block block%}
+            {% endfor %}
+        {% endif %}
         </aside>
     </div>
 </main>

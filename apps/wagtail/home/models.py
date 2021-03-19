@@ -99,10 +99,21 @@ class RoomPage(Page):
 
     video = models.CharField(max_length=50, null=True, blank=True)
 
+    reviews = StreamField(
+        StreamBlock([
+            ('review_family', myblocks.ReviewCarouselBlock()),
+            ],
+            max_num=1,
+        ),
+        null=True,
+        blank=True,
+    )
+
     content_panels = Page.content_panels + [
         FieldPanel('room'),
         FieldPanel('video'),
         StreamFieldPanel('gallery'),
+        StreamFieldPanel('reviews'),
     ]
     
 
