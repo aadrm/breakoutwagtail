@@ -26,6 +26,8 @@ except Exception:
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+SITE_ID = 1
+
 INTERNAL_IPS = [
     # ...
     '127.0.0.1',
@@ -48,6 +50,8 @@ DJANGO_CORE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [

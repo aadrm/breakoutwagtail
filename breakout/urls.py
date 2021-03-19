@@ -1,14 +1,18 @@
 from django.conf import settings
 from django.urls import include, path
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from django.views.generic.base import TemplateView
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.contrib.sitemaps.views import sitemap
 
 import debug_toolbar
 
 from apps.wagtail.search import views as search_views
+
 
 urlpatterns = [
     path('django-admin/', admin.site.urls),
@@ -23,6 +27,8 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace="blog")),
 
     path('paypal/', include('paypal.standard.ipn.urls')),
+    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path('sitemap.xml', sitemap),
 ]
 
 
