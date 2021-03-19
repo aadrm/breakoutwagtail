@@ -39,10 +39,9 @@
 
     }
     &:hover {
-        background: $brand-secondary;
-        color: $brand-primary;
+        background: $brand-emphasis;
         svg {
-            fill: $brand-primary;
+            // fill: $brand-primary;
         }
     }
     @include break--xs {

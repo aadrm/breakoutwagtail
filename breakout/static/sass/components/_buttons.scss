@@ -71,9 +71,9 @@
     text-shadow: none;
     border: 3px solid transparent;
     &:hover {
-        color: $brand-primary;
-        background: transparent;
-        border: 3px solid $brand-primary;
+        color: $brand-light;
+        background: $brand-emphasis;
+        // border: 3px solid $brand-primary;
         &::before,
         &::after {
             content: none;
