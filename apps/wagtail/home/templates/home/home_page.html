@@ -19,10 +19,11 @@
 
 <section class="c-section-primary">
     <span id="offers" class="c-id-offset"></span>
+    <div class="c-wrapper--md">
     {% include 'home/section_offers.html' %}
     {% for group in page.group_offers %}
-    <p></p>
     {% endfor %}
+    </div>
 </section>
 
 <section class="c-section-dark">
@@ -41,6 +42,16 @@
     {% comment %} <br><br><br> {% endcomment %}
     {% include 'home/section_location.html' %}
 </section>
+
+{% if page.reviews %}
+<section class="c-section-primary">
+    <div class="c-wrapper--md">
+    {% for block in page.reviews %}
+        {% include_block block%}
+    {% endfor %}
+    </div>
+</section>
+{% endif %}
 
 <section class="c-section-dark">
     <span id="faq" class="c-id-offset"></span>
@@ -61,7 +72,7 @@
 
 {% block extra_js %}
     {{ block.super }}
-    <script src =" {% static 'js/accordion.js' %}"></script>
-    <script src =" {% static 'js/deffer.js' %}" ></script>
+    <script defer src =" {% static 'js/accordion.js' %}"></script>
+    <script defer src =" {% static 'js/deffer.js' %}" ></script>
 
 {% endblock extra_js %}

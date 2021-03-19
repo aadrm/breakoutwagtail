@@ -2,9 +2,11 @@
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.core import blocks
+from django.db import models
+from django import forms
 from wagtail.images import blocks as images_blocks
-
 from wagtail.contrib.table_block.blocks import TableBlock
+from .models import ReviewFamily, Review
 
 
 class SpacerBlock(blocks.IntegerBlock):
@@ -66,15 +68,34 @@ class SimpleRichTextBlock(blocks.RichTextBlock):
         icon = 'edit'
         label = 'Simple RichText'
 
+
+class ReviewCarouselBlock(blocks.MultipleChoiceBlock):
+    
+    choices = ReviewFamily.objects.all().values_list
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context['reviews'] = Review.objects.filter(family__in=context['value']).distinct()
+        return context
+
+
+    class Meta:
+        template = 'streams/reviews_carousel_block.html'
+        icon = 'image'
+        label = 'Reviews'
+
+
 class ImageGalleryBlock(blocks.StructBlock):
     gallery = blocks.ListBlock(
         images_blocks.ImageChooserBlock(),
     )
 
+
     class Meta:
         template = 'streams/gallery_block.html'
         icon = 'image'
         label = 'Image Gallery'
+
 
 class HorizontalCardsBlock(blocks.StructBlock):
     """ Cards with image and title else """
@@ -103,7 +124,6 @@ class HorizontalCardsBlock(blocks.StructBlock):
         template = 'streams/fullwidthcards_block.html'
         icon = 'placeholder'
         label = 'Full width cards'
-
 
 
 class TeamCardsBlock(blocks.StructBlock):
@@ -215,6 +235,7 @@ class AccordionBlock(InfoParagraphBlock):
         icon = 'pilcrow'
         label = 'Paragraph'
 
+
 class ContactBlock(blocks.StructBlock):
     """Contact Block"""
     title = blocks.CharBlock(
@@ -243,13 +264,13 @@ class MyMapsBlock(blocks.URLBlock):
         icon = 'site'
         label = 'MyMaps block'
 
+
 class IframeBlock(blocks.URLBlock):
 
     class Meta:
         template = 'stream/iframe_blocks.html'
         icon = 'site'
         label = 'iframe block'
-
 
 
 class SectionBlock(blocks.StructBlock):

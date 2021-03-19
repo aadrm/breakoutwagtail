@@ -145,3 +145,23 @@ class AppointmentsGroup(ModelAdminGroup):
     )
 
 modeladmin_register(AppointmentsGroup)
+
+
+# from apps.wagtail.streams.models import Review 
+
+# class ReviewAdmin(ModelAdmin):
+#     model = Review 
+#     menu_label = 'Review'
+#     menu_icon = 'placeholder'
+#     list_display = ('family', 'review')
+
+
+# class ReviewsGroup(ModelAdminGroup):
+#     menu_label = 'Reviews'
+#     menu_icon = 'placeholder'
+#     menu_order = 201
+#     items = (
+#         ReviewAdmin
+#     )
+
+# modeladmin_register(ReviewsGroup)

@@ -8,7 +8,9 @@
         <div class="offercard__body">
             <h3>{{ block.title }}</h3>
             {{ block.text }}
-            {% include_block block.link %}
+            <div class="offercard__link">
+                {% include_block block.link %}
+            </div>
         </div>
     </div>
     {% endfor %}

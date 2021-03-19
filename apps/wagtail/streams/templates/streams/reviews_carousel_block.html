@@ -1,0 +1,39 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
+{% load i18n %}
+
+<div class="block-reviews">
+    <div class="block-reviews__inner">
+    {% for review in reviews %}
+    <div class="review {% if forloop.counter == 1 %}review-show{% endif %}">
+        <div class="review__content">
+        <div aria-hidden=True class="review__icon">
+        {{review.platform.icon|safe}} 
+        </div>
+        {% if review.name %}
+        <p class="review__name">
+        {{review.name}} 
+        {% if review.platform.icon %}{% else %}
+        ({{review.platform.name}})
+        {% endif %}
+        </p>
+        {% endif %}
+        <span aria-hidden=True class="review__stars">
+            {% for i in ''|center:5 %}
+                {{review.platform.star_icon|safe}}
+            {% endfor %}
+        </span>
+        <p class="review__text">
+            {{ review.review }}
+        </p>
+        {% if review.platform.link %}
+        <p>
+        <a target="_blank" rel="noopener" href="{{review.platform.link}}">{% trans "See more" %}</a>
+        </p>
+        {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+</div>
+<script defer src =" {% static 'js/reviews.js' %}"></script>

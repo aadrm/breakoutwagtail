@@ -1,3 +1,65 @@
+.block-reviews {
+  width: 100%;
+  .block-reviews__inner {
+    position: relative;
+    max-width: 400px; 
+    height:250px;
+    margin: 0 auto;
+    .review {
+      text-align: center;
+      position: absolute;
+      visibility: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      width: 100%;
+      transition: all 1s;
+      .review__icon {
+        svg {
+          max-width: 80px;
+          width: 20%;
+        }
+      }
+      .review__stars {
+        svg {
+          width: 16px;
+        }
+      }
+      .review__name {
+        font-size: $font--md;
+        font-weight: bold;
+      }
+      .review__text {
+        position: relative;
+        &::before,
+        &::after {
+          position: absolute;
+          content: "'"; 
+          font-size: $font--ll;
+        }
+        &::before {
+          content: "\201c";
+          top: 0;
+          left: 0;
+          transform: translate(-100%);
+        }
+        &::after {
+          content: "\201d";
+          bottom: 0;
+          right: 0;
+          transform: translate(100%);
+        }
+      }
+    }
+    .review-show {
+      visibility: initial;
+      opacity: 1;
+    }
+  }
+
+}
+
 
 .block-gallery {
   width: 100%;
@@ -56,18 +118,19 @@
 }
 
 .offercards{
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  gap: 2rem;
+  margin: 0 auto;
   @include break--md {
+    justify-content: center;
+    align-items: stretch;
+    display: flex;
     flex-direction: row;
+    gap: 2rem;
   }
   .offercard {
     max-width: 300px;
+    margin: 1rem auto;
     .offercard__head {
-      margin: 1rem auto;
+      margin: 2rem auto 0;
       width: 150px;
       svg {
         padding: 2;
@@ -86,6 +149,23 @@
       }
       p {
         text-align: center;
+      }
+      .offercard__link {
+          text-align: center;
+          margin-top: 1.1rem;
+        a {
+          padding: .6rem 1.8rem;
+          font-weight: bold;
+          background: $brand-secondary;
+          border-radius: 4px;
+          color: $brand-primary;
+          // border: 2px solid $brand-primary;
+          &:hover {
+            background: #b13d1a;
+            // border: 2px solid $brand-secondary;
+            color: $brand-secondary;
+          }
+        }
       }
     }
   }

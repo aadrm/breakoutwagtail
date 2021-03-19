@@ -4,7 +4,7 @@
 {% block stream %}
     <main>
         <section class="c-section-light">
-            <div class="c-wrapper--lg info-content {% if self.is_numbered %}enumerate-paragraphs{% endif %}">
+            <div class="c-wrapper--md info-content {% if self.is_numbered %}enumerate-paragraphs{% endif %}">
                 {% for block in page.content %}
                     {% include_block block %}
                 {% endfor %}

@@ -53,6 +53,16 @@ class HomePage(Page):
         blank=True,
     )
 
+    reviews = StreamField(
+        StreamBlock([
+            ('review_family', myblocks.ReviewCarouselBlock()),
+            ],
+            max_num=1,
+        ),
+        null=True,
+        blank=True,
+    )
+
     content_panels = Page.content_panels + [
         # ImageChooserPanel("header_image"),
         MultiFieldPanel(
@@ -62,6 +72,7 @@ class HomePage(Page):
                 FieldPanel('our_rooms_text'),
             ]
         ),
+        StreamFieldPanel('reviews'),
         StreamFieldPanel('group_offers'),
         StreamFieldPanel('faq'),
     ]
