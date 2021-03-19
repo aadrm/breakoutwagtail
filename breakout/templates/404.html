@@ -3,7 +3,17 @@
 {% block body_class %}template-404{% endblock %}
 
 {% block content %}
-    <h1>Page not found</h1>
+<header class="secondary-header">
+    {% if header_img %}
+    <div class="secondary-header__mask"></div>
+    <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
+    {% else %}
+    <div class="secondary-header__solid">
+    {% endif %}
+        <h1 font--xl>{% trans "404 - Page not found " %}</h1>
+    </div>
+</header>
 
-    <h2>Sorry, this page could not be found.</h2>
+    <h2>{% trans "Sorry, the page you are looking for could not be found" %}</h2>
+    <p>{% trans "You can still use the navigation bar to continue using this website." %}</p>
 {% endblock %}
