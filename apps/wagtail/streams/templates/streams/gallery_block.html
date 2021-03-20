@@ -2,12 +2,12 @@
 
 <div class="block_gallery">
     {% for image in self.gallery %}
-    {% image image fill-400x300 as img%}
+    {% image image.image fill-400x300 as img%}
     <label for="image{{forloop.counter}}">
         <input id="image{{forloop.counter}}" class="u-visually-hidden" type="checkbox">
         <div class="image_mask">
             <div class="image_wrapper">
-                <img alt="{{img.alt}}" src="{{img.url}}" loading="lazy">
+                <img alt="{{image.alt_text}}" src="{{img.url}}" loading="lazy">
             </div>
         </div>
     </label>

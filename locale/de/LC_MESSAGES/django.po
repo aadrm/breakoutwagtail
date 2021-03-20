@@ -980,7 +980,7 @@ msgstr "pro Person"
 #: apps/wagtail/home/templates/home/section_rooms.html:22
 #: breakout/templates/navbar.html:27
 msgid "Book now"
-msgstr "Jetz Buchen"
+msgstr "Jetzt Buchen"
 
 #: apps/wagtail/home/templates/home/section_video.html:5
 msgid "Breakout Escape Room Teaser"

@@ -4,7 +4,7 @@
  
     {% for room in rooms %}
     <div class="rooms-room">
-        <a href="{% url 'booking:book' %}#{{room.pk}}">
+        <a title="{% trans "Book Now" %} {{room.name}}" href={{room.get_page.url}}>
             <div class="rooms-picture-outer">
 
                 <img title="Room cover picture" loading="lazy" height="585" width="360" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">

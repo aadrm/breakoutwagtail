@@ -867,6 +867,11 @@ class Room(models.Model):
     green = models.SmallIntegerField(_("Green"), default=255)
     blue = models.SmallIntegerField(_("Blue"), default=255)
 
+    def get_page(self):
+        if self.room_page:
+            return self.room_page.first()
+            
+
     def __str__(self):
         return self.name
 

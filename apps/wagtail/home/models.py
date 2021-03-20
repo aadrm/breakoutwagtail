@@ -151,7 +151,7 @@ class HomePage(MyPage):
 
 class RoomPage(MyPage):
 
-    room = models.ForeignKey('booking.Room', null=True, blank=True, on_delete=models.SET_NULL)
+    room = models.ForeignKey('booking.Room', related_name="room_page", null=True, blank=True, on_delete=models.SET_NULL)
     gallery = StreamField(
         StreamBlock([
             ('gallery', myblocks.ImageGalleryBlock())
