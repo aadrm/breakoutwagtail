@@ -1,4 +1,5 @@
 from .models import (
+    MyPage,
     HomePage,
     RoomPage,
     BooknowPage,
@@ -8,6 +9,14 @@ from .models import (
 from blog.models import BlogIndexPage, BlogPage
 from modeltranslation.translator import TranslationOptions
 from modeltranslation.decorators import register
+
+
+@register(MyPage)
+class MyPageTR(TranslationOptions):
+    fields = (
+        'header_image_alt',
+        'seo_image_alt',
+    )
 
 
 @register(HomePage)

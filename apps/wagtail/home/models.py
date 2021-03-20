@@ -47,7 +47,7 @@ class MyPage(Page):
 
     content_panels = Page.content_panels + [
         MultiFieldPanel (
-            heading="Seo Image",
+            heading="Header Image",
             children = [
                 ImageChooserPanel("header_image"),
                 FieldPanel("header_image_alt")

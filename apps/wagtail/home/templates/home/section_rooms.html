@@ -1,7 +1,8 @@
 {% load i18n %}
-<div class=" tac c-color-primary">
+<div class=" tac c-color-primary c-wrapper--md">
     <h2>{{ page.our_rooms_header }}</h2>
-    <p>{{ page.our_rooms_text }}</p>
+    
+    {{ page.our_rooms_text|safe}}
 </div> 
 <br>
 

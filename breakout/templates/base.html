@@ -7,7 +7,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
         <meta charset="utf-8" />
-
         {% comment "Meta titles" %}{% endcomment %}
         {% with self.get_site.site_name as site_name %}
         {% if self.seo_title %}
@@ -32,10 +31,12 @@
         <meta name="description" content="{{ self.search_description }}" />
         <meta name="og:description" content="{{ self.search_description }}" />
         <meta name="twitter:description" content="{{ self.search_description }}" />
+        <meta itemprop="description" content="{{ self.search_description }}">
         {% else %}
         <meta name="description" content="Breakout Escape Room Augsburg" />
         <meta name="og:description" content="Breakout Escape Room Augsburg" />
         <meta name="twitter:description" content="Breakout Escape Room Augsburg" />
+        <meta itemprop="description" content="Breakout Escape Room Augsburg">
         {% endif %}
 
         {% comment %} meta image {% endcomment %}
@@ -43,6 +44,7 @@
         {% image self.seo_image fill-1200x627 as ogimage %}
         {% image self.seo_image fill-512x512 as twitterimage %}
         <meta name="og:image" content="{{ogimage.url}}" />
+        <meta itemprop="image" content="{{ogimage.url}}" />
         <meta name="twitter:image" content="{{twitterimage.url}}" />
         
 
@@ -52,6 +54,7 @@
         <meta name="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="theme-color" content="#464839">
+        <meta itemprop="name" content="">
 
 
 
