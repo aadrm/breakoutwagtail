@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
         <meta charset="utf-8" />
+
         {% comment "Meta titles" %}{% endcomment %}
         {% with self.get_site.site_name as site_name %}
         {% if self.seo_title %}
@@ -21,6 +22,7 @@
         <meta name="og:title" content="{% if site_name %} {{ site_name }}{% endif %}">
         <meta name="twitter:title" content="{% if site_name %} {{ site_name }}{% endif %}">
         {% endif %}
+        {% endwith %}
 
         {% comment %} meta urls {% endcomment %}
         <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
@@ -57,12 +59,11 @@
         <meta name="theme-color" content="#464839">
         <meta itemprop="name" content="">
 
-
-
-        {% endwith %}
         <link rel="icon" href="{% static 'img/favicons/breakout-favicon.svg' %}" type="image/svg+xml" />
         <link rel="alternate icon" href="{% static 'img/favicons/favicon.ico' %}" type="image/x-icon" sizes="16x16"/>
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#463839">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicons/apple-touch-icon-152x152-precomposed.png' %} " />
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicons/apple-touch-icon-120x120-precomposed.png' %} " />
 
 
         <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="{% static 'fonts/capture_it/capture_it.woff2' %}">
@@ -79,6 +80,16 @@
             <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
             <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
         {% endif %} 
+        
+
+        {% comment %} site wide schema {% endcomment %}
+        <script type="application/ld+json">
+        {% include "schema/business_schema" %}
+        </script>
+        <script type="application/ld+json">
+        {% include "schema/website_schema" %}
+        </script>
+
 
     </head>
 

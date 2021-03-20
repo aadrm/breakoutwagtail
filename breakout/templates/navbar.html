@@ -17,7 +17,7 @@
             {% for item in navigation.menu_items.all %}
             <li class="nav-item_container">
                 <a class="nav-link nav-link-anchor c-nav-anchor" 
-                href="{{ item.link }}{% if item.uri_framgent %}{{item.uri_fragment}}{% endif %}">
+                href="{{ item.link }}{% if item.uri_fragment %}{{item.uri_fragment}}{% endif %}">
                     {{ item.title }}
                 </a>
             </li>

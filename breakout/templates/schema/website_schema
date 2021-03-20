@@ -1,0 +1,8 @@
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "Breakout Escape Room",
+    "url": "https://breakout-escaperoom.de",
+    "sameAs": ["https://facebook.com/breakoutaugsburg/",
+            "https://instagram.com/breakoutaugsburg",
+            "https://twitter.com/breakoutaux"]
+    }

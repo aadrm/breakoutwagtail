@@ -1,0 +1,62 @@
+{
+"@context": "https://schema.org",
+"@type": "EntertainmentBusiness",
+"image": [
+    "https://breakout-escaperoom.de/static/img/photos/escape-room-wanted-horseshoe.jpg",
+    "https://breakout-escaperoom.de/static/img/photos/escape-room-spacelab-helmet.jpg"
+],
+"@id": "http://breakout-escaperoom.de",
+"name": "Breakout Escape Room",
+"address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Riedingerstrasse 26c",
+    "addressLocality": "Augsurg",
+    "addressRegion": "Bavaria",
+    "postalCode": "86152",
+    "addressCountry": "DE"
+},
+//   "review": {
+//     "@type": "Review",
+//     "reviewRating": {
+//       "@type": "Rating",
+//       "ratingValue": "4",
+//       "bestRating": "5"
+//     },
+//     "author": {
+//       "@type": "Person",
+//       "name": "Mike Jones"
+//     }
+//   },
+"geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 48.3850234,
+    "longitude": 10.8900748
+},
+"url": "htts://breakout-escaperoom.de",
+"telephone": "+4915777853955",
+"priceRange": "$$",
+"openingHoursSpecification": [
+    {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+        "Wednesday",
+        "Thursday",
+        "Friday"
+    ],
+    "opens": "16:30",
+    "closes": "22:00"
+    },
+    {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Saturday",
+    "opens": "13:30",
+    "closes": "22:00"
+    },
+    {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": "Sunday",
+    "opens": "13:30",
+    "closes": "19:00"
+    }
+]
+}
