@@ -122,7 +122,7 @@ class RoomAdmin(ModelAdmin):
     model = Room 
     menu_label = 'Rooms'
     menu_icon = 'placeholder'
-    list_display = ('pk', 'name')
+    list_display = ('name', 'is_active')
 
 
 class ScheduleAdmin(ModelAdmin):

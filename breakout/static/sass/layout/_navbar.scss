@@ -29,14 +29,18 @@
 
 .nav-item_book {
     text-align: center;
+    font-size: $font--md;
     overflow: hidden;
     transition: all .3s ease-out;
     box-sizing: border-box;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 2rem;
+    right: 1rem;
     line-height: 100px;
+    @include break--md {
+        font-size: medium;
+    }
 
 }
 

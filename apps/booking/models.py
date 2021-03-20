@@ -253,26 +253,32 @@ class Cart(models.Model):
 
         message = render_to_string('email/order_confirmation.txt', context)
         html_message = render_to_string('email/order_confirmation.html', context)
-
-        # html_string = render_to_string('booking/pdf-coupon_code.html')
-        # html = HTML(string=html_string)
-        # pdf = html.write_pdf()
-
         to_email = invoice.email
         mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
         email = EmailMultiAlternatives(
             subject=mail_subject,
             body=message,
             from_email='info@breakout-escaperoom.de',
-            to=[to_email],
+            to=[to_email,],
+        )
+
+
+        email.attach_alternative(html_message, mimetype='text/html')
+        self.attach_cart_coupons_to_email(email)
+        email.send(fail_silently=True)
+
+        mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
+        message = render_to_string('email/order_confirmation_alert.txt', context)
+        html_message = render_to_string('email/order_confirmation_alert.html', context)
+
+        email = EmailMultiAlternatives(
+            subject=mail_subject,
+            body=message,
+            from_email='info@breakout-escaperoom.de',
+            to=['info@breakout-escaperoom.de',],
         )
         email.attach_alternative(html_message, mimetype='text/html')
-
-        self.attach_cart_coupons_to_email(email)
-
-        print('email sending')
-        print(email.send(fail_silently=False))
-        print('email sent')
+        email.send(fail_silently=True)
 
     def attach_cart_coupons_to_email(self, email):
         """given an EmailMessage this function will create the pdf files of the coupons that
@@ -863,9 +869,7 @@ class Room(models.Model):
     description = models.TextField(_("Description"), blank=True, null=True)
     photo = models.ImageField(_("Image"), upload_to='uploads/rooms', height_field=None, width_field=None, max_length=None, null=True, blank=True)
     photo_alt = models.CharField(_("Alt text"), max_length=128, null=True, blank=True)
-    red = models.SmallIntegerField(_("Red"), default=255)
-    green = models.SmallIntegerField(_("Green"), default=255)
-    blue = models.SmallIntegerField(_("Blue"), default=255)
+    theme_colour = models.CharField(_("Colour Hexagesimal"), max_length=6, default="999999")
 
     def get_page(self):
         if self.room_page:

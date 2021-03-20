@@ -38,6 +38,7 @@ footer {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 2rem;
 }
 
 .footer__social__icon {
@@ -56,6 +57,10 @@ footer {
 .footer__info {
     text-align: center;
     margin-top: 2rem;
+    line-height: 2rem;
+    span {
+        white-space: nowrap;
+    }
     div {
         display: inline-block;
     }

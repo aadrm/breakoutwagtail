@@ -231,10 +231,10 @@ SITE_ID_FOR_SETTINGS = 2
 # email setup
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND = 'mailer.backend.DbBackend'
-SERVER_EMAIL = 'info@breakout-escaperoom.de'
+SERVER_EMAIL = 'mailer@breakout-escaperoom.de'
 EMAIL_HOST = 'smtp.strato.de'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'info@breakout-escaperoom.de'
+EMAIL_HOST_USER = 'mailer@breakout-escaperoom.de'
 EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True 
 

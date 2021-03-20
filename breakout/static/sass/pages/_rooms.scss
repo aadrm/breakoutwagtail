@@ -67,16 +67,17 @@
 
 
 .rooms-wrapper {
-    display: -ms-grid;
     display: grid;
-    // padding: 2rem;
     gap: 30px;
     max-width: $width--lg;
     width: 100%;
     margin: 0 auto;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     align-content: center;
     justify-content: center;
+    grid-template-columns: 1fr;
+    @include break--md {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 
@@ -101,12 +102,9 @@
         }
         .rooms-booknow-wrapper {
             p {
-                border: 3px solid $brand-light;
-                background: $brand-primary;
-                color: $brand-light;
-                font-size: 1.2em;
+                transform: scale(1.5);
                 &:hover {
-                    background: $brand-secondary;
+                    background: $brand-emphasis;
                     cursor: crosshair;
                 }
             }
@@ -126,12 +124,9 @@
     margin: 2rem auto;
     text-align: center;
     text-transform: uppercase;
-    -webkit-transition: all .7s;
-    -o-transition: all .7s;
     transition: all .7s;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: .2fr 1fr;
     grid-template-columns: .2fr 1fr;
     align-items: center;
     padding: 1rem;
@@ -154,7 +149,7 @@
         font-weight: bold;
         color: $brand-light;
         margin: 0 auto;
-        transition: all .7s;
+        transition: all .3s;
         font-family: sans-serif;
         padding: .5rem 1rem;
     }

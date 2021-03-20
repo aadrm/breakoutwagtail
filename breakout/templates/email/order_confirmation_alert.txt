@@ -1,0 +1,30 @@
+{% extends 'email/email_main.txt' %}
+{% load i18n %}
+{% block body %}
+
+Order number {{invoice.order_number}}
+Customer: {{invoice.full_name}},
+
+{% for item in cart.get_valid_items %}
+{{item.product}} {{item.price}}
+{% endfor %}
+{% trans "Total:" %} {{cart.total_after_coupons}}
+
+{% if appointments %}
+Appointments
+{% for appointment in appointments %}
+{{appointment.slot.start|date:'d F Y'}} at {{appointment.slot.start|date:'G:i'}} | {{appointment.slot.room}}
+{% endfor %}
+{% endif %}
+
+    
+{% if coupons|length > 1 %}
+Coupon codes
+{% elif coupons %}
+{% endif %}
+
+
+{% for coupon in coupons %}
+{{coupon.coupon.code}} - value -{{coupon.coupon.amount}}
+{% endfor %}
+{% endblock body %}
