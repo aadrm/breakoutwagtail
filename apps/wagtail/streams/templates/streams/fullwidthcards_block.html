@@ -4,7 +4,7 @@
   <div class="card-horizontal {% if block.reverse %}card-horizontal-reverse{% endif %}">
     <div class="card-horizontal__head">
           {% image block.image fill-650x400  as card_image %}
-        <img src="{{card_image.url}}" alt="{{ block.title}} photo"> 
+        <img loading="lazy" src="{{card_image.url}}" alt="{{ block.title}} photo"> 
       {% comment %} <ul class="details">
         <li class="author"><a href="#">John Doe</a></li>
         <li class="date">Aug. 24, 2015</li>

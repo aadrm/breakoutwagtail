@@ -28,6 +28,8 @@ class MyPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
+    
+    header_image_alt = models.CharField(max_length=128, null=True, blank=True)
 
     seo_image = models.ForeignKey(
         "wagtailimages.Image", 
@@ -38,15 +40,29 @@ class MyPage(Page):
         related_name="+",
     )
 
+    seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
+
     class Meta:
         abstract = True
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel("header_image"),
+        MultiFieldPanel (
+            heading="Seo Image",
+            children = [
+                ImageChooserPanel("header_image"),
+                FieldPanel("header_image_alt")
+            ]
+        )
     ]
 
     promote_panels = Page.promote_panels + [
-        ImageChooserPanel("seo_image"),
+        MultiFieldPanel (
+            heading="Seo Image",
+            children = [
+                ImageChooserPanel("seo_image"),
+                FieldPanel("seo_image_alt")
+            ]
+        )
     ]
 
 class HomePage(MyPage):
@@ -62,8 +78,9 @@ class HomePage(MyPage):
         ], 
         null=True,
         blank=True,
-        min_num=1,
-        max_num=1)
+        max_num=1),
+        null=True,
+        blank=True,
     )
 
     faq = StreamField(
@@ -112,6 +129,8 @@ class RoomPage(MyPage):
         StreamBlock([
             ('gallery', myblocks.ImageGalleryBlock())
         ],
+        blank=True,
+        null=True,
         max_num=1,
         ),
         null=True,

@@ -87,9 +87,11 @@ class ReviewCarouselBlock(blocks.MultipleChoiceBlock):
 
 class ImageGalleryBlock(blocks.StructBlock):
     gallery = blocks.ListBlock(
-        images_blocks.ImageChooserBlock(),
+        blocks.StructBlock([
+            ('image', images_blocks.ImageChooserBlock()),
+            ('alt', blocks.CharBlock()),
+        ])
     )
-
 
     class Meta:
         template = 'streams/gallery_block.html'
@@ -157,7 +159,7 @@ class OfferCardsBlock(blocks.StructBlock):
     cards = blocks.ListBlock(
         blocks.StructBlock(
             [
-                ('icon', blocks.RawHTMLBlock()),
+                ('icon', blocks.RawHTMLBlock(required=False)),
                 ('title', blocks.CharBlock(max_length=48, required=False)),
                 ('text', blocks.RichTextBlock(features=['bold', 'link'], required=False)),
                 ('link', LinkBlock()),

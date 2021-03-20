@@ -862,6 +862,7 @@ class Room(models.Model):
     is_active = models.BooleanField(_("Active"), default=False)
     description = models.TextField(_("Description"), blank=True, null=True)
     photo = models.ImageField(_("Image"), upload_to='uploads/rooms', height_field=None, width_field=None, max_length=None, null=True, blank=True)
+    photo_alt = models.CharField(_("Alt text"), max_length=128, null=True, blank=True)
     red = models.SmallIntegerField(_("Red"), default=255)
     green = models.SmallIntegerField(_("Green"), default=255)
     blue = models.SmallIntegerField(_("Blue"), default=255)
