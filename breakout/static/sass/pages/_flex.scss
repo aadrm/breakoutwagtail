@@ -1,0 +1,39 @@
+.info-content {
+    background: #eee;
+    border-radius: 2rem;
+    padding: 2rem;
+    ul, ol {
+        list-style-position: inside;
+    }
+
+    h2 {margin-bottom: 1.5rem;}
+    h3 {margin-bottom: 1.2rem;}
+    h4 {margin-bottom: 1rem;}
+    h5 {margin-bottom: .8rem;}
+    h6 {margin-bottom: .7rem;}
+
+    p, li {
+        margin-bottom: .5rem;
+    }
+}
+
+
+.enumerate-paragraphs {
+    h2, h3, h4, h4, h5, h6 {
+        font-family: sans-serif;
+        letter-spacing: normal;
+    }
+    counter-reset: counter-info;
+    .info-paragraph {
+        h2 {
+            &::before{
+                counter-increment: counter-info;
+                content: '\00a7' counter(counter-info)'. ';
+            }
+        }
+    }
+}
+
+.info-paragraph {
+    margin-bottom: 3rem;
+}

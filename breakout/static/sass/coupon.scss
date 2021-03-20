@@ -1,0 +1,135 @@
+@import "abstracts/0abstracts-dir";
+@import "base/0base-dir";
+
+@page {
+    size: 105mm 148mm;
+    margin-top: 0;
+    margin-left: 0mm;
+    margin-right: 0mm;
+    margin-bottom: 0mm;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.p-coupon {
+    background-color: $brand-dark;
+    color: $brand-light;
+    height: 148mm;
+    width: 105mm;
+}
+
+.p-coupon__logo {
+    position: relative;
+    display: block;
+    width: 72mm;
+    height: 25mm;
+    margin: 0 auto;
+    img{
+        width: 100%;
+    }
+}
+
+.p-coupon__title {
+    width: 105mm;
+    height: 15mm;
+}
+
+.p-coupon__title__text {
+    float: left;
+        width: 84mm;
+    height: 100%mm;
+    p {
+        line-height: 15mm;
+        font-size: 7mm;
+        text-align: right;
+    }
+}
+
+.p-coupon__players {
+    float: right;
+    height: 15mm;
+    width: 20mm;
+    overflow: hidden;
+}
+
+.p-coupon__players__wrapper {
+    position: relative;
+    width: 10mm;
+    height: 15mm;
+    margin: 0 auto;
+    img {
+        position: absolute;
+        top: .5mm;
+        width: 8mm;
+        height: 14mm;
+        z-index: 0;
+    }
+    p {
+        position: absolute;
+        left: 2mm;
+        color: $brand-dark;
+        font-size: 7mm;
+        z-index: 1;
+        line-height: 15mm;
+        text-align: center;
+    }
+}
+
+.p-coupon__image {
+    width: 105mm;
+    // height: 60mm;
+    img {
+        width: 100%;
+    }
+
+}
+
+.p-coupon__body {
+    text-align: center;
+    line-height: 6mm;
+}
+
+.p-coupon__code {
+    width: 100%;
+}
+
+.p-coupon__code__field {
+    background: $brand-light;
+    color: $brand-dark;
+    margin: 0 auto;
+    height: 8mm;
+    width: 80%;
+    border-radius: 1mm;
+    p {
+        width: 100%;
+        text-align: center;
+        line-height: 8mm;
+    }
+}
+
+.divider {
+    height: 1mm;
+    margin: 1mm 0;
+    background: $brand-light-a;
+}
+
+.divider--left {
+    width: 85mm;
+    float: left
+}
+
+.divider--right {
+    width: 60mm;
+    float: right;
+}
+
+.text-sm {
+    font-size: 3mm;
+}
+
+.text-md {
+    font-size: 5mm;
+}

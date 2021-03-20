@@ -13,6 +13,8 @@ from modeltranslation.decorators import register
 @register(HomePage)
 class HomePageTR(TranslationOptions):
     fields = (
+        'reviews',
+        'group_offers',
         'our_rooms_header',
         'our_rooms_text',
         'faq',

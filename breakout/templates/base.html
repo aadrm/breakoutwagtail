@@ -5,15 +5,18 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         {% comment %} <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/> {% endcomment %}
-        <link rel="canonical" href="http://127.0.0.1:8000{{request.path}}"/>
+        <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
         <meta charset="utf-8" />
+        {% if self.seo_title %}
+        {% else %} 
+        {% endif %}
         <title>
             {% block title %}
                 {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
             {% endblock %}
             {% block title_suffix %}
                 {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
+                    {% if site_name %} | {{ site_name }}{% endif %}
                 {% endwith %}
             {% endblock %}
         </title>

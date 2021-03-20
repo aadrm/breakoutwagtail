@@ -1,0 +1,42 @@
+/* blog index */
+.blog-post-item {
+    margin: 2rem auto;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $brand-secondary;
+
+}
+
+.blog-intro {
+    img {
+        max-width:128px;
+        max-height:128px;
+        width:auto;
+        height:auto;
+    }
+}
+
+/* blog post*/
+
+.blog-body {
+    margin: 3rem auto;
+    p {
+        margin: 1rem auto;
+    }
+    .richtext-image {
+        min-width: 100%;
+        max-width: 100%;
+        width: auto;
+        height: auto;
+    }
+
+    .richtext-image.left {
+        @include break--sm {
+            float: left;
+            margin-right: 1rem;
+            min-width: 48%;
+            max-width: 50%;
+            width: auto;
+            height: auto;
+        }
+    }
+}

@@ -18,10 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 from apps.booking.models import Room
 from apps.booking.utils import get_cart
 
-class HomePage(Page):
-
-    templates = "hame/home_page.html"
-    max_count = 1
+class MyPage(Page):
 
     header_image = models.ForeignKey(
         "wagtailimages.Image", 
@@ -32,6 +29,30 @@ class HomePage(Page):
         related_name="+",
     )
 
+    seo_image = models.ForeignKey(
+        "wagtailimages.Image", 
+        null=True,
+        blank=True,
+        verbose_name=_("Seo Image"), 
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    class Meta:
+        abstract = True
+
+    content_panels = Page.content_panels + [
+        ImageChooserPanel("header_image"),
+    ]
+
+    promote_panels = Page.promote_panels + [
+        ImageChooserPanel("seo_image"),
+    ]
+
+class HomePage(MyPage):
+
+    templates = "home/home_page.html"
+    max_count = 1
     our_rooms_header = models.CharField(max_length=50, blank=True, null=True)
     our_rooms_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
 
@@ -63,7 +84,7 @@ class HomePage(Page):
         blank=True,
     )
 
-    content_panels = Page.content_panels + [
+    content_panels = MyPage.content_panels + [
         # ImageChooserPanel("header_image"),
         MultiFieldPanel(
             heading="Our Rooms",
@@ -84,7 +105,7 @@ class HomePage(Page):
         return context
 
 
-class RoomPage(Page):
+class RoomPage(MyPage):
 
     room = models.ForeignKey('booking.Room', null=True, blank=True, on_delete=models.SET_NULL)
     gallery = StreamField(
@@ -109,7 +130,7 @@ class RoomPage(Page):
         blank=True,
     )
 
-    content_panels = Page.content_panels + [
+    content_panels = MyPage.content_panels + [
         FieldPanel('room'),
         FieldPanel('video'),
         StreamFieldPanel('gallery'),
@@ -117,13 +138,13 @@ class RoomPage(Page):
     ]
     
 
-class BooknowPage(Page):
+class BooknowPage(MyPage):
 
     max_count = 1
     def serve(self, request):
         return HttpResponseRedirect(reverse('booking:book'))
 
-class CouponsPage(Page):
+class CouponsPage(MyPage):
 
     max_count = 1
     def serve(self, request):
