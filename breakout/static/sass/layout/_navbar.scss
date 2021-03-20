@@ -38,7 +38,7 @@
     transform: translateY(-50%);
     right: 1rem;
     line-height: 100px;
-    @include break--md {
+    @include break--lg {
         font-size: medium;
     }
 
@@ -133,7 +133,7 @@ nav items toogle
     }
 }   
 
-@include break--md {
+@include break--lg {
     .nav-toggle-label {
         display: none;
     
