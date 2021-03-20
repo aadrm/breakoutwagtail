@@ -1,5 +1,6 @@
 {% load static wagtailuserbar %}
 {% load wagtailimages_tags %}
+{% load cookie_consent_tags %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -70,6 +71,15 @@
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        {% comment %} cookie consent {% endcomment %}
+        {% if request|cookie_group_accepted:"analytics" %}
+            {# load 3rd party analytics %}
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
+            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
+            <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
+        {% endif %} 
+
     </head>
 
     <body class="{% block body_class %}{% endblock %}">
