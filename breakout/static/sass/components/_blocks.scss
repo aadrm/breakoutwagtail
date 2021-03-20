@@ -134,7 +134,7 @@
       width: 150px;
       svg {
         padding: 2;
-        fill: $brand-light;
+        fill: $brand-secondary;
         opacity: .85;
         height: 100%;
         width: 100%;
@@ -144,10 +144,11 @@
     .offercard__body {
       h3 {
         text-align: center;
-        color: $brand-dark;
+        color: $brand-emphasis;
         font-weight: bold;
       }
       p {
+        color: $brand-secondary;
         text-align: center;
       }
       .offercard__link {
@@ -161,7 +162,7 @@
           color: $brand-primary;
           // border: 2px solid $brand-primary;
           &:hover {
-            background: #b13d1a;
+            background: $brand-emphasis;
             // border: 2px solid $brand-secondary;
             color: $brand-light;
           }

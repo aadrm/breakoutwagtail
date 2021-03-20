@@ -71,7 +71,13 @@ class HomePage(MyPage):
     max_count = 1
     our_rooms_header = models.CharField(max_length=50, blank=True, null=True)
     our_rooms_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
-
+    online_header = models.CharField(max_length=50, blank=True, null=True)
+    online_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
+    video_header = models.CharField(max_length=50, blank=True, null=True)
+    video_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
+    offers_header = models.CharField(max_length=50, blank=True, null=True)
+    offers_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
+    
     group_offers = StreamField(
         StreamBlock([
             ('offers', myblocks.OfferCardsBlock())
@@ -108,6 +114,27 @@ class HomePage(MyPage):
             children=[
                 FieldPanel('our_rooms_header'),
                 FieldPanel('our_rooms_text'),
+            ]
+        ),
+        MultiFieldPanel(
+            heading="Online Games",
+            children=[
+                FieldPanel('online_header'),
+                FieldPanel('online_text'),
+            ]
+        ),
+        MultiFieldPanel(
+            heading="Video",
+            children=[
+                FieldPanel('video_header'),
+                FieldPanel('video_text'),
+            ]
+        ),
+        MultiFieldPanel(
+            heading="Offers",
+            children=[
+                FieldPanel('offers_header'),
+                FieldPanel('offers_text'),
             ]
         ),
         StreamFieldPanel('reviews'),

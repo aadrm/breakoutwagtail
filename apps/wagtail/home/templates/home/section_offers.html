@@ -2,9 +2,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 <div class="offersplay">
-    <div>
-        <h2 class="tac">{% trans "Group offers and special discounts" %}</h2>
-    </div>
         {% for group in page.group_offers %}
             {% include_block group %}
         {% endfor %} 

@@ -26,6 +26,12 @@ class HomePageTR(TranslationOptions):
         'group_offers',
         'our_rooms_header',
         'our_rooms_text',
+        'online_header',
+        'online_text',
+        'video_header',
+        'video_text',
+        'offers_header',
+        'offers_text',
         'faq',
     )
 

@@ -18,7 +18,6 @@ a {
 p {
     line-height: 1.5em;
     font-size: $font--sm;
-
 }
 
 ul {
@@ -48,4 +47,11 @@ body, html {
 input,
 select {
     background: $brand-light;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, div, br, ul, li, img, b{
+    &::selection {
+        background: $brand-emphasis;
+        color: $brand-light;
+    }
 }

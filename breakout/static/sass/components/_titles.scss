@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 .c-page-header {
     height: 75vh;
     position: relative;
@@ -214,6 +207,10 @@
 
 .c-color-secondary {
     color: $brand-secondary;
+}
+
+.c-color-emphasis {
+    color: $brand-emphasis;
 }
 
 .c-background-light {

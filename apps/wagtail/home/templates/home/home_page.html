@@ -8,17 +8,54 @@
 {% include 'booking/section_cart-overlay.html' %}
 <main>
 <section class="c-section-dark">
+
+    <div class=" tac c-color-primary c-wrapper--md">
+        {% if page.our_rooms_header %}
+        <h2>{{ page.our_rooms_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.our_rooms_text %}
+        <div class="c-color-light">
+        {{ page.our_rooms_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    </div> 
     <span id="rooms" class="c-id-offset"></span>
     {% include 'home/section_rooms.html' %}
 </section>
 
 <section class="c-section-dark">
     <span id="online" class="c-id-offset"></span>
+    <div class=" tac c-color-primary c-wrapper--md">
+        {% if page.online_header %}
+        <h2>{{ page.online_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.online_text %}
+        <div class="c-color-light">
+        {{ page.online_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    </div> 
     {% include 'home/section_online.html' %}
 </section>
 
 <section class="c-section-primary">
     <span id="offers" class="c-id-offset"></span>
+    <div class=" tac c-color-emphasis c-wrapper--md">
+        {% if page.offers_header %}
+        <h2>{{ page.offers_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.offers_text %}
+        <div class="c-color-secondary">
+        {{ page.offers_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    </div> 
     <div class="c-wrapper--md">
     {% include 'home/section_offers.html' %}
     </div>
@@ -26,7 +63,20 @@
 
 <section class="c-section-dark">
     <span id="video" class="c-id-offset"></span>
+    <div class=" tac c-color-primary c-wrapper--md">
+        {% if page.video_header %}
+        <h2>{{ page.video_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.video_text %}
+        <div class="c-color-light">
+        {{ page.video_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    </div>
     {% include 'home/section_video.html' %}
+    </div> 
 </section>
 
 <section class="c-section-primary">
