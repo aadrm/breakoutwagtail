@@ -10,19 +10,21 @@
         <meta charset="utf-8" />
 
         {% comment "Meta titles" %}{% endcomment %}
-        {% with self.get_site.site_name as site_name %}
         {% if self.seo_title %}
-        <title>{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}</title>
-        <meta name="title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
-        <meta name="og:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
-        <meta name="twitter:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
+            {% with self.get_site.site_name as site_name %}
+            <title>{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}</title>
+            <meta name="title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
+            <meta name="og:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
+            <meta name="twitter:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
+            {% endwith %}
         {% else %} 
-        <title>{% if site_name %} {{ site_name }}{% endif %}</title>
-        <meta name="title" content="{% if site_name %} {{ site_name }}{% endif %}">
-        <meta name="og:title" content="{% if site_name %} {{ site_name }}{% endif %}">
-        <meta name="twitter:title" content="{% if site_name %} {{ site_name }}{% endif %}">
+            {% with 'Breakout Escape Room Augsburg' as base_title %}
+            <title>{% if extra_title %}{{ extra_title }} - {% endif %}{{base_title}}</title>
+            <meta name="title" content="{% if extra_title %}{{ extra_title }} - {% endif %}{{ base_title }} ">
+            <meta name="og:title" content="{% if extra_title %}{{ extra_title }} - {% endif %}{{ base_title }}">
+            <meta name="twitter:title" content="{% if extra_title %}{{ extra_title }} - {% endif %}{{ base_title }} ">
+            {% endwith %}
         {% endif %}
-        {% endwith %}
 
         {% comment %} meta urls {% endcomment %}
         <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
@@ -36,10 +38,10 @@
         <meta name="twitter:description" content="{{ self.search_description }}" />
         <meta itemprop="description" content="{{ self.search_description }}">
         {% else %}
-        <meta name="description" content="Breakout Escape Room Augsburg" />
-        <meta name="og:description" content="Breakout Escape Room Augsburg" />
-        <meta name="twitter:description" content="Breakout Escape Room Augsburg" />
-        <meta itemprop="description" content="Breakout Escape Room Augsburg">
+        <meta name="description" content="{% if extra_description %}{{ extra_description }}{% else %} Breakout Escape Room Augsburg{% endif %}" />
+        <meta name="og:description" content="{% if extra_description %}{{ extra_description }}{% else %} Breakout Escape Room Augsburg{% endif %}" />
+        <meta name="twitter:description" content="{% if extra_description %}{{ extra_description }}{% else %} Breakout Escape Room Augsburg{% endif %}" />
+        <meta itemprop="description" content="{% if extra_description %}{{ extra_description }}{% else %} Breakout Escape Room Augsburg{% endif %}"/>
         {% endif %}
 
         {% comment %} meta image {% endcomment %}
@@ -49,8 +51,6 @@
         <meta name="og:image" content="{{ request.build_absolute_uri}}{{ogimage.url|slice:"1:"}}" />
         <meta itemprop="image" content="{{ request.build_absolute_uri}}{{ogimage.url|slice:"1:"}}" />
         <meta name="twitter:image" content="{{ request.build_absolute_uri }}{{twitterimage.url|slice:"1:"}}" />
-        
-
         {% endif %}
 
         {% comment %} other meta tags {% endcomment %}
@@ -75,7 +75,6 @@
 
         {% comment %} cookie consent {% endcomment %}
         {% if request|cookie_group_accepted:"analytics" %}
-            {# load 3rd party analytics %}
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
             <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
             <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>

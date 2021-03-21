@@ -39,7 +39,10 @@
         <ul>
         {% for link in links.menu_items.all %}
             <li>
-                <a class="c-anchor-standard" href="{{ link.link }}">{{ link.title }}</a>
+                <a class="c-anchor-standard" 
+                {% if link.noopener %}rel="noopener"{% endif %}
+                {% if link.new_tab %}target="_blank"{% endif %}
+                href="{{ link.link }}">{{ link.title }}</a>
             </li>
         {% endfor %}
         </ul>

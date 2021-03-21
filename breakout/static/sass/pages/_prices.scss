@@ -17,16 +17,20 @@
 }
 
 .price {
-    margin: 20px;
+    margin: 12px;
     text-align: center;
     font-weight: bold;
+    @include break--md {
+        margin: 20px;
+    }
+
     span {
-        font-size: $font--md;
+        font-size: $font--md--sharp;
         text-transform: uppercase;
         white-space: nowrap;
     }
     p {
-        font-size: $font--sm;
+        font-size: $font--sm--sharp;
         white-space: nowrap;
     }
 }

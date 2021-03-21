@@ -24,6 +24,7 @@
       .review__stars {
         svg {
           width: 16px;
+          filter: drop-shadow(2px 2px 4px $brand-dark);
         }
       }
       .review__name {
@@ -32,6 +33,7 @@
       }
       .review__text {
         position: relative;
+        font-style: italic;
         &::before,
         &::after {
           position: absolute;
@@ -520,6 +522,8 @@ table tr:nth-child(even) {
   .accordion {
     position: relative;
     cursor: pointer;
+    text-transform: none;
+    font-size: $font--md;
     padding: 18px 16px 18px 32px;
     transition: .4s;
     &:before,
@@ -527,14 +531,17 @@ table tr:nth-child(even) {
       background: $brand-primary;
       content: ''; /* Unicode character for "plus" sign (+) */
       height: 2px;
-      width: 24px;
+      max-width: 24px;
+      min-width: 14px;
+      width: 3vw;
       position: absolute;
       left: 0;
       top: 50%;
       transition: all .4s;
+      transform: translateY(-50%);
     }
     &:after {
-      transform: rotate(90deg);
+      transform: translateY(-50%) rotate(90deg);
     }
   }
   .active {

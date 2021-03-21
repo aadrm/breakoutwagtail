@@ -26,6 +26,8 @@ class LinkBlock(blocks.StructBlock):
     page_link = blocks.PageChooserBlock(required=False)
     url_link = blocks.URLBlock(required=False)
     button_text = blocks.CharBlock(max_length=64, required=False)
+    noopener = blocks.BooleanBlock(required=False, help_text="Select this for links that point to other websites")
+    new_tab = blocks.BooleanBlock(required=False)
 
     class Meta:
         template = 'streams/link_block.html'

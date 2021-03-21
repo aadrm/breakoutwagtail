@@ -6,7 +6,7 @@
 <nav>
     <div class="nav-wrapper">
             <div class="nav-item logo c-stamp-fine">
-                <a href="/">
+                <a aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
                     {% comment %} <img src="{% static 'img/brand/logo_small_white.png' %}" alt="Breakout Escape Room" width="119" height="52"> {% endcomment %}
                     {% include 'svg/logo_breakout_nav.svg' %}
                 </a>
@@ -15,16 +15,25 @@
         <label for="nav-toggle" class="nav-toggle-label"><span></span> </label>
         <ul class="nav-items">
             {% for item in navigation.menu_items.all %}
+            {% if not item.fixed %}
             <li class="nav-item_container">
                 <a class="nav-link nav-link-anchor c-nav-anchor" 
-                href="{{ item.link }}{% if item.uri_fragment %}{{item.uri_fragment}}{% endif %}">
+                href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                     {{ item.title }}
                 </a>
             </li>
+            {% endif %}
             {% endfor %}
+            {% for item in navigation.menu_items.all %}
+            {% if item.fixed %}
             <li class="nav-item_book ">
-                <a class="nav-book-anchor nav-link nav-link-anchor c-nav-anchor c-primary-anchor" href="{% url 'booking:book' %}">{% trans "Book now" %}</a>
+                <a class="nav-book-anchor nav-link nav-link-anchor c-nav-anchor c-primary-anchor" 
+                href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
+                {{item.title}}
+                </a>
             </li>
+            {% endif %}
+            {% endfor %}
 
         </ul>
     </div>

@@ -69,7 +69,9 @@ from .models import (
 def booking_calendars(request):
     cart = get_cart(request)
     rooms = Room.objects.filter(is_active=True)
+    extra_title = _('Book Now!')
     context = {
+        'extra_title': extra_title,
         'cart': cart,
         'rooms': rooms,
     }

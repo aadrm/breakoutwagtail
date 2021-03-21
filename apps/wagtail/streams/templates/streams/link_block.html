@@ -1,6 +1,8 @@
 {% if self.button_text %}
-<a class="accordion-block"
-
+<a
+{% if self.noopener %}rel="noopener"{% endif %}
+{% if self.new_tab %}target="_blank"{% endif %}
+href="{% if self.page_link %}{{self.page_link}}{% elif self.url_link%}{{self.url_link}}{% else %}#{% endif %}"
 >
 {{self.button_text}}
 </a>

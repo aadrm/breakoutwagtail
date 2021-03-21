@@ -43,7 +43,11 @@ class MenuItem(Orderable):
         on_delete=models.SET_NULL,
     )
 
-    open_in_new_tab = models.BooleanField(default=False, blank=True)
+    fixed = models.BooleanField(default=False, blank=True)
+
+    noopener = models.BooleanField(default=False, blank=True)
+
+    new_tab = models.BooleanField(default=False, blank=True)
 
     page = ParentalKey("Menu", related_name="menu_items")
 
@@ -52,7 +56,9 @@ class MenuItem(Orderable):
         FieldPanel("link_url"),
         FieldPanel("uri_fragment"),
         PageChooserPanel("link_page"),
-        FieldPanel("open_in_new_tab"),
+        FieldPanel("fixed"),
+        FieldPanel("new_tab"),
+        FieldPanel("noopener"),
         SnippetChooserPanel("sub_menu"),
     ]
 
@@ -63,7 +69,8 @@ class MenuItem(Orderable):
             return self.link_page.url
         elif self.link_url:
             return self.link_url
-        return '#'
+        else:
+            return ''
 
     @property
     def title(self):
