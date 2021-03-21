@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load i18n %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    <header class="secondary-header">
+        {% if self.header_image %}
+        {% image self.header_image width-1200 as header_img%}    
+        <div class="secondary-header__mask"></div>
+        <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
+        {% else %}
+        <div class="secondary-header__solid">
+        {% endif %}
+            <h1>{{page.title}}</h1>
+        </div>
+    </header>
+    <main>
+        <div class="c-wrapper--md">
+            <div>
+            {{ page.intro|richtext }}
+            </div>
+            <section class="checkout-form__wrapper">
+            <div class="standard-form__body invoice-form__body">
+                <form class="booking-form" action="{% pageurl page %}" method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">
+                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Submit" %}</button>
+                </form>
+            </div>
+            </section>
+        </div>
+    </main>
+
+{% endblock content %}

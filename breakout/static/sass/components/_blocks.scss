@@ -146,7 +146,7 @@
     .offercard__body {
       h3 {
         text-align: center;
-        color: $brand-emphasis;
+        color: $brand-light;
         font-weight: bold;
       }
       p {
@@ -162,6 +162,7 @@
           background: $brand-secondary;
           border-radius: 4px;
           color: $brand-primary;
+          text-decoration: none;
           // border: 2px solid $brand-primary;
           &:hover {
             background: $brand-emphasis;
@@ -422,36 +423,36 @@
     max-width: 100%;
     white-space: nowrap;
     background-color: white;
-}
+  }
 
-table td, table th {
-    text-align: center;
-    padding: 8px;
-}
+  table td, table th {
+      text-align: center;
+      padding: 8px;
+  }
 
-table td {
-    border-right: 1px solid #f8f8f8;
-    font-size: 12px;
-}
+  table td {
+      border-right: 1px solid #f8f8f8;
+      font-size: 12px;
+  }
 
-table thead th {
-    color: #ffffff;
-    background: $brand-secondary-6;
-}
+  table thead th {
+      color: #ffffff;
+      background: $brand-secondary-6;
+  }
 
 
-table thead th:nth-child(odd) {
-    color: #ffffff;
-    background: $brand-secondary-a;
-}
+  table thead th:nth-child(odd) {
+      color: #ffffff;
+      background: $brand-secondary-a;
+  }
 
-table tr:nth-child(even) {
-    background: #F8F8F8;
-}
+  table tr:nth-child(even) {
+      background: #F8F8F8;
+  }
 
 /* Responsive */
 
-@media (max-width: 767px) {
+  @media (max-width: 767px) {
     table {
         display: block;
         width: 100%;
@@ -513,7 +514,7 @@ table tr:nth-child(even) {
         display: block;
         text-align: center;
     }
-}
+  }
 }
 
 
@@ -560,3 +561,6 @@ table tr:nth-child(even) {
   }
 }
 
+.richtext {
+
+}

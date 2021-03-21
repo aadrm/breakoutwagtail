@@ -33,6 +33,9 @@
         font-size: $font--sm--sharp;
         white-space: nowrap;
     }
+    p:nth-child(1) {
+        font-weight: bold;
+    }
 }
 
 .scratched {

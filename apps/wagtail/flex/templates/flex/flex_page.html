@@ -14,9 +14,9 @@
 
 {% block content %}
 
-    {% image self.header_image width-1200 as header_img%}    
     <header class="secondary-header">
-        {% if header_img %}
+        {% if self.header_image %}
+        {% image self.header_image width-1200 as header_img%}    
         <div class="secondary-header__mask"></div>
         <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
         {% else %}

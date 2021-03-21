@@ -30,16 +30,28 @@
   width: 100%;
   height: 100%;
   background-position: center;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(127, 127, 127, 0.2);
+    background-image: radial-gradient(black 33%, transparent 50%);
+    background-size: 6px 6px;
+  }
 }
 
-.secondary-header__mask {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background: $brand-primary-3;
-  z-index: 2;
-}
+// .secondary-header__mask {
+  // position: absolute;
+  // width: 100%;
+  // height: 100%;
+  // background-position: center;
+  // background: $brand-primary-3;
+  // z-index: 2;
+// }
 
 
 

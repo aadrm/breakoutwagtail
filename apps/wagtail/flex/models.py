@@ -3,10 +3,13 @@ from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from apps.wagtail.home.models import MyPage
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import StreamField
+from wagtail.core.fields import RichTextField
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from modelcluster.fields import ParentalKey
 
 from apps.wagtail.streams import blocks
 
@@ -15,14 +18,14 @@ class FlexPage(MyPage):
 
     template = "flex/flex_page.html"
 
-    header_image = models.ForeignKey(
-        "wagtailimages.Image", 
-        null=True,
-        blank=True,
-        verbose_name=_("Header Image"), 
-        on_delete=models.SET_NULL,
-        related_name="+",
-    )
+    # header_image = models.ForeignKey(
+    #     "wagtailimages.Image", 
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Header Image"), 
+    #     on_delete=models.SET_NULL,
+    #     related_name="+",
+    # )
 
     content = StreamField(
         [
@@ -34,7 +37,6 @@ class FlexPage(MyPage):
     )
 
     content_panels = MyPage.content_panels + [
-        ImageChooserPanel("header_image"),
         StreamFieldPanel("content"),
     ]
 
@@ -48,15 +50,15 @@ class InfoPage(MyPage):
     """Info page class"""
     template = "flex/info_page.html"
 
-    header_image = models.ForeignKey(
-        "wagtailimages.Image", 
-        null=True,
-        blank=True,
-        verbose_name=_("Banner Image"), 
-        on_delete=models.SET_NULL,
-        related_name="+",
-        help_text="limit the file size to 200kb, recommended dimensions 1200x500",
-    )
+    # header_image = models.ForeignKey(
+    #     "wagtailimages.Image", 
+    #     null=True,
+    #     blank=True,
+    #     verbose_name=_("Banner Image"), 
+    #     on_delete=models.SET_NULL,
+    #     related_name="+",
+    #     help_text="limit the file size to 200kb, recommended dimensions 1200x500",
+    # )
 
     is_numbered = models.BooleanField(_("Enumerate Paragraphs"), default=False)
 
@@ -69,7 +71,6 @@ class InfoPage(MyPage):
     )
 
     content_panels = MyPage.content_panels + [
-        ImageChooserPanel('header_image'),
         FieldPanel('is_numbered'),
         StreamFieldPanel('content'),
 
@@ -79,3 +80,25 @@ class InfoPage(MyPage):
         verbose_name = "Info Page"
         verbose_name_plural = "Info Pages"
 
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
+
+
+
+class FormPage(AbstractEmailForm):
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel('intro', classname="full"),
+        InlinePanel('form_fields', label="Form fields"),
+        FieldPanel('thank_you_text', classname="full"),
+        MultiFieldPanel([
+            FieldRowPanel([
+                FieldPanel('from_address', classname="col6"),
+                FieldPanel('to_address', classname="col6"),
+            ]),
+            FieldPanel('subject'),
+        ], "Email"),
+    ]
