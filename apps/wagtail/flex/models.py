@@ -4,13 +4,13 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel
-from wagtail.core.models import Page
+from apps.wagtail.home.models import MyPage
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.core.fields import StreamField
 
 from apps.wagtail.streams import blocks
 
-class FlexPage(Page):
+class FlexPage(MyPage):
     """Flexible page class""" 
 
     template = "flex/flex_page.html"
@@ -33,7 +33,7 @@ class FlexPage(Page):
         blank=True,
     )
 
-    content_panels = Page.content_panels + [
+    content_panels = MyPage.content_panels + [
         ImageChooserPanel("header_image"),
         StreamFieldPanel("content"),
     ]
@@ -44,7 +44,7 @@ class FlexPage(Page):
         verbose_name_plural = "Flex Pages"
 
 
-class InfoPage(Page):
+class InfoPage(MyPage):
     """Info page class"""
     template = "flex/info_page.html"
 
@@ -68,7 +68,7 @@ class InfoPage(Page):
         blank=True,
     )
 
-    content_panels = Page.content_panels + [
+    content_panels = MyPage.content_panels + [
         ImageChooserPanel('header_image'),
         FieldPanel('is_numbered'),
         StreamFieldPanel('content'),

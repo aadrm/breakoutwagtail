@@ -64,7 +64,7 @@ class MyPage(Page):
                 ImageChooserPanel("seo_image"),
                 FieldPanel("seo_image_alt")
             ]
-        )
+        ),
         FieldPanel('extra_schema'),
     ]
 

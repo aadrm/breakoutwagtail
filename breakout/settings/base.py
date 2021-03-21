@@ -84,10 +84,10 @@ THIRD_PARTY_APPS = [
 ]
 
 MY_APPS = [
+    'apps.wagtail.home.apps.HomePageConfig', # has to come before flex
     'apps.wagtail.flex.apps.FlexConfig',
     'apps.wagtail.site_settings.apps.SiteSettingsConfig',
     'apps.wagtail.streams.apps.StreamsConfig',
-    'apps.wagtail.home.apps.HomePageConfig',
     'apps.wagtail.search',
     'apps.users.apps.UsersConfig',
     'apps.booking.apps.BookingConfig',

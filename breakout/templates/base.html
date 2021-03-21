@@ -89,6 +89,12 @@
         {% include "schema/website_schema" %}
         </script>
 
+        {% if page.extra_schema %}
+        <script type="application/ld+json">
+        {{ extra_schema }}
+        </script>
+        {% endif %}
+
 
     </head>
 
