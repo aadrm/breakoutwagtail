@@ -42,6 +42,8 @@ class MyPage(Page):
 
     seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
 
+    extra_schema = models.TextField(null=True, blank=True)
+
     class Meta:
         abstract = True
 
@@ -63,6 +65,7 @@ class MyPage(Page):
                 FieldPanel("seo_image_alt")
             ]
         )
+        FieldPanel('extra_schema'),
     ]
 
 class LinkPage(Page):
