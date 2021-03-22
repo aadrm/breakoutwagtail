@@ -85,7 +85,7 @@
 .c-anchor-secondary {
     color: $brand-light;
     border: 3px solid transparent;
-    background: $brand-secondary-c;
+    background: $brand-secondary;
     &::before,
     &::after {
         content: none;
@@ -94,7 +94,7 @@
         color: $brand-light;
     }
     &:hover {
-        background: $brand-primary;
+        background: $brand-emphasis;
     }
 }
 

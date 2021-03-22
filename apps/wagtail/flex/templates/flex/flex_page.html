@@ -1,9 +1,5 @@
-{% extends 'base.html' %}
-
+{% extends 'base_secondary.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
-
-
-
 {% load static %}
 
 {% block body_class %}template-flexpage{% endblock %}
@@ -12,28 +8,19 @@
 {% comment %} <link rel="stylesheet" href="{% static 'css/flex_page.css' %}"> {% endcomment %}
 {% endblock extra_css %}
 
-{% block content %}
+{% block page_title %}{{ self.title }}{% endblock page_title %}
 
-    <header class="secondary-header">
-        {% if self.header_image %}
-        {% image self.header_image width-1200 as header_img%}    
-        <div class="secondary-header__mask"></div>
-        <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
-        {% else %}
-        <div class="secondary-header__solid">
-        {% endif %}
-            <h1>{{self.title}}</h1>
-        </div>
-    </header>
+{% block content %}
+    {{ block.super }}
+
+
     {% block stream %}
     <main>
         {% for block in page.content %}
             {% include_block block %}
         {% endfor %}
     </main>
-    
     {% endblock stream %}
-
 
 
 {% endblock content %}

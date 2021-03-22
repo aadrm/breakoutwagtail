@@ -6,9 +6,11 @@
 {% block content %}
 {% include 'home/section_main-header.html' %}
 {% include 'booking/section_cart-overlay.html' %}
+{% include 'home/corona_banner.html' %}
 <main>
 <section class="c-section-dark">
 
+    <span id="rooms" class="c-id-offset"></span>
     <div class=" tac c-color-primary c-wrapper--md">
         {% if page.our_rooms_header %}
         <h2>{{ page.our_rooms_header }}</h2>
@@ -20,31 +22,30 @@
         </div>
         <br>
         {% endif %}
+        {% include 'home/section_rooms.html' %}
     </div> 
-    <span id="rooms" class="c-id-offset"></span>
-    {% include 'home/section_rooms.html' %}
 </section>
 
 <section class="c-section-dark">
     <span id="online" class="c-id-offset"></span>
-    <div class=" tac c-color-primary c-wrapper--md">
+    <div class=" c-wrapper--md">
         {% if page.online_header %}
-        <h2>{{ page.online_header }}</h2>
+        <h2 class="tac c-color-primary">{{ page.online_header }}</h2>
         <br>
         {% endif %}
         {% if page.online_text %}
-        <div class="c-color-light">
+        <div class="tac c-color-light">
         {{ page.online_text|safe}}
         </div>
         <br>
         {% endif %}
+        {% include 'home/section_online.html' %}
     </div> 
-    {% include 'home/section_online.html' %}
 </section>
 
 <section class="c-section-primary">
     <span id="offers" class="c-id-offset"></span>
-    <div class=" tac c-color-light c-wrapper--md">
+    <div class=" tac c-color-emphasis c-wrapper--md">
         {% if page.offers_header %}
         <h2>{{ page.offers_header }}</h2>
         <br>
@@ -74,9 +75,8 @@
         </div>
         <br>
         {% endif %}
+        {% include 'home/section_video.html' %}
     </div>
-    {% include 'home/section_video.html' %}
-    </div> 
 </section>
 
 <section class="c-section-primary">
@@ -88,7 +88,9 @@
     <span id="contact" class="c-id-offset"></span>
     {% comment %} {% include 'home/section_contact.html' %} {% endcomment %}
     {% comment %} <br><br><br> {% endcomment %}
+    <div class="c-wrapper--md">
     {% include 'home/section_location.html' %}
+    </div>
 </section>
 
 {% if page.reviews %}

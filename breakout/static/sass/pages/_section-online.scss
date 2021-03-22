@@ -2,6 +2,9 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    @include break--md {
+        flex-wrap: nowrap;
+    }
 }
 
 

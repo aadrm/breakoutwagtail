@@ -273,13 +273,11 @@ nav items toogle
         transform: skewY(-25deg);
     }
     a {
+        padding: .5rem;
         display: block;
         width: 100%;
         line-height: 1em;
         text-shadow: none;
         margin: .5rem auto;
-        &:hover {
-            background: $brand-secondary;
-        }
     }
 }

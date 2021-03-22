@@ -1,7 +1,11 @@
 footer {
-    padding: 2rem 2rem 1rem;
+    padding: 6rem 3rem 2rem;
     background: $brand-secondary;
     color: $brand-light;
+    h2 {
+        font-size: $font--lg;
+        font-family: sans-serif;
+    }
 }
 
 .footer-content {

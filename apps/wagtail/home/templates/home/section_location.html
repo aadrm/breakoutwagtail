@@ -1,55 +1,52 @@
 {% load i18n %}
-<div class="c-inner-width--md">
-    <div class="tac">
-        <h2 >{% trans "Contact" %}</h2>
-    </div>
-    <div class="location-wrapper">
-        <div class="location-opentimes">
-        {% comment %} <div id="contact" class="l-id-offset"></div> {% endcomment %}
-
-        <p class=""><b>{% trans "Opening hours:" %}</b></p>
-        <br>
-        <p>{% trans "Please have a look at our" %} <a href="{% url 'booking:book' %}">{% trans "booking calendars" %}</a>
-            {% trans "in order to see our exact opening hours" %} 
-            <br> 
-            <br>
-            <b>{% trans "IMPORTANT!" %}</b>
-            {% trans "We are at our office depending on the bookings. If you wish to visit us but you have no appointment please call us in order to arrange one. " %}
-            <br>
-            <br>
-        </p>
-                    
-
-        <p><b>{% trans "E-mail:" %} </b><a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="contact-link">info@breakout-escaperoom.de</a></p>
-        <p><b>{% trans "Phone number:" %} </b><a target="_blank" href="tel:+4915777853955" class="contact-link"> 0157 7785 3955</a></p>
-        <p><b>{% trans "Address:" %} </b>Riedingerstr. 26c, 86153, Augsburg</p>
-        <div class="contact-methods">
-            <a target="_blank" rel="noopener" href="https://wa.me/4915777853955" class="contact-link">
-            <div class="contact-method">
-                {% include 'svg/icon-whatsapp.svg' %}
-            </div>
-            </a>
-        
-            <a target="_blank" href="tel:+4915777853955" class="contact-link">
-            <div class="contact-method">
-                {% include 'svg/icon-phone.svg' %}
-            </div>
-            </a>
-        
-            <a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="contact-link">
-            <div class="contact-method">
-                {% include 'svg/icon-email.svg' %}
-            </div>
-            </a>
-        
-        </div>
-        </div>
-
-        <div class="location-map">
-            {% comment %} <iframe src="#" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2649.724384793693!2d10.887931915824739!3d48.385030541872354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479ebd6a402e75f9%3A0x7daa478cd194a49b!2sBreakout%20Escape%20Room%20Augsburg!5e0!3m2!1sen!2sde!4v1576339461835!5m2!1sen!2sde" width="600" height="400"  style="border:0;" allowfullscreen=""></iframe> {% endcomment %}
-            <iframe src="#" title="Location of Breakout Escape Room (gogole maps)" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5299.447680662202!2d10.890110000000002!3d48.385041!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7daa478cd194a49b!2sBreakout%20Escape%20Room%20Augsburg!5e0!3m2!1sen!2sde!4v1615633177808!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </div>
-
-
+<div class="tac">
+    <h2 >{% trans "Contact" %}</h2>
 </div>
+<div class="location-wrapper">
+    <div class="location-opentimes">
+    {% comment %} <div id="contact" class="l-id-offset"></div> {% endcomment %}
+
+    <p class=""><b>{% trans "Opening hours:" %}</b></p>
+    <br>
+    <p>{% trans "Please have a look at our" %} <a href="{% url 'booking:book' %}">{% trans "booking calendars" %}</a>
+        {% trans "in order to see our exact opening hours" %} 
+        <br> 
+        <br>
+        <b>{% trans "IMPORTANT!" %}</b>
+        {% trans "We are at our office depending on the bookings. If you wish to visit us but you have no appointment please call us in order to arrange one. " %}
+        <br>
+        <br>
+    </p>
+                
+
+    <p><b>{% trans "E-mail:" %} </b><a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="contact-link">info@breakout-escaperoom.de</a></p>
+    <p><b>{% trans "Phone number:" %} </b><a target="_blank" href="tel:+4915777853955" class="contact-link"> 0157 7785 3955</a></p>
+    <p><b>{% trans "Address:" %} </b>Riedingerstr. 26c, 86153, Augsburg</p>
+    <div class="contact-methods">
+        <a target="_blank" rel="noopener" href="https://wa.me/4915777853955" class="contact-link">
+        <div class="contact-method">
+            {% include 'svg/icon-whatsapp.svg' %}
+        </div>
+        </a>
+    
+        <a target="_blank" href="tel:+4915777853955" class="contact-link">
+        <div class="contact-method">
+            {% include 'svg/icon-phone.svg' %}
+        </div>
+        </a>
+    
+        <a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="contact-link">
+        <div class="contact-method">
+            {% include 'svg/icon-email.svg' %}
+        </div>
+        </a>
+    
+    </div>
+    </div>
+
+    <div class="location-map">
+        {% comment %} <iframe src="#" data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2649.724384793693!2d10.887931915824739!3d48.385030541872354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479ebd6a402e75f9%3A0x7daa478cd194a49b!2sBreakout%20Escape%20Room%20Augsburg!5e0!3m2!1sen!2sde!4v1576339461835!5m2!1sen!2sde" width="600" height="400"  style="border:0;" allowfullscreen=""></iframe> {% endcomment %}
+        <iframe src="#" title="Location of Breakout Escape Room (gogole maps)" data-src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5299.447680662202!2d10.890110000000002!3d48.385041!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x7daa478cd194a49b!2sBreakout%20Escape%20Room%20Augsburg!5e0!3m2!1sen!2sde!4v1615633177808!5m2!1sen!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+</div>
+

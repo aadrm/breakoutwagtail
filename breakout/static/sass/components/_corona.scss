@@ -18,6 +18,7 @@
     right: 0;
     transform: translateY(-50%);
     animation: 1s ease-out 0s slideInFromRight;
+    box-shadow: 2px -2px 4px $brand-dark;
     z-index: 11;
     opacity: .85;
     input {
@@ -38,9 +39,12 @@
         padding: .5rem;
         font-size: 20px;
         &:hover {
-            background: $brand-light;
+            background: $brand-emphasis;
             cursor: pointer;
         }
+    }
+    a {
+        text-decoration: none;
     }
     .corona-info {
         text-align: center;
@@ -61,7 +65,7 @@
                 width: 32px;
                 height: 32px;
                 path {
-                    fill: $brand-secondary;
+                    fill: $brand-emphasis;
                 }
             }
         }

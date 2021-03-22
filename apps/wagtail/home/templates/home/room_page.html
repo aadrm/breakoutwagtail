@@ -1,19 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'base_secondary.html' %}
 {% load static %}
 {% load i18n %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block page_title %}{{ page.title }}{% endblock page_title %}
 {% block content %}
-<header class="secondary-header">
-    {% if header_img %}
-    <div class="secondary-header__mask"></div>
-    <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
-    {% else %}
-    <div class="secondary-header__solid">
-    {% endif %}
-        <h1>{{ page.title}}</h1>
-    </div>
-</header>
+{{ block.super }}
 <main>
     <div class="room-page-content">
         <aside class="aside_gallery">
@@ -29,7 +21,7 @@
             <h2 class="font--lg">{% trans "Overview" %}</h2>
             {{ page.room.description }}
             </div>
-            <h2 class="font--lg">{% trans "Choose when you want to play" %}</h2>
+            {% comment %} <h2 class="font--lg">{% trans "Book your game." %}</h2> {% endcomment %}
             <div class="calendars">
                 <div id="{{page.room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ page.room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
             </div>

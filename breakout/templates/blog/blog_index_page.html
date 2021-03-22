@@ -1,17 +1,10 @@
-{% extends "base.html" %}
+{% extends "base_secondary.html" %}
 {% load wagtailcore_tags static %}
 
+{% block page_title %}{{ self.title }}{% endblock page_title %}
+
 {% block content %}
-    <header class="secondary-header">
-        {% if header_img %}
-        <div class="secondary-header__mask"></div>
-        <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
-        {% else %}
-        <div class="secondary-header__solid">
-        {% endif %}
-            <h1 font--xl>{{self.title}}</h1>
-        </div>
-    </header>
+    {{ block.super }}
     <main class="c-wrapper--sm">
     {% if category %}
     <h2>{{ category }}</h2>

@@ -1,24 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base_secondary.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% load i18n %}
 {% load wagtailcore_tags %}
 
+{% block page_title %}{{ page.title }}{% endblock page_title %}
+
 {% block content %}
-    <header class="secondary-header">
-        {% if self.header_image %}
-        {% image self.header_image width-1200 as header_img%}    
-        <div class="secondary-header__mask"></div>
-        <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
-        {% else %}
-        <div class="secondary-header__solid">
-        {% endif %}
-        {% if form_submission %}
-            <h1>{{page.submitted_title}}</h1>
-        {% else %}
-            <h1>{{page.title}}</h1>
-        {% endif %}
-        </div>
-    </header>
+{{ block.super }}
     <main>
         <div class="c-wrapper--md">
         {% if form_submission %}

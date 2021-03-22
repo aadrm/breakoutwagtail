@@ -6,8 +6,8 @@
     <h2>{{ blog.title }}</h2>
 </a>
 {% else %}
-<header class="secondary-header">
-    {% if header_img %}
+{% comment %} <header class="secondary-header">
+    {% if header_image %}
     <div class="secondary-header__mask"></div>
     <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
     {% else %}
@@ -15,7 +15,7 @@
     {% endif %}
         <h1>{{blog.title}}</h1>
     </div>
-</header>
+</header> {% endcomment %}
 {% endif %}
 {% comment %} 
 {% if blog.date %}
