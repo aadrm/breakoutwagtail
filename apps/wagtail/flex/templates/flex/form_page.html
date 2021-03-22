@@ -12,12 +12,21 @@
         {% else %}
         <div class="secondary-header__solid">
         {% endif %}
+        {% if form_submission %}
+            <h1>{{page.submitted_title}}</h1>
+        {% else %}
             <h1>{{page.title}}</h1>
+        {% endif %}
         </div>
     </header>
     <main>
         <div class="c-wrapper--md">
-            <div>
+        {% if form_submission %}
+            <div class="richtext">
+            {{ page.submitted_text|richtext }}
+            </div>
+        {% else %}
+            <div class="richtext">
             {{ page.intro|richtext }}
             </div>
             <section class="checkout-form__wrapper">
@@ -30,6 +39,7 @@
                 </form>
             </div>
             </section>
+        {% endif %}
         </div>
     </main>
 

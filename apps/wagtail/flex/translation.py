@@ -23,4 +23,6 @@ class InfoPageTR(TranslationOptions):
         'intro',
         'thank_you_text',
         'subject',
+        'submitted_title',
+        'submitted_text',
     )
