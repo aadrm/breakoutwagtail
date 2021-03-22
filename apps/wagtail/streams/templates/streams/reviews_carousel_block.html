@@ -7,7 +7,7 @@
     {% for review in reviews %}
     <div class="review {% if forloop.counter == 1 %}review-show{% endif %}">
         <div class="review__content">
-        <div aria-hidden=True class="review__icon">
+        <div aria-hidden="true" class="review__icon">
         {{review.platform.icon|safe}} 
         </div>
         {% if review.name %}
@@ -18,7 +18,7 @@
         {% endif %}
         </p>
         {% endif %}
-        <span aria-hidden=True class="review__stars">
+        <span aria-hidden="true" class="review__stars">
             {% for i in ''|center:5 %}
                 {{review.platform.star_icon|safe}}
             {% endfor %}

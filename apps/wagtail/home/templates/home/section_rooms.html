@@ -4,7 +4,7 @@
  
     {% for room in rooms %}
     <div class="rooms-room">
-        <a title="{% trans "Book Now" %} {{room.name}}" href={{room.get_page.url}}>
+        <a title="{% trans "Book Now" %} {{room.name}}" href="{% if room.get_page %}{{room.get_page.url}}{% else %}#{% endif %}">
             <div class="rooms-picture-outer">
 
                 <img loading="lazy" height="585" width="360" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">
@@ -23,6 +23,4 @@
         </a>
     </div>
     {% endfor %}
-        
-    </div>
 </div>
