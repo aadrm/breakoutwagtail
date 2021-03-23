@@ -1,17 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'base_secondary.html' %}
 {% load static %}
 {% load i18n %}
 
 
-{% block header %}
-    {{ block.super }}
-    <header class="header--small">
-        <h2 class="">{% trans "Coupons" %}</h2>
-    </header>
-    {% include 'booking/section_cart-overlay.html' %}
-{% endblock header %}
+{% block page_title %}
+{% trans "Coupons" %}
+{% endblock page_title %}
 
 {% block content %}
+{{ block.super }}
 <main class="coupons-main">
     <section class="c-section-secondary">
         <div class="c-section-inner-sm">

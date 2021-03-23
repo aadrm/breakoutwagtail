@@ -44,7 +44,7 @@
     flex-grow: 1;
     padding: 1rem;
     &:hover {
-        background: $brand-secondary-5;
+        background: $brand-light-5;
     }
 
 }
@@ -62,12 +62,17 @@
     width: 14.28%;
     padding-top: 14.28%;
     box-sizing: border-box;
-    border: 1px solid $brand-secondary-3;
+    border: 1px dotted $brand-secondary-3;
     position: relative;
 }
 
 .cell--not-in-month {
     background: $brand-secondary-1;
+    .cell_inner {
+        p {
+            color: $brand-secondary-3;
+        }
+    }
 }
 
 
@@ -102,6 +107,15 @@
     width: 100%;
     cursor: pointer;
     transition: all $t--quick;
+    &:before {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: $brand-primary;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     &:hover {
         background: $brand-primary;
     }

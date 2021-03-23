@@ -7,7 +7,7 @@
 {% block content %}
 {{ block.super }}
 <main>
-    <div class="room-page-content">
+    <div class="room-page-content c-wrapper--lg">
         <aside class="aside_gallery">
             <h2 class="font--md">{% trans "Promo Video" %}</h2>
             <div class="video-wrapper">
@@ -19,7 +19,9 @@
         <div class="room-main">
             <div class="room-description">
             <h2 class="font--lg">{% trans "Overview" %}</h2>
+            <p>
             {{ page.room.description }}
+            </p>
             </div>
             {% comment %} <h2 class="font--lg">{% trans "Book your game." %}</h2> {% endcomment %}
             <div class="calendars">

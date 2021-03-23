@@ -17,6 +17,9 @@
             <div class="richtext">
             {{ page.intro|richtext }}
             </div>
+            {% for block in page.content %}
+                {% include_block block %}
+            {% endfor %}
             <section class="checkout-form__wrapper">
             <div class="standard-form__body invoice-form__body">
                 <form class="booking-form" action="{% pageurl page %}" method="POST">

@@ -21,6 +21,7 @@ class InfoPageTR(TranslationOptions):
 class InfoPageTR(TranslationOptions):
     fields = (
         'intro',
+        'content',
         'thank_you_text',
         'subject',
         'submitted_title',

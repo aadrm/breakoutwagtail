@@ -91,6 +91,15 @@ class FormPage(AbstractEmailForm):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 
+    content = StreamField(
+        [
+            ('section', blocks.SectionBlock()),
+            ('banner', blocks.ImgBannerSeparator()),
+        ],
+        null=True,
+        blank=True,
+    )
+
     submitted_title = models.CharField('submitted title', max_length=50, blank=True, null=True)
     submitted_text = RichTextField(blank=True)
 
@@ -98,7 +107,8 @@ class FormPage(AbstractEmailForm):
 
     content_panels = AbstractEmailForm.content_panels + [
         FormSubmissionsPanel(),
-        FieldPanel('intro', classname="full"),
+        StreamFieldPanel('content'),
+        # FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Form fields"),
         FieldPanel('thank_you_text', classname="full"),
         MultiFieldPanel([

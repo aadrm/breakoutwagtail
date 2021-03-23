@@ -68,7 +68,7 @@ class MyPage(Page):
         FieldPanel('extra_schema'),
     ]
 
-class LinkPage(Page):
+class LinkPage(MyPage):
 
     class Meta:
         abstract = True
@@ -161,6 +161,7 @@ class HomePage(MyPage):
         context['cart'] = get_cart(request)
         return context
 
+
 class RoomPage(MyPage):
 
     room = models.ForeignKey('booking.Room', related_name="room_page", null=True, blank=True, on_delete=models.SET_NULL)
@@ -201,12 +202,18 @@ class BooknowPage(LinkPage):
     max_count = 1
     def serve(self, request):
         return HttpResponseRedirect(reverse('booking:book'))
+    
+
+    
 
 class CouponsPage(LinkPage):
 
     max_count = 1
+    template = "booking/view_coupon.html"
+
     def serve(self, request):
         return HttpResponseRedirect(reverse('booking:coupons'))
+    
 
 class CookieSettingsPage(LinkPage):
 

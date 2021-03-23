@@ -1,4 +1,5 @@
 .room-page-content {
+  color: $brand-secondary;
   padding: 1rem;
   margin: 0 auto;
   display: flex;
@@ -99,17 +100,12 @@
     }
     .room-title {
       background: transparent;
+        // &:hover {
+        //   background: $brand-emphasis;
+        // }
     }
     .room-text {
       left: 0;
-    }
-    .rooms-booknow-wrapper {
-      p {
-        transform: scale(1.5);
-        &:hover {
-          background: $brand-emphasis;
-        }
-      }
     }
   }
 }

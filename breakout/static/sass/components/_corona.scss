@@ -12,9 +12,9 @@
   }
 
 .corona-banner {
-    background: $brand-primary;
+    background: $brand-emphasis;
     position: fixed;
-    top: 50vh;
+    top: 30vh;
     right: 0;
     transform: translateY(-50%);
     animation: 1s ease-out 0s slideInFromRight;
@@ -39,7 +39,7 @@
         padding: .5rem;
         font-size: 20px;
         &:hover {
-            background: $brand-emphasis;
+            background: $brand-light;
             cursor: pointer;
         }
     }
@@ -47,14 +47,13 @@
         text-decoration: none;
     }
     .corona-info {
+        color: $brand-light;
         text-align: center;
         max-width: 120px;
 
         p {
             font-size: $font--sm;
             text-align: center;
-            // text-orientation: upright;
-            // writing-mode: vertical-lr;
             margin: 0 auto;
             padding: .5rem;
             // line-height: .5em;
@@ -65,7 +64,7 @@
                 width: 32px;
                 height: 32px;
                 path {
-                    fill: $brand-emphasis;
+                    fill: $brand-primary;
                 }
             }
         }
