@@ -63,9 +63,19 @@
     padding: .5rem 2rem;
     box-sizing: border-box;
     border: 3px solid transparent;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-weight: bold;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
-.c-primary-anchor {
+.c-anchor-inline {
+    display: inline-block;
+}
+
+.c-anchor-primary {
     background: $brand-primary;
     color: $brand-dark;
     text-shadow: none;
@@ -80,7 +90,6 @@
         }
     }
 }
-
 
 .c-anchor-secondary {
     color: $brand-light;
@@ -106,13 +115,4 @@
     }
 }
 
-.c-inline-button {
-    border-radius: 5px;
-    color: $brand-primary;
-    cursor: pointer;
-    font-weight: 800;
-    padding: 6px;
-    &:hover {
-        color: $brand-dark;
-    }
-}
+

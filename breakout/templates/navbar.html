@@ -27,7 +27,7 @@
             {% for item in navigation.menu_items.all %}
             {% if item.fixed %}
             <li class="nav-item_book ">
-                <a class="nav-book-anchor nav-link nav-link-anchor c-nav-anchor c-primary-anchor" 
+                <a class="nav-book-anchor nav-link nav-link-anchor c-nav-anchor c-anchor-primary" 
                 href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                 {{item.title}}
                 </a>

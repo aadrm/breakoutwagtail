@@ -39,8 +39,8 @@
     top: 0;
     bottom: 0;
     background: rgba(127, 127, 127, 0.2);
-    background-image: radial-gradient(black 33%, transparent 50%);
-    background-size: 6px 6px;
+    background-image: radial-gradient($brand-dark 2%, transparent 80%);
+    background-size: 4px 4px;
   }
 }
 

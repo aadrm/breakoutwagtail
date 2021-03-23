@@ -1,13 +1,11 @@
 {% load i18n %}
 <div class="section-prices">
-    <div class="tac">
-        <h2 class="c-color-emphasis">{% trans "Prices" %}</h2>
-    </div>
     <div class="prices-wrapper c-wrapper--md c-color-secondary">
 
         <div class="price">
             <span>1 {% trans "Player" %}</span>
-            <p>€49 {% trans "Player" %}</p>
+            <p>{% trans "Only" %}</p>
+            <p>€49 {% trans "Total" %}</p>
         </div>
 
         <div class="price">
@@ -41,5 +39,7 @@
         </div>
 
     </div>
+    <br>
+    <a class="c-anchor c-anchor-inline c-anchor-secondary font--md--soft" href="{% url 'booking:book' %}">{% trans "Book Now" %}</a>
 
 </div>

@@ -14,7 +14,7 @@ urlpatterns = [
     
     path('slot_to_cart/', views.slot_to_cart, name='slot_to_cart'),
     path('checkout/', views.checkout, name='checkout'),
-    path('coupons/', views.coupons, name='coupons'),
+    # path('coupons/', views.coupons, name='coupons'),
     path('purchase/', views.purchase, name='purchase'),
     path('order/<str:order>', views.order_completed, name='order'),
 

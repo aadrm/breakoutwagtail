@@ -10,9 +10,9 @@
     align-content: center;
     justify-content: center;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    @include break--md {
-        grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    @include break--sm {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 

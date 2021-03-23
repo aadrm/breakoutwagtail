@@ -81,7 +81,19 @@
 
 <section class="c-section-primary">
     <span id="prices" class="c-id-offset"></span>
+    <div class=" tac c-wrapper--md">
+        {% if page.prices_header %}
+        <h2>{{ page.prices_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.prices_text %}
+        <div class="c-color-light">
+        {{ page.prices_text|safe}}
+        </div>
+        <br>
+        {% endif %}
     {% include 'home/section_prices.html' %}
+    </div>
 </section>
 
 <section class="c-section-light">
@@ -95,12 +107,20 @@
 
 {% if page.reviews %}
 <section class="c-section-primary">
-    <div class="c-wrapper--md">
-    <h2 class="tac">{% trans "Reviews" %}</h2>
-    <br><br>
-    {% for block in page.reviews %}
-        {% include_block block%}
-    {% endfor %}
+    <div class=" tac c-wrapper--md">
+        {% if page.reviews_header %}
+        <h2 class="c-color-emphasis">{{ page.reviews_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.reviews_text %}
+        <div class="">
+        {{ page.reviews_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+        {% for block in page.reviews %}
+            {% include_block block%}
+        {% endfor %}
     </div>
 </section>
 {% endif %}

@@ -38,6 +38,10 @@ class HomePageTR(TranslationOptions):
         'video_text',
         'offers_header',
         'offers_text',
+        'prices_header',
+        'prices_text',
+        'reviews_header',
+        'reviews_text',
         'faq',
     )
 

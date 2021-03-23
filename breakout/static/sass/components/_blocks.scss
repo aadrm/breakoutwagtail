@@ -1,3 +1,4 @@
+
 .block-reviews {
   width: 100%;
   .block-reviews__inner {
@@ -7,24 +8,33 @@
     margin: 0 auto;
     .review {
       text-align: center;
-      position: absolute;
+      display: none;
       visibility: hidden;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       opacity: 0;
       width: 100%;
       transition: all 1s;
-      .review__icon {
-        svg {
-          max-width: 80px;
-          width: 20%;
+      .review__stamp {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        .review__icon {
+          margin-right: 8px;
+          display: inline-block;
+          height: 40px;
+          svg {
+            max-width: 64px;
+            max-height: 64px;
+            filter: drop-shadow(1px 1px 1px $brand-dark);
+          }
         }
-      }
-      .review__stars {
-        svg {
-          width: 16px;
-          filter: drop-shadow(2px 2px 4px $brand-dark);
+        .review__stars {
+          display: inline-block;
+          svg {
+            width: 16px;
+            filter: drop-shadow(1px 1px 2px $brand-dark);
+          }
         }
       }
       .review__name {
@@ -55,8 +65,10 @@
       }
     }
     .review-show {
+      display: block;
       visibility: initial;
       opacity: 1;
+      animation: 1s ease-in-out 0s fadeIn;
     }
   }
 
@@ -133,6 +145,7 @@
     margin: 1rem auto;
     .offercard__head {
       margin: 2rem auto 0;
+      height: 150px;
       width: 150px;
       svg {
         padding: 2;
@@ -157,17 +170,10 @@
           text-align: center;
           margin-top: 1.1rem;
         a {
-          padding: .6rem 1.8rem;
-          font-weight: bold;
           background: $brand-secondary;
-          border-radius: 4px;
-          color: $brand-primary;
-          text-decoration: none;
-          // border: 2px solid $brand-primary;
+          color: $brand-light;
           &:hover {
             background: $brand-emphasis;
-            // border: 2px solid $brand-secondary;
-            color: $brand-light;
           }
         }
       }

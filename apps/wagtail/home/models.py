@@ -1,6 +1,7 @@
 from django.db import models
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.shortcuts import render
 
 from wagtail.core import blocks
 from wagtail.core import fields
@@ -15,7 +16,8 @@ from apps.booking.models import Room
 
 from django.utils.translation import ugettext_lazy as _
 
-from apps.booking.models import Room
+from apps.booking.models import Room, ProductFamily
+from apps.booking.forms import AddProductToCartForm 
 from apps.booking.utils import get_cart
 
 class MyPage(Page):
@@ -90,6 +92,10 @@ class HomePage(MyPage):
     video_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
     offers_header = models.CharField(max_length=50, blank=True, null=True)
     offers_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
+    prices_header = models.CharField(max_length=50, blank=True, null=True)
+    prices_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
+    reviews_header = models.CharField(max_length=50, blank=True, null=True)
+    reviews_text = RichTextField(features=['bold', 'link'], blank=True, null=True)
     
     group_offers = StreamField(
         StreamBlock([
@@ -137,6 +143,14 @@ class HomePage(MyPage):
             ]
         ),
         MultiFieldPanel(
+            heading="Offers",
+            children=[
+                FieldPanel('offers_header'),
+                FieldPanel('offers_text'),
+            ]
+        ),
+        StreamFieldPanel('group_offers'),
+        MultiFieldPanel(
             heading="Video",
             children=[
                 FieldPanel('video_header'),
@@ -144,14 +158,20 @@ class HomePage(MyPage):
             ]
         ),
         MultiFieldPanel(
-            heading="Offers",
+            heading="Prices",
             children=[
-                FieldPanel('offers_header'),
-                FieldPanel('offers_text'),
+                FieldPanel('prices_header'),
+                FieldPanel('prices_text'),
+            ]
+        ),
+        MultiFieldPanel(
+            heading="Reviews",
+            children=[
+                FieldPanel('reviews_header'),
+                FieldPanel('reviews_text'),
             ]
         ),
         StreamFieldPanel('reviews'),
-        StreamFieldPanel('group_offers'),
         StreamFieldPanel('faq'),
     ]
 
@@ -206,13 +226,31 @@ class BooknowPage(LinkPage):
 
     
 
-class CouponsPage(LinkPage):
+class CouponsPage(RoutablePageMixin, LinkPage):
 
     max_count = 1
     template = "booking/view_coupon.html"
 
-    def serve(self, request):
-        return HttpResponseRedirect(reverse('booking:coupons'))
+    @route(r'^$')
+    def my_coupons(self, request, *args, **kwargs):
+        context = self.get_context(request, *args, **kwargs)
+        cart = get_cart(request)
+        try:
+            online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
+            voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+            online_coupon_form = AddProductToCartForm(family=online_coupon_family)
+            voucher_form = AddProductToCartForm(family=voucher_family)
+            context['cart'] = cart
+            context['online_coupon_form'] = online_coupon_form
+            context['voucher_form'] = voucher_form
+
+        except Exception as e:
+            print(e)
+
+        print(context)
+        return render(request, 'booking/view_coupon.html', context)
+    # def serve(self, request):
+    #     return  HttpResponseRedirect(reverse('booking:coupons'))
     
 
 class CookieSettingsPage(LinkPage):
