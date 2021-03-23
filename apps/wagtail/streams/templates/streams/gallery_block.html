@@ -5,11 +5,11 @@
     {% image image.image fill-400x300 as img%}
     <label for="image{{forloop.counter}}">
         <input id="image{{forloop.counter}}" class="u-visually-hidden" type="checkbox">
-        <div class="image_mask">
-            <div class="image_wrapper">
+        <span class="image_mask">
+            <span class="image_wrapper">
                 <img alt="{{image.alt_text}}" src="{{img.url}}" loading="lazy">
-            </div>
-        </div>
+            </span>
+        </span>
     </label>
     {% endfor %}
 </div>
