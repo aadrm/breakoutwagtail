@@ -100,41 +100,41 @@ class PaymentMethodAdmin(admin.ModelAdmin):
 class ProductFamilyAdmin(ModelAdmin):
     model = ProductFamily 
     menu_label = 'Product Families'
-    menu_icon = 'placeholder'
+    menu_icon = 'fa-object-group'
     list_display = ('pk', 'name', 'payment_methods', 'room')
 
 
 class ProductAdmin(ModelAdmin):
     model = Product 
     menu_label = 'Products'
-    menu_icon = 'placeholder'
+    menu_icon = 'fa-object-ungroup'
     list_display = ('pk', 'family', 'name', 'price', 'upgrade')
 
 
 class CouponAdmin(ModelAdmin):
     model = Coupon 
     menu_label = 'Coupons'
-    menu_icon = 'placeholder'
+    menu_icon = 'fa-envelope'
     list_display = ('pk', 'name', 'code')
 
 
 class RoomAdmin(ModelAdmin):
     model = Room 
     menu_label = 'Rooms'
-    menu_icon = 'placeholder'
+    menu_icon = 'fa-film'
     list_display = ('name', 'is_active')
 
 
 class ScheduleAdmin(ModelAdmin):
     model = Schedule
     menu_label = 'Calendar Schedule'
-    menu_icon = 'placeholder'
+    menu_icon = 'fa-calendar'
     list_display = ('pk', '__str__', 'start_date', 'end_date', 'start_time', 'end_time')
 
 
 class AppointmentsGroup(ModelAdminGroup):
-    menu_label = 'Appointments'
-    menu_icon = 'placeholder'
+    menu_label = 'Breakout Data'
+    menu_icon = 'fa-calendar-check-o'
     menu_order = 200
     items = (
         ProductFamilyAdmin,

@@ -239,78 +239,45 @@ paypal button
 pdf templates 
 */
 
-.coupon-pdf-wrapper {
-    margin: 0 auto;
-    max-width: $width--sm;
-    width: 90vw;
-    text-align: center;
-}
-
-.coupon-pdf-header {
-    @include break--sm {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        flex-direction: row;
-    }
-}
-
-.coupon-pdf-header__text {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    max-width: 90vw;
-    width: 100%;
-    margin: 1rem;
-}
-
-.coupon-pdf-header__img {
-    flex: 1;
-    margin: 1rem;
-    img {
-        width: 100%;
-    }
-}
-
 .coupon-pdf-links {
     margin-top: 2rem;
-    max-width: 90vw;
     width: 100%;
-    display: -ms-grid;
-    display: grid;
-    gap: 1rem;
-    &:hover{
-        cursor: pointer;
-    }
-    @include break--xs {
-        grid-template-columns: 1fr 1fr;
-    }
-    @include break--sm {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
 
 .coupon-pdf-link {
+    margin: 2rem;
     border: 2px solid $brand-dark;
     border-radius: 8px;
     align-content: center;
     background: $brand-light;
-    display: -ms-grid;
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    min-width: 200px;
+    max-width: 300px;
+    width: 90%;
+    height: 76px;
+    position: relative;
     padding: 8px;
-    img {
-        height: 50px;
+    &:hover {
+        cursor: pointer;
     }
-    span {
-        height: 50px;
+    a {
         line-height: 50px;
+        font-size: $font--lg;
         font-weight: bold;
+        text-decoration: none;
+    }
+    svg {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        right: 6px;
+        top: 6px;
     }
     &:hover {
-        background: $brand-dark;
+        background: $brand-emphasis;
         color: $brand-light;
         img{
             animation: bounce 1;

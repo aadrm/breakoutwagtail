@@ -1,0 +1,22 @@
+{% load menus_tags %}
+{% load i18n %}
+
+{% get_documents "coupon-templates" as docs %}
+{% if docs %}
+{% for doc in docs.documents.all %}
+
+<h2 class="tac">{% trans "PDF Coupon Templates" %}</h2>
+<br>
+<div class="coupon-pdf-links">
+    <div class="coupon-pdf-link">
+        <a href="{{doc.document.url}}" target="_blank">{{ doc.name }}.pdf</a>
+        {{ doc.icon|safe }}
+    </div>
+</div>
+
+{% endfor %}
+{% else %}
+<p>
+Register coupon-templates in snippets and they will appear here
+</p>
+{% endif %}

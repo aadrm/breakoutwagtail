@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     'wagtail_modeltranslation',
     'wagtail_modeltranslation.makemigrations',
     'wagtail_modeltranslation.migrate',
+    'wagtailfontawesome',
     'modeltranslation',
     'modelcluster',
     'taggit',

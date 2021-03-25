@@ -15,6 +15,41 @@ from wagtail.core.models import Orderable
 from wagtail.snippets.models import register_snippet
 
 
+class Document(Orderable):
+
+    name = models.CharField(max_length=48)
+    icon = models.TextField()
+    document = models.ForeignKey("wagtaildocs.Document", on_delete=models.CASCADE)
+    docs = ParentalKey("DocumentCollection", related_name="documents")
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('icon'),
+        FieldPanel('document'),
+    ]
+
+        
+
+@register_snippet
+class DocumentCollection(ClusterableModel):
+    """The main menu clusterable model."""
+
+    title = models.CharField(max_length=100)
+    slug = AutoSlugField(populate_from="title", editable=True)
+    # slug = models.SlugField()
+
+    panels = [
+        MultiFieldPanel([
+            FieldPanel("title"),
+            FieldPanel("slug"),
+        ], heading="Menu"),
+        InlinePanel("documents", label="Document")
+    ]
+
+    def __str__(self):
+        return self.title
+
+
 class MenuItem(Orderable):
 
     link_title = models.CharField(
