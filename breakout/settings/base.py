@@ -59,6 +59,7 @@ THIRD_PARTY_APPS = [
     'wagtail.contrib.forms',
     'wagtail.contrib.redirects',
     'wagtail.contrib.routable_page',
+    'wagtail.contrib.styleguide',
     'wagtail.embeds',
     'wagtail.sites',
     'wagtail.users',

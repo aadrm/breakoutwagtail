@@ -6,6 +6,7 @@
     }
 }
 
+
 .c-nav-anchor {
     text-decoration: none;
     text-transform: uppercase;
@@ -15,6 +16,7 @@
     position: relative;
     padding: .6rem;
     font-weight: bold;
+    border-radius: 4px;
     cursor: pointer;
 
     &::before,
@@ -64,7 +66,7 @@
     box-sizing: border-box;
     border: 3px solid transparent;
     text-transform: uppercase;
-    border-radius: 5px;
+    border-radius: 4px;
     font-weight: bold;
     &:hover {
         cursor: pointer;
@@ -73,6 +75,18 @@
 
 .c-anchor-inline {
     display: inline-block;
+}
+
+.c-anchor-hover-override-inline{
+    &:hover {
+        color: $brand-light !important;
+        background: $brand-emphasis !important;
+        // border: 3px solid $brand-primary;
+        &::before,
+        &::after {
+            content: none;
+        }
+    }
 }
 
 .c-anchor-primary {

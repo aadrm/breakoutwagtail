@@ -54,3 +54,18 @@ class Review(models.Model):
         
     def get_families(self):
         return "\n".join([p.name for p in self.family.all()])
+
+class Colour(models.Model):
+
+    name = models.CharField(max_length=32) 
+    hex_code = models.CharField(max_length=6)
+
+    class Meta:
+        verbose_name = _("Colour")
+        verbose_name_plural = _("Colours")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("Colour_detail", kwargs={"pk": self.pk})

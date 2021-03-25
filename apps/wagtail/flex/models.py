@@ -87,7 +87,7 @@ class FormField(AbstractFormField):
 
 
 
-class FormPage(AbstractEmailForm):
+class FormPage(AbstractEmailForm, MyPage):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 
@@ -106,7 +106,8 @@ class FormPage(AbstractEmailForm):
     landing_page_template = 'flex/form_page.html'
 
     content_panels = AbstractEmailForm.content_panels + [
-        FormSubmissionsPanel(),
+        # FormSubmissionsPanel(),
+        ImageChooserPanel('header_image'),
         StreamFieldPanel('content'),
         # FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Form fields"),
@@ -121,3 +122,5 @@ class FormPage(AbstractEmailForm):
         FieldPanel('submitted_title'),
         FieldPanel('submitted_text'),
     ]
+
+    promote_panels = MyPage.promote_panels

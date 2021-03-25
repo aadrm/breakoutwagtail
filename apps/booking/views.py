@@ -26,7 +26,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404, JsonRespons
 from django.forms import modelformset_factory
 
 from django.contrib.admin.views.decorators import staff_member_required
-
+from apps.wagtail.home.models import CouponsPage, BooknowPage
 from breakout.utils import get_booking_settings
 
 
@@ -65,18 +65,17 @@ from .models import (
     Slot,
 )
 
-
+# overriden by routable page
 def booking_calendars(request):
     cart = get_cart(request)
     rooms = Room.objects.filter(is_active=True)
-    extra_title = _('Book Now!')
     context = {
-        'extra_title': extra_title,
         'cart': cart,
         'rooms': rooms,
     }
     return render(request, 'booking/view_book.html', context)
 
+# overriden by routable page
 def coupons(request):
 
     cart = get_cart(request)
@@ -101,11 +100,16 @@ def checkout(request):
     invoice_form = InvoiceForm(cart=cart)
     remove_from_cart_form = RemoveFromCartForm()
     apply_coupon_form = ApplyCouponForm()
+    coupons_page = CouponsPage.objects.first()
+    booknow_page = BooknowPage.objects.first()
     context = {
         'cart': cart,
         'invoice_form': invoice_form,
         'apply_coupon_form': apply_coupon_form,
         'remove_from_cart_form': remove_from_cart_form,
+        'coupons_page': coupons_page,
+        'booknow_page': booknow_page,
+        'nocart': True,
     }
     return render(request, 'booking/view_checkout.html', context)
 
@@ -151,7 +155,9 @@ def order_completed(request, order):
         'coupons': coupons,
         'appointments': appointments,
         'payment': payment,
+        'nocart': True,
     }
+
     return render(request, 'booking/view-order.html', context)
 
 def paypal_return(request, cart, email):

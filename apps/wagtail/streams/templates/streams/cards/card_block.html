@@ -1,0 +1,20 @@
+{% extends 'streams/element_block.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block element_class %}card {% if self.flip %}card-flex-reverse{% endif %}{% endblock element_class %}
+{% block element_content %}
+<div class="card__head">
+    {% image self.image width-754  as card_image %}
+    <img 
+        src="{{ card_image.url }}" 
+        alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}"
+    >
+</div>
+<div class="card__content">
+    <p class="card__content__title">{{ self.title}}</p>
+    <p class="card__content__subtitle">{{ self.subtitle}}</p>
+    <p class="card__content__text">{{ self.text }}</p>
+    {% include_block self.link %}
+</div>
+
+
+{% endblock element_content %}

@@ -9,7 +9,7 @@ app_name = 'booking'
 
 # handler404 = 'website.views.view_404'
 urlpatterns = [
-    path('', views.booking_calendars, name='book'),
+    # path('', views.booking_calendars, name='book'),
     path('calendar/', views.ajax_calendar, name='ajax_calendar'),
     
     path('slot_to_cart/', views.slot_to_cart, name='slot_to_cart'),

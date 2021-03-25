@@ -70,6 +70,7 @@ class MyPage(Page):
         FieldPanel('extra_schema'),
     ]
 
+
 class LinkPage(MyPage):
 
     class Meta:
@@ -78,7 +79,55 @@ class LinkPage(MyPage):
     content_panels = [FieldPanel('title')]
     promote_panels = [
         FieldPanel('slug')
+
     ]
+
+
+class BooknowPage(RoutablePageMixin, LinkPage):
+
+    max_count = 1
+    template = "booking/view_book.html"
+
+    @route(r'^$')
+    def booknow_page_route(self, request, *args, **kwargs):
+        context = self.get_context(request, *args, **kwargs)
+        cart = get_cart(request)
+        rooms = Room.objects.filter(is_active=True)
+        context['cart'] = cart
+        context['rooms'] = rooms
+        return render(request, 'booking/view_book.html', context)
+
+class CouponsPage(RoutablePageMixin, MyPage):
+
+    max_count = 1
+    template = "booking/view_coupon.html"
+
+    @route(r'^$')
+    def coupons_page_route(self, request, *args, **kwargs):
+        context = self.get_context(request, *args, **kwargs)
+        cart = get_cart(request)
+        try:
+            online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
+            voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+            online_coupon_form = AddProductToCartForm(family=online_coupon_family)
+            voucher_form = AddProductToCartForm(family=voucher_family)
+            context['cart'] = cart
+            context['online_coupon_form'] = online_coupon_form
+            context['voucher_form'] = voucher_form
+
+        except Exception as e:
+            print(e)
+
+        print(context)
+        return render(request, 'booking/view_coupon.html', context)
+    # def serve(self, request):
+    #     return  HttpResponseRedirect(reverse('booking:coupons'))
+    
+class CookieSettingsPage(LinkPage):
+
+    max_count = 1
+    def serve(self, request):
+        return HttpResponseRedirect('/cookies/')
 
 class HomePage(MyPage):
 
@@ -179,6 +228,8 @@ class HomePage(MyPage):
         context = super(HomePage, self).get_context(request)
         context['rooms'] = Room.objects.filter(is_active=True)
         context['cart'] = get_cart(request)
+        context['coupons_page'] = CouponsPage.objects.first()
+        context['booknow_page'] = BooknowPage.objects.first()
         return context
 
 
@@ -216,45 +267,3 @@ class RoomPage(MyPage):
         StreamFieldPanel('reviews'),
     ]
     
-
-class BooknowPage(LinkPage):
-
-    max_count = 1
-    def serve(self, request):
-        return HttpResponseRedirect(reverse('booking:book'))
-    
-
-    
-
-class CouponsPage(RoutablePageMixin, LinkPage):
-
-    max_count = 1
-    template = "booking/view_coupon.html"
-
-    @route(r'^$')
-    def my_coupons(self, request, *args, **kwargs):
-        context = self.get_context(request, *args, **kwargs)
-        cart = get_cart(request)
-        try:
-            online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
-            voucher_family = ProductFamily.objects.get(name='CouponVoucher')
-            online_coupon_form = AddProductToCartForm(family=online_coupon_family)
-            voucher_form = AddProductToCartForm(family=voucher_family)
-            context['cart'] = cart
-            context['online_coupon_form'] = online_coupon_form
-            context['voucher_form'] = voucher_form
-
-        except Exception as e:
-            print(e)
-
-        print(context)
-        return render(request, 'booking/view_coupon.html', context)
-    # def serve(self, request):
-    #     return  HttpResponseRedirect(reverse('booking:coupons'))
-    
-
-class CookieSettingsPage(LinkPage):
-
-    max_count = 1
-    def serve(self, request):
-        return HttpResponseRedirect('/cookies/')

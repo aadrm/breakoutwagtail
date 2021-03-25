@@ -1,0 +1,30 @@
+{% if self.is_section %}
+<section
+{% else %}
+<div
+{% endif %}
+class="element__wrapper" 
+style="
+    {% if self.bg_colour %}background: #{{bg_colour}};{% endif %}
+    {% if self.font_colour %}color: #{{font_colour}};{% endif %}
+    {% if self.shadow %}box-shadow: 2px 2px {{self.shadow}}px #111;{% endif %}
+    {% if self.max_width_outer %}max-width: {{ self.max_width_outer }}px;
+    margin: 0 auto;
+    {% endif %}
+">
+<div
+class="element__inner"
+style="
+    {% if self.max_width_inner %}max-width: {{ self.max_width_inner }}px;
+    margin: 0 auto;
+    {% endif %}
+"
+>
+    {% block element_content %}
+    {% endblock element_content %}
+</div>
+{% if self.is_section %}
+</section>
+{% else %}
+</div>
+{% endif %}

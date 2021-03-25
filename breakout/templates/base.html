@@ -101,6 +101,9 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
         {% include 'navbar.html' %}
+        {% if not nocart %}
+        {% include 'booking/section_cart-overlay.html' %}
+        {% endif %}
 
         {% block content %}{% endblock %}
         <footer>

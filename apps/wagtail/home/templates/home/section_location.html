@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load wagtailroutablepage_tags %}
 <div class="tac">
     <h2 >{% trans "Contact" %}</h2>
 </div>
@@ -8,7 +9,7 @@
 
     <p class=""><b>{% trans "Opening hours:" %}</b></p>
     <br>
-    <p>{% trans "Please have a look at our" %} <a href="{% url 'booking:book' %}">{% trans "booking calendars" %}</a>
+    <p>{% trans "Please have a look at our" %} <a href="{% routablepageurl booknow_page "booknow_page_route" %}">{% trans "booking calendars" %}</a>
         {% trans "in order to see our exact opening hours" %} 
         <br> 
         <br>

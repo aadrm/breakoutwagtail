@@ -1,0 +1,16 @@
+{% extends 'streams/element_block.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block element_class %}image-text{% endblock element_class %}
+{% block element_content %}
+<div class="image-text__image">
+    {% image self.image width-754  as card_image %}
+    <img 
+        src="{{ card_image.url }}" 
+        alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}"
+    >
+</div>
+<div class="image-text__text richtext">
+    {{self.text}}
+</div>
+{% endblock element_content %}

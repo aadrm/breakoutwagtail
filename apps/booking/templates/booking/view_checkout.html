@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load wagtailroutablepage_tags %}
 
 {% comment %} Shopping cart {% endcomment %}
 
@@ -36,8 +37,8 @@
         <h2 class="">{% trans "Continue Shopping" %}</h2>
         <br>
         <div class="continue-shopping__buttons">
-            <a class="c-anchor c-anchor-secondary" href="{% url 'booking:book' %}">{% trans "Booking Calendar" %}</a>
-            <a class="c-anchor c-anchor-secondary" href="{% url 'booking:coupons' %}">{% trans "Coupons" %}</a>
+            <a class="c-anchor c-anchor-secondary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a>
+            <a class="c-anchor c-anchor-secondary" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons" %}</a>
         </div>
     
     </div>
@@ -64,14 +65,14 @@
 <br>
 <p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} 
 <u>
-<a class="" href="{% url 'booking:book' %}">{% trans "Booking Calendar" %}</a> 
+<a class="" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a> 
 </u>
 </p>
 <br>
 <br>
 <p>{% trans "Or if you wish to buy a special gift for someone visit our" %} 
 <u>
-<a class="" href="">{% trans "Coupons Shop" %}</a>
+<a class="" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons Shop" %}</a>
 </u>
 </p>
 </div>
@@ -85,14 +86,14 @@
 <br>
 <p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} 
 <u>
-<a class="" href="{% url 'booking:book' %}">{% trans "Booking Calendar" %}</a> 
+<a class="" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a> 
 </u>
 </p>
 <br>
 <br>
 <p>{% trans "Or if you wish to buy a special gift for someone visit our" %} 
 <u>
-<a class="" href="">{% trans "Coupons Shop" %}</a>
+<a class="" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons Shop" %}</a>
 </u>
 </p>
 </div>

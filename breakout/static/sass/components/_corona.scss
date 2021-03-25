@@ -20,7 +20,7 @@
     animation: 1s ease-out 0s slideInFromRight;
     box-shadow: 2px -2px 4px $brand-dark;
     z-index: 11;
-    opacity: .85;
+    opacity: .95;
     input {
         display: none;
         &:checked {
@@ -36,8 +36,9 @@
         color: $brand-primary;
         width: 100%;
         text-align: center;
+        font-weight: bold;
         padding: .5rem;
-        font-size: 20px;
+        font-size: 28px;
         &:hover {
             background: $brand-light;
             cursor: pointer;

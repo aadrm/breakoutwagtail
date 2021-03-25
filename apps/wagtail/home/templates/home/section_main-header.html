@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load wagtailroutablepage_tags %}
 <header class="main-header container">
     <div class="header-overlay overlay-bottom"></div>
     <div class="main-header-title-container">
@@ -13,9 +14,10 @@
     </div>
     <div class="banner">
         <div class="banner-inner">
+            {% comment %} {{coupons_page.coupons_page_route}} {% endcomment %}
             <p>{% trans "Complete your order in just a minute" %}</p>
-            <a href="{% url 'booking:coupons' %}" class="c-nav-anchor c-anchor-secondary">{% trans "Coupons" %}</a>
-            <a href="{% url 'booking:book' %}" class="c-nav-anchor c-anchor-secondary">{% trans "Book" %}</a>
+            <a href="{% routablepageurl coupons_page "coupons_page_route"%}" class="c-nav-anchor c-anchor-secondary">{% trans "Coupons" %}</a>
+            <a href="{% routablepageurl booknow_page "booknow_page_route"%}" class="c-nav-anchor c-anchor-secondary">{% trans "Book" %}</a>
         </div>
     </div>
 </header>

@@ -51,7 +51,7 @@
                 <form action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
                     {{online_coupon_form}}
-                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Add to cart" %}</button> 
+                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
             </div>
         </div>
@@ -101,7 +101,7 @@
                 <form action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
                     {{voucher_form}}
-                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Add to cart" %}</button> 
+                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
             </div>
         </div>
@@ -151,7 +151,7 @@
             <div class="paypal-multi-button">
                 <p class="c-text-sm">
                 {% trans "We are at the escape room only when there are sessions, please make sure we are there if you would like to pick up your coupon" %}
-                    <a href="/#contact" class="standard-button standard-button--emphasis" type="submit">{% trans "Contact us" %}</a> 
+                    <a href="/#contact" class="c-anchor c-anchor-primary" type="submit">{% trans "Contact us" %}</a> 
                 </form>
                 </p>
             </div>

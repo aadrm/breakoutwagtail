@@ -80,7 +80,7 @@ methods
     max-width: 400px;
     counter-reset: stepnum;
     flex: 1;
-    background: $brand-primary;
+    background: $brand-secondary;
     color: $brand-light;
     text-align: center;
     padding: 2rem .6rem;
@@ -116,7 +116,7 @@ methods
             margin: .5rem auto;
             content: '';
             display: block;
-            height: 5px;
+            height: 3px;
             width: 100%;
             background: $brand-light;
             box-shadow: 3px 3px 15px $brand-dark-5;

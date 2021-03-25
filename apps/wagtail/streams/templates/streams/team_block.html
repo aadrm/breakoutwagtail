@@ -1,19 +1,31 @@
 {% load wagtailcore_tags wagtailimages_tags %}
+{% block element_content %}
+
 <p class="tac font--lg">{{ self.title }}</p>
 <br><br>
-<div class="cards__wrapper">
     {% for block in self.cards %}
-    <div class="teamcard">
-        <span class="teamcard__logo">A</span>
+    <div class="teamcard"
+    style="
+        {% if block.style.bg_colour %}background: #{{block.style.bg_colour}};{% endif %}
+        {% if block.style.font_colour %}color: #{{block.style.font_colour}};{% endif %}
+        {% if block.style.shadow %}box-shadow: 2px 2px {{block.style.shadow}}px #111;{% endif %}
+    "
+    >
         <div class="teamcard__head">
             {% image block.image width-512  as card_image %}
-            <img src="{{ card_image.url }}" alt="{{card_image.alt}}"> 
+            <img 
+                src="{{ card_image.url }}" 
+
+                alt="{% if block.image_alt %}{{block.image_alt}}{% else %}{{card_image.alt}}{% endif %}"
+            >
         </div>
         <div class="teamcard__content">
-            <p class="teamcard__content__name">{{ block.name }}</p>
-            <p class="teamcard__content__position">{{ block.position}}</p>
+            <p class="teamcard__content__name">{{ block.title}}</p>
+            <p class="teamcard__content__position">{{ block.subtitle}}</p>
             <p class="teamcard__content__text">{{ block.text }}</p>
         </div>
     </div>
     {% endfor %}
 </div>
+
+{% endblock element_content %}

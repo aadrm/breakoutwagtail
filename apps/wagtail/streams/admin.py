@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
-from .models import Review, ReviewFamily, ReviewPlatform 
+from .models import Review, ReviewFamily, ReviewPlatform, Colour
 
 class ReviewFamilyAdmin(ModelAdmin):
     model = ReviewFamily 
@@ -22,6 +22,12 @@ class ReviewAdmin(ModelAdmin):
     menu_icon = 'placeholder'
     list_display = ('get_families', 'review')
 
+class ColourAdmin(ModelAdmin):
+    model = Colour 
+    menu_label = 'Colour'
+    menu_icon = 'placeholder'
+    list_display = ('name', 'hex_code')
+    menu_order = 202
 
 class ReviewsGroup(ModelAdminGroup):
     menu_label = 'Reviews'
@@ -34,3 +40,4 @@ class ReviewsGroup(ModelAdminGroup):
     )
 
 modeladmin_register(ReviewsGroup)
+modeladmin_register(ColourAdmin)

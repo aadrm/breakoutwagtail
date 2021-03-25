@@ -19,7 +19,7 @@
 .blog-body,
 .richtext,
 .mystream {
-  margin: 3rem auto;
+  margin: 3rem auto 0;
   p {
     margin: 1rem auto;
   }
@@ -59,5 +59,18 @@
       font-weight: normal;
       font-family: $fonts-space;
     }
+  }
+  li {
+    position: relative;
+    left: 16px;
+    &::marker {
+      font-size: .8rem;
+    }
+  }
+  hr {
+    border: 0; 
+    height: 1px; 
+
+    background: linear-gradient(to left, #f0f0f0, #8c8b8b, #f0f0f0);
   }
 }

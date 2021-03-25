@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load wagtailroutablepage_tags %}
 <div class="section-prices">
     <div class="prices-wrapper c-wrapper--md c-color-secondary">
 
@@ -40,6 +41,6 @@
 
     </div>
     <br>
-    <a class="c-anchor c-anchor-inline c-anchor-secondary font--md--soft" href="{% url 'booking:book' %}">{% trans "Book Now" %}</a>
+    <a class="c-anchor c-anchor-inline c-anchor-secondary font--md--soft" href="{% routablepageurl booknow_page "booknow_page_route" %}">{% trans "Book Now" %}</a>
 
 </div>
