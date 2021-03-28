@@ -119,7 +119,7 @@ class FormPage(AbstractEmailForm, MyPage):
         # FormSubmissionsPanel(),
         ImageChooserPanel('header_image'),
         StreamFieldPanel('content'),
-        # FieldPanel('intro', classname="full"),
+        FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Form fields"),
         StreamFieldPanel('content_2'),
         FieldPanel('thank_you_text', classname="full"),

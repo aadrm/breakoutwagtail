@@ -11,31 +11,31 @@
 }
 
 .c-wrapper--xs {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     margin: 0 auto;
     max-width: $width--xs;
 }
 
 .c-wrapper--sm {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     margin: 0 auto;
     max-width: $width--sm;
 }
 
 .c-wrapper--md {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     margin: 0 auto;
     max-width: $width--md;
 }
 
 .c-wrapper--lg {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     margin: 0 auto;
     max-width: $width--lg;
 }
 
 .c-wrapper--xl {
-    padding: 0 1rem;
+    padding: 0 0.6rem;
     margin: 0 auto;
     max-width: $width--xl;
 }
@@ -46,7 +46,7 @@
 .c-section-primary,
 .c-section-secondary,
 .c-section-color {
-    padding: 1rem;
+    padding: 0.6rem;
     position: relative;
     overflow: hidden;
     &::before,

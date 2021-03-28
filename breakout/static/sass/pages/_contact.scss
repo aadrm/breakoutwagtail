@@ -24,19 +24,16 @@
     border-radius: 50%;
     color: $brand-light;
     text-align: center;
-    margin: 1rem auto;
     height: 64px;
     width: 64px;
     transition: color .3s, background .3s;
     display: grid;
     align-content: center;
     justify-content: center;
-
     svg {
         fill: $brand-light;
         width: 32px;
         transition: fill .3s;
-
     }
     &:hover {
         background: $brand-emphasis;

@@ -6,14 +6,23 @@
 */
 
 .location-wrapper {
-    margin: 3rem auto;
+    margin: 2rem auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 2rem;
+    grid-template-columns: 1fr;
+    @include break--sm {
+        grid-template-columns: 1fr 1fr;
+    }
+    grid-gap: 1rem;
 }
 
 .location-map {
+    position: relative;
+    padding-bottom: 75%;
     iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 100%;
     }
 }

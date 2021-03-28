@@ -3,14 +3,16 @@
 <div class="c-wrapper--lg">
     <div class="video-wrapper">
         <iframe 
-        onmouseover="loadDeferredIframe(this)"
+        class="js-iframe-defer"
         title="Youtube Promo Video"
         loading="lazy" width="560"
         height="315"
         data-src="https://www.youtube-nocookie.com/embed/rsPZnVUPkz0" 
         allow="clipboard-write; encrypted-media; picture-in-picture" 
         allowfullscreen
-        style="background-image: url({% static 'img/iframe/youtubeplaceholder.webp' %})" 
+        style="
+        background-image: url({% static 'img/iframe/youtubeplaceholder.webp' %});
+        " 
         >
         </iframe>
 

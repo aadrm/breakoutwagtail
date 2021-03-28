@@ -67,7 +67,9 @@
 
 
         <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="{% static 'fonts/capture_it/capture_it.woff2' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        {% comment %} thin.css is render blocking css {% endcomment %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/thin.css' %}">
+        <link rel="stylesheet" media="screen" type="text/css" href="{% static 'css/main.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}

@@ -1,15 +1,10 @@
 {% extends 'streams/element_block.html' %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags %}
 
 {% block element_content %}
-{% if self.uri_fragment %}
-<div id="{{ self.uri_fragment }}" class="c-section-id-offset"></div>
-{% endif %}
-<h2 class=" {% if self.center_title %}tac{% endif %} {% if self.decorate_title %}c-section__title{% endif %}">{{ self.title }}</h2>
 <div class="mystream">
+{% include_block self.title %}
 {% for block in self.stream %}
-    <br>
-    {{ block.section }}
     {% include_block block %}
 {% endfor %}
 </div>

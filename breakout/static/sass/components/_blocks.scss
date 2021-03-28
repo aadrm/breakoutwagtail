@@ -318,7 +318,7 @@
   .image-text__text {
     flex-basis: 100%;
     margin: 0;
-    padding: 1.5rem 3rem;
+    padding: 1.8rem 1rem;
   }
 
 }
@@ -339,7 +339,14 @@
 // }
 
 .mystream {
-  padding: 2rem .5rem;
+
+  .section-block-tittle {
+    font-family: $fonts;
+  }
+  .section-block-title--decorated {
+    font-family: $fonts-space;
+  }
+  padding: .5rem;
   table {
     border-radius: 5px;
     font-size: 12px;

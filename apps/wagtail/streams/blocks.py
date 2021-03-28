@@ -55,9 +55,41 @@ class ElementBlockExtended(ElementBlock):
     )
 
 
-class CollectionBlock(ElementBlockExtended):
-    title = blocks.CharBlock(required=False, help_text='Block title')
+class SubtitleBlock(blocks.StructBlock):
+    """ Title block with shord description """
+
+    title = blocks.StructBlock(
+        [
+            ('subtitle', blocks.CharBlock(required=False)),
+            ('uri_fragment', blocks.CharBlock(required=False)),
+            ('center_title', blocks.BooleanBlock(default=False, required=False)),
+            ('decorate_title', blocks.BooleanBlock(default=False, required=False)),
+            ('title_level', blocks.ChoiceBlock(required=False, choices=(('h2','h2'),('h3','h3'),('h4','h4')))),
+            ('title_colour', blocks.ChoiceBlock(
+                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+        ], form_classname='inline_struct', label="Properties"
+    )
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        print(context['value']['title']['title_colour'])
+        try:
+            context['value']['title']['title_colour'] = Colour.objects.get(
+                pk=context['value']['title']['title_colour']).hex_code
+        except Exception:
+            pass
+        return context
+
+    class Meta:
+        template = 'streams/subtitle_block.html'
+        icon = 'title'
+        label = 'Subtitle'
+
+class SubtitleTextBlock(SubtitleBlock):
     richtext = blocks.RichTextBlock(required=False)
+
+class CollectionBlock(ElementBlockExtended):
+    title = SubtitleTextBlock(required=False, help_text='Block title')
     children = blocks.ListBlock(
         blocks.StructBlock(
             [
@@ -65,6 +97,11 @@ class CollectionBlock(ElementBlockExtended):
             ]
         )
     )
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        context['value']['h_value'] = 'h3'
+        return context
 
     class Meta:
         template = 'streams/collection_block.html'
@@ -134,16 +171,6 @@ class LinkBlock(blocks.StructBlock):
         label = 'Link'
         icon = 'user'
 
-
-class SubtitleBlock(blocks.StructBlock):
-    """ Title block and nothing else """
-
-    subtitle = blocks.CharBlock(required=True, help_text='Add your subtitle')
-
-    class Meta:
-        template = 'streams/subtitle_block.html'
-        icon = 'title'
-        label = 'Subtitle'
 
 
 class RichTextBlock(blocks.RichTextBlock):
@@ -234,7 +261,7 @@ class VerticalCardsBlock(CollectionBlock):
         label = 'Vertical Cards'
 
 
-class HorizontalCardsBlock(ElementBlock):
+class HorizontalCardsBlock(CollectionBlock):
     """ Cards with image and title else """
 
     children = blocks.ListBlock(
@@ -374,14 +401,12 @@ class IframeBlock(blocks.URLBlock):
 
 
 class SectionBlock(ElementBlockExtended):
-    title = blocks.CharBlock(
+    title = SubtitleBlock(
         required=False, help_text='Add a suitable section title')
-    uri_fragment = blocks.CharBlock(required=False, help_text='uri fragment')
-    center_title = blocks.BooleanBlock(default=False, required=False)
-    decorate_title = blocks.BooleanBlock(default=False, required=False)
     is_section = True
     stream = blocks.StreamBlock(
         [
+            # ('subtitle_block', SubtitleBlock()),
             ('collection_test', CollectionBlock()),
             ('rich_text', RichTextBlock()),
             ('mymaps', MyMapsBlock()),
@@ -389,7 +414,7 @@ class SectionBlock(ElementBlockExtended):
             ('spacer', SpacerBlock()),
             ('image_text', ImageTextBlock()),
             ('horizontal_cards', HorizontalCardsBlock()),
-            ('contact_block', ContactBlock()),
+            # ('contact_block', ContactBlock()),
             ('table', TableBlock()),
         ],
     )

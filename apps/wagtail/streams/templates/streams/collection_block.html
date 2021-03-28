@@ -2,12 +2,9 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block element_content %}
-{% if self.title %}<h2 class="tac">{{ self.title }}</h2>{% endif %}
-{% if self.richtext %}
-<div class="richtext tac">
-{{ relf.richtext }}
-</div>
-{% endif %}
+<p>{{page}}</p>
+<div class="mystream">
+{% include_block self.title %}
 <div class="{% block collection_class %}{% endblock collection_class %}">
 {% for block in self.children %}
     {% include_block block %}
