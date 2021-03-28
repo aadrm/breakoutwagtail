@@ -100,6 +100,16 @@ class FormPage(AbstractEmailForm, MyPage):
         blank=True,
     )
 
+
+    content_2 = StreamField(
+        [
+            ('section', blocks.SectionBlock()),
+            ('banner', blocks.ImgBannerSeparator()),
+        ],
+        null=True,
+        blank=True,
+    )
+
     submitted_title = models.CharField('submitted title', max_length=50, blank=True, null=True)
     submitted_text = RichTextField(blank=True)
 
@@ -111,6 +121,7 @@ class FormPage(AbstractEmailForm, MyPage):
         StreamFieldPanel('content'),
         # FieldPanel('intro', classname="full"),
         InlinePanel('form_fields', label="Form fields"),
+        StreamFieldPanel('content_2'),
         FieldPanel('thank_you_text', classname="full"),
         MultiFieldPanel([
             FieldRowPanel([

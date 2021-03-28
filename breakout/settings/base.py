@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
     'paypal.standard.ipn',
     'cookie_consent',
     'blog',
+    'django_extensions',
     # 'wagtail_svgmap',
     # 'django-crontab',
 ]

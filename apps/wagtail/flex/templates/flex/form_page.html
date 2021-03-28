@@ -30,6 +30,9 @@
                 </form>
             </div>
             </section>
+            {% for block in page.content_2 %}
+                {% include_block block %}
+            {% endfor %}
         {% endif %}
         </div>
     </main>

@@ -29,24 +29,28 @@ class CartItemAdmin(admin.ModelAdmin):
 class CartCouponAdmin(admin.ModelAdmin):
     pass 
 
-# @admin.register(Room)
-# class RoomAdmin(admin.ModelAdmin):
-#     list_display = ('name',)
+@admin.register(Room)
+class RoomAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    
+@admin.register(Coupon)
+class CouponAdmin(admin.ModelAdmin):
+    list_display = ('name','code','amount')
     
 
-# @admin.register(Schedule)
-# class ScheduleAdmin(admin.ModelAdmin):
-#     list_display = ('pk', '__str__', 'start_date', 'end_date', 'start_time', 'end_time')
+@admin.register(Schedule)
+class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ('pk', '__str__', 'start_date', 'end_date', 'start_time', 'end_time')
 
 
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
     list_display = ('start', 'room', 'is_available')    
 
-# @admin.register(Product)
-# class ProductAdmin(admin.ModelAdmin):
-#     list_display = ('__str__', 'family', 'upgrade', 'degrade')
-#     pass 
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'family', 'upgrade', 'degrade')
+    pass 
 
 @admin.register(ProductFamily)
 class ProductFamilyAdmin(admin.ModelAdmin):
@@ -59,11 +63,10 @@ class CartAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super(CartAdmin, self).get_urls()
         my_urls = [
-            url(r'^order_summary/$', self.admin_site.admin_view(views.order_summary), name='order_summary'),
-            url(r'^appointments/$', self.admin_site.admin_view(views.appointments), name='appointments'),
-            url(r'^shipping/$', self.admin_site.admin_view(views.shipping), name='shipping'),
             url(r'^change_slot_list/$', self.admin_site.admin_view(views.change_slot_list), name='change_slot_list'),
             url(r'^change_slot/$', self.admin_site.admin_view(views.change_slot), name='change_slot'),
+            url(r'^change_product_list/$', self.admin_site.admin_view(views.change_product_list), name='change_product_list'),
+            url(r'^change_product/$', self.admin_site.admin_view(views.change_product), name='change_product'),
         ]
         return my_urls + urls
 
@@ -133,7 +136,7 @@ class ScheduleAdmin(ModelAdmin):
 
 
 class AppointmentsGroup(ModelAdminGroup):
-    menu_label = 'Breakout Data'
+    menu_label = 'Rooms Setup'
     menu_icon = 'fa-calendar-check-o'
     menu_order = 200
     items = (

@@ -1,4 +1,4 @@
-{% extends 'admin/base_site.html' %}
+{% extends 'wagtailadmin/base.html' %}
 {% load static %}
 {% block extrastyle %}
 {{ block.super }}
@@ -6,69 +6,98 @@
 {% endblock extrastyle %}
 {% block content %}
 
-<div class="content">
+<div class="content nice-padding">
     <br>
     <h1>Items to be shipped</h1>
     <br><br>
     <div id="content-main">
 
-    <table>
-    {% for item in items %}
+    <table class="listing">
+    <thead>
     <tr>
-        <td>
-            <form action="{% url 'admin:shipping' %}" method="POST"> 
-            {% csrf_token %}
-                <button type="sumbit" name="shipped" value="{{item.pk}}">Shipped</button>
-            </form>
-        </td>
-        <td>{{item.product}}</td>
-        <td>
-            <a href="{% url 'admin:booking_coupon_change' item.coupon.pk %}">
+        <td>Mark Shipped</td> 
+        <td>For</td> 
+        <td>Code</td>
+        <td>Name</td>
+        <td>Street</td>
+        <td>Post Code</td>
+        <td>City</td>
+        <td>Order</td>
+        <td>Phone</td>
+        <td>Email</td>
+        <td>Payment</td>
+        <td>Ordered</td>
+        <td>Total</td>
+        <td>w discount</td>
+    </tr> 
+    </thead>
+    <tbody>
+    {% for item in items %}
+        <tr>
+            <td>
+                <form action="{% url 'shipping' %}" method="POST"> 
+                {% csrf_token %}
+                    <button class="button button-secondary button-small" type="sumbit" name="shipped" value="{{item.pk}}">Shipped</button>
+                </form>
+            </td>
+            <td>{{item.product}}</td>
+            <td>
+                {% if item.coupon %}
+                <a href="{% url 'admin:booking_coupon_change' item.coupon.pk %}">
+                    {{item.coupon.code}}
+                </a>
+                {% else %}
                 {{item.coupon.code}}
-            </a>
-        </td>
-        <td>{{item.cart.invoice.full_name}}</td>
-        <td>{{item.cart.invoice.street}}</td>
-        <td>{{item.cart.invoice.post}}</td>
-        <td>{{item.cart.invoice.city}}</td>
-        <td>{{item.cart.invoice.order_number}}</td>
-        <td>{{item.cart.invoice.phone}}</td>
-        <td>{{item.cart.invoice.email}}</td>
-        <td>{{item.cart.invoice.payment}}</td>
-        <td>{{item.cart.invoice.order_date}}</td>
-        <td>{{item.cart.total}}</td>
-        <td>{{item.cart.total_after_coupons}}</td>
+                {% endif %}
+            </td>
+            <td>{{item.cart.invoice.full_name}}</td>
+            <td>{{item.cart.invoice.street}}</td>
+            <td>{{item.cart.invoice.post}}</td>
+            <td>{{item.cart.invoice.city}}</td>
+            <td>{{item.cart.invoice.order_number}}</td>
+            <td>{{item.cart.invoice.phone}}</td>
+            <td>{{item.cart.invoice.email}}</td>
+            <td>{{item.cart.invoice.payment}}</td>
+            <td>{{item.cart.invoice.order_date}}</td>
+            <td>{{item.cart.total}}</td>
+            <td>{{item.cart.total_after_coupons}}</td>
 
-        <td>
-            <div class="hover-info">
-                Discount 
-                <ul class="hover-info__list">
-                {% for item in order.cart_coupons.all %}
-                    <li>
-                    {{item.coupon}}
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-        </td>
-    </tr>
+            {% comment %} <td>
+                <div class="hover-info">
+                    Discount 
+                    <ul class="hover-info__list">
+                    {% for item in order.cart_coupons.all %}
+                        <li>
+                        {{item.coupon}}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </td> {% endcomment %}
+        </tr>
+    </tbody>
     {% endfor %}
     </table>
     <h2>Items Shipped (last 10)</h2>
-    <table>
+    <table class="listing">
+    <tbody>
     {% for item in shipped %}
     <tr>
         <td>
-            <form action="{% url 'admin:shipping' %}" method="POST"> 
+            <form action="{% url 'shipping' %}" method="POST"> 
             {% csrf_token %}
-                <button type="sumbit" name="not_shipped" value="{{item.pk}}">Not Shipped</button>
+                <button class="button  button-small" type="sumbit" name="not_shipped" value="{{item.pk}}">Not Shipped</button>
             </form>
         </td>
         <td>{{item.product}}</td>
         <td>
+            {% if item.coupon %}
             <a href="{% url 'admin:booking_coupon_change' item.coupon.pk %}">
                 {{item.coupon.code}}
             </a>
+            {% else %}
+            {{item.coupon.code}}
+            {% endif %}
         </td>
         <td>{{item.cart.invoice.full_name}}</td>
         <td>{{item.cart.invoice.street}}</td>
@@ -82,7 +111,7 @@
         <td>{{item.cart.total}}</td>
         <td>{{item.cart.total_after_coupons}}</td>
 
-        <td>
+        {% comment %} <td>
             <div class="hover-info">
                 Discount 
                 <ul class="hover-info__list">
@@ -93,9 +122,10 @@
                 {% endfor %}
                 </ul>
             </div>
-        </td>
+        </td> {% endcomment %}
     </tr>
     {% endfor %}
+    </tbody>
     </table>
     </div>
 </div>

@@ -445,6 +445,8 @@ def test_paypal_ipn(request):
 
 @staff_member_required
 def coupon_generator(request):
+    from django import urls
+
     generatorform = CouponGeneratorForm
     context = {
         'form': generatorform,
@@ -476,8 +478,10 @@ def coupon_generator(request):
 
     return render(request, 'booking/admin/view-coupon_generator.html', context)
 
+@staff_member_required
 def order_summary(request):
     orders = Cart.objects.filter(status=1)
+    orders.order_by('invoice__order_date')
     start_date_filter = date.today() - timedelta(28)
     end_date_filter = date.today()
     if request.method == 'POST':
@@ -502,6 +506,11 @@ def order_summary(request):
 
     else:
         form = FilterOrdersForm
+    if start_date_filter:
+        orders = orders.filter(invoice__order_date__gte=start_date_filter)
+    if end_date_filter:
+        end_date_filter = end_date_filter + timedelta(days=1)
+        orders = orders.filter(invoice__order_date__lt=end_date_filter)
 
     context = {
         'form': form,
@@ -549,6 +558,8 @@ def appointments(request):
     }
     return render(request, 'booking/admin/view-appointments.html', context)
 
+
+@staff_member_required
 def shipping(request):
     if request.method == "POST":
         if 'shipped' in request.POST:
@@ -579,18 +590,18 @@ def shipping(request):
 def change_slot_list(request):
     if request.method == "POST":
         data = json.loads(request.body)
-        current_slot = Slot.objects.get(pk=data.get('currentslot'))
+        current = Slot.objects.get(pk=data.get('current'))
         order = data.get('order')
         customer = data.get('customer')
         cart_item = data.get('cartitem')
         frompage = data.get('frompage')
         from_date = date.today()
-        slots = Slot.objects.filter(start__gte=from_date)
-        slots = slots.order_by('start')
+        items = Slot.objects.filter(start__gte=from_date)
+        items = items.order_by('start')
         context = {
-            'current_slot': current_slot,
+            'current': current,
             'cart_item': cart_item,
-            'slots': slots,
+            'items': items,
             'order': order,
             'customer': customer,
             'frompage': frompage,
@@ -598,65 +609,103 @@ def change_slot_list(request):
         # return JsonResponse({'data': 'test'})
         return render(request, 'booking/admin/ajax-change_slot_list.html', context)
 
+@csrf_exempt
+@staff_member_required
+def change_product_list(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        current = Product.objects.get(pk=data.get('current'))
+        order = data.get('order')
+        customer = data.get('customer')
+        cart_item = data.get('cartitem')
+        frompage = data.get('frompage')
+        from_date = date.today()
+        items = Product.objects.filter(family=current.family)
+        context = {
+            'current': current,
+            'cart_item': cart_item,
+            'items': items,
+            'order': order,
+            'customer': customer,
+            'frompage': frompage,
+        }
+        # return JsonResponse({'data': 'test'})
+        return render(request, 'booking/admin/ajax-change_product_list.html', context)
 
+@staff_member_required
 def change_slot(request):
     if request.method == 'POST':
         valid = False
         frompage = request.POST.get('frompage')
-        if frompage == 'order_summary':
-            redirectto = reverse('admin:order_summary')
+        redirectto = reverse('appointments_list')
+        if frompage == 'orders_list':
+            redirectto = reverse('orders_list')
             valid = True
-        elif frompage == 'appointments':
-            redirectto = reverse('admin:appointments')
-            valid = True
-        if valid:
-            new_slot_id = request.POST.get('new_slot')
-            cart_item_id = request.POST.get('cart_item')
-            new_slot = Slot.objects.get(pk=new_slot_id) 
-            cart_item = CartItem.objects.get(pk=cart_item_id)
-            current_product = cart_item.product
+        new_slot_id = request.POST.get('new_slot')
+        cart_item_id = request.POST.get('cart_item')
+        new_slot = Slot.objects.get(pk=new_slot_id) 
+        cart_item = CartItem.objects.get(pk=cart_item_id)
+        current_product = cart_item.product
 
-            if new_slot.is_available:
-                cart_item.slot = new_slot
-                # change the product to be aligned with the corresponding room
-                # in case it was changed
-                if not (new_slot.room == cart_item.product.family.room):
-                    valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
-                    valid_products = Product.objects.filter(family__in=valid_families)
-                    valid_products = valid_products.order_by('price')
-                    new_product = valid_products[0]
-                    # search for a suitable product
-                    for product in valid_products:
-                        print(product.price, current_product.price)
-                        if product.price > current_product.price:
-                            break
-                        else:
-                            new_product = product
+        if new_slot.is_available:
+            cart_item.slot = new_slot
+            # change the product to be aligned with the corresponding room
+            # in case it was changed
+            if not (new_slot.room == cart_item.product.family.room):
+                valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
+                valid_products = Product.objects.filter(family__in=valid_families)
+                valid_products = valid_products.order_by('price')
+                new_product = valid_products[0]
+                # search for a suitable product
+                for product in valid_products:
+                    print(product.price, current_product.price)
+                    if product.price > current_product.price:
+                        break
+                    else:
+                        new_product = product
 
-                    cart_item.product = new_product
-                cart_item.save()
+                cart_item.product = new_product
+            cart_item.save()
     return HttpResponseRedirect(redirectto)
 
 
+@staff_member_required
+def change_product(request):
+    if request.method == 'POST':
+        frompage = request.POST.get('frompage')
+        redirectto = reverse('orders_list')
+        new_product_id = request.POST.get('new_slot')
+        cart_item_id = request.POST.get('cart_item')
+        new_product = Product.objects.get(pk=new_product_id) 
+        cart_item = CartItem.objects.get(pk=cart_item_id)
+        current_product = cart_item.product
+
+        cart_item.product = new_product 
+        cart_item.save()
+    return HttpResponseRedirect(redirectto)
+
+
+@staff_member_required
 def record_payment(request):
     if request.method == 'POST':
         sumbited_form = PaymentForm(request.POST)
         if sumbited_form.is_valid:
             sumbited_form.save()
         HttpResponseRedirect(reverse('admin:record_payment'))
-    invoices = Invoice.objects.filter(payments__isnull=True)
+    invoices = Invoice.objects.all()
     invoices_list = []
     due_invoices_list = []
     for invoice in invoices:
-        invoices_list.append({
-            'invoice': invoice,
-            'form': PaymentForm(initial={'invoice': invoice})
-        })
-        if invoice.is_due:
-            due_invoices_list.append({
+        if not invoice.is_paid():
+            invoices_list.append({
                 'invoice': invoice,
                 'form': PaymentForm(initial={'invoice': invoice})
             })
+            if invoice.is_due :
+                due_invoices_list.append({
+                    'invoice': invoice,
+                    'form': PaymentForm(initial={'invoice': invoice})
+                })
     context = {
         'due_list': due_invoices_list,
         'inv_list': invoices_list,

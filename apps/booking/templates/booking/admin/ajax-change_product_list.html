@@ -1,11 +1,10 @@
 {% extends 'booking/admin/ajax-change.html' %}
-{% block current_item %}{{current_slot}}{% endblock current_item %}
+{% block current_item %}{{current}}{% endblock current_item %}
 {% block items_list %}
 <ul>
     {% for item in items %}
-    {% if item.is_available %}
     <li>
-        <form action="{% url 'admin:change_slot' %}" method="post">
+        <form action="{% url 'admin:change_product' %}" method="post">
         {% csrf_token %}
         <input name="cart_item" value="{{cart_item}}" type="hidden">
         <input name="new_slot" value="{{item.pk}}" type="hidden">
@@ -19,7 +18,6 @@
         </button>
         </form>
     </li>
-    {% endif %}
     {% endfor %}
 </ul>
 {% endblock items_list %}

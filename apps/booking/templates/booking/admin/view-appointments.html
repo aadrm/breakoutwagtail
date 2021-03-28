@@ -1,7 +1,6 @@
 {% extends 'wagtailadmin/base.html' %}
 {% load wagtailadmin_tags i18n %}
 {% load static %}
-{% block titletag %}{% trans "Dashboard" %}{% endblock %}
 
 {% block extra_css %}
     {{ block.super }}
@@ -12,6 +11,7 @@
 
 {% endblock %}
 
+{% block titletag %}{% trans "Appointments" %}{% endblock %}
 {% block content %}
     <header class="merged nice-padding">
         <div class="row">
@@ -26,7 +26,7 @@
 <div class="admin-content">
     <div id="content-main">
     <div class="filters">
-        <form action="{% url 'admin:appointments' %}" method="POST">
+        <form action="{% url 'appointments_list' %}" method="POST">
             {% csrf_token %}
             <ul>
                 {{form.as_ul}} 
@@ -34,13 +34,14 @@
             <br>
             <button class="button button-secondary button-small" type="submit">Filter</button>
         </form>
-        <form action="{% url 'admin:appointments' %}">
+        <form action="{% url 'appointments_list' %}">
             {% csrf_token %}
             <button class="button button-secondary button-small" type="submit">Reset</button>
         </form>
     </div>
     <br>
-    <table class="admin-table">
+    <table class="admin-table listing">
+    <thead>
     <tr>
     <th>Edit</th> 
     <th>Date <br> Time</th>
@@ -51,6 +52,7 @@
     <th>Appointments</th>
     <th>Couponse</th> {% endcomment %}
     </tr>
+    </thead>
     {% for appointment in appointments%}
     <tr>
         <td>
@@ -58,7 +60,7 @@
                 class="js-button-change-slot button button-secondary button-small"
                 data-order={{appointment.cart.invoice.order_number}}
                 data-customer={{appointment.cart.invoice.full_name}}
-                data-currentslot="{{ appointment.slot.pk }}"
+                data-current="{{ appointment.slot.pk }}"
                 data-cartitem="{{appointment.pk}}"
                 data-posturl="{% url 'admin:change_slot_list' %}"
                 data-frompage="appointments"
@@ -74,46 +76,6 @@
         <td>{{appointment.product.family.room}} <br> {{appointment.product.players}} players</td>
         <td>Nr.:{{appointment.cart.invoice.order_number}} <br> {{appointment.cart.invoice.full_name}} </td>
         <td>{{appointment.cart.invoice.email}} <br>{{appointment.cart.invoice.phone}} </td>
-        {% comment %} <td>{{appointment.created}}</td> {% endcomment %}
-        {% comment %} <td>
-            <a href="{% url 'admin:booking_cartitem_change' appointment.pk %}">
-
-            </a>
-        </td> {% endcomment %}
-        {% comment %} <td>
-            <div class="hover-info">
-                Discount 
-                <ul class="hover-info__list">
-                {% for item in appointments.cart_coupons.all %}
-                    <li>
-                    {{item.coupon}} |
-                    {{item.discount}}
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
-        </td>
-        <td>
-            <div class="hover-info">
-                appointments 
-                <ul class="hover-info__list">
-                {% for item in order.get_appointment_items %}
-                -{{item.slot}}
-                {% endfor %}
-                </ul>
-            </div>
-        </td>
-        <td>
-            <div class="hover-info">
-                coupons 
-                <ul class="hover-info__list">
-                {% for item in order.cart_coupons.all %}
-                {{item.coupon}}
-                {% endfor %}
-                </ul>
-            </div>
-        </td> {% endcomment %}
-
     </tr>
     {% endfor %}
     </table>

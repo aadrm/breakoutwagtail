@@ -1,0 +1,18 @@
+<div class="js-change-response change-slot-response">
+    <div class="change-mask" onclick="closeList()">
+    </div>
+    <div class="change-wrapper">
+        <div class="change-current">
+            <p>{{order}} | {{customer}}</p>
+            <p><b>Current:
+            <br>
+            {% block current_item %}{% endblock current_item %}</b></p>
+        </div>
+        <div class="change-available">
+            <P>Change to:</P>
+            {% block items_list %}
+            
+            {% endblock items_list %}
+        </div>
+    </div>
+</div>

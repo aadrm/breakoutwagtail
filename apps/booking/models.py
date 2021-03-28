@@ -718,18 +718,39 @@ class Invoice(models.Model):
     order_int = models.SmallIntegerField(_("Order Number"), blank=True, null=True, editable=False)
     order_number = models.CharField(_("Order Number"), max_length=8, blank=True, null=True, editable=False) 
 
+    def amount_paid(self):
+        amount = 0
+        for payment in self.payments.all():
+            amount += payment.amount
+        return amount
+
+    def amount_due(self):
+        return self.amount_to_pay() - self.amount_paid()
+    
+    def amount_to_pay(self):
+        try:
+            return self.cart.total_after_coupons()
+        except Exception:
+            return 0
+
+    def is_paid(self):
+        if self.amount_paid() >= self.amount_to_pay():
+            return True
+        else:
+            return False
+    
     @property
     def is_due(self):
-        print(self)
-        appointments = self.cart.get_appointment_items()
-        if appointments:
-            for item in appointments:
-                print('date', item.slot.start.date(), date.today(),item.slot.start.date() < date.today() )
-                if item.slot.start.date() < date.today():
-                    return True
+        try:
+            appointments = self.cart.get_appointment_items()
+            if appointments:
+                for item in appointments:
+                    print('date', item.slot.start.date(), date.today(),item.slot.start.date() < date.today() )
+                    if item.slot.start.date() < date.today():
+                        return True
+        except:
             return False
-        else:
-            return True
+        return False 
 
     class Meta:
         verbose_name = _("Invoice")

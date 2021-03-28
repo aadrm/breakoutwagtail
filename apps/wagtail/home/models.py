@@ -22,6 +22,8 @@ from apps.booking.utils import get_cart
 
 class MyPage(Page):
 
+    Page.search_description.max_length = 100
+
     header_image = models.ForeignKey(
         "wagtailimages.Image", 
         null=True,
@@ -44,7 +46,7 @@ class MyPage(Page):
 
     seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
 
-    extra_schema = models.TextField(null=True, blank=True)
+    extra_schema = models.TextField(max_length=128, null=True, blank=True)
 
     class Meta:
         abstract = True

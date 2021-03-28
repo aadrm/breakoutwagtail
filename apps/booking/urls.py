@@ -34,8 +34,7 @@ urlpatterns = [
     path('ajax_refresh_invoice', views.ajax_refresh_invoice, name='ajax_refresh_invoice'),
 
     #admin extension views
-    path('appointments_list', views.appointments, name='appointments_list'),
-    path('coupon_generator', views.coupon_generator, name='coupon_generator'),
+    # path('appointments_list', views.appointments, name='appointments_list'),
     path('ajax_remove_coupon', views.ajax_remove_coupon, name='ajax_remove_coupon'),
 
 ]

@@ -1,37 +1,56 @@
-{% extends 'admin/base_site.html' %}
+{% extends 'wagtailadmin/base.html' %}
+{% load wagtailadmin_tags %}
 {% load static %}
 
-{% block extrahead %}
+{% block extra_js%}
 {{ block.super }}
 <script src =" {% static 'js/change_slot_list.js' %}"  ></script>
-{% endblock extrahead %}
+{% endblock extra_js %}
 
-{% block extrastyle %}
+{% block extra_css %}
 {{ block.super }}
-<link rel="stylesheet" href="{% static 'css/admin.css' %}">
-{% endblock extrastyle %}
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extra_css %}
 
+{% block titletag %}Orders{% endblock %}
 {% block content %}
+<header class="merged nice-padding">
+    <div class="row">
+        <div class="col1">
+        <div class="col9">
+            <h1>{% block branding_welcome %}Orders{% endblock %}</h1>
+        </div>
+    </div>
+</header>
 
-<div class="content">
-    <br>
-    <h1>Completed Orders</h1>
-    <br><br>
-    <div id="content-main">
-    <div>
-        <form action="{% url 'admin:order_summary' %}" method="POST">
+{% comment %} <div class="admin-content"> {% endcomment %}
+
+    <div class="filters nice-padding">
+        <form action="{% url 'orders_list' %}" method="POST">
             {% csrf_token %}
-            {{form}} 
-            <button type="submit">Filter</button>
+            <ul>
+                {{form.as_ul}} 
+            </ul>
+            <br>
+            <button class="button button-secondary button-small" type="submit">Filter</button>
         </form>
-        <form action="{% url 'admin:order_summary' %}">
+        <form action="{% url 'orders_list' %}">
             {% csrf_token %}
-            <button type="submit">Reset</button>
+            <button class="button button-secondary button-small" type="submit">Reset</button>
         </form>
     </div>
+
     <br>
-    <table>
+    <table class="listing">
+    <thead>
+        <tr>
+            <td>Order</td> 
+        </tr>
+    </thead>
     {% for order in orders %}
+    <tbody>
     <tr>
         <td>{{order.invoice.order_number}}</td>
         <td>{{order.invoice.full_name}}</td>
@@ -42,36 +61,44 @@
         <td>{{order.total}}</td>
         <td>{{order.total_after_coupons}}</td>
         <td>
-            <div class="hover-info">
-                products
-                <ul class="hover-info__list">
+            {% comment %} <div class="hover-info"> {% endcomment %}
+                {% comment %} products {% endcomment %}
+                <ul class="">
                     {% for item in order.get_valid_items %}
                     <li>
-                    {{item.product}}
+                        <button
+                            class="js-button-change-product button button-secondary button-small"
+                            data-order={{order.invoice.order_number}}
+                            data-customer={{order.invoice.full_name}}
+                            data-current="{{ item.product.pk }}"
+                            data-cartitem="{{item.pk}}"
+                            data-posturl="{% url 'admin:change_product_list' %}"
+                            data-frompage="orders_list"
+                        >
+                        {{item.product.family}}-{{item.product.players}}
+                        </button>
                     </li>
                     {% endfor %}
                 </ul>
-            </div>
+            {% comment %} </div> {% endcomment %}
         </td>
         <td>
             {% if order.get_appointment_items %}
-            <div class="hover-info">
-                appointments 
-                <ul class="hover-info__list">
+                <ul>
                 {% for item in order.get_appointment_items %}
                     <li>
                         <button
-                            class="js-button-change-slot"
+                            class="js-button-change-slot button button-secondary button-small"
                             data-order={{order.invoice.order_number}}
                             data-customer={{order.invoice.full_name}}
-                            data-currentslot="{{ item.slot.pk }}"
+                            data-current="{{ item.slot.pk }}"
                             data-cartitem="{{item.pk}}"
                             data-posturl="{% url 'admin:change_slot_list' %}"
-                            data-frompage="order_summary"
+                            data-frompage="orders_list"
                         >
                             {{item.slot}}
                         </button>
-                    </li>
+                    {% comment %} </li> {% endcomment %}
                 {% endfor %}
                 </ul>
             </div>
@@ -81,8 +108,6 @@
         </td>
         <td>
             {% if order.cart_coupons.all %}
-            <div class="hover-info">
-                Discount 
                 <ul class="hover-info__list">
                 {% for item in order.cart_coupons.all %}
                     <li>
@@ -90,7 +115,6 @@
                     </li>
                 {% endfor %}
                 </ul>
-            </div>
             {% else %}
             ---
             {% endif %}
@@ -98,7 +122,7 @@
 
     </tr>
     {% endfor %}
+    </tbody>
     </table>
-    </div>
-</div>
+{% comment %} </div> {% endcomment %}
 {% endblock content %}
