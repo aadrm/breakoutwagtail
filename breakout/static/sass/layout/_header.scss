@@ -67,7 +67,7 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: 100%;
+  // background-size: 100%;
   background-attachment: fixed;
 
   top: 0;
@@ -112,13 +112,13 @@ Main header
 
 .main-header-title-container{
   position: relative;
-  margin-top: 250px;
-  padding-top: calc(250px - 18vw);
+  top: 50%;
   left: calc(12vw - 42px);
   z-index: 3;
   display: grid;
   align-content: center;
   justify-content: center;
+  transform: translateY(-50%);
 }
 
 .main-header-title {

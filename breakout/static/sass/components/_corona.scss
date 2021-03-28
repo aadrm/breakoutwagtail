@@ -12,6 +12,10 @@
   }
 
 .corona-banner {
+    display: none;
+    @include break--md {
+        display: block;
+    }
     background: $brand-emphasis;
     position: fixed;
     top: 30vh;

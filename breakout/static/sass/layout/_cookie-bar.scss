@@ -25,19 +25,21 @@
     bottom: 0;
     animation: 2s ease-out 0s slideInFromBottom;
     p {
-        font-size: medium;
+        font-size: $font--sm--sharp;
     }
     .cookie-bar__buttons {
         display: block;
         a {
-            margin: .6rem;
-            border-radius: 5px;
+            font-size: $font--sm--sharp;
+            margin: .4rem;
+            border-radius: 3px;
             display: inline-block;
-            padding: .2rem .4rem;
+            padding: .2rem .3rem;
             box-shadow: 2px 2px 4px black;
             background: $brand-secondary;
+            text-decoration: none;
             &:hover {
-                background: transparent;
+                background: $brand-emphasis;
             }
         }
 
@@ -45,6 +47,14 @@
             background: $brand-primary;
             color: $brand-dark;
             padding: .2rem 2rem;
+            &:hover {
+                background: $brand-emphasis;
+            }
+        }
+        a:last-child {
+            @include break--ss--reversed{
+                display: none;
+            }
         }
     }
 }

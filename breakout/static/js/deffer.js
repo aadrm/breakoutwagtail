@@ -1,15 +1,9 @@
-function loadDeferredIframes() {
-    console.log('load...');
-    var vidDefer = document.getElementsByTagName('iframe');
-    for (var i=0; i<vidDefer.length; i++) {
-        if(vidDefer[i].getAttribute('data-src')) {
-            vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
-            console.log('...loaded');
-        } 
+"use strict";
+
+function loadDeferredIframe(e) {
+    console.log('loading-iframe');
+    if(e.getAttribute('data-src')) {
+        e.setAttribute('src',e.getAttribute('data-src'));
+        e.setAttribute('onmouseover', '');
     } 
 };
-
-window.addEventListener('load', function() {
-    console.log('prepared_defer')
-    loadDeferredIframes();
-});
