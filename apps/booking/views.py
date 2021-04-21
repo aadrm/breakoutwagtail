@@ -712,3 +712,6 @@ def record_payment(request):
     }
     return render(request, 'booking/admin/view-record_payment.html', context)
 
+def test_email_template(request):
+    email = render_to_string('email/test_mail.html')
+    return HttpResponse(email)

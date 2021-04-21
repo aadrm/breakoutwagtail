@@ -1,3 +1,4 @@
+import traceback
 from datetime import datetime, timedelta, time, date
 
 from django.urls import reverse
@@ -10,11 +11,10 @@ from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
-from breakout.utils import get_booking_settings
+from breakout.utils import get_booking_settings, textify
 
 
 from weasyprint import HTML, CSS
-
 # from phonenumber_field.modelfields import PhoneNumberField
 
 from breakout.utils import addmins
@@ -233,7 +233,12 @@ class Cart(models.Model):
             self.approve_cart()
             self.invoice.commit_order()
             self.create_cart_coupons()
-            self.send_cart_emails()
+            try:
+                self.send_cart_emails()
+            except Exception as e:
+                print('emails not sent')
+                print(e)
+                traceback.print_exc()
             return True
         except Exception as e:
             print(e)
@@ -251,8 +256,8 @@ class Cart(models.Model):
             'payment': invoice.payment.method,
         }
 
-        message = render_to_string('email/order_confirmation.txt', context)
         html_message = render_to_string('email/order_confirmation.html', context)
+        message = textify(html_message) 
         to_email = invoice.email
         mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
         email = EmailMultiAlternatives(
@@ -268,8 +273,8 @@ class Cart(models.Model):
         email.send(fail_silently=True)
 
         mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
-        message = render_to_string('email/order_confirmation_alert.txt', context)
         html_message = render_to_string('email/order_confirmation_alert.html', context)
+        message = textify(html_message) 
 
         email = EmailMultiAlternatives(
             subject=mail_subject,

@@ -37,4 +37,5 @@ urlpatterns = [
     # path('appointments_list', views.appointments, name='appointments_list'),
     path('ajax_remove_coupon', views.ajax_remove_coupon, name='ajax_remove_coupon'),
 
+    path('test_email_template', views.test_email_template, name='test_email_template'),
 ]

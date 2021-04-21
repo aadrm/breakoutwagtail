@@ -12,10 +12,10 @@
         {% comment "Meta titles" %}{% endcomment %}
         {% if self.seo_title %}
             {% with self.get_site.site_name as site_name %}
-            <title>{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}</title>
-            <meta name="title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
-            <meta name="og:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
-            <meta name="twitter:title" content="{{self.seo_title}}{% if site_name %} - {{ site_name }}{% endif %}">
+            <title>{{self.seo_title}}{% if site_name %}{% endif %}</title>
+            <meta name="title" content="{{self.seo_title}}">
+            <meta name="og:title" content="{{self.seo_title}}">
+            <meta name="twitter:title" content="{{self.seo_title}}">
             {% endwith %}
         {% else %} 
             {% with 'Breakout Escape Room Augsburg' as base_title %}
