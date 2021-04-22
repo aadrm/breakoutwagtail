@@ -11,7 +11,7 @@ from wagtail.core.fields import StreamField
 from wagtail.core.fields import RichTextField
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from modelcluster.fields import ParentalKey
-
+from wagtailcaptcha.models import WagtailCaptchaEmailForm
 from apps.wagtail.streams import blocks
 
 class FlexPage(MyPage):
@@ -87,7 +87,7 @@ class FormField(AbstractFormField):
 
 
 
-class FormPage(AbstractEmailForm, MyPage):
+class FormPage(WagtailCaptchaEmailForm, MyPage):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
 

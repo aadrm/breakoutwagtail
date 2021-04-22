@@ -83,6 +83,7 @@ THIRD_PARTY_APPS = [
     'cookie_consent',
     'blog',
     'django_extensions',
+    'wagtailcaptcha',
     # 'wagtail_svgmap',
     # 'django-crontab',
 ]
@@ -174,7 +175,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-GB'
+LANGUAGE_CODE = 'de'
 
 TIME_ZONE = 'UTC'
 
@@ -189,8 +190,8 @@ LOCALE_PATHS = (
 )
 
 LANGUAGES = [
-    ("en", "English"),
     ("de", "German"),
+    ("en", "English"),
 ]
 
 WAGTAIL_CONTENT_LANGUAGES = (

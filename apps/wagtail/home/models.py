@@ -1,7 +1,9 @@
 from django.db import models
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, translate_url
 from django.shortcuts import render
+from django.utils import translation
+from django.conf import settings
 
 from wagtail.core import blocks
 from wagtail.core import fields
@@ -11,11 +13,13 @@ from wagtail.images.edit_handlers import ImageChooserPanel, ImageFieldComparison
 from wagtail.core.fields import StreamField, StreamBlock, BlockField, RichTextField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from apps.wagtail.streams import blocks as myblocks
+from modelcluster.fields import ParentalManyToManyField
 
 from apps.booking.models import Room
 
 from django.utils.translation import ugettext_lazy as _
 
+from apps.wagtail.menus.models import WagtailLanguage
 from apps.booking.models import Room, ProductFamily
 from apps.booking.forms import AddProductToCartForm 
 from apps.booking.utils import get_cart
@@ -47,6 +51,34 @@ class MyPage(Page):
     seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
 
     extra_schema = models.TextField(max_length=128, null=True, blank=True)
+    translations = ParentalManyToManyField(WagtailLanguage, blank=True)
+
+    def get_context(self, request):
+        default_lang = settings.LANGUAGES[0][0]
+        current_lang = translation.get_language()
+        translations = self.translations.all().values_list('language_code', flat=True)
+
+        if current_lang in translations:
+            remove_lang = current_lang
+            canonical = self.url
+        else:
+            remove_lang = default_lang 
+            canonical = translate_url(self.url, default_lang)
+
+        if remove_lang == default_lang:
+            alternatives = []
+        else:
+            alternatives = [(default_lang, translate_url(self.url, default_lang))]
+        for code in translations:
+            if remove_lang == code:
+                pass
+            else:
+                alternatives.append((code, translate_url(self.url, code)))
+
+        context = super().get_context(request)
+        context['canonical_path'] = canonical
+        context['language_alternatives'] = alternatives
+        return context
 
     class Meta:
         abstract = True
@@ -69,6 +101,7 @@ class MyPage(Page):
                 FieldPanel("seo_image_alt")
             ]
         ),
+        FieldPanel('translations'),
         FieldPanel('extra_schema'),
     ]
 

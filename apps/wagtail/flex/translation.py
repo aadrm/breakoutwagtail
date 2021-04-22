@@ -1,4 +1,4 @@
-from .models import FlexPage, InfoPage, FormPage
+from .models import FlexPage, InfoPage, FormPage, FormField
 from modeltranslation.translator import TranslationOptions
 from modeltranslation.decorators import register
 from wagtail.contrib.forms.models import AbstractFormField
@@ -27,4 +27,12 @@ class InfoPageTR(TranslationOptions):
         'subject',
         'submitted_title',
         'submitted_text',
+    )
+
+
+@register(FormField)
+class FormFieldTR(TranslationOptions):
+    fields = (
+        'label',
+        'help_text',
     )

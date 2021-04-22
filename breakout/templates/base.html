@@ -27,7 +27,16 @@
         {% endif %}
 
         {% comment %} meta urls {% endcomment %}
-        <link rel="canonical" href="https://breakout-escaperoom.de{{request.path}}"/>
+                {% comment %} meta urls {% endcomment %}
+        {% if canonical_path %}
+            <link rel="canonical" href="https://peakhelicopter.com{{ canonical_path }}">
+        {% else %}
+            <link rel="canonical" href="https://peakhelicopter.com{{ request.path }}">
+        {% endif %}
+        {% for alternative in language_alternatives %}
+            <link rel="alternative" ref="{{ alternative.0 }}" href="https://breakout-escaperoom.de{{ alternative.1 }}">
+        {% endfor %}
+
         <meta name="og:url" content="https://breakout-escaperoom.de{{request.path}}">
         <meta name="twitter:url" content="https://breakout-escaperoom.de{{request.path}}">
 

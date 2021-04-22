@@ -142,3 +142,18 @@ class Menu(ClusterableModel):
 
     def __str__(self):
         return self.title
+
+
+class WagtailLanguage(models.Model):
+
+    language_code = models.CharField('code', max_length=8, unique=True)
+
+    class Meta:
+        verbose_name = "wagtail_language"
+        verbose_name_plural = "wagtail_languages"
+
+    def __str__(self):
+        return self.language_code
+
+    def get_absolute_url(self):
+        return reverse("wagtail_language_detail", kwargs={"pk": self.pk})
