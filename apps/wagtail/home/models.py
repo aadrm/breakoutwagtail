@@ -121,12 +121,30 @@ class LinkPage(MyPage):
 class BooknowPage(RoutablePageMixin, MyPage):
 
     max_count = 1
-    template = "booking/view_book.html"
+    template = "home/book_page.html"
 
-    content = RichTextField(blank=True, null=True)
 
+    content = StreamField(
+        [
+            ('section', myblocks.SectionBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+
+    content_after = StreamField(
+
+        [
+            ('section', myblocks.SectionBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+
+ 
     content_panels = MyPage.content_panels + [
-        FieldPanel('content'),
+        StreamFieldPanel('content'),
+        StreamFieldPanel('content_after'),
     ]
 
 
@@ -137,7 +155,7 @@ class BooknowPage(RoutablePageMixin, MyPage):
         rooms = Room.objects.filter(is_active=True)
         context['cart'] = cart
         context['rooms'] = rooms
-        return render(request, 'booking/view_book.html', context)
+        return render(request, 'home/book_page.html', context)
 
 class CouponsPage(RoutablePageMixin, MyPage):
 

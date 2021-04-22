@@ -18,7 +18,7 @@
     {% endfor %}
 
     {% if blogs %}
-        <ul class="list-unstyled the-loop">
+        <ul class="list-unstyled blog-index__posts">
         {% for blog in blogs %}
             <li class="blog-post-item{% if forloop.first and not category and not tag %} first-reset{% endif %}">
                 {% include 'blog/blog_post.html' with include_context="index_page" %}

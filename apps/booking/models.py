@@ -839,13 +839,9 @@ class Product(models.Model):
         name_str = ''
         if self.players:
             name_str += str(self.players)
-            name_str += _(' Player ')
-        # if self.family.room:
-        #     name_str += self.family.room.__str__()
-        # if self.family.is_coupon:
-        #     name_str += 'Coupon'
-        name_str += ' '
-        name_str += '| €' + str(self.price)
+            name_str += ' ' 
+            name_str += _('Player')
+        name_str += ' | ' + self.family.__str__() 
 
         return name_str
 

@@ -14,11 +14,6 @@
         {% endfor %}
     <section class="c-section-light">
         <div class="c-wrapper--lg">
-            <br>
-            <div class="c-wrapper--sm richtext">
-                {{ self.content|richtext }}
-            </div>
-            <br>
             <div class="calendars">
                 {% for room in rooms %}
                 <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>

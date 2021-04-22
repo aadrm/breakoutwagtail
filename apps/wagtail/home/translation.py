@@ -58,6 +58,8 @@ class HomePageTR(TranslationOptions):
 @register(BooknowPage)
 class BooknowPageTR(TranslationOptions):
     fields = (
+        'content',
+        'content_after',
     )
 
 @register(CookieSettingsPage)

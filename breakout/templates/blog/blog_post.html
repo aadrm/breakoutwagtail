@@ -1,11 +1,21 @@
-{% load wagtailcore_tags static %}
+{% load wagtailimages_tags wagtailcore_tags static %}
 {% load i18n %}
 
 {% if include_context == "index_page" %}
-<a class="blog-post-link" href="{% pageurl blog %}">
-    <h2>{{ blog.title }}</h2>
-</a>
-{% else %}
+<div class="blog-index__post-preview">
+    {% image blog.header_image fill-400x100 as blog_image %}
+    {{ blog.image }}
+        <h2 class="font--md">{{ blog.title }}</h2>
+        <img src="{{ blog_image.url }}" alt="">
+    <a class="blog-post-link" href="{% pageurl blog %}">
+    </a>
+    <div class="blog-intro">
+        {{ blog.body|richtext|truncatewords_html:45 }} 
+    </div>
+    <div class="blog-read-more">
+        <a href="{% pageurl blog %}">{% trans "Read the rest of this entry" %} &raquo;</a>
+    </div>
+</div>
 {% comment %} <header class="secondary-header">
     {% if header_image %}
     <div class="secondary-header__mask"></div>
@@ -16,7 +26,6 @@
         <h1>{{blog.title}}</h1>
     </div>
 </header> {% endcomment %}
-{% endif %}
 {% comment %} 
 {% if blog.date %}
     <div class="meta date">
@@ -25,25 +34,20 @@
     </div>
 {% endif %} {% endcomment %}
 
-{% if include_context == "index_page" %}
-<div class="blog-intro">
-    {{ blog.body|richtext|truncatewords_html:70 }} 
-    <a href="{% pageurl blog %}">{% trans "Read the rest of this entry" %} &raquo;</a>
-</div>
 {% else %}
-<div class="blog-body c-wrapper--sm">
+<div class="richtext c-wrapper--sm">
     {{ blog.body|richtext }}
 </div>
 {% endif %}
-{% comment %} 
-<div class="share">
+
+{% comment %} <div class="share">
     <span class="st_linkedin_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="LinkedIn"></span>
     <span class="st_twitter_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Tweet"></span>
     <span class="st_facebook_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Facebook"></span>
     <span class="st_plusone_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Google +1"></span>
     <span class="st_email_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Email"></span>
     <span class="st_sharethis_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="ShareThis"></span>
-</div> {% endcomment %}
+</div>
 
 <div class="meta">
     <div class="tags">
@@ -70,4 +74,4 @@
         {% endif %}
         </div>
     </div>
-</div>
+</div> {% endcomment %}
