@@ -83,6 +83,7 @@ THIRD_PARTY_APPS = [
     'cookie_consent',
     'blog',
     'django_extensions',
+    'captcha',
     'wagtailcaptcha',
     # 'wagtail_svgmap',
     # 'django-crontab',
@@ -267,3 +268,6 @@ if PAYPAL_TEST:
 else:
     PAYPAL_IPN_POST_TO_ADDRESS = 'https://ipnpb.paypal.com/cgi-bin/webscr'
     PAYPAL_RECEIVER_EMAIL = 'info@breakout-escaperoom.de'
+
+# recaptcha
+NOCAPTCHA = True

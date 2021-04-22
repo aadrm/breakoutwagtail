@@ -6,7 +6,7 @@ DEBUG = False
 
 SECRET_KEY = config['SECRET_KEY'] 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['172.105.71.221', 'breakout-escaperoom.de']
 
 DATABASES = {
     'default': {
@@ -18,6 +18,10 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+# Recaptcha
+RECAPTCHA_PUBLIC_KEY = config['RECAPTCHA_PUBLIC_KEY']
+RECAPTCHA_PRIVATE_KEY = config['RECAPTCHA_PRIVATE_KEY']
 
 LOGGING = {
     'version': 1,

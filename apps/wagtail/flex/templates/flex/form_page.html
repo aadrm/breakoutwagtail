@@ -8,6 +8,7 @@
 {% block content %}
 {{ block.super }}
     <main>
+        <div class="c-wrapper--sm">
         {% if form_submission %}
             <div class="richtext">
             {{ page.submitted_text|richtext }}
@@ -24,11 +25,16 @@
                 <br>
             {% endif %}
             <div class="invoice-form__body">
-                <form class="booking-form" action="{% pageurl page %}" method="POST">
+                <form class="form-fields" action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit">
-                    <button class="standard-button standard-button--emphasis" type="submit">{% trans "Submit" %}</button>
+                    {% for field in form %}
+                    <p>
+                        <label for="{{field.auto_id}}" class="{% if field.field.required %}required{% endif %}">{{ field.label_tag }}</label> 
+                        {% if field.field.help_text %}<span>({{ field.field.help_text }})</span>{% endif %}
+                        {{ field }}
+                    </p> 
+                    {% endfor %}
+                    <button type="submit">{% trans "Submit" %}</button>
                 </form>
             </div>
             </section>
@@ -36,6 +42,7 @@
                 {% include_block block %}
             {% endfor %}
         {% endif %}
+        </div>
     </main>
 
 {% endblock content %}

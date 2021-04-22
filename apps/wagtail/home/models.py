@@ -118,10 +118,17 @@ class LinkPage(MyPage):
     ]
 
 
-class BooknowPage(RoutablePageMixin, LinkPage):
+class BooknowPage(RoutablePageMixin, MyPage):
 
     max_count = 1
     template = "booking/view_book.html"
+
+    content = RichTextField(blank=True, null=True)
+
+    content_panels = MyPage.content_panels + [
+        FieldPanel('content'),
+    ]
+
 
     @route(r'^$')
     def booknow_page_route(self, request, *args, **kwargs):

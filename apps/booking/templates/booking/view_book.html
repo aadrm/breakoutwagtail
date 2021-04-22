@@ -1,23 +1,20 @@
-{% extends 'base.html' %}
+{% extends 'base_secondary.html' %}
 {% load static %}
 {% load i18n %}
+{% load wagtailcore_tags %}
 
-
+{% block page_title %}{{ page.title }}{% endblock page_title %}
 {% block content %}
-<header class="header--small">
-    <h2 class="">{% trans "Book Online" %}</h2>
-</header>
+{{ block.super }}
 {% include 'booking/section_cart-overlay.html' %}
 
 <section class="c-section-light">
     <div class="c-wrapper--lg">
-        <div class="s-tac booking-instructions">
-        <h3 class=" ">{% trans "Our Escape Rooms" %}</h3>
         <br>
-        <p class="c-text-lg">{% trans "Choose your favourite adventure and select an appointment to book." %}</p>
-        <p>{{self.title}}</p>
+        <div class="c-wrapper--sm">
+            {{ self.content|richtext }}
         </div>
-        <br><br><br>
+        <br>
         <div class="calendars">
             {% for room in rooms %}
             <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>

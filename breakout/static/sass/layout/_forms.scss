@@ -264,3 +264,203 @@ label {
     flex-direction: row;
   }
 }
+
+
+
+.form-wrapper {
+  padding: 20px;
+  background: $brand-secondary-2;
+  border-radius: 8px;
+  margin: 10px auto;
+}
+
+.form-fields {
+  p {
+    margin-top: 20px;
+  }
+  a {
+    color: $brand-emphasis;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  label {
+    font-size: medium;
+    margin: px 0 5px;
+    font-weight: bold;
+  }
+  span {
+    font-size: small;
+    margin-bottom: 5px;
+    color: $brand-secondary;
+  }
+  fieldset {
+    border: 1px dashed $brand-secondary-5
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="password"],
+  input[type="datetime"],
+  input[type="number"],
+  input[type="search"],
+  input[type="time"],
+  input[type="url"],
+  input[type="email"],
+  textarea,
+  select {
+    width: 100%;
+    background: $brand-light;
+    border: none;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 15px;
+    margin: 5px 0 1px;
+    outline: 0;
+    padding: 10px;
+    box-sizing: border-box; 
+    color: $brand-secondary;
+    box-shadow: 0 1px 0 $brand-dark-2 inset;
+    &:focus {
+      background: #fff7d2;
+    }
+    display: block;
+  }
+  input[type="checkbox"] {
+    box-shadow: 0 1px 0 $brand-dark-2 inset;
+    background: $brand-light;
+    appearance: none;
+    height: 24px;
+    width: 24px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+    position: relative;
+    &:hover {
+      background: #ddd;
+    }
+    &:checked {
+      &::after{
+        display: block;
+        position: absolute;
+        line-height: 24px;
+        font-size: 32px;
+        font-weight: 900;
+        text-align: center;
+        content: '✓';
+        color: $brand-primary;
+      }
+    }
+
+  }
+  input[type="submit"],
+  input[type="button"],
+  button {
+    border-radius: 4px;
+    font-weight: bold;
+    position: relative;
+    display: block;
+    padding: 12px 18px 10px 18px;
+    color: $brand-light;
+    margin: .5rem 0;
+    background: $brand-primary;
+    font-size: 18px;
+    border-width: 1px 1px 3px;
+    transition: all .3s;
+    &:hover {
+      background: $brand-emphasis;
+      cursor: pointer;
+    }
+  }
+//   overflow: hidden;
+//   width: 100%;
+//   p {
+//     label {
+//       display: block;
+//       width: 100%;
+//       margin-bottom: 0.2rem;
+//     }
+//     select {
+//       display: block;
+//       width: 100%;
+//       padding: 0.8rem;
+//       border-radius: 0.3rem;
+//       min-width: 250px;
+//     }
+//   }
+//   input,
+//   textarea {
+//     width: 100%;
+//     padding: 0.8rem;
+//     margin: 0.5rem auto;
+//     border-radius: 0.3rem;
+//   }
+//   fieldset {
+//     margin: .5rem auto;
+//     border-bottom: 1px dashed #aaa;
+//   }
+// }
+
+// .standard-form--flex {
+//   .flex-content {
+//     & > * {
+//       margin-bottom {
+//       }
+//     }
+//     @include break--md {
+//       display: flex;
+//       & > * {
+//         margin: 0.5rem;
+//       }
+//     }
+//   }
+}
+.fieldset--decorated {
+  background: $brand-light;
+  border: none;
+  margin-top: 1.5rem;
+  legend {
+    border: 1px dashed $brand-secondary-5;
+    font-size: $font--md;
+    background: $brand-light;
+    color: $brand-secondary;
+    padding: .8rem 2rem;
+  }
+  input, select {
+    &:focus {
+      background: #fff7d2;
+    }
+  }
+}
+
+.fieldset--flex {
+  & > * {
+
+  }
+  @include break--sm {
+    display: flex;
+    & > * {
+      margin: 1rem;
+    }
+    button {
+      margin: 1rem;
+    }
+  }
+}
+
+.fieldset--large {
+  input,
+  select {
+    font-size: x-large;
+    padding: 1.5rem 3rem;
+  }
+}
+
+.form-buttons {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  button {
+    width: 100%;
+  }
+}
