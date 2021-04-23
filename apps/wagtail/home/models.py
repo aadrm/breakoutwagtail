@@ -167,8 +167,8 @@ class CouponsPage(RoutablePageMixin, MyPage):
         context = self.get_context(request, *args, **kwargs)
         cart = get_cart(request)
         try:
-            online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
-            voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+            online_coupon_family = ProductFamily.objects.get(slug='coupon-online')
+            voucher_family = ProductFamily.objects.get(slug='coupon-voucher')
             online_coupon_form = AddProductToCartForm(family=online_coupon_family)
             voucher_form = AddProductToCartForm(family=voucher_family)
             context['cart'] = cart

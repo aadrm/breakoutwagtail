@@ -50,7 +50,11 @@
             <div class="paypal-multi-button">
                 <form action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
-                    {{online_coupon_form}}
+                    {% if online_coupon_form %}
+                        {{online_coupon_form}}
+                    {% else %}
+                        [register coupon-online in product family]
+                    {% endif %}
                     <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
             </div>
@@ -100,7 +104,11 @@
             <div class="paypal-multi-button">
                 <form action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
+                    {% if voucher_form %}
                     {{voucher_form}}
+                    {% else %}
+                        [register coupon-voucher in product family]
+                    {% endif %}
                     <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
             </div>

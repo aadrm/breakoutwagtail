@@ -93,15 +93,15 @@
 
         {% comment %} site wide schema {% endcomment %}
         <script type="application/ld+json">
-        {% include "schema/business_schema" %}
+            {% include "schema/business_schema" %}
         </script>
         <script type="application/ld+json">
-        {% include "schema/website_schema" %}
+            {% include "schema/website_schema" %}
         </script>
 
         {% if page.extra_schema %}
         <script type="application/ld+json">
-        {{ extra_schema }}
+            {{ extra_schema }}
         </script>
         {% endif %}
 

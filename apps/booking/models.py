@@ -865,7 +865,8 @@ class ProductFamily(models.Model):
     allowing the user to choose from several producs for a single appointment.
     Also an interface for including or excluding several products to each of the coupons.
     """
-    name = models.CharField(_("Product Family"), max_length=50)
+    name = models.CharField(_("Product Family"), max_length=16)
+    slug = models.CharField("Slug", max_length=32)
     payment_methods = models.ManyToManyField("booking.PaymentMethod")
     is_coupon = models.BooleanField(_("Is coupon"), default=False)
     shipping_cost = models.DecimalField(_("Shipping cost"), max_digits=5, decimal_places=2, default=0)

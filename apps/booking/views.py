@@ -80,12 +80,15 @@ def coupons(request):
 
     cart = get_cart(request)
     try:
-        online_coupon_family = ProductFamily.objects.get(name='CouponOnline')
-        voucher_family = ProductFamily.objects.get(name='CouponVoucher')
+        online_coupon_family = ProductFamily.objects.get(slug='coupon-online')
         online_coupon_form = AddProductToCartForm(family=online_coupon_family)
+    except Exeption:
+        online_coupon_form = False
+    try:
+        voucher_family = ProductFamily.objects.get(name='coupon-voucher')
         voucher_form = AddProductToCartForm(family=voucher_family)
     except Exeption:
-        pass
+        voucher_form = False
     context = {
         'cart': cart,
         'online_coupon_form': online_coupon_form,
