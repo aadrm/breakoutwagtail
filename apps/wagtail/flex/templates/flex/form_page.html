@@ -3,28 +3,27 @@
 {% load i18n %}
 {% load wagtailcore_tags %}
 
-{% block page_title %}{{ page.title }}{% endblock page_title %}
+{% block page_title %}{% if form_submission %}{{ page.submitted_title }}{% else %}{{ page.title }}{% endif %}{% endblock page_title %}
 
 {% block content %}
 {{ block.super }}
     <main>
-        <div class="c-wrapper--sm">
         {% if form_submission %}
-            <div class="richtext">
+            <div class="c-wrapper--sm">
             {{ page.submitted_text|richtext }}
             </div>
         {% else %}
             {% for block in page.content %}
                 {% include_block block %}
             {% endfor %}
-            <section class="checkout-form__wrapper c-wrapper--md">
+            <section class="form-wrapper c-wrapper--sm">
             {% if page.intro %}
                 <div class="form-intro">
                 {{ page.intro|richtext }}
                 </div>
                 <br>
             {% endif %}
-            <div class="invoice-form__body">
+            <div class="">
                 <form class="form-fields" action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
                     {% for field in form %}
@@ -42,7 +41,6 @@
                 {% include_block block %}
             {% endfor %}
         {% endif %}
-        </div>
     </main>
 
 {% endblock content %}
