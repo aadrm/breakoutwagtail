@@ -1,0 +1,13 @@
+{% load static wagtailcore_tags %}
+
+{% with blocks=page.body %}
+  {% for block in blocks %}
+    {% if block.block_type == 'paragraph' %}
+      {{ block.value|richtext }}
+    {% elif block.block_type == 'image_text' %}
+      {% include 'myblog/blocks/image_text.html' with block=block only %}
+    {% else %}
+      {% include_block block %}
+    {% endif %}
+  {% endfor %}
+{% endwith %}

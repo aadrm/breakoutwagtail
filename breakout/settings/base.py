@@ -81,7 +81,7 @@ THIRD_PARTY_APPS = [
     'taggit',
     'paypal.standard.ipn',
     'cookie_consent',
-    'blog',
+    # 'blog',
     'django_extensions',
     'captcha',
     'wagtailcaptcha',
@@ -91,6 +91,7 @@ THIRD_PARTY_APPS = [
 
 MY_APPS = [
     'apps.wagtail.home.apps.HomePageConfig', # has to come before flex
+    'apps.wagtail.myblog.apps.MyblogConfig',
     'apps.wagtail.flex.apps.FlexConfig',
     'apps.wagtail.site_settings.apps.SiteSettingsConfig',
     'apps.wagtail.streams.apps.StreamsConfig',

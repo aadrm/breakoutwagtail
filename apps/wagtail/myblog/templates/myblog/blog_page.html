@@ -1,0 +1,14 @@
+{% extends "myblog/base_blog.html" %}
+{% load wagtailcore_tags %}
+
+
+{% block page_title %}{{ page.title }}{% endblock page_title %}
+
+
+{% block content %}
+    {{ block.super }}
+        {% include 'myblog/blog_post.html' with blog=self %}
+    {% if COMMENTS_APP == 'django_comments_xtd' %}
+        {% include 'myblog/blog_post_comments_xtd.html' with blog=self %}
+    {% endif %}
+{% endblock %}

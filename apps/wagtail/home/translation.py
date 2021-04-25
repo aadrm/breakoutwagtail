@@ -6,7 +6,7 @@ from .models import (
     CouponsPage,
     CookieSettingsPage,
 )
-from blog.models import BlogIndexPage, BlogPage
+# from blog.models import BlogIndexPage, BlogPage
 from modeltranslation.translator import TranslationOptions
 from modeltranslation.decorators import register
 from wagtail.core.models import Page
@@ -84,12 +84,12 @@ class CookieTR(TranslationOptions):
 
 
 
-@register(BlogPage)
-class BlogPageTr(TranslationOptions):
-    fields = (
-        'body',
-    )
+# @register(BlogPage)
+# class BlogPageTr(TranslationOptions):
+#     fields = (
+#         'body',
+#     )
 
-@register(BlogIndexPage)
-class BlogIndexPageTr(TranslationOptions):
-    fields = ()
+# @register(BlogIndexPage)
+# class BlogIndexPageTr(TranslationOptions):
+#     fields = ()

@@ -1,0 +1,67 @@
+{% extends "myblog/base_blog.html" %} 
+{% load wagtailcore_tags static %} 
+{% load wagtailimages_tags %} 
+{% block page_title %}
+{{ self.title }}
+{% endblock page_title %}
+{% block content %}
+{{ block.super }}
+
+<main>
+  <div class="container c-wrapper--md">
+    <div class="row">
+
+      <div class="col-sm-9 my-4">
+
+        {% if category or tag %}
+        <div class="card my-4 alert alert-success">
+          {% if category %}
+          <p>Posts about: {{ category }}</p>
+          {% endif %} 
+          {% if tag %}
+          <p>Posts tagged with: {{ tag }}'</p>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        {% for rl in self.related_links.all %}
+        <p>{{ rl.title }}: <a href="{{ rl.link_page.url }}">{{ rl.link_page }}</a></p>
+        {% endfor %}
+
+        {% if blogs %}
+        {% for blog in blogs %}
+          {% include 'myblog/blog_post.html' with include_context="index_page" %}
+        {% endfor %}
+
+        <ul class="pager">
+          {% if blogs.has_next %}
+          <li class="previous">
+            <a
+              href="?page={{ myblogs.next_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"
+              >&larr; Older</a
+            >
+          </li>
+          {% endif %} {% if blogs.has_previous %}
+          <li class="next">
+            <a
+              href="?page={{ myblogs.previous_page_number }}{% for key,value in request.GET.items %}{% ifnotequal key 'page' %}&amp;{{ key }}={{ value }}{% endifnotequal %}{% endfor %}"
+              >Newer &rarr;</a
+            >
+          </li>
+          {% endif %}
+        </ul>
+
+        {% else %}
+        <p>There are currently no blog posts</p>
+        {% endif %}
+      </div>
+
+      <div class="col-sm-3">
+        {% include 'myblog/components/categories_list.html' %}
+        {% include 'myblog/components/tags_list.html' %}
+      </div>
+    </div>
+  </div>
+
+</main>
+{% endblock content %}

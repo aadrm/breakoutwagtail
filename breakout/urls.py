@@ -25,7 +25,7 @@ urlpatterns = [
     path('book/', include('apps.booking.urls')),
 
     path('cookies/', include('cookie_consent.urls')),
-    path('blog/', include('blog.urls', namespace="blog")),
+    path('blog/', include('apps.wagtail.myblog.urls', namespace="blog")),
 
     path('paypal/', include('paypal.standard.ipn.urls')),
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),

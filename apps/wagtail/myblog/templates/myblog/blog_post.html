@@ -1,0 +1,91 @@
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% load blog_extras %}
+{% load i18n %}
+
+{% if include_context == "index_page" %} 
+  <div class="card mb-3">
+    <div class="row g-0">
+
+      {% if blog.header_image %} {% image blog.header_image width-500 as post_image %}
+      <div style="background-image: url({{post_image.url}}); background-size: cover; background-position: center; min-height: 12rem;" class="col-md-4 overflow-hidden mh-5">
+      </div>
+      {% endif %}
+
+      <div class="col-md-8">
+        <div class="card-body">
+          
+              <h2 class="card-title h4"><a href="{% pageurl blog %}">{{ blog.title }}</a></h2>
+          
+          <div class="h6 card-text">
+            {{ blog.body|excerpt:70 }} 
+          </div>
+          <p class="card-text">
+            <a class="bnt btn-secondary btn-sm" href="{% pageurl blog %}">{% trans "Continue reading" %} &raquo;</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-0">
+        {% if blog.date %}
+        <div class="card-footer">
+          <p class="m-0">
+            {{ blog.date }}
+            |
+            {% if blog.tags.all %}
+                Tags: 
+                    {% for tag in blog.tags.all %}
+                        <a href="{% url 'myblog:tag' tag.slug %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+            {% endif %}
+            |
+            {% if blog.categories.all %}
+                Posted in 
+                    {% for cat in blog.categories.all %}
+                        <a href="{% url 'myblog:category' cat.category.slug %}">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %} 
+            {% endif %}
+          </p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% else %}
+
+<div class="container c-wrapper--md">
+
+  <div class="row">
+
+    <div class="col-sm-9 my-4 ">
+      {% include 'myblog/components/streamfield.html' %}
+      {% comment %} {{ blog.body }} {% endcomment %}
+    </div> 
+    <div class="col-sm-3">
+      {% include 'myblog/components/categories_list.html' %}
+      {% include 'myblog/components/tags_list.html' %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% comment %} 
+<div class="share">
+    <span class="st_linkedin_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="LinkedIn"></span>
+    <span class="st_twitter_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Tweet"></span>
+    <span class="st_facebook_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Facebook"></span>
+    <span class="st_plusone_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Google +1"></span>
+    <span class="st_email_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="Email"></span>
+    <span class="st_sharethis_large" st_title="{{ blog.title }}" st_url="{{ SITE_URL }}{% pageurl blog %}" displayText="ShareThis"></span>
+</div> {% endcomment %}
+
+<div class="meta">
+    <div class="tags-and-comments">
+
+        <div id="comments" class="comments">
+        {% if COMMENTS_APP == 'django_comments_xtd' %}
+            {% include 'blog/blog_post_comments_xtd_link.html' with blog=blog %}
+        {% elif False %}
+            <a href="{% pageurl blog %}#disqus_thread">No Comments</a>
+        {% endif %}
+        </div>
+    </div>
+</div>

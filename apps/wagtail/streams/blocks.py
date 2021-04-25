@@ -400,6 +400,11 @@ class IframeBlock(blocks.URLBlock):
         label = 'iframe block'
 
 
+class CustomTableBlock(TableBlock):
+    class Meta:
+        template = 'streams/tableblock_custom.html'
+
+
 class SectionBlock(ElementBlockExtended):
     title = SubtitleBlock(
         required=False, help_text='Add a suitable section title')
