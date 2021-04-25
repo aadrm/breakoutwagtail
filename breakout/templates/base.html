@@ -28,9 +28,9 @@
         {% comment %} meta urls {% endcomment %}
                 {% comment %} meta urls {% endcomment %}
         {% if canonical_path %}
-            <link rel="canonical" href="https://peakhelicopter.com{{ canonical_path }}">
+            <link rel="canonical" href="https://breakout-escaperoom.de{{ canonical_path }}">
         {% else %}
-            <link rel="canonical" href="https://peakhelicopter.com{{ request.path }}">
+            <link rel="canonical" href="https://breakout-escaperoom.de{{ request.path }}">
         {% endif %}
         {% for alternative in language_alternatives %}
             <link rel="alternative" ref="{{ alternative.0 }}" href="https://breakout-escaperoom.de{{ alternative.1 }}">
@@ -75,28 +75,31 @@
 
 
 
+        <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="{% static 'fonts/capture_it/capture_it.woff2' %}">
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
-        <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="{% static 'fonts/capture_it/capture_it.woff2' %}">
         {% comment %} thin.css is render blocking css {% endcomment %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/thin.css' %}">
-        <link rel="stylesheet" media="screen" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="preload" href="{% static 'css/main.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="{% static 'css/main.css' %}"></noscript>
 
         {% comment %} cookie consent {% endcomment %}
         {% if request|cookie_group_accepted:"analytics" %}
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
             <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
             <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
         {% endif %} 
-        
+
+        <script data-varname="analytics" async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
+        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
+        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
 
         {% comment %} site wide schema {% endcomment %}
         <script type="application/ld+json">
-            {% include "schema/business_schema" %}
+            {% include "schema/schema_business.json" %}
         </script>
         <script type="application/ld+json">
-            {% include "schema/website_schema" %}
+            {% include "schema/schema_website.json" %}
         </script>
 
         {% if page.extra_schema %}

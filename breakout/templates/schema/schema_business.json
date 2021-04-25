@@ -15,18 +15,6 @@
     "postalCode": "86152",
     "addressCountry": "DE"
 },
-//   "review": {
-//     "@type": "Review",
-//     "reviewRating": {
-//       "@type": "Rating",
-//       "ratingValue": "4",
-//       "bestRating": "5"
-//     },
-//     "author": {
-//       "@type": "Person",
-//       "name": "Mike Jones"
-//     }
-//   },
 "geo": {
     "@type": "GeoCoordinates",
     "latitude": 48.3850234,
