@@ -193,8 +193,8 @@ LOCALE_PATHS = (
 )
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = (
-    ('en', _('English')),
     ('de', _('German')),
+    ('en', _('English')),
 )
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
