@@ -224,7 +224,7 @@ class Cart(models.Model):
         if self.status < 1:
             self.status = 2
             self.invoice.commit_order()
-            self.create_cart_coupons()
+            self.create_cart_coupons(paid=False)
             self.save()
 
     def approve_cart(self):
