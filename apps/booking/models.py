@@ -301,7 +301,7 @@ class Cart(models.Model):
                 'coupon': coupon.coupon,
             }
             html_string = render_to_string('booking/pdf-coupon_code.html', context)
-            html = HTML(string=html_string, base_url='http://127.0.0.1:8000/')
+            html = HTML(string=html_string, base_url=settings.BASE_URL)
             # html = HTML(string=html_string, base_url=request.build_absolute_uri())
             csspath = settings.STATIC_ROOT + 'css/pdf/coupon_code.css'
             pdf = html.write_pdf(stylesheets=[CSS(csspath)])
