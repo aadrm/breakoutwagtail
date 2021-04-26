@@ -18,7 +18,9 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+PAYPAL_TEST = False
+PAYPAL_IPN_POST_TO_ADDRESS = 'https://ipnpb.paypal.com/cgi-bin/webscr'
+PAYPAL_RECEIVER_EMAIL = 'info@breakout-escaperoom.de'
 # Recaptcha
 RECAPTCHA_PUBLIC_KEY = config['RECAPTCHA_PUBLIC_KEY']
 RECAPTCHA_PRIVATE_KEY = config['RECAPTCHA_PRIVATE_KEY']

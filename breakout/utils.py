@@ -9,8 +9,8 @@ from apps.wagtail.site_settings.models import BookingSettings
 
 
 
-def get_settings_site():
-    return Site.objects.get(pk=settings.SITE_ID_FOR_SETTINGS)
+# def get_settings_site():
+#     return Site.objects.get(pk=settings.SITE_ID_FOR_SETTINGS)
 
 def get_booking_settings():
     return BookingSettings.for_site(get_settings_site())

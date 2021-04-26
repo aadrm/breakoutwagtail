@@ -191,12 +191,7 @@ LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
 
-LANGUAGES = [
-    ("de", "German"),
-    ("en", "English"),
-]
-
-WAGTAIL_CONTENT_LANGUAGES = (
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = (
     ('en', _('English')),
     ('de', _('German')),
 )
@@ -230,8 +225,8 @@ WAGTAIL_SITE_NAME = "breakout"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
-SITE_ID_FOR_SETTINGS = 2
+BASE_URL = 'https://breakout-escaperoom.de'
+# SITE_ID_FOR_SETTINGS = 1
 
 
 
@@ -244,22 +239,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mailer@breakout-escaperoom.de'
 EMAIL_HOST_PASSWORD = config['EMAIL_HOST_PASSWORD']
 EMAIL_USE_TLS = True 
-
-
-
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_PORT = 578
-# EMAIL_HOST_USER = 'breakout.augsburg@gmail.com'
-# EMAIL_HOST_PASSWORD = 'RooM1006'
-# EMAIL_USE_TLS = True 
-# EMAIL_USE_SSL = False 
-
-# EMAIL_HOST = 's191.goserver.host'
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = 'web121p1'
-# EMAIL_HOST_PASSWORD = 'peakADW-355'
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
 
 #paypal
 PAYPAL_TEST = True
