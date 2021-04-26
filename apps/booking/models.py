@@ -459,7 +459,7 @@ class CartCoupon(models.Model):
                     _('The coupon with the code "%(code)s" is already being applied to your purchase.') % 
                     {'code': self.coupon.code}
                 )
-            elif self.coupon.expiry and self.coupon.expiry < date.today():
+            elif self.coupon and self.coupon.is_expired:
                 messages.add_message(
                     request,
                     messages.WARNING,
@@ -467,7 +467,7 @@ class CartCoupon(models.Model):
                     {'code': self.coupon.code}
 
                 )
-            elif self.coupon.use_limit > 0 and self.coupon.used_times >= self.coupon.use_limit:
+            elif self.coupon and self.coupon.is_overused:
                 messages.add_message(
                     request,
                     messages.WARNING,
@@ -558,8 +558,8 @@ class Coupon(models.Model):
     @property
     def is_expired(self):
         is_expired = False
-        if self.expiration:
-            if self.expiration < datetime.today():
+        if self.expiry:
+            if self.expiry < datetime.now().date():
                 is_expired = True
         return is_expired
 

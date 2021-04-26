@@ -121,7 +121,7 @@ function applyCoupon() {
 };
 
 function removeCoupon(e) {
-    xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("POST", couponsUrl, true);
     // xhr.open("POST", e.dataset.removecouponurl, true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
