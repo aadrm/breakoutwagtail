@@ -33,6 +33,7 @@ class Cart(models.Model):
     status = models.SmallIntegerField(_("status"), default=0)
     items_before_checkout = models.SmallIntegerField(_("items before purchase"), blank=True, null=True)
     invoice = models.OneToOneField("booking.Invoice", verbose_name=_("Invoice"), on_delete=models.PROTECT, blank=True, null=True)
+    timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
 
     @property
     def is_require_shipping_address(self):

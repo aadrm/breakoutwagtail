@@ -86,7 +86,7 @@ THIRD_PARTY_APPS = [
     'captcha',
     'wagtailcaptcha',
     # 'wagtail_svgmap',
-    # 'django-crontab',
+    'django_crontab',
 ]
 
 MY_APPS = [
@@ -245,3 +245,9 @@ EMAIL_USE_TLS = True
 
 # recaptcha
 NOCAPTCHA = True
+
+
+# crontab
+CRONJOBS = [
+    ('0 3 * * *', 'apps.booking.cron.delete_unused_carts')
+]
