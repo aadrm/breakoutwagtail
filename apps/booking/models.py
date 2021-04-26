@@ -208,7 +208,6 @@ class Cart(models.Model):
             coupon_ref += self.invoice.order_number
             coupon_ref = ' | '
             coupon_ref += item.product.__str__()
-            coupon = Coupon()
             coupon.use_limit = 1 if paid else -1
             coupon.name = coupon_ref
             coupon.is_apply_to_basket = True
