@@ -195,22 +195,28 @@ class Cart(models.Model):
             item.set_approved()
             item.save()
     
-    def create_cart_coupons(self):
+    def create_cart_coupons(self, paid=True):
         coupon_items = self.get_coupon_items()
         for item in coupon_items:
+            if item.coupon:
+                coupon = item.coupon
+            else:
+                coupon = Coupon()
+
             value = item.base_price - item.product.family.shipping_cost
             coupon_ref = ''
             coupon_ref += self.invoice.order_number
             coupon_ref = ' | '
             coupon_ref += item.product.__str__()
-            coupon = Coupon(
-                name=coupon_ref,
-                is_apply_to_basket=True,
-                amount=value,
-                is_overrule_individual_use=False,
-                is_individual_use=False,                
-            )
+            coupon = Coupon()
+            coupon.use_limit = 1 if paid else -1
+            coupon.name = coupon_ref
+            coupon.is_apply_to_basket = True
+            coupon.amount = value
+            coupon.is_overrule_individual_use = False
+            coupon.is_individual_use = False
             coupon.save()
+
             item.coupon = coupon
             item.save()
 
@@ -218,6 +224,7 @@ class Cart(models.Model):
         if self.status < 1:
             self.status = 2
             self.invoice.commit_order()
+            self.create_cart_coupons()
             self.save()
 
     def approve_cart(self):
