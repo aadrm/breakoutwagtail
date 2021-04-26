@@ -54,7 +54,10 @@ class BlogIndexPage(BlogIndexPageAbstract, MyPage):
         categories = BlogCategory.objects.all()
         context['categories'] = categories
 
-        tags = BlogTag.objects.all()
+        tags = []
+        for blog in blogs:
+            for tag in blog.tags.all():
+                tags.append(tag)
         context['tags'] = tags  
 
         if tag is None:
