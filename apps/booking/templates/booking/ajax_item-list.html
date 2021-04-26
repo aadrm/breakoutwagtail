@@ -15,7 +15,7 @@
         {{item.slot.start|date:"D d M"}} {{item.slot.start|date:"H:i"}}
     </td>
     {% if item.slot %}
-    <td class="js-expiry-counter" data-remaining="{{item.slot_expiry_seconds}}" data-prefix="{% trans "Expires in: " %}">
+    <td class="js-expiry-counter" data-remaining="{{item.slot_expiry_seconds}}" data-prefix="{% trans "Expires in:" %}">
     {% trans "Expires: " %} -:--
     </td>
     {% else %}
