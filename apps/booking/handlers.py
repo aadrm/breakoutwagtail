@@ -61,7 +61,7 @@ def show_me_the_money(sender, **kwargs):
             invoice.save()
             cart.invoice = invoice
             cart.save()
-            payment = Payment(invoice=cart.invoice, ipn_obj.mc_gross)
+            payment = Payment(invoice=cart.invoice, payment=ipn_obj.mc_gross)
             payment.save()
 
             print('processing purchase')
