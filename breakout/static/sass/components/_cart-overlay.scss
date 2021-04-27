@@ -6,7 +6,7 @@
 */
 
 .cart-overlay {
-    background: $brand-emphasis;
+    background: #aaa;
     height: 32px;
     width: 100px;
     color: $brand-light;
@@ -34,30 +34,35 @@
 
 .cart-overlay__icon-wrapper {
     // position: absolute;
-    height: 90%;
-    margin-bottom: 5%;
-    margin-left: 4px;
+    height: 28;
+    margin: 2 auto;
     // top: 50%;
     // left: 50%;
     // transform: translateX(-50%) translateY(-50%);
     // border-radius: 50%;
     svg {
         height: 100%;
-        width: 100%;
         fill: $brand-light;
+        position: absolute;
+        right: 51%;
     }
 }
 
 .cart-overlay__items-amount,
 .cart-overlay__items-amount--empty {
+    position: absolute;
+    left: 51%;
     background: red;
     border-radius: 50%;
     text-align: center;
-    line-height: 1.6rem;
+    line-height: 28px;
+    font-size: 24px;
     height: 28px;
     width: 28px;
     margin: 2px auto;
+    display: block;
     text-decoration: none;
+    opacity: .5;
 }
 
 .cart-overlay__items-amount--empty {
