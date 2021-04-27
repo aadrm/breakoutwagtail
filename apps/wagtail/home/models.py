@@ -59,7 +59,6 @@ class MyPage(Page):
         translations = list(self.translations.all())
         try:
             default_lang = WagtailLanguage.objects.get(language_code=settings.LANGUAGES[0][0])
-            translations.append(default_lang)
         except Exception:
             default_lang = None
         try:
