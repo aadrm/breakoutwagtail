@@ -1,0 +1,32 @@
+.switcher-languages {
+  background: $brand-emphasis;
+  color: $brand-light;
+  height: 32px;
+  width: 100px;
+  overflow: hidden;
+  &:hover {
+    height: auto;
+  }
+  .switcher-language {
+    position: relative;
+    height: 32px;
+    text-decoration: none;
+    &:hover {
+      background: $brand-primary;
+    }
+    * {
+      line-height: 32px;
+      margin-left: 4px;
+      display: block;
+      height: 100%;
+      width: 100%;
+      svg {
+        position: absolute;
+        top: 4px;
+        left: 12px;
+        display: inline-block;
+        height: 24px;
+      }
+    }
+  }
+}

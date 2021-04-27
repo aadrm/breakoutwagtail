@@ -1,10 +1,15 @@
 {% load static wagtailuserbar %}
 {% load wagtailimages_tags %}
 {% load cookie_consent_tags %}
+{% load wagtail_modeltranslation %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html itemscope class="no-js" lang="en">
     <head>
+        {% if self.noindex %}
+        <meta name="robots" content="noindex"> 
+        {% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="utf-8"/>
 
@@ -27,13 +32,17 @@
 
         {% comment %} meta urls {% endcomment %}
                 {% comment %} meta urls {% endcomment %}
-        {% if canonical_path %}
-            <link rel="canonical" href="https://breakout-escaperoom.de{{ canonical_path }}">
+        {% if language_canonical %}
+            {% language language_canonical.language_code %}
+                <link rel="canonical" href="https://breakout-escaperoom.de{{ page.url }}">
+            {% endlanguage %}
         {% else %}
             <link rel="canonical" href="https://breakout-escaperoom.de{{ request.path }}">
         {% endif %}
         {% for alternative in language_alternatives %}
-            <link rel="alternative" ref="{{ alternative.0 }}" href="https://breakout-escaperoom.de{{ alternative.1 }}">
+            {% language alternative.language_code %}
+                <link rel="alternative" ref="{{ alternative }}" href="https://breakout-escaperoom.de{{ page.url }}">
+            {% endlanguage %}
         {% endfor %}
 
         <meta name="og:url" content="https://breakout-escaperoom.de{{request.path}}">
@@ -114,15 +123,12 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
         {% include 'navbar.html' %}
-        {% if not nocart %}
-        {% include 'booking/section_cart-overlay.html' %}
-        {% endif %}
 
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
         <footer>
             {% include 'footer.html' %} 
         </footer>
-
+        {% include 'language_switcher.html' %}
         {# Global javascript #}
         {% include 'cookie_consent.html' %}
         {% comment %} <script  src="{% static 'js/peak.js' %}"></script> {% endcomment %}

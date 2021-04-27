@@ -87,6 +87,7 @@ THIRD_PARTY_APPS = [
     'wagtailcaptcha',
     # 'wagtail_svgmap',
     'django_crontab',
+    'wagtail.locales',
 ]
 
 MY_APPS = [
@@ -108,15 +109,14 @@ COOKIE_CONSENT_NAME = "cookie_consent"
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',  # should be after SessionMiddleware and before CommonMiddleware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # should be after SessionMiddleware and before CommonMiddleware
 ]
 
 ROOT_URLCONF = 'breakout.urls'

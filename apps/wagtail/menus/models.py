@@ -147,6 +147,8 @@ class Menu(ClusterableModel):
 class WagtailLanguage(models.Model):
 
     language_code = models.CharField('code', max_length=8, unique=True)
+    language_name = models.CharField('language', max_length=50, null=True, blank=True)
+    svg_flag = models.TextField(null=True, blank=True)
 
     class Meta:
         verbose_name = "wagtail_language"

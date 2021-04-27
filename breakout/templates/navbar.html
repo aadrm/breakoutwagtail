@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load menus_tags %}
 {% get_menu "main-menu" as navigation %}
-<nav>
+<nav class="nav-main">
     <div class="nav-wrapper">
             <div class="nav-item logo c-stamp-fine">
                 <a aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
@@ -36,5 +36,11 @@
             {% endfor %}
 
         </ul>
+        <div class="extra-nav">
+            {% if not nocart %}
+                {% include 'booking/section_cart-overlay.html' %}
+            {% endif %}
+            {% include 'language_switcher.html' %}
+        </div>
     </div>
 </nav>

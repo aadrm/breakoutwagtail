@@ -14,4 +14,5 @@ def get_menu(slug):
 @register.simple_tag()
 def get_documents(slug):
     return DocumentCollection.objects.filter(slug=slug).first()
-    
+   # This Python file uses the following encoding: utf-8
+

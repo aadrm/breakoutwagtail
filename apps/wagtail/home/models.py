@@ -47,38 +47,56 @@ class MyPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-
     seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
+
+    noindex = models.BooleanField(default=False)
 
     extra_schema = models.TextField(max_length=128, null=True, blank=True)
     translations = ParentalManyToManyField(WagtailLanguage, blank=True)
 
     def get_context(self, request):
-        default_lang = settings.LANGUAGES[0][0]
-        current_lang = translation.get_language()
-        translations = self.translations.all().values_list('language_code', flat=True)
+        print('lang', WagtailLanguage.objects.all())
+        translations = list(self.translations.all())
+        try:
+            default_lang = WagtailLanguage.objects.get(language_code=settings.LANGUAGES[0][0])
+            translations.append(default_lang)
+        except Exception:
+            default_lang = None
+        try:
+            current_lang = WagtailLanguage.objects.get(language_code=translation.get_language())
+            translations.remove(current_lang)
+            translations.insert(0, current_lang)
+        except Exception:
+            current_lang = None
+        alternatives = list(translations)
 
+
+        # figure out if the current language is translated
         if current_lang in translations:
             remove_lang = current_lang
-            canonical = self.url
+            canonical = remove_lang 
+        # else the default language is canonical 
         else:
             remove_lang = default_lang 
-            canonical = translate_url(self.url, default_lang)
+            canonical = default_lang
+        if remove_lang:
+            alternatives.remove(remove_lang)
 
-        if remove_lang == default_lang:
-            alternatives = []
-        else:
-            alternatives = [(default_lang, translate_url(self.url, default_lang))]
-        for code in translations:
-            if remove_lang == code:
-                pass
-            else:
-                alternatives.append((code, translate_url(self.url, code)))
-
+        print(canonical)
+        print(remove_lang)
+        print(translations)
         context = super().get_context(request)
-        context['canonical_path'] = canonical
+        context['language_canonical'] = canonical
+        context['language_all'] = translations 
         context['language_alternatives'] = alternatives
         return context
+
+    def get_sitemap_urls(self, request):
+        if self.noindex:
+            return []
+        else:
+            sitemap =  super().get_sitemap_urls(request)
+            return sitemap
 
     class Meta:
         abstract = True
@@ -101,6 +119,7 @@ class MyPage(Page):
                 FieldPanel("seo_image_alt")
             ]
         ),
+        FieldPanel('noindex'),
         FieldPanel('translations'),
         FieldPanel('extra_schema'),
     ]
@@ -227,7 +246,7 @@ class HomePage(MyPage):
 
     reviews = StreamField(
         StreamBlock([
-            ('review_family', myblocks.ReviewCarouselBlock()),
+                ('review_family', myblocks.ReviewCarouselBlock()),
             ],
             max_num=1,
         ),

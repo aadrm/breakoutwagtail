@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if language_all|length > 1 %}
+<ul class="switcher-languages">
+{% for language in language_all %}
+{% language language.language_code %}
+  <li class="switcher-language">
+    {% if forloop.counter == 1 %}
+    <span>{{language}} {{language.svg_flag|safe}}</span>
+    {% else %}
+    <a href="{{page.url}}">{{language}} {{language.svg_flag|safe}}</a>
+    {% endif %}
+  </li>
+{% endlanguage %}
+{% endfor %}
+</ul>
+{% endif %}
