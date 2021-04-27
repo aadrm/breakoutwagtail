@@ -10,18 +10,18 @@ h6 {
   
 
 h1 {
-    font-size: $font--ll;
-    font-family: $fonts-space;
-    letter-spacing: .1em;
-}
-h2 {
     font-size: $font--xl;
     font-family: $fonts-space;
     letter-spacing: .1em;
 }
+h2 {
+    font-size: $font--lg;
+    font-family: $fonts-space;
+    letter-spacing: .1em;
+}
 
-h3 {font-size: $font--lg;}
-h4 {font-size: $font--md;}
+h3 {font-size: $font--md;}
+h4 {font-size: $font--sm;}
 h5 {font-size: $font--sm;}
 
 body {
