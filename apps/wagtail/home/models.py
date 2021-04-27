@@ -79,7 +79,10 @@ class MyPage(Page):
             remove_lang = default_lang 
             canonical = default_lang
         if remove_lang:
-            alternatives.remove(remove_lang)
+            try:
+                alternatives.remove(remove_lang)
+            except Exception:
+                pass
 
         print(canonical)
         print(remove_lang)
