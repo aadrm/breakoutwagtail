@@ -72,20 +72,11 @@ class MyPage(Page):
 
         # figure out if the current language is translated
         if current_lang in translations:
-            remove_lang = current_lang
-            canonical = remove_lang 
-        # else the default language is canonical 
+            canonical = current_lang 
         else:
-            remove_lang = default_lang 
             canonical = default_lang
-        if remove_lang:
-            try:
-                alternatives.remove(remove_lang)
-            except Exception:
-                pass
 
         print(canonical)
-        print(remove_lang)
         print(translations)
         context = super().get_context(request)
         context['language_canonical'] = canonical
@@ -97,6 +88,11 @@ class MyPage(Page):
         if self.noindex:
             return []
         else:
+            default_lang = settings.LANGUAGE_CODE
+            translation.activate(default_lang)
+
+
+
             sitemap =  super().get_sitemap_urls(request)
             return sitemap
 
