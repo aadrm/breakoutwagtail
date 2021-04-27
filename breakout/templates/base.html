@@ -41,7 +41,7 @@
         {% endif %}
         {% for alternative in language_alternatives %}
             {% language alternative.language_code %}
-                <link rel="alternative" ref="{{ alternative }}" href="https://breakout-escaperoom.de{{ page.url }}">
+                <link rel="alternative" hreflang="{{ alternative }}" href="https://breakout-escaperoom.de{{ page.url }}">
             {% endlanguage %}
         {% endfor %}
 

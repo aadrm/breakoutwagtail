@@ -5,9 +5,9 @@
 {% language language.language_code %}
   <li class="switcher-language">
     {% if forloop.counter == 1 %}
-    <span>{{language}} {{language.svg_flag|safe}}</span>
+    <span>{{language}} {% if language.svg_flag %}{{language.svg_flag|safe}}{% endif %}</span>
     {% else %}
-    <a href="{{page.url}}">{{language}} {{language.svg_flag|safe}}</a>
+    <a href="{{page.url}}" title="{{language.language_name}}">{{language}} {{language.svg_flag|safe}}</a>
     {% endif %}
   </li>
 {% endlanguage %}
