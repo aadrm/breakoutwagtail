@@ -54,24 +54,28 @@ class BlogIndexPage(BlogIndexPageAbstract, MyPage):
         categories = BlogCategory.objects.all()
         context['categories'] = categories
 
+        print(tag)
         tags = []
+ 
         for blog in blogs:
-            for tag in blog.tags.all():
-                tags.append(tag)
+            for blogtag in blog.tags.all():
+                tags.append(blogtag)
         context['tags'] = tags  
 
         if tag is None:
+            pass
             tag = request.GET.get('tag')
         if tag:
             blogs = blogs.filter(tags__slug=tag)
+
+        print('cat', category)
         if category is None:  # Not coming from category_view in views.py
-            if request.GET.get('category'):
-                category = get_object_or_404(
-                    BlogCategory, slug=request.GET.get('category'))
+            pass
         if category:
             if not request.GET.get('category'):
                 category = get_object_or_404(BlogCategory, slug=category)
             blogs = blogs.filter(categories__category__name=category)
+
         if author:
             if isinstance(author, str) and not author.isdigit():
                 blogs = blogs.filter(author__username=author)

@@ -2,12 +2,9 @@
 {% load wagtailcore_tags static %}
 
 
-{% block extra_css %}
-{{ block.super }}
-<link rel="preload" href="{% static 'css/bs5/bootstrap.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="{% static 'css/bs5/bootstrap.min.css' %}"></noscript>
+{% comment %} <link rel="preload" href="{% static 'css/bs5/bootstrap.min.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'"> {% endcomment %}
+{% comment %} <noscript><link rel="stylesheet" href="{% static 'css/bs5/bootstrap.min.css' %}"></noscript> {% endcomment %}
 
-{% endblock %}
 
 {% block extra_js %}
 <script defer src="{% static 'js/bs5/bootstrap.min.js' %}"></script>

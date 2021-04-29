@@ -43,6 +43,7 @@
     }
     &:hover {
         color: $brand-light;
+        text-decoration: none;
         &::before,
         &::after {
             opacity: 1;

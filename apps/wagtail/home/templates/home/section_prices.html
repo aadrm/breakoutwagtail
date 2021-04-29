@@ -1,7 +1,71 @@
 {% load i18n %}
 {% load wagtailroutablepage_tags %}
 <div class="section-prices">
-    <div class="prices-wrapper c-wrapper--md c-color-secondary">
+    <div class="container">
+        {% comment %} <div class="row justify-content-center g-1"> {% endcomment %}
+            {% comment %} <div class="column"> {% endcomment %}
+                <table class="table">
+                        </tr> 
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>2 {% trans "Players" %}</th>
+                            <td>€64 Total</td>
+                            <td>€32 {% trans "per person" %}</td>
+                        </tr>
+                        <tr>
+                            <th>3 {% trans "Players" %}</th>
+                            <td>€84 Total</td>
+                            <td>€28 {% trans "per person" %}</td>
+                        </tr>
+                        <tr>
+                            <th>4 {% trans "Players" %}</th>
+                            <td>€96 Total</td>
+                            <td>€24 {% trans "per person" %}</td>
+                        </tr>
+                        <tr>
+                            <th>5 {% trans "Players" %}</th>
+                            <td>€110 Total</td>
+                            <td>€22 {% trans "per person" %}</td>
+                        </tr>
+                        <tr>
+                            <th>6 {% trans "Players" %}</th>
+                            <td>€120 Total</td>
+                            <td>€20 {% trans "per person" %}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+
+            {% comment %} <div class="column"> {% endcomment %}
+                {% comment %} <span>3 {% trans "Players" %}</span>
+                <p>€84 Total</p>
+                <p>€28 {% trans "per person" %}</p>
+            </div> {% endcomment %}
+            {% comment %} </div> {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+
+        {% comment %} <div class="price">
+            <span>4 {% trans "Players" %}</span>
+            <p>€96 Total</p>
+            <p>€24 {% trans "per person" %}</p>
+        </div>
+        
+        <div class="price">
+            <span>5 {% trans "Players" %}</span>
+            <p>€110 Total</p>
+            <p>€22 {% trans "per person" %}</p>
+        </div>
+        
+        <div class="price">
+            <span>6 {% trans "Players" %}</span>
+            <p>€120 Total</p>
+            <p>€20 {% trans "per person" %}</p>
+        </div> {% endcomment %}
+
+    </div>
+    {% comment %} <div class="prices-wrapper c-wrapper--md c-color-secondary">
 
         <div class="price">
             <span>1 {% trans "Player" %}</span>
@@ -39,8 +103,8 @@
             <p>€20 {% trans "per person" %}</p>
         </div>
 
-    </div>
+    </div> {% endcomment %}
     <br>
-    <a class="c-anchor c-anchor-inline c-anchor-secondary font--md--soft" href="{% routablepageurl booknow_page "booknow_page_route" %}">{% trans "Book Now" %}</a>
+    <a class="c-nav-anchor c-anchor-secondary font--md--soft" href="{% routablepageurl booknow_page "booknow_page_route" %}">{% trans "Book Now" %}</a>
 
 </div>

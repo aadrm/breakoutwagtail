@@ -171,7 +171,25 @@ class LinkBlock(blocks.StructBlock):
         label = 'Link'
         icon = 'user'
 
+class RichTextBoxBlock(blocks.StructBlock):
+    """ Rich text block with all the features."""
+    BOX_CHOICES = [
+        ('primary', 'primary'),
+        ('secondary', 'secondary'),
+        ('success', 'success'),
+        ('warning', 'warning'),
+        ('danger', 'danger'),
+        ('info', 'info'),
+        ('light', 'light'),
+        ('dark', 'dark'),
+    ]
+    box_type = blocks.ChoiceBlock(choices=BOX_CHOICES)
+    richtext = blocks.RichTextBlock()
 
+    class Meta:
+        template = 'streams/richtextbox_block.html'
+        icon = 'doc-full'
+        label = 'Text Box'
 
 class RichTextBlock(blocks.RichTextBlock):
     """ Rich text block with all the features."""

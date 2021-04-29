@@ -13,15 +13,12 @@
         box-shadow: 3px 3px 8px $brand-dark-a;;
         caption-side: top;
         color: $brand-light;
+        padding: 0;
     }
     margin: 0 auto;
     position: relative;
     max-width: 660px;
     width: 100%;
-}
-
-.cal-title, .cal-month {
-    padding: 1rem
 }
 
 .cal-image {
@@ -34,15 +31,8 @@
     }
 }
 
-.cal-nav {
-    display: flex;
-    width: 100%;
-}
-
 .cal-nav__btn {
     cursor: pointer;
-    flex-grow: 1;
-    padding: 1rem;
     &:hover {
         background: $brand-light-5;
     }

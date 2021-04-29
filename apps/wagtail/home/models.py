@@ -7,6 +7,7 @@ from django.conf import settings
 
 from wagtail.core import blocks
 from wagtail.core import fields
+from wagtail.utils.decorators import cached_classmethod
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel, ImageFieldComparison
@@ -14,7 +15,8 @@ from wagtail.core.fields import StreamField, StreamBlock, BlockField, RichTextFi
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 from apps.wagtail.streams import blocks as myblocks
 from modelcluster.fields import ParentalManyToManyField
-
+from wagtail.admin.edit_handlers import TabbedInterface, ObjectList
+from wagtailyoast.edit_handlers import YoastPanel
 from apps.booking.models import Room
 
 from django.utils.translation import ugettext_lazy as _
@@ -27,7 +29,6 @@ from apps.booking.utils import get_cart
 class MyPage(Page):
 
     Page.search_description.max_length = 100
-
     header_image = models.ForeignKey(
         "wagtailimages.Image", 
         null=True,
@@ -36,9 +37,7 @@ class MyPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    
     header_image_alt = models.CharField(max_length=128, null=True, blank=True)
-
     seo_image = models.ForeignKey(
         "wagtailimages.Image", 
         null=True,
@@ -48,10 +47,9 @@ class MyPage(Page):
         related_name="+",
     )
     seo_image_alt = models.CharField(max_length=128, null=True, blank=True)
-
     noindex = models.BooleanField(default=False)
-
     extra_schema = models.TextField(max_length=128, null=True, blank=True)
+    keywords = models.CharField('Keywords', max_length=100, blank=True, null=True)
     translations = ParentalManyToManyField(WagtailLanguage, blank=True)
 
     def get_context(self, request):
@@ -121,6 +119,23 @@ class MyPage(Page):
         FieldPanel('translations'),
         FieldPanel('extra_schema'),
     ]
+
+    @cached_classmethod
+    def get_edit_handler(cls):
+        edit_handler = TabbedInterface([
+            ObjectList(cls.content_panels, heading=('Content')),
+            ObjectList(cls.promote_panels, heading=('Promotion')),
+            ObjectList(cls.settings_panels, heading=('Settings')),
+            YoastPanel(
+                keywords='keywords',
+                title='seo_title',
+                search_description='search_description',
+                slug='slug'
+            ),
+        ])
+        return edit_handler.bind_to(model=cls)
+
+
 
 
 class LinkPage(MyPage):

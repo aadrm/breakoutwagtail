@@ -10,9 +10,9 @@
 <section class="c-section-dark">
 
     <span id="rooms" class="c-id-offset"></span>
-    <div class=" tac c-color-primary c-wrapper--md">
+    <div class="text-center c-color-primary c-wrapper--md">
         {% if page.our_rooms_header %}
-        <h2>{{ page.our_rooms_header }}</h2>
+        <h2 class="breakout-font">{{ page.our_rooms_header }}</h2>
         <br>
         {% endif %}
         {% if page.our_rooms_text %}
@@ -29,11 +29,11 @@
     <span id="online" class="c-id-offset"></span>
     <div class=" c-wrapper--md">
         {% if page.online_header %}
-        <h2 class="tac c-color-primary">{{ page.online_header }}</h2>
+        <h2 class="breakout-font text-center c-color-primary">{{ page.online_header }}</h2>
         <br>
         {% endif %}
         {% if page.online_text %}
-        <div class="tac c-color-light">
+        <div class="text-center c-color-light">
         {{ page.online_text|safe}}
         </div>
         <br>
@@ -44,9 +44,9 @@
 
 <section class="c-section-primary">
     <span id="offers" class="c-id-offset"></span>
-    <div class=" tac c-color-emphasis c-wrapper--md">
+    <div class=" text-center c-color-emphasis c-wrapper--md">
         {% if page.offers_header %}
-        <h2>{{ page.offers_header }}</h2>
+        <h2 class="breakout-font">{{ page.offers_header }}</h2>
         <br>
         {% endif %}
         {% if page.offers_text %}
@@ -63,9 +63,9 @@
 
 <section class="c-section-dark">
     <span id="video" class="c-id-offset"></span>
-    <div class=" tac c-color-primary c-wrapper--md">
+    <div class=" text-center c-color-primary c-wrapper--md">
         {% if page.video_header %}
-        <h2>{{ page.video_header }}</h2>
+        <h2 class="breakout-font">{{ page.video_header }}</h2>
         <br>
         {% endif %}
         {% if page.video_text %}
@@ -80,9 +80,9 @@
 
 <section class="c-section-primary">
     <span id="prices" class="c-id-offset"></span>
-    <div class=" tac c-wrapper--md">
+    <div class=" text-center c-wrapper--md">
         {% if page.prices_header %}
-        <h2>{{ page.prices_header }}</h2>
+        <h2 class="breakout-font">{{ page.prices_header }}</h2>
         <br>
         {% endif %}
         {% if page.prices_text %}
@@ -96,8 +96,8 @@
 </section>
 
 <section class="c-section-light">
-    <span id="contact" class="c-id-offset"></span>
-    {% comment %} {% include 'home/section_contact.html' %} {% endcomment %}
+    <span id="context-centert" class="c-id-offset"></span>
+    {% comment %} {% include 'home/section_context-centert.html' %} {% endcomment %}
     {% comment %} <br><br><br> {% endcomment %}
     <div class="c-wrapper--md">
     {% include 'home/section_location.html' %}
@@ -106,9 +106,9 @@
 
 {% if page.reviews %}
 <section class="c-section-primary">
-    <div class=" tac c-wrapper--md">
+    <div class=" text-center c-wrapper--md">
         {% if page.reviews_header %}
-        <h2 class="c-color-emphasis">{{ page.reviews_header }}</h2>
+        <h2 class="breakout-font c-color-emphasis">{{ page.reviews_header }}</h2>
         <br>
         {% endif %}
         {% if page.reviews_text %}
@@ -127,7 +127,7 @@
 <section class="c-section-dark">
     <span id="faq" class="c-id-offset"></span>
     <div class="c-wrapper--md">
-        <h2 class="tac c-color-primary">{% trans "Frequently Asked Questions" %}</h2>
+        <h2 class="breakout-font text-center c-color-primary">{% trans "Frequently Asked Questions" %}</h2>
         <br>
         <div class="faq-wrapper">
             {% for block in page.faq %}

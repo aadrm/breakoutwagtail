@@ -4,41 +4,45 @@
 
 {% if include_context == "index_page" %} 
   <div class="card mb-3">
-    <div class="row g-0">
+    {% comment %} <div class="row g-0"> {% endcomment %}
 
       {% if blog.header_image %} {% image blog.header_image width-500 as post_image %}
-      <div style="background-image: url({{post_image.url}}); background-size: cover; background-position: center; min-height: 12rem;" class="col-md-4 overflow-hidden mh-5">
-      </div>
+      {% comment %} <div style="background-image: url({{post_image.url}}); background-size: cover; background-position: center; min-height: 12rem;" class="card-head overflow-hidden mh-5"> {% endcomment %}
+      {% comment %} <div class="card"> {% endcomment %}
+      {% comment %} <div class="card-head"> {% endcomment %}
+    <img class="card-img-top" src="{{post_image.url}}" alt="post_image.alt"> 
+      {% comment %} </div> {% endcomment %}
+      {% comment %} </div> {% endcomment %}
       {% endif %}
 
-      <div class="col-md-8">
-        <div class="card-body">
-          
-              <h2 class="card-title h4"><a href="{% pageurl blog %}">{{ blog.title }}</a></h2>
-          
-          <div class="h6 card-text">
-            {{ blog.body|excerpt:70 }} 
-          </div>
-          <p class="card-text">
-            <a class="bnt btn-secondary btn-sm" href="{% pageurl blog %}">{% trans "Continue reading" %} &raquo;</a>
-          </p>
-        </div>
+      {% comment %} <div class="col-md-8"> {% endcomment %}
+    <div class="card-body">
+      
+          <h2 class="card-title h4"><a href="{% pageurl blog %}">{{ blog.title }}</a></h2>
+      
+      <div class="card-text">
+        {{ blog.body|excerpt:70 }} 
       </div>
+      <p class="card-text">
+        <a class="btn btn-primary btn-sm" href="{% pageurl blog %}">{% trans "Continue reading" %} &raquo;</a>
+      </p>
+    </div>
+      {% comment %} </div> {% endcomment %}
 
-      <div class="row g-0">
+      {% comment %} <div class="row g-0"> {% endcomment %}
         {% if blog.date %}
         <div class="card-footer">
           <p class="m-0">
             {{ blog.date }}
-            |
             {% if blog.tags.all %}
+            |
                 Tags: 
                     {% for tag in blog.tags.all %}
                         <a href="{% url 'myblog:tag' tag.slug %}">{{ tag }}</a>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
             {% endif %}
-            |
             {% if blog.categories.all %}
+            |
                 Posted in 
                     {% for cat in blog.categories.all %}
                         <a href="{% url 'myblog:category' cat.category.slug %}">{{ cat.category.name }}</a>{% if not forloop.last %}, {% endif %}
@@ -48,19 +52,18 @@
         </div>
         {% endif %}
       </div>
-    </div>
-  </div>
+  {% comment %} </div> {% endcomment %}
 {% else %}
 
 <div class="container c-wrapper--md">
 
   <div class="row">
 
-    <div class="col-sm-9 my-4 ">
+    <div class="col-sm-8 my-4 standard-page">
       {% include 'myblog/components/streamfield.html' %}
       {% comment %} {{ blog.body }} {% endcomment %}
     </div> 
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       {% include 'myblog/components/categories_list.html' %}
       {% include 'myblog/components/tags_list.html' %}
     </div>

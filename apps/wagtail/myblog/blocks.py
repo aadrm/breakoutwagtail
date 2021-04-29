@@ -35,6 +35,7 @@ class BodyBlock(StreamBlock):
     # h1 = CharBlock()
     # h2 = CharBlock()
     paragraph = RichTextBlock()
+    paragraph_shade = myblocks.RichTextBoxBlock()
     # markdown = MarkdownBlock(icon="code")
 
     image_text = ImageText()

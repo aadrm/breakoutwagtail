@@ -2,7 +2,7 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block element_class %}card {% if self.flip %}card-flex-reverse{% endif %}{% endblock element_class %}
 {% block element_content %}
-<div class="card__head">
+<div class="card">
     {% image self.image width-754  as card_image %}
     <img 
         src="{{ card_image.url }}" 
