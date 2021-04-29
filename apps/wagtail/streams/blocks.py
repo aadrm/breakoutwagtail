@@ -432,6 +432,7 @@ class SectionBlock(ElementBlockExtended):
             # ('subtitle_block', SubtitleBlock()),
             ('collection_test', CollectionBlock()),
             ('rich_text', RichTextBlock()),
+            ('text_box', RichTextBoxBlock()),
             ('mymaps', MyMapsBlock()),
             ('cards', VerticalCardsBlock()),
             ('spacer', SpacerBlock()),
