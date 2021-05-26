@@ -2,11 +2,10 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block element_content %}
-<div class="mystream">
 {% include_block self.title %}
 <div class="{% block collection_class %}{% endblock collection_class %}">
 {% for block in self.children %}
     {% include_block block %}
 {% endfor %}
-{% endblock element_content %}
 </div>
+{% endblock element_content %}

@@ -1,4 +1,4 @@
-{% extends 'streams/element_block.html' %}
+{% extends 'streams/cards/card_base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block element_class %}card {% if self.flip %}card-flex-reverse{% endif %}{% endblock element_class %}
 {% block element_content %}
@@ -11,13 +11,13 @@
 </div>
 <div class="card__content">
     {% comment %} <p class="card__content__title">{{ self.title}}</p> {% endcomment %}
-    {% if self.title.title.subtitle %}
+    {% if self.title %}
         <div class="card__content__title">
             {% include_block self.title %}
         </div>
     {% endif %}
-    {% if self.extra_subtitle %}
-        <p class="card__content__subtitle"><b>{{ self.extra_subtitle}}</b></p>
+    {% if self.subtitle %}
+        <p class="card__content__subtitle"><b>{{ self.subtitle}}</b></p>
     {% endif %}
     {% if self.text %}
         <p class="card__content__text">{{ self.text }}</p>

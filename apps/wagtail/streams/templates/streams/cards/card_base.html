@@ -11,22 +11,11 @@ style="
     {% if self.style.font_colour %}color: #{{self.style.font_colour}};{% endif %}
     {% if self.style.shadow == 0 %}box-shadow: none; -webkit-box-shadow: none;{% endif %}
     {% if self.style.shadow %}box-shadow: 2px 2px {{self.style.shadow}}px #111111aa; -webkit-box-shadow: 2px 2px {{self.style.shadow}}px #111111aa{% endif %}
-    {% if self.style.max_width_outer %}max-width: {{ self.style.max_width_outer }}px;
+    {% if self.style.max_width_inner %}max-width: {{ self.style.max_width_inner }}px;
     margin: 0 auto;
     {% endif %}
 ">
 
-{% if self.style.max_width_inner %}
-<div
-class="element__inner"
-style="
-    max-width: {{ self.style.max_width_inner }}px;
-    margin: 0 auto;
-"
->
-{% else %}
-
-{% endif %}
     {% block element_content %}
     {% endblock element_content %}
     {% block inner %}{% endblock inner %}
