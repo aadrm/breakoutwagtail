@@ -86,7 +86,6 @@ class FormField(AbstractFormField):
     page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
 
 
-
 class FormPage(WagtailCaptchaEmailForm, MyPage):
     intro = RichTextField(blank=True)
     thank_you_text = RichTextField(blank=True)
@@ -135,3 +134,10 @@ class FormPage(WagtailCaptchaEmailForm, MyPage):
     ]
 
     promote_panels = MyPage.promote_panels
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        fields = self.get_form_fields()
+        print(fields)
+        return context
+
