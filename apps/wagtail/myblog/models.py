@@ -54,7 +54,6 @@ class BlogIndexPage(BlogIndexPageAbstract, MyPage):
         categories = BlogCategory.objects.all()
         context['categories'] = categories
 
-        print(tag)
         tags = []
  
         for blog in blogs:
@@ -68,7 +67,6 @@ class BlogIndexPage(BlogIndexPageAbstract, MyPage):
         if tag:
             blogs = blogs.filter(tags__slug=tag)
 
-        print('cat', category)
         if category is None:  # Not coming from category_view in views.py
             pass
         if category:

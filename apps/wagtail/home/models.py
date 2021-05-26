@@ -74,8 +74,6 @@ class MyPage(Page):
         else:
             canonical = default_lang
 
-        print(canonical)
-        print(translations)
         context = super().get_context(request)
         context['language_canonical'] = canonical
         context['language_all'] = translations 
