@@ -5,13 +5,24 @@
 
         <div class="coupon-method">
             <!-- <div class="coupon-method__header"> -->
-                    <div class="coupon-method_mainico">
-                        {% include 'svg/cp-via_email.svg' %}
-                    </div>
-                    <div class="coupon-title">
-                        <h3>{% trans "Email coupon" %}</h3>
-                        <br>
-                    </div>
+            <div class="coupon-method_mainico">
+                {% include 'svg/cp-via_email.svg' %}
+            </div>
+            <div class="coupon-title">
+                <h3>{% trans "Email coupon" %}</h3>
+                <br>
+            </div>
+            <div class="paypal-multi-button">
+                <form action="{% url 'booking:add_product' %}" method="POST">
+                    {% csrf_token %}
+                    {% if online_coupon_form %}
+                        {{online_coupon_form.product}}
+                    {% else %}
+                        [register coupon-online in product family]
+                    {% endif %}
+                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
+                </form>
+            </div>
                 <div class="coupon-step">
                     <div class="coupon-step_icon">
                         {% include 'svg/cp-order_online.svg' %}
@@ -47,17 +58,6 @@
                     </div>
                 </div>
                 
-            <div class="paypal-multi-button">
-                <form action="{% url 'booking:add_product' %}" method="POST">
-                    {% csrf_token %}
-                    {% if online_coupon_form %}
-                        {{online_coupon_form}}
-                    {% else %}
-                        [register coupon-online in product family]
-                    {% endif %}
-                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
-                </form>
-            </div>
         </div>
 
         <div class="coupon-method">
@@ -67,6 +67,17 @@
             <div class="coupon-title">
                 <h3>{% trans "Get by mail" %}</h3>
                 <br>
+            </div>
+            <div class="paypal-multi-button">
+                <form action="{% url 'booking:add_product' %}" method="POST">
+                    {% csrf_token %}
+                    {% if voucher_form %}
+                    {{voucher_form.product}}
+                    {% else %}
+                        [register coupon-voucher in product family]
+                    {% endif %}
+                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
+                </form>
             </div>
             <div class="coupon-step">
                 <div class="coupon-step_icon">
@@ -86,7 +97,7 @@
                 </div>
                 <div class="coupon-step_instruction">
                     <p>
-                    {% trans "Immediately receive your code" %}
+                    {% trans "Immediately get your code" %}
                     </p>
                 </div>
             </div>
@@ -101,17 +112,6 @@
                     </p>
                 </div>
             </div>
-            <div class="paypal-multi-button">
-                <form action="{% url 'booking:add_product' %}" method="POST">
-                    {% csrf_token %}
-                    {% if voucher_form %}
-                    {{voucher_form}}
-                    {% else %}
-                        [register coupon-voucher in product family]
-                    {% endif %}
-                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
-                </form>
-            </div>
         </div>
 
         <div class="coupon-method">
@@ -124,6 +124,12 @@
                 <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et maxime impedit eos at.</p> -->
                 <br>
             </div>
+            <div class="paypal-multi-button">
+                <p class="c-text-sm">
+                    <a href="/#contact" class="c-anchor c-anchor-primary" type="submit">{% trans "Contact" %}</a> 
+                </form>
+                </p>
+            </div>
             <div class="coupon-step">
                 <div class="coupon-step_icon">
                     {% include 'svg/cp-phone.svg' %}
@@ -131,7 +137,7 @@
                 </div>
                 <div class="coupon-step_instruction">
                     <p>
-                    {% trans "Contact us" %}
+                     {% trans "Get in touch" %}
                     </p>
                 </div>
             </div>
@@ -155,13 +161,6 @@
                     {% trans "Receive your coupon" %}
                     </p>
                 </div>
-            </div>
-            <div class="paypal-multi-button">
-                <p class="c-text-sm">
-                {% trans "We are at the escape room only when there are sessions, please make sure we are there if you would like to pick up your coupon" %}
-                    <a href="/#contact" class="c-anchor c-anchor-primary" type="submit">{% trans "Contact us" %}</a> 
-                </form>
-                </p>
             </div>
         </div>
   

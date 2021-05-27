@@ -210,6 +210,9 @@
         font-size: $font--md;
       }
     }
+    .card__content__cta {
+      padding: 0 20px 15px;
+    }
   }
 }
 
@@ -322,6 +325,11 @@
     padding: 1.8rem 1rem;
   }
 
+}
+
+.link-block {
+  text-align: left;
+  text-decoration: none;
 }
 
 

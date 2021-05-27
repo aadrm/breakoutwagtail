@@ -1,15 +1,11 @@
 {% if self.properties.button_text %}
 <div
 style="
-    {% if self.link_style.center %}text-align: center;{% endif %}
+    {% if self.properties.center %}text-align: center;{% endif %}
 "
 >
-<a class="c-anchor c-anchor-inline c-anchor-primary c-anchor-hover-override-inline"
-style = "
-    {% if self.link_style.bg_colour %}background: #{{ self.link_style.bg_colour }};{% endif %}
-    {% if self.link_style.font_colour %}color: #{{ self.link_style.font_colour }};{% endif %}
-    {% if self.link_style.full_width %}display: block;{% endif %}
-"
+<a class="btn btn-primary"
+style = "{% if self.properties.full_width %}display: block;{% endif %}"
 {% if self.properties.noopener %}rel="noopener"{% endif %}
 {% if self.properties.new_tab %}target="_blank"{% endif %}
 href="{% if self.properties.page_link %}{{self.properties.page_link.url}}{% elif self.properties.url_link%}{{self.properties.url_link}}{% else %}#{% endif %}"

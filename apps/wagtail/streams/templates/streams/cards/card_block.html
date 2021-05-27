@@ -22,15 +22,15 @@
     {% if self.text %}
         <p class="card__content__text">{{ self.text }}</p>
     {% endif %}
-    {% if self.link %}
-        <div class="card__content__cta">
-        {% include_block self.link %}
-        </div>
-    {% endif %}
-    {% if self.link_stream %}
-        <div class="car__content__cta">
-            {% include_block self.link_stream %}
-        </div>
-    {% endif %}
 </div>
+{% if self.link %}
+<div class="card__content__cta">
+{% include_block self.link %}
+</div>
+{% endif %}
+{% if self.link_stream %}
+<div class="card__content__cta">
+    {% include_block self.link_stream %}
+</div>
+{% endif %}
 {% endblock element_content %}

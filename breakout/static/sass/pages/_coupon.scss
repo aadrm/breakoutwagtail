@@ -5,7 +5,6 @@
 * Browsers: last 4 version
 */
 
-
 .coupons-intro {
     max-width: $width--sm;
     text-align: center;
@@ -104,7 +103,7 @@ methods
 .coupon-title {
     width: 100%;
     display: block;
-    margin: 0rem auto;
+    margin: .5rem auto 0;
     text-align: center;
     h3 {
         font-family: $fonts;
@@ -207,11 +206,11 @@ paypal button
     display: grid;
     text-align: center;
     width: 100%;
-    margin: auto auto 0; 
+    margin: 0 auto 32px; 
     background: $brand-secondary-9;
     border-radius: .6rem;
     align-self: flex-end;
-    min-height: 150px;
+    min-height: 120px;
     line-height: 1.15;
     form {
         width: 100%;
@@ -281,6 +280,9 @@ pdf templates
         color: $brand-light;
         img{
             animation: bounce 1;
+        }
+        a {
+            color: $brand-light;
         }
     }
 }

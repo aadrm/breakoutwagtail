@@ -1,10 +1,9 @@
+{% spaceless %}
 {% if self.is_section %}
 <section
 {% else %}
 <div
 {% endif %}
-
-
 class="element__wrapper {% block element_class %}{% endblock element_class %} {% if self.is_section %}c-section{% endif %}" 
 style="
     {% if self.style.bg_colour %}background: #{{self.style.bg_colour}};{% endif %}
@@ -12,20 +11,17 @@ style="
     {% if self.style.shadow == 0 %}box-shadow: none; -webkit-box-shadow: none;{% endif %}
     {% if self.style.shadow %}box-shadow: 2px 2px {{self.style.shadow}}px #111111aa; -webkit-box-shadow: 2px 2px {{self.style.shadow}}px #111111aa{% endif %}
     {% if self.style.max_width_inner %}max-width: {{ self.style.max_width_inner }}px;
-    margin: 0 auto;
+        {% if self.is_section %}
+        margin: 0 auto;
+        {% endif %}
     {% endif %}
 ">
-
     {% block element_content %}
     {% endblock element_content %}
     {% block inner %}{% endblock inner %}
-{% if self.style.max_width_inner %}
-</div>
-{% endif %}
-
-
 {% if self.is_section %}
 </section>
 {% else %}
 </div>
 {% endif %}
+{% endspaceless %}

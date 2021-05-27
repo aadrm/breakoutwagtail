@@ -1,11 +1,14 @@
-"""Richtext hooks."""
+from django.utils.html import escape
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
+from wagtail.core import hooks
+from wagtail.core.rich_text import LinkHandler
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
     InlineStyleElementHandler,
     BlockElementHandler,
 )
 from wagtail.core import hooks
 
+"""Richtext hooks."""
 @hooks.register("register_rich_text_features")
 def register_centertext_inline_feature(features):
     """Creates centered text in our richtext editor and page."""
@@ -100,3 +103,20 @@ def register_centertext_block_feature(features):
     # Step 6, This is optional.
     features.default_features.append(feature_name)
 
+
+class NewWindowExternalLinkHandler(LinkHandler):
+    # This specifies to do this override for external links only.
+    # Other identifiers are available for other types of links.
+    identifier = 'external'
+
+    @classmethod
+    def expand_db_attributes(cls, attrs):
+        href = attrs["href"]
+        # Let's add the target attr, and also rel="noopener" + noreferrer fallback.
+        # See https://github.com/whatwg/html/issues/4078.
+        return '<a href="%s" target="_blank" rel="noopener">' % escape(href)
+
+
+@hooks.register('register_rich_text_features')
+def register_external_link(features):
+    features.register_link_type(NewWindowExternalLinkHandler)

@@ -26,13 +26,17 @@
                     <p class="c-text-sm"> 
                     {% trans "Then gift that special person a voucher for" %}
                     <b>
-                    {% trans "Breakout Escape Room Augsburg" %}
+                    {% trans "Breakout Escape Room Augsburg" %}!
                     </b>
                     </br>
                     <br>
                     <b>{% trans "It's quick and easy:" %}</b>
-                    {% trans "You can have your present ready in less than a Minute, valid for all Rooms." %}
-                    {% trans "Our coupons are valid for three years, and can be redeemed online." %}
+                    {% blocktranslate trimmed%}
+                    You can have your <b>Christmass</b> or <b>birthday</b> present ready in less than a Minute.
+                    {% endblocktranslate %}
+                    {% blocktranslate trimmed%}
+                    Coupons remain valid three years for all rooms and redeemable <b>online</b>.
+                    {% endblocktranslate %}
                     </p>
                 </div> 
             </div>

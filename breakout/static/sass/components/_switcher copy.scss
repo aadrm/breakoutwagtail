@@ -1,9 +1,7 @@
 .switcher-languages {
   position: absolute;
   top: 100px;
-  z-index: 1;
   right: 16px;
-  color: $brand-light;
   transition: .3s all;
   transform: translateY(.6rem);
   margin-right: .6rem;
@@ -12,7 +10,7 @@
   width: 100px;
   overflow: hidden;
   border-radius: 8px;
-  opacity: .8;
+  opacity: .7;
   &:hover {
     opacity: 1;
     height: auto;

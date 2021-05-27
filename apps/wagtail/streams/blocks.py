@@ -138,19 +138,19 @@ class LinkBlock(blocks.StructBlock):
         ('noopener', blocks.BooleanBlock(required=False,
                                          help_text="Select this for links that point to other websites")),
         ('new_tab', blocks.BooleanBlock(required=False)),
-    ],
-        form_classname='inline_struct'
-    )
-    link_style = blocks.StructBlock([
         ('center', blocks.BooleanBlock(required=False)),
         ('full_width', blocks.BooleanBlock(required=False)),
-        ('font_colour', blocks.ChoiceBlock(
-            choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-        ('bg_colour', blocks.ChoiceBlock(
-            choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
     ],
         form_classname='inline_struct'
     )
+    # link_style = blocks.StructBlock([
+    #     ('font_colour', blocks.ChoiceBlock(
+    #         choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+    #     ('bg_colour', blocks.ChoiceBlock(
+    #         choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+    # ],
+    #     form_classname='inline_struct'
+    # )
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
