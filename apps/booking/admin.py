@@ -133,6 +133,7 @@ class ScheduleAdmin(ModelAdmin):
     menu_label = 'Calendar Schedule'
     menu_icon = 'fa-calendar'
     list_display = ('pk', '__str__', 'start_date', 'end_date', 'start_time', 'end_time')
+    menu_order = 
 
 
 class AppointmentsGroup(ModelAdminGroup):

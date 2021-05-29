@@ -1089,6 +1089,7 @@ class Slot(models.Model):
     schedule = models.ForeignKey("booking.Schedule", verbose_name=_("schedule"), related_name=("slots"), on_delete=models.SET_NULL, null=True)
     protect = models.BooleanField(_("protect"), null=True)
     product_family = models.ForeignKey("booking.ProductFamily", verbose_name=_("ProductFamily"), on_delete=models.CASCADE, null=True, blank=True)
+    is_disabled = models.BooleanField(default=False)
     
     class Meta:
         ordering = ['room', 'start']
@@ -1103,7 +1104,7 @@ class Slot(models.Model):
         
     @property
     def is_available(self):
-        if self.is_not_reserved and self.is_future_of_buffer:
+        if self.is_not_reserved and self.is_future_of_buffer and not self.is_disabled:
             return True
         else:
             return False 
