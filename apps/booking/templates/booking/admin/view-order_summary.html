@@ -1,4 +1,4 @@
-{% extends 'wagtailadmin/base.html' %}
+{% extends 'custom_admin_base.html' %}
 {% load wagtailadmin_tags %}
 {% load static %}
 
@@ -13,17 +13,10 @@
     <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" />
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 {% endblock extra_css %}
-
+{% block page_title %}Orders{% endblock page_title %}
 {% block titletag %}Orders{% endblock %}
 {% block content %}
-<header class="merged nice-padding">
-    <div class="row">
-        <div class="col1">
-        <div class="col9">
-            <h1>{% block branding_welcome %}Orders{% endblock %}</h1>
-        </div>
-    </div>
-</header>
+{{ block.super }}
 
 {% comment %} <div class="admin-content"> {% endcomment %}
 

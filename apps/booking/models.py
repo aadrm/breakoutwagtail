@@ -1136,6 +1136,8 @@ class Slot(models.Model):
         # TODO there's room for opmimisation here, the query calls for slots in the same day
         # this courd be improved into just checking if the query exists for specific slots
         slots = Slot.objects.filter(start__date=self.start.date(), room=self.room)
+        slots = slots.exclude(pk=self.pk)
+
         slot_collides = False
         
         for slot in slots:

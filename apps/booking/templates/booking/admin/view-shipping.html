@@ -1,10 +1,15 @@
-{% extends 'wagtailadmin/base.html' %}
+{% extends 'custom_admin_base.html' %}
 {% load static %}
 {% block extrastyle %}
 {{ block.super }}
 <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 {% endblock extrastyle %}
+
+{% block page_title %}Shipping{% endblock page_title %}
+{% block titletag %}Shipping{% endblock titletag %}
+
 {% block content %}
+{{ block.super }}
 
 <div class="content nice-padding">
     <br>

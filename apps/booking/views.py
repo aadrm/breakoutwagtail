@@ -220,7 +220,8 @@ def ajax_calendar(request):
     room = request.GET.get('room', '')
     year = request.GET.get('year', '')
     month = request.GET.get('month', '')
-    calendar_data = calendar_from_room(year, month, room)
+    room = int(room)
+    calendar_data = calendar_from_room(year, month, room=room)
     n = datetime.today()
     today_date = datetime(n.year, n.month, n.day, 0, 0, 0, 0)
     # slots = Slot.objects.filter(start__date__gte=today_date)
@@ -232,19 +233,43 @@ def ajax_calendar(request):
     }
     return render(request, 'booking/ajax_calendar.html', context)
 
+def ajax_admin_calendar(request):
+    room = request.GET.get('room', '')
+    year = request.GET.get('year', '')
+    month = request.GET.get('month', '')
+    room = int(room)
+    calendar_data = calendar_from_room(year, month, room=room)
+    n = datetime.today()
+    today_date = datetime(n.year, n.month, n.day, 0, 0, 0, 0)
+    # slots = Slot.objects.filter(start__date__gte=today_date)
+    # print (slots)
+    context = {
+        # 'slots': slots,
+        # 'available_counter': 0,
+        'calendar': calendar_data,
+    }
+    return render(request, 'booking/admin/ajax_admin_calendar.html', context)
+
 def ajax_day_available_slots(request):
     year = int(request.GET.get('year', ''))
     month = int(request.GET.get('month', ''))
     day = int(request.GET.get('day', ''))
     room = int(request.GET.get('room', ''))
     day_slots = date(year, month, day)
-    slots = Slot.objects.filter(start__date=day_slots)
-    slots = slots.filter(room=room)
+    slots = Slot.objects.filter(start__date=day_slots).order_by('start')
+    if room:
+        slots = slots.filter(room=room)
     context = {
         'slots': slots,
     }
     # return JsonResponse({'data': 'test'})
-    return render(request, 'booking/ajax_date-availability.html', context)
+    if room:
+        return render(request, 'booking/ajax_date-availability.html', context)
+    else:
+        print('admin')
+        return render(request, 'booking/admin/ajax_admin_date-availability.html', context)
+
+
 
 def ajax_slot_booking(request):
     slot_id = int(request.GET.get('slot', ''))
@@ -256,6 +281,21 @@ def ajax_slot_booking(request):
         'slot': slot,
     }
     return render(request, 'booking/ajax_slot-booking.html', context)
+
+
+def ajax_slot_disable(request):
+    slot_id = int(request.GET.get('slot', ''))
+    slot = Slot.objects.get(pk=slot_id)
+    slot.is_disabled = True
+    slot.save()
+    return HttpResponse('slot enabled')
+
+def ajax_slot_enable(request):
+    slot_id = int(request.GET.get('slot', ''))
+    slot = Slot.objects.get(pk=slot_id)
+    slot.is_disabled = False 
+    slot.save()
+    return HttpResponse('slot enabled')
 
 # pdf
 
@@ -714,6 +754,13 @@ def record_payment(request):
         'inv_list': invoices_list,
     }
     return render(request, 'booking/admin/view-record_payment.html', context)
+
+@staff_member_required
+def slots_calendar(request):
+    context = {
+        'test': 'test',
+    }
+    return render(request, 'booking/admin/view-slots_calendar.html', context)
 
 def test_email_template(request):
     email = render_to_string('email/test_mail.html')

@@ -143,13 +143,11 @@ function showBookingForm() {
 
 function callBackAvailability() {
     if (ajaxRequest.readyState == 4) {
-
         let availableSlots = this.response.getElementsByClassName('available-slots-response')[0];
         let siblingRow = getLastClickedRow();
         availableSpinner.remove();
         insertAfter(availableSlots, siblingRow);
         addEventToSlot();
-
     }
 };
 
@@ -157,6 +155,8 @@ function callBackSlotForm() {
     if (ajaxRequest.readyState == 4) {
         let form = this.response.getElementsByClassName('booking-form-response')[0];
         let body = document.getElementsByTagName('body')[0];
+        if (form == 'undefined'):
+
         body.prepend(form);
         addEventCloseForm();
         bookingFormSpinner.style.display = "none";
@@ -193,6 +193,10 @@ function addEventToDay() {
 
 function addEventToSlot() {
     let slots = document.getElementsByClassName('available-slots__data__slot');
+    for (i = 0; i < slots.length; i++) {
+        slots[i].addEventListener("click", showBookingForm);
+    }
+    slots = document.getElementsByClassName('admin-slot__extra-button');
     for (i = 0; i < slots.length; i++) {
         slots[i].addEventListener("click", showBookingForm);
     }

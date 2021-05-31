@@ -1,4 +1,4 @@
-{% extends 'wagtailadmin/base.html' %}
+{% extends 'custom_admin_base.html' %}
 {% load wagtailadmin_tags i18n %}
 {% load static %}
 {% block titletag %}{% trans "Dashboard" %}{% endblock %}
@@ -12,15 +12,9 @@
 
 {% endblock %}
 
+{% block page_title %}Coupon Generator{% endblock page_title %}
 {% block content %}
-    <header class="merged nice-padding">
-        <div class="row">
-            <div class="col1">
-            <div class="col9">
-                <h1>{% block branding_welcome %}{% blocktrans %}Coupon Generator{% endblocktrans %}{% endblock %}</h1>
-            </div>
-        </div>
-    </header>
+{{ block.super }}
 
 
 <div class="admin-content">

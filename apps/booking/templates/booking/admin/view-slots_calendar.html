@@ -1,0 +1,29 @@
+{% extends 'custom_admin_base.html' %}
+{% load static %}
+{% load wagtailcore_tags %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock extrastyle %}
+
+{% block page_title %}Slot Overview{% endblock %}
+{% block titletag %}Slot Overview{% endblock %}
+
+{% block content %}
+{{ block.super }}
+    <div class="nice-padding">
+    <br><br>
+        <section class="c-section-light">
+            <div class="c-wrapper--lg">
+                <div class="calendars">
+                    <div id="1" class="calendar-frame js-calendar-window" data-url="{% url 'booking:ajax_admin_calendar' %}" data-room="0"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
+{% block extra_js %}
+{{ block.super }}
+    <script src =" {% static 'js/calendar.js' %}"></script>
+{% endblock extra_js %}

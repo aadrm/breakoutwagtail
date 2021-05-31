@@ -21,6 +21,10 @@ def add_breakout_menu(request, menu_items):
 
 @hooks.register('register_breakout_item')
 def register_coupon_generator_item():
+  return MenuItem('Slots Calendar', reverse('slots_calendar'), classnames='icon icon-fa-calendar', order=10001)
+
+@hooks.register('register_breakout_item')
+def register_coupon_generator_item():
   return MenuItem('Orders', reverse('orders_list'), classnames='icon icon-fa-shopping-basket', order=10001)
 
 @hooks.register('register_breakout_item')
@@ -46,6 +50,7 @@ def register_coupon_generator_item():
 @hooks.register('register_admin_urls')
 def urlconf_time():
   return [
+    path('slots_calendar', views.slots_calendar, name='slots_calendar'),
     path('appointments_list', views.appointments, name='appointments_list'),
     path('orders_list', views.order_summary, name='orders_list'),
     path('shipping', views.shipping, name='shipping'),

@@ -1,4 +1,4 @@
-{% extends 'wagtailadmin/base.html' %}
+{% extends 'custom_admin_base.html' %}
 {% load wagtailadmin_tags i18n %}
 
 {% load static %}
@@ -11,17 +11,11 @@
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 
 {% endblock %}
+{% block page_title %}Payments{% endblock page_title %}
 {% block titletag %}Payments{% endblock %}
 
 {% block content %}
-<header class="merged nice-padding">
-    <div class="row">
-        <div class="col1">
-        <div class="col9">
-            <h1>{% block branding_welcome %}Payments{% endblock %}</h1>
-        </div>
-    </div>
-</header>
+{{ block.super }}
     <div class="nice-padding">
         <h2>Due List</h2>
     </div>

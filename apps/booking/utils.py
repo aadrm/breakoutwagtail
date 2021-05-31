@@ -16,12 +16,11 @@ from .models import Slot, ProductFamily, Room, Cart
 
 def calendar_from_room(year, month, room):
     """returns a dictionary with slots data of the given calendar month for a room"""
-    calendar_data = {
-        'room': Room.objects.get(pk=room),
-    }
-    calendar_data.update(prepare_calendar_base(year, month, room))
+    calendar_data = {}
+    if room:
+        calendar_data['room'] = Room.objects.get(pk=room)
 
-    # calendar_data = prepare_calendar_base(year, month, room)
+    calendar_data.update(prepare_calendar_base(year, month, room))
 
     return calendar_data
 
@@ -31,7 +30,10 @@ def prepare_calendar_base(year, month, room):
     # this function interfaces with the Slots module
     def callendar_day_to_datadict(day, room):
         """return a dictionary with slot information for the given day"""
-        slots_in_day = Slot.objects.filter(start__date=day, room=room)
+        if room:
+            slots_in_day = Slot.objects.filter(start__date=day, room=room)
+        else:
+            slots_in_day = Slot.objects.filter(start__date=day)
         available_slots = 0
         for slot in slots_in_day:
             if slot.is_available:
@@ -44,8 +46,14 @@ def prepare_calendar_base(year, month, room):
         })
         return day_data
 
-    def get_available_dates(room, year, month):
-        slots = Slot.objects.filter(start__month=month, start__year=year, room=room) 
+    def get_available_dates(year, month, room):
+        print('year', year)
+        print('year', month)
+        print('year', room)
+        if room:
+            slots = Slot.objects.filter(start__month=month, start__year=year, room=room) 
+        else:
+            slots = Slot.objects.filter(start__month=month, start__year=year) 
         slots = slots.filter(start__gte=datetime.now())
         available_dates = []
         for slot in slots:
@@ -84,7 +92,7 @@ def prepare_calendar_base(year, month, room):
         previous_month = 12
         previous_year -= 1
     
-    slots = get_available_dates(room, year, month)
+    slots = get_available_dates(year, month, room)
 
     for i, week in enumerate(month_days):
         for j, day in enumerate(week):

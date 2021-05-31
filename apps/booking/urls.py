@@ -10,7 +10,6 @@ app_name = 'booking'
 # handler404 = 'website.views.view_404'
 urlpatterns = [
     # path('', views.booking_calendars, name='book'),
-    path('calendar/', views.ajax_calendar, name='ajax_calendar'),
     
     path('slot_to_cart/', views.slot_to_cart, name='slot_to_cart'),
     path('checkout/', views.checkout, name='checkout'),
@@ -25,7 +24,11 @@ urlpatterns = [
 
     path('pdf_coupon_code/', views.pdf_coupon_code, name='pdf_coupon_code'),
 
+    path('calendar/', views.ajax_calendar, name='ajax_calendar'),
+    path('ajax_admin_calendar/', views.ajax_admin_calendar, name='ajax_admin_calendar'),
     path('ajax_slot_booking/', views.ajax_slot_booking, name='ajax_slot_booking'),
+    path('ajax_slot_disable/', views.ajax_slot_disable, name='ajax_slot_disable'),
+    path('ajax_slot_enable/', views.ajax_slot_enable, name='ajax_slot_enable'),
     path('ajax_checkout_buttons/', views.ajax_checkout_buttons, name='ajax_checkout_buttons'),
     path('ajax_refresh_item/', views.ajax_refresh_item, name='ajax_refresh_item'),
     path('ajax_apply_coupon', views.ajax_apply_coupon, name='ajax_apply_coupon'),

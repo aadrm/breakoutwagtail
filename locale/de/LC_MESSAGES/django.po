@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-27 19:41+0000\n"
+"POT-Creation-Date: 2021-05-31 13:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Breakout Escape Room | Order: "
 msgstr ""
 
-#: apps/booking/models.py:307 apps/booking/utils.py:156
+#: apps/booking/models.py:307 apps/booking/utils.py:164
 msgid "gift_voucher_"
 msgstr ""
 
@@ -388,51 +388,49 @@ msgstr ""
 msgid "protect"
 msgstr ""
 
-#: apps/booking/templates/booking/admin/view-appointments.html:14
-#: apps/booking/templates/booking/admin/view-appointments.html:20
-msgid "Appointments"
-msgstr ""
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:31
+#: apps/booking/templates/booking/ajax_calendar.html:40
+msgid "Mo"
+msgstr "Mo"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:32
+#: apps/booking/templates/booking/ajax_calendar.html:41
+msgid "Tu"
+msgstr "Di"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:33
+#: apps/booking/templates/booking/ajax_calendar.html:42
+msgid "We"
+msgstr "Mi"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:34
+#: apps/booking/templates/booking/ajax_calendar.html:43
+msgid "Th"
+msgstr "Dö"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:35
+#: apps/booking/templates/booking/ajax_calendar.html:44
+msgid "Fr"
+msgstr "Fr"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:36
+#: apps/booking/templates/booking/ajax_calendar.html:45
+msgid "Sa"
+msgstr "Sa"
+
+#: apps/booking/templates/booking/admin/ajax_admin_calendar.html:37
+#: apps/booking/templates/booking/ajax_calendar.html:46
+msgid "Su"
+msgstr "So"
 
 #: apps/booking/templates/booking/admin/view-coupon_generator.html:4
 msgid "Dashboard"
-msgstr ""
-
-#: apps/booking/templates/booking/admin/view-coupon_generator.html:20
-msgid "Coupon Generator"
 msgstr ""
 
 #: apps/booking/templates/booking/ajax-invoice_form.html:3
 #: apps/booking/templates/booking/view_checkout.html:58
 msgid "Customer Details"
 msgstr ""
-
-#: apps/booking/templates/booking/ajax_calendar.html:40
-msgid "Mo"
-msgstr "Mo"
-
-#: apps/booking/templates/booking/ajax_calendar.html:41
-msgid "Tu"
-msgstr "Di"
-
-#: apps/booking/templates/booking/ajax_calendar.html:42
-msgid "We"
-msgstr "Mi"
-
-#: apps/booking/templates/booking/ajax_calendar.html:43
-msgid "Th"
-msgstr "Dö"
-
-#: apps/booking/templates/booking/ajax_calendar.html:44
-msgid "Fr"
-msgstr "Fr"
-
-#: apps/booking/templates/booking/ajax_calendar.html:45
-msgid "Sa"
-msgstr "Sa"
-
-#: apps/booking/templates/booking/ajax_calendar.html:46
-msgid "Su"
-msgstr "So"
 
 #: apps/booking/templates/booking/ajax_checkout-buttons.html:5
 msgid "Confirm Purchase"
@@ -530,7 +528,7 @@ msgid "and book your game with the code:"
 msgstr "und buche dein Spiel mit dem Code"
 
 #: apps/booking/templates/booking/section-completed_order.html:3
-#: breakout/templates/email/order_confirmation.txt:8
+#: breakout/templates/email/bu.order_confirmation.txt:8
 msgid "Order Number: "
 msgstr "Ordernummer:"
 
@@ -556,34 +554,34 @@ msgstr "Unsere Bankverbingung:"
 
 #: apps/booking/templates/booking/section-completed_order.html:26
 #: apps/booking/templates/booking/section-order_summary.html:3
-#: breakout/templates/email/order_confirmation.txt:11
+#: breakout/templates/email/bu.order_confirmation.txt:11
 msgid "Summary"
 msgstr "Zusammenfassung"
 
 #: apps/booking/templates/booking/section-completed_order.html:37
 #: apps/booking/templates/booking/section-order_summary.html:14
-#: breakout/templates/email/order_confirmation.txt:15
+#: breakout/templates/email/bu.order_confirmation.txt:15
 #: breakout/templates/email/order_confirmation_alert.txt:11
 msgid "Total:"
 msgstr "Gesamt:"
 
 #: apps/booking/templates/booking/section-completed_order.html:45
-#: breakout/templates/email/order_confirmation.txt:18
+#: breakout/templates/email/bu.order_confirmation.txt:18
 msgid "You have the following appointments"
 msgstr "Termine"
 
 #: apps/booking/templates/booking/section-completed_order.html:47
-#: breakout/templates/email/order_confirmation.txt:20
+#: breakout/templates/email/bu.order_confirmation.txt:20
 msgid "You have the following appointment"
 msgstr "Termin"
 
 #: apps/booking/templates/booking/section-completed_order.html:59
-#: breakout/templates/email/order_confirmation.txt:25
+#: breakout/templates/email/bu.order_confirmation.txt:25
 msgid "at"
 msgstr "um"
 
 #: apps/booking/templates/booking/section-completed_order.html:61
-#: breakout/templates/email/order_confirmation.txt:25
+#: breakout/templates/email/bu.order_confirmation.txt:25
 msgid "for the room"
 msgstr "für den Raum"
 
@@ -591,27 +589,31 @@ msgstr "für den Raum"
 msgid ""
 "\n"
 "    Remember that you have to arrive 15 minutes before your session begins "
-"to allow enough time for you to perpare \n"
-"    and to give you a short explanation.\n"
+"to allow enough time for you to prepare and to give you a short "
+"explanation.\n"
 "    "
 msgstr ""
+"\n"
+"Denke daran, dass du 15 Minuten vor Beginn deiner Sitzung eintreffen musst,"
+"damit du genug Zeit hast, dich vorzubereiten und wir dir eine kurze Erklärung geben können\n"
+"    "
 
-#: apps/booking/templates/booking/section-completed_order.html:77
-#: breakout/templates/email/order_confirmation.txt:35
+#: apps/booking/templates/booking/section-completed_order.html:76
+#: breakout/templates/email/bu.order_confirmation.txt:36
 msgid "Your Coupon Codes"
 msgstr "Gutschein-Codes"
 
-#: apps/booking/templates/booking/section-completed_order.html:79
-#: breakout/templates/email/order_confirmation.txt:37
+#: apps/booking/templates/booking/section-completed_order.html:78
+#: breakout/templates/email/bu.order_confirmation.txt:38
 msgid "Your Coupon Code"
 msgstr "Gutschein-Code"
 
-#: apps/booking/templates/booking/section-completed_order.html:92
-#: breakout/templates/email/order_confirmation.txt:42
+#: apps/booking/templates/booking/section-completed_order.html:91
+#: breakout/templates/email/bu.order_confirmation.txt:43
 msgid "valued at"
 msgstr "wert"
 
-#: apps/booking/templates/booking/section-completed_order.html:100
+#: apps/booking/templates/booking/section-completed_order.html:99
 msgid ""
 "\n"
 "\n"
@@ -698,6 +700,10 @@ msgid ""
 "might be on it's way so please allow a couple of minutes, also make sure to "
 "check your spam folder."
 msgstr ""
+"Eine E-Mail mit den Informationen auf dieser Seite wurde an die E-Mail "
+"gesendet, die du während des Buchungsprozesses angegeben hast.Wenn du sie "
+"nicht in deinem Posteingang siehst, könnte sie auf dem Weg sein,, oder auf "
+"Deinen Spam-Ordner gelandet."
 
 #: apps/booking/templates/booking/view_calendar_test.html:8
 msgid "Book Online"
@@ -794,17 +800,17 @@ msgstr ""
 "Unsere Gutscheine sind für alle Räume drei Jahre gültig, nicht "
 "termingebunden und <b>online</b> einlösbar. "
 
-#: apps/booking/views.py:329 apps/booking/views.py:372
+#: apps/booking/views.py:369 apps/booking/views.py:412
 #, python-format
 msgid "The coupon with the code \"%(code)s\" does not exist"
 msgstr "Der Gutschein \"%(code)s\" existiert nicht"
 
-#: apps/booking/views.py:346 apps/booking/views.py:398
+#: apps/booking/views.py:386 apps/booking/views.py:438
 #, python-format
 msgid "The coupon with code \"%(code)s\" has been removed from your purchase"
 msgstr "Gutschein \"%(code)s\" entfernt"
 
-#: apps/booking/views.py:477
+#: apps/booking/views.py:517
 #, python-format
 msgid "Created %(amount)s coupons"
 msgstr ""
@@ -1085,31 +1091,19 @@ msgstr ""
 "Dies ist eine Liste der Kategorien von Cookies, die auf unserer Website "
 "verwendet werden, und warum wir sie verwenden."
 
+#: breakout/templates/email/bu.order_confirmation.txt:4
 #: breakout/templates/email/order_confirmation.html:5
-#: breakout/templates/email/order_confirmation.txt:4
 msgid "Dear"
 msgstr "Liebe"
 
+#: breakout/templates/email/bu.order_confirmation.txt:6
 #: breakout/templates/email/order_confirmation.html:8
-#: breakout/templates/email/order_confirmation.txt:6
 msgid "We have received your order. You can see a summary below."
 msgstr ""
 "Wir haben deine Bestellung erhalten. Du kannst unten eine Zusammenfassung "
 "sehen."
 
-#: breakout/templates/email/order_confirmation.txt:27
-msgid ""
-"\n"
-"Remember that you have to arrive 15 minutes before your session begins to "
-"allow enough time for you to perpare \n"
-"and to give you a short explanation.\n"
-msgstr ""
-"\n"
-"Denken Sie daran, dass Sie 15 Minuten vor Beginn Ihrer Sitzung eintreffen "
-"müssen, um dir genug Zeit zu geben, dich vorzubereitenund um dir eine kurze "
-"Erklärung zu geben. \n"
-
-#: breakout/templates/email/order_confirmation.txt:44
+#: breakout/templates/email/bu.order_confirmation.txt:45
 msgid ""
 "\n"
 "\n"
