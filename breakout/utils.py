@@ -1,4 +1,5 @@
 import re
+from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
 
 from django.conf import settings
@@ -20,6 +21,18 @@ def addmins(tm, mins):
 
 def textify(html):
     # Remove html tags and continuous whitespaces 
-    text_only = re.sub('[ \t]+', ' ', strip_tags(html))
-    # Strip single spaces in the beginning of each line
-    return text_only.replace('\n ', '\n').strip()
+    soup = BeautifulSoup(html, "html.parser") # create a new bs4 object from the html data loaded
+    for br in soup.find_all("br"):
+        print(br)
+        br.replace_with("\n")
+    for script in soup(["script", "style"]): # remove all javascript and stylesheet code
+        script.extract()
+    # get text
+    text = soup.get_text()
+    # break into lines and remove leading and trailing space on each
+    lines = (line.strip() for line in text.splitlines())
+    # break multi-headlines into a line each
+    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+    # drop blank lines
+    text = '\n'.join(chunk for chunk in chunks if chunk)
+    return text

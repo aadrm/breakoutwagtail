@@ -27,7 +27,7 @@ from django.forms import modelformset_factory
 
 from django.contrib.admin.views.decorators import staff_member_required
 from apps.wagtail.home.models import CouponsPage, BooknowPage
-from breakout.utils import get_booking_settings
+from breakout.utils import get_booking_settings, textify
 
 
 from paypal.standard import conf
@@ -764,4 +764,5 @@ def slots_calendar(request):
 
 def test_email_template(request):
     email = render_to_string('email/test_mail.html')
+    email = textify(email)
     return HttpResponse(email)

@@ -1,0 +1,46 @@
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+
+
+</style>
+</head>
+<body style="
+    background-color: #eee;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Open Sans', sans-serif, Arial;
+">
+<section style="
+    margin: 2rem auto;
+    background-color: #fff;
+    border-radius: 50px;
+    overflow: hidden;
+    min-height: 800px;
+">
+    <header style="
+        background-color: #465054;
+        color: white;
+        padding: 1rem 2rem;
+        height: 50px;
+    "
+    >
+    {% include 'svg/email-logo.svg' %}
+    {% comment %} <div style="
+        height: 50px;
+        display: inline-block; 
+    "> {% endcomment %}
+    </header>
+    <main style="padding: 1rem; line-height: 1.15em">
+        {% block body %}
+        {% endblock body %}
+    </main>
+</section>
+    <footer>
+        <p>&copy; {% now "Y"%} Breakout Escape Room</p>
+        <p>Breakout Escape Room GmbH, Riedingerstrasse 26c, D-86153 Augsburg</p>
+    </footer>
+</body>

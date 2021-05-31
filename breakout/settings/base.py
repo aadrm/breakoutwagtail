@@ -89,6 +89,7 @@ THIRD_PARTY_APPS = [
     'django_crontab',
     'wagtailyoast',
     'wagtail.locales',
+    'django_inlinecss',
 ]
 
 MY_APPS = [

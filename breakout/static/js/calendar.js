@@ -153,15 +153,16 @@ function callBackAvailability() {
 
 function callBackSlotForm() {
     if (ajaxRequest.readyState == 4) {
+        console.log('being called')
         let form = this.response.getElementsByClassName('booking-form-response')[0];
         let body = document.getElementsByTagName('body')[0];
-        if (!form == 'undefined') {
+        // if (!form == 'undefined') {
             body.prepend(form);
             addEventCloseForm();
             bookingFormSpinner.style.display = "none";
-        } else {
+        // } else {
             bookingFormSpinner.style.display = "none";
-        }
+        // }
     }
 };
 
@@ -189,6 +190,7 @@ function addEventToDay() {
     let available = document.getElementsByClassName("js-day");
 
     for (i = 0; i < available.length; i++) {
+        console.log('added')
         available[i].addEventListener("click", showSessionsOnDay);
     }
 }
@@ -196,6 +198,7 @@ function addEventToDay() {
 function addEventToSlot() {
     let slots = document.getElementsByClassName('available-slots__data__slot');
     for (i = 0; i < slots.length; i++) {
+        console.log('added')
         slots[i].addEventListener("click", showBookingForm);
     }
     slots = document.getElementsByClassName('admin-slot__extra-button');

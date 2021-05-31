@@ -1,6 +1,6 @@
 {% extends 'email/email_main.html' %}
 {% load i18n %}
-{% block body %}
+{% block email_body %}
 <p>
 {% trans "Dear" %} {{invoice.full_name}},
 </p>
@@ -8,5 +8,5 @@
 {% trans "We have received your order. You can see a summary below." %}
 </p>
 {% include 'booking/section-completed_order.html' %}
-{% endblock body %}
+{% endblock email_body %}
 
