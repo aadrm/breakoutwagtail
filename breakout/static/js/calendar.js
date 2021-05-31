@@ -155,11 +155,13 @@ function callBackSlotForm() {
     if (ajaxRequest.readyState == 4) {
         let form = this.response.getElementsByClassName('booking-form-response')[0];
         let body = document.getElementsByTagName('body')[0];
-        if (form == 'undefined'):
-
-        body.prepend(form);
-        addEventCloseForm();
-        bookingFormSpinner.style.display = "none";
+        if (!form == 'undefined') {
+            body.prepend(form);
+            addEventCloseForm();
+            bookingFormSpinner.style.display = "none";
+        } else {
+            bookingFormSpinner.style.display = "none";
+        }
     }
 };
 
