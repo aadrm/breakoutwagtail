@@ -48,7 +48,7 @@
             {% for appointment in appointments %}
             <tr>
                 <td>
-                {{appointment.slot.start|date:'d F Y'}} {% trans "at" %} {{appointment.slot.start|date:'G:i'}}{% trans "for the room" %}{{appointment.slot.room}}
+                {{appointment.slot.start|date:'d F Y'}} {% trans "at" %} {{appointment.slot.start|date:'G:i'}} {% trans "for the room" %} {{appointment.slot.room}}
                 </td>
             </tr>
             {% endfor %}

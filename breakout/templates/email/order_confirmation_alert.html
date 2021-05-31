@@ -1,10 +1,11 @@
 {% extends 'email/email_main.html' %}
 {% load i18n %}
-{% block body %}
+{% block email_title %}New Order{% endblock email_title %}
+{% block email_body %}
 <p>
 New Order from {{invoice.full_name}},
 </p>
 </p>
 {% include 'booking/section-completed_order.html' %}
-{% endblock body %}
+{% endblock email_body %}
 
