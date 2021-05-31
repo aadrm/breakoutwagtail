@@ -14,21 +14,14 @@ body {
 }
 
 .email-header {
-  width: 100%;
+  width: 450px;
   background: #abca44;
   padding: 16px;
   text-align: center;
 }
 
-h1 {
-  color: #fffffa;
-  font-size: 32px;
-  line-height: 32px;
-  margin: 0;
-}
-
 .email-body {
-  width: 100%;
+  width: 450px;
   background: #fffffa;
   padding: 16px;
 }
@@ -39,4 +32,15 @@ h1 {
   color: #777;
   padding-top: 16px;
   text-align: center;
+}
+
+.email-title {
+  color: #fffffa;
+  font-size: 32px;
+  line-height: 32px;
+  margin: 0;
+}
+
+h2 {
+  font-size: 24px; 
 }

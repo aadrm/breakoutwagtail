@@ -1,5 +1,6 @@
 {% extends 'email/email_main.html' %}
 {% load i18n %}
+{% block email_title %}{% trans "Order Confirmation" %}{% endblock email_title %}
 {% block email_body %}
 <p>
 {% trans "Dear" %} {{invoice.full_name}},

@@ -23,7 +23,6 @@ def textify(html):
     # Remove html tags and continuous whitespaces 
     soup = BeautifulSoup(html, "html.parser") # create a new bs4 object from the html data loaded
     for br in soup.find_all("br"):
-        print(br)
         br.replace_with("\n")
     for script in soup(["script", "style"]): # remove all javascript and stylesheet code
         script.extract()

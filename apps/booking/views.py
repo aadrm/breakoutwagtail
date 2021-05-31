@@ -766,3 +766,18 @@ def test_email_template(request):
     email = render_to_string('email/test_mail.html')
     email = textify(email)
     return HttpResponse(email)
+
+def test_email_order(request, order):
+    invoice = Invoice.objects.get(order_number=order) 
+    cart = invoice.cart
+    context = {
+        'invoice': invoice,
+        'cart': cart,
+        'domain': 'breakout-escaperoom.de',
+        'appointments': cart.get_appointment_items(),
+        'coupons': cart.get_coupon_items(),
+        'payment': invoice.payment.method,
+    }
+    email = render_to_string('email/order_confirmation.html', context)
+    # email = textify(email)
+    return HttpResponse(email)
