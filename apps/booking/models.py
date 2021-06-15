@@ -1071,7 +1071,7 @@ class Schedule(models.Model):
     
     def delete_slots(self):
         """deletes slots that are part of this Schedule and that have no related booking"""
-        Slot.objects.filter(schedule=self).filter(booking__isnull=True).delete()
+        Slot.objects.filter(schedule=self).filter(booking__isnull=True, is_disabled=False).delete()
 
                 
 class Slot(models.Model):
