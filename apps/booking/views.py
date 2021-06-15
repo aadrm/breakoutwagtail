@@ -711,6 +711,17 @@ def change_slot(request):
             cart_item.save()
     return HttpResponseRedirect(redirectto)
 
+@staff_member_required
+def delete_order(request):
+    if request.method == 'POST':
+        frompage = request.POST.get('frompage')
+        redirectto = reverse(frompage)
+        cart_id = request.POST.get('cart_id')
+        cart = Cart.objects.get(pk=cart_id)
+        cart.delete_order()
+
+    return HttpResponseRedirect(redirectto)
+
 
 @staff_member_required
 def change_product(request):

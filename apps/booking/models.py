@@ -313,6 +313,19 @@ class Cart(models.Model):
         item = items.get(pk=id)
         item.delete()
 
+    def delete_order(self):
+        """
+        deletes the order and any related data
+        """
+        for item in self.cart_items.all():
+            item.delete()
+        for item in self.cart_coupons.all():
+            item.coupon.used_times -= 1
+            item.coupon.save()
+            item.delete()
+        invoice = self.invoice
+        self.delete()
+        invoice.delete()
 
 class CartItem(models.Model):
     """
@@ -641,9 +654,9 @@ class Coupon(models.Model):
 
         for family in families:
             family_products = family.products.all()
-            products = (products | family_products).distinct()
+            products = (products | family_products)
 
-        return products
+        return products.distinct()
 
     def products_excluded_queryset(self):
         """returns a queryset with the all the producs related in the fields products_excluded and
@@ -655,7 +668,7 @@ class Coupon(models.Model):
             family_products = family.products.all()
             products = (products | family_products).distinct()
 
-        return products
+        return products.distinct()
 
     def products_cant_degrade_queryset(self):
         """
@@ -807,6 +820,8 @@ class Invoice(models.Model):
             self.order_int = self.order_next_int()
             self.order_number = self.create_order_number()
         self.save()
+
+        
 
 
 class Payment(models.Model):

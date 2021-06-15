@@ -67,6 +67,7 @@ class CartAdmin(admin.ModelAdmin):
             url(r'^change_slot/$', self.admin_site.admin_view(views.change_slot), name='change_slot'),
             url(r'^change_product_list/$', self.admin_site.admin_view(views.change_product_list), name='change_product_list'),
             url(r'^change_product/$', self.admin_site.admin_view(views.change_product), name='change_product'),
+            url(r'^delete_order/$', self.admin_site.admin_view(views.delete_order), name='delete_order'),
         ]
         return my_urls + urls
 

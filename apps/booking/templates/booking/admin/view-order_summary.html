@@ -15,7 +15,7 @@
 {% endblock extra_css %}
 {% block page_title %}Orders{% endblock page_title %}
 {% block titletag %}Orders{% endblock %}
-{% block content %}
+{% block body %}
 {{ block.super }}
 
 {% comment %} <div class="admin-content"> {% endcomment %}
@@ -39,13 +39,36 @@
     <table class="listing">
     <thead>
         <tr>
-            <td>Order</td> 
+            <th>Order</th> 
+            <th>Name</th> 
+            <th>Email</th> 
+            <th>Email</th> 
+            <th>Phone</th> 
+            <th>Payment</th> 
+            <th>Placed</th> 
+            <th>Tot</th> 
+            <th>Disc</th> 
+            <th>Products</th> 
+            <th>Appointments</th> 
+            <th>Coupons Used</th> 
         </tr>
     </thead>
     {% for order in orders %}
     <tbody>
     <tr>
-        <td>{{order.invoice.order_number}}</td>
+        <td>
+            <p>
+            {{order.invoice.order_number}}
+            </p>
+            <p>
+                <form action="{% url 'admin:delete_order' %}" method="POST">
+                    {% csrf_token %}
+                    <input name="cart_id" value="{{ order.pk }}" type="hidden">
+                    <input name="frompage" value="orders_list" type="hidden">
+                    <button class="button button-small button-secondary no">Delete</button> 
+                </form> 
+            </p>
+        </td>
         <td>{{order.invoice.full_name}}</td>
         <td>{{order.invoice.email}}</td>
         <td>{{order.invoice.phone}}</td>
@@ -115,7 +138,4 @@
 
     </tr>
     {% endfor %}
-    </tbody>
-    </table>
-{% comment %} </div> {% endcomment %}
-{% endblock content %}
+{% endblock body %}
