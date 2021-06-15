@@ -703,7 +703,7 @@ msgid ""
 msgstr ""
 "Eine E-Mail mit den Informationen auf dieser Seite wurde an die E-Mail "
 "Adressegesendet, die du während des Buchungsprozesses angegeben hast.Wenn du "
-"sie nicht in deinem Posteingang siehst, könnte sie auf dem Weg sein,, oder "
+"sie nicht in deinem Posteingang siehst, könnte sie auf dem Weg sein, oder "
 "auf Deinen Spam-Ordner gelandet."
 
 #: apps/booking/templates/booking/view_calendar_test.html:8

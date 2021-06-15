@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from breakout.utils import get_booking_settings, booking_limit_date
 
 from weasyprint import HTML, CSS
 
@@ -47,11 +48,10 @@ def prepare_calendar_base(year, month, room):
         return day_data
 
     def get_available_dates(year, month, room):
-        print('year', year)
-        print('year', month)
-        print('year', room)
         if room:
             slots = Slot.objects.filter(start__month=month, start__year=year, room=room) 
+            print(booking_limit_date())
+            slots = slots.exclude(start__gt=booking_limit_date())
         else:
             slots = Slot.objects.filter(start__month=month, start__year=year) 
         slots = slots.filter(start__gte=datetime.now())

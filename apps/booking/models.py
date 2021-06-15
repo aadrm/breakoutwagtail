@@ -4,6 +4,7 @@ from datetime import datetime, timedelta, time, date
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext as _
+from django.utils import timezone
 from django.utils.timezone import make_aware, is_aware
 from django.db import models, transaction
 from django.conf import settings
@@ -1026,6 +1027,8 @@ class Schedule(models.Model):
         """returns a list of Slot objects corresponding to the schedule"""
         slots = list()
         curr_date = self.start_date
+        if curr_date <= timezone.now().date():
+            curr_date = timezone.now().date()
         dow_binary = self.dow_as_binarylist()
         dow_integer = self.dow_as_integerlist()
         while curr_date <= self.end_date:
@@ -1122,7 +1125,7 @@ class Slot(models.Model):
     @property
     def is_future_of_buffer(self):
         this_moment = make_aware(datetime.today()) 
-        buffer = this_moment + timedelta(minutes=120)
+        buffer = this_moment + timedelta(hours=get_booking_settings().slot_buffer_time)
         if self.start > buffer:
             return True
         else:

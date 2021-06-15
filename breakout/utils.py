@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, time, timedelta
 
 from django.conf import settings
+from django.utils import timezone
 from django.utils.html import strip_tags
 from wagtail.core.models import Site
 
@@ -11,7 +12,32 @@ from apps.wagtail.site_settings.models import BookingSettings
 
 def get_booking_settings():
     settings = BookingSettings.objects.first()
-    return settings 
+    return settings
+
+def booking_limit_date():
+    now_date = timezone.now().date()
+    # maximum limit is one year from now
+    max_limit = now_date + timedelta(days=365)
+    days = get_booking_settings().prevent_bookings_after_days
+    date_limit = get_booking_settings().prevent_bookings_after_date
+
+    # check if values are none
+    if not days:
+        days_limit = max_limit
+    else:
+        days_limit = now_date + timedelta(days=days)
+
+    if not date_limit:
+        date_limit = max_limit
+
+    if days_limit < date_limit:
+        return days_limit
+    else:
+        return date_limit
+    
+
+
+
 
 def addmins(tm, mins):
     """adds minutes to a datetime.time object"""
