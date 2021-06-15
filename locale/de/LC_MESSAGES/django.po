@@ -406,7 +406,7 @@ msgstr "Mi"
 #: apps/booking/templates/booking/admin/ajax_admin_calendar.html:34
 #: apps/booking/templates/booking/ajax_calendar.html:43
 msgid "Th"
-msgstr "Dö"
+msgstr "Do"
 
 #: apps/booking/templates/booking/admin/ajax_admin_calendar.html:35
 #: apps/booking/templates/booking/ajax_calendar.html:44
@@ -441,8 +441,6 @@ msgid "Coupon not applicable to your cart"
 msgstr "Gutschein gilt nicht für deinen Warenkorb"
 
 #: apps/booking/templates/booking/ajax_item-list.html:18
-#, fuzzy
-#| msgid "Expires in: "
 msgid "Expires in:"
 msgstr "Ablauf im"
 
@@ -781,10 +779,6 @@ msgid "It's quick and easy:"
 msgstr "Schnell und unkompliziert:"
 
 #: apps/booking/templates/booking/view_coupon.html:34
-#, fuzzy
-#| msgid ""
-#| "You can have your present ready in less than a Minute, valid for all "
-#| "Rooms."
 msgid ""
 "You can have your <b>Christmass</b> or <b>birthday</b> present ready in less "
 "than a Minute."
@@ -793,8 +787,6 @@ msgstr ""
 "in nerWenigen Augenblicken."
 
 #: apps/booking/templates/booking/view_coupon.html:37
-#, fuzzy
-#| msgid "Our coupons are valid for three years, and can be redeemed online."
 msgid ""
 "Coupons remain valid three years for all rooms and redeemable <b>online</b>."
 msgstr ""
@@ -959,8 +951,6 @@ msgstr "pro Person"
 
 #: apps/wagtail/home/templates/home/section_prices.html:116
 #: apps/wagtail/home/templates/home/section_rooms.html:7
-#, fuzzy
-#| msgid "Book now"
 msgid "Book Now"
 msgstr "Jetzt Buchen"
 
@@ -989,8 +979,6 @@ msgid "Blog pages"
 msgstr ""
 
 #: apps/wagtail/myblog/templates/myblog/blog_post.html:34
-#, fuzzy
-#| msgid "Continue Shopping"
 msgid "Continue reading"
 msgstr "Weiter Kaufen"
 
@@ -1126,34 +1114,3 @@ msgstr "Tel:"
 #: breakout/templates/navbar.html:9
 msgid "Go to home"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Contact us"
-#~ msgstr "Kontaktiere uns"
-
-#~ msgid "Today"
-#~ msgstr "Heute"
-
-#~ msgid "Our Escape Rooms"
-#~ msgstr "Unsere Escape Rooms"
-
-#~ msgid "Choose your favourite adventure and select an appointment to book."
-#~ msgstr "Wähle dein Lieblingsabenteuer und suche dier eine Termin aus."
-
-#~ msgid "Choose when you want to play"
-#~ msgstr "Wann wilst du Spielen?"
-
-#~ msgid "Group offers and special discounts"
-#~ msgstr "Gruppenangebote und Sonderrabatte"
-
-#~ msgid "Prices"
-#~ msgstr "Preise"
-
-#~ msgid "Breakout Escape Room Teaser"
-#~ msgstr "Escape Room Teaser"
-
-#~ msgid "Two rooms, your choice"
-#~ msgstr "zwei Zimmer deine Wahl"
-
-#~ msgid "Read the rest of this entry"
-#~ msgstr "Mehr lessen"
