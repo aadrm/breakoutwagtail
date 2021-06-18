@@ -131,10 +131,10 @@ def purchase(request):
 
         print(form.errors)
         if form.is_valid():
+            cart.extend_items_expiration()
             invoice = form.save()
             cart.update_valid_items()
             cart.invoice = invoice
-            cart.extend_items_expiration()
             cart.save()
             if cart.process_purchase():
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
@@ -166,6 +166,8 @@ def order_completed(request, order):
 def paypal_return(request, cart, email):
     print(request)
     print(cart)
+    for cart_item_id in request.session['paypal_items']:
+        CartItem.objects.get(pk=cart_item_id).extend_expiration()
     cart = Cart.objects.get(pk=int(cart))
     cart.invoice = Invoice(
         payment=PaymentMethod.objects.get(method='paypal'),
@@ -177,7 +179,6 @@ def paypal_return(request, cart, email):
     )
     cart.invoice.save()
     cart.paypal_preapprove()
-    cart.extend_items_expiration()
     print(cart.invoice.order_number)
     return HttpResponseRedirect(reverse('booking:order', kwargs={'order': cart.invoice.order_number}))
 
@@ -445,9 +446,10 @@ def ajax_remove_coupon(request):
 
 @csrf_exempt
 def ajax_checkout_buttons(request):
+    print('ajax stuff')
     if request.method == 'POST':
+        print('is_post')
         cart = get_cart(request)
-        cart.extend_items_expiration()
         data = json.loads(request.body)
         email = data.get('email')
         payment_id = data.get('payment')
@@ -456,7 +458,7 @@ def ajax_checkout_buttons(request):
         if cart.is_require_shipping_address:
             shipping = 2
 
-        cart.apply_coupons()
+        cart.apply_coupons
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
             'amount': cart.total_after_coupons,
@@ -466,8 +468,11 @@ def ajax_checkout_buttons(request):
             'notify_url': request.build_absolute_uri(reverse('paypal-ipn')),
             'return': request.build_absolute_uri(reverse('booking:paypal_return', kwargs={'cart': cart.pk, 'email': email},)),
             'cancel': request.build_absolute_uri(reverse('booking:checkout')),
-            'no_shipping': shipping
+            'no_shipping': shipping,
+            'items': [item.pk for item in cart.get_valid_items()]
         }
+        request.session['paypal_items'] = paypal_dict['items']
+
     paypal_form = CustomPaypal(initial=paypal_dict)
     context = {
         'payment': payment,
@@ -565,7 +570,7 @@ def order_summary(request):
 def appointments(request):
     appointments = CartItem.objects.filter(cart__status__gt=0, status__gt=0, slot__isnull=False)
     start_date_filter = date.today()
-    end_date_filter = date.today() + timedelta(days=7)
+    end_date_filter = date.today() + timedelta(days=180)
     if request.method == 'POST':
         form = FilterAppointmentsForm(request.POST)
         if form.is_valid():

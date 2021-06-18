@@ -1,6 +1,7 @@
 .admin-content {
     position: relative;
     padding: 1rem;
+    overflow-y: scroll;
 }
 
 .admin-scroll {
@@ -13,6 +14,10 @@
     form {
         ul {
             display: flex;
+            flex-direction: column;
+            @include break--md {
+                flex-direction: row;
+            }
             li {    
                 max-width: 300px;
                 label {

@@ -21,7 +21,7 @@ from weasyprint import HTML, CSS
 from breakout.utils import addmins
 
 
-# Create your models here.
+# Create your models here
 
 class Cart(models.Model):
     """
@@ -51,7 +51,7 @@ class Cart(models.Model):
         return reverse("Cart_detail", kwargs={"pk": self.pk})
 
     def apply_coupons(self):
-        cart_items = self.get_valid_items_queryset()
+        cart_items = self.get_valid_items()
         self.reset_cart_items()
 
         for coupon in self.cart_coupons.all():
@@ -84,12 +84,12 @@ class Cart(models.Model):
         self.reset_cart_coupons()
 
     def reset_cart_items_price(self):
-        for item in self.get_valid_items_queryset():
+        for item in self.get_valid_items():
             item.price = item.base_price
             item.save()
 
     def reset_cart_items_coupons(self):
-        for item in self.get_valid_items_queryset():
+        for item in self.get_valid_items():
             item.cart_coupons.clear()
             item.save()
     
@@ -98,14 +98,17 @@ class Cart(models.Model):
             coupon.discount = 0
             coupon.save()
 
+
     def get_valid_items(self):
         items = self.cart_items.all()
-        valid_items = (x for x in items if x.is_in_cart)
-        return valid_items
+        for item in items:
+            if not item.is_in_cart:
+                item.delete()
+        return items 
 
-    def get_valid_items_queryset(self):
-        pks = [item.pk for item in self.get_valid_items()]
-        return CartItem.objects.filter(pk__in=pks)
+    # def get_valid_items_queryset(self):
+    #     pks = [item.pk for item in self.get_valid_items()]
+    #     return CartItem.objects.filter(pk__in=pks)
 
     def get_appointment_items(self):
         valid_items = self.get_valid_items()
@@ -193,9 +196,10 @@ class Cart(models.Model):
         each item has ben purchased
         """
         for item in self.get_valid_items():
+            print('a valid item')
             item.set_approved()
             item.save()
-    
+
     def create_cart_coupons(self, paid=True):
         coupon_items = self.get_coupon_items()
         for item in coupon_items:
@@ -231,14 +235,17 @@ class Cart(models.Model):
         """
         sets the status of the cart to 1 which means that the order should be confirmed
         """
-        self.status = 1
+        print('approving cart')
         self.approve_items()
         self.use_coupons()
+        self.status = 1
         self.save()
 
     def process_purchase(self):
         try:
+            print('---------------approve cart')
             self.approve_cart()
+            print('invoice')
             self.invoice.commit_order()
             self.create_cart_coupons()
             try:
@@ -264,31 +271,34 @@ class Cart(models.Model):
             'payment': invoice.payment.method,
         }
 
-        html_message = render_to_string('email/order_confirmation.html', context)
-        message = textify(html_message) 
+        html_message = render_to_string(
+            'email/order_confirmation.html', context)
+        message = textify(html_message)
         to_email = invoice.email
-        mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
+        mail_subject = _('Breakout Escape Room | Order: ') + \
+            invoice.order_number
         email = EmailMultiAlternatives(
             subject=mail_subject,
             body=message,
             from_email='info@breakout-escaperoom.de',
-            to=[to_email,],
+            to=[to_email, ],
         )
-
 
         email.attach_alternative(html_message, mimetype='text/html')
         self.attach_cart_coupons_to_email(email)
         email.send(fail_silently=True)
 
-        mail_subject = _('Breakout Escape Room | Order: ') + invoice.order_number
-        html_message = render_to_string('email/order_confirmation_alert.html', context)
-        message = textify(html_message) 
+        mail_subject = _('Breakout Escape Room | Order: ') + \
+            invoice.order_number
+        html_message = render_to_string(
+            'email/order_confirmation_alert.html', context)
+        message = textify(html_message)
 
         email = EmailMultiAlternatives(
             subject=mail_subject,
             body=message,
             from_email='info@breakout-escaperoom.de',
-            to=['info@breakout-escaperoom.de',],
+            to=['info@breakout-escaperoom.de', ],
         )
         email.attach_alternative(html_message, mimetype='text/html')
         email.send(fail_silently=True)
@@ -300,7 +310,8 @@ class Cart(models.Model):
             context = {
                 'coupon': coupon.coupon,
             }
-            html_string = render_to_string('booking/pdf-coupon_code.html', context)
+            html_string = render_to_string(
+                'booking/pdf-coupon_code.html', context)
             html = HTML(string=html_string, base_url=settings.BASE_URL)
             # html = HTML(string=html_string, base_url=request.build_absolute_uri())
             csspath = settings.STATIC_ROOT + 'css/pdf/coupon_code.css'
@@ -327,20 +338,30 @@ class Cart(models.Model):
         self.delete()
         invoice.delete()
 
+    def get_admin_url(self):
+        content_type = ContentType.objects.get_for_model(self.__class__)
+        return reverse("admin:%s_%s_change" % (content_type.app_label, content_type.model), args=(self.id,))
+
+
 class CartItem(models.Model):
     """
     Model that acts as a bridge between products and the cart
     """
-    slot = models.ForeignKey("booking.Slot", related_name="booking", verbose_name=_("slot"), on_delete=models.SET_NULL, null=True, blank=True)
-    coupon = models.ForeignKey("booking.Coupon", related_name="booking", on_delete=models.SET_NULL, null=True, blank=True)
+    slot = models.ForeignKey("booking.Slot", related_name="booking", verbose_name=_(
+        "slot"), on_delete=models.SET_NULL, null=True, blank=True)
+    coupon = models.ForeignKey("booking.Coupon", related_name="booking",
+                               on_delete=models.SET_NULL, null=True, blank=True)
     product = models.ForeignKey("booking.Product", on_delete=models.PROTECT)
     status = models.SmallIntegerField(_("status"), default=0)
-    cart = models.ForeignKey("booking.Cart", verbose_name=_("Cart"), related_name=_("cart_items"), on_delete=models.CASCADE, null=True, blank=True)
+    cart = models.ForeignKey("booking.Cart", verbose_name=_("Cart"), related_name=_(
+        "cart_items"), on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(_("created"), auto_now_add=True)
-    price = models.DecimalField(_("Price"), max_digits=8, decimal_places=2, default=0)
-    cart_coupons = models.ManyToManyField("booking.CartCoupon", verbose_name=_("coupons"), related_name='cart_items', blank=True)
-    marked_shipped = models.DateTimeField(_("Shipped"), auto_now=False, auto_now_add=False, null=True, blank=True)
-
+    price = models.DecimalField(
+        _("Price"), max_digits=8, decimal_places=2, default=0)
+    cart_coupons = models.ManyToManyField("booking.CartCoupon", verbose_name=_(
+        "coupons"), related_name='cart_items', blank=True)
+    marked_shipped = models.DateTimeField(
+        _("Shipped"), auto_now=False, auto_now_add=False, null=True, blank=True)
 
     @property
     def is_appointment(self):
@@ -361,11 +382,15 @@ class CartItem(models.Model):
         the booking was completed or is being booked and the expiry time has not been reached
         """
         if self.slot:
-            this_moment = make_aware(datetime.today())
+            this_moment = timezone.now()
+            print('now', this_moment)
+            print('expiry', self.slot_expiry)
 
             if self.status > 0:
+                print ('status > 0')
                 return True
             elif self.status == 0 and this_moment < self.slot_expiry:
+                print ('time?', this_moment < self.slot_expiry)
                 return True
             else:
                 return False
@@ -379,7 +404,7 @@ class CartItem(models.Model):
         a related slot and status is 0 
         """
         if self.slot:
-            return self.created + timedelta(minutes=get_booking_settings().slot_reservation_hold_minutes)
+            return self.created + timedelta(seconds=get_booking_settings().slot_reservation_hold_minutes)
         else:
             False
 
@@ -388,17 +413,19 @@ class CartItem(models.Model):
         """this means that the item is part of it's related cart, the conditions are if 
         this item is not expired
         """
+        print(self.slot_expiry_seconds())
         if self.slot and self.status == 0  and self.slot_expiry_seconds() < 1:
             return False
         elif self.status < 0:
             return False
         else:
+            print('in_cart')
             return True
 
     def slot_expiry_seconds(self):
         if self.slot and self.status == 0:
-            this_moment = make_aware(datetime.today())
-            expiry = self.created + timedelta(minutes=get_booking_settings().slot_reservation_hold_minutes)
+            this_moment = timezone.now()
+            expiry = self.slot_expiry 
             # this condition allows some extra time for orders carried out via paypal IPN
             if self.cart.status > 0:
                 return ((expiry + timedelta(minutes=40)) - this_moment).total_seconds()
@@ -419,7 +446,7 @@ class CartItem(models.Model):
         super(CartItem, self).save(*args, **kwargs)
 
     def extend_expiration(self):
-        self.created = make_aware(datetime.today())
+        self.created = timezone.now() 
         self.save()
 
     def set_approved(self):
@@ -438,6 +465,8 @@ class CartItem(models.Model):
         else:
             return False
 
+    def get_admin_url(self):
+        return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
 class CartCoupon(models.Model):
 
@@ -1147,7 +1176,7 @@ class Slot(models.Model):
             return False
     
     def __str__(self):
-        return self.room.__str__() + ' | ' + datetime.strftime(self.start, "%Y-%m-%d | %H:%M") + '(' + str(self.duration) + ')'
+        return self.room.__str__() + ' | ' + self.start.astimezone().strftime("%Y-%m-%d | %H:%M" ) + '(' + str(self.duration) + ')'
     
     def save(self, *args, **kwargs):
         # booked_slots = Slot.objects.filter(booking__isnull=False)

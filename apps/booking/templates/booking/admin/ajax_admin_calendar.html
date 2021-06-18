@@ -45,7 +45,8 @@
             {% if day.date|date:"m"|add:"0" == calendar.month|add:"0" %}
             <td class="cell">
                 <div class="cell__inner">
-                    <button 
+                    {% if day.available %}
+                    <div
                         class="cell__available-data js-day" 
                         data-url="{% url 'booking:ajax_day_availability' %}" 
                         data-year="{{day.date|date:"Y"}}" 
@@ -55,7 +56,8 @@
                         <p class="cell__day-number">
                             {{day.date|date:"j"}}
                         </p>
-                    </button>
+                    </div>
+                    {% endif %}
                 </div>
             {% else %}
             <td class="cell cell--not-in-month">

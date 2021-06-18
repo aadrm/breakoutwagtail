@@ -184,8 +184,9 @@ var cartError = document.getElementById("js-cart-error");
 function displayCartError() {
     if (cartValid == true) {
         cartValid = false;
-        let invoiceDetails = document.getElementById("js-invoice-details");
-        invoiceDetails.remove();
-        cartError.classList.remove("u-visually-hidden");
+        // let invoiceDetails = document.gsecondsetElementById("js-invoice-details");
+        // invoiceDetails.remove();
+        location.reload();
+        // cartError.classList.remove("u-visually-hidden");
     }
 };

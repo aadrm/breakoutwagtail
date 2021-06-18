@@ -60,9 +60,9 @@
                 Change
             </button> 
             <div></div>
-            <button class="button button-secondary button-small">
+            <a href="{{ appointment.get_admin_url }}" target="_blank" class="button button-secondary button-small">
                 Advanced 
-            </button>
+            </a>
         </td>
         <td>{{appointment.slot.start|date:"Y M d"}} <br> {{appointment.slot.start|date:"H:i"}}</td>
         <td>{{appointment.product.family.room}} <br> {{appointment.product.players}} players</td>

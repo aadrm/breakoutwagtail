@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-31 21:08+0000\n"
+"POT-Creation-Date: 2021-06-18 01:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/booking/forms.py:25 apps/booking/models.py:838
+#: apps/booking/forms.py:25 apps/booking/models.py:862
 #: apps/booking/templates/booking/form_slot-booking.html:5
 #: apps/wagtail/home/templates/home/section_prices.html:14
 #: apps/wagtail/home/templates/home/section_prices.html:19
@@ -28,363 +28,363 @@ msgstr ""
 msgid "Players"
 msgstr "Spieler"
 
-#: apps/booking/models.py:33 apps/booking/models.py:323
+#: apps/booking/models.py:34 apps/booking/models.py:343
 msgid "status"
 msgstr ""
 
-#: apps/booking/models.py:34
+#: apps/booking/models.py:35
 msgid "items before purchase"
 msgstr ""
 
-#: apps/booking/models.py:35 apps/booking/models.py:768
+#: apps/booking/models.py:36 apps/booking/models.py:790
 msgid "Invoice"
 msgstr ""
 
-#: apps/booking/models.py:46 apps/booking/models.py:324
-#: apps/booking/models.py:431
+#: apps/booking/models.py:47 apps/booking/models.py:344
+#: apps/booking/models.py:453
 msgid "Cart"
 msgstr ""
 
-#: apps/booking/models.py:47
+#: apps/booking/models.py:48
 msgid "Carts"
 msgstr ""
 
-#: apps/booking/models.py:269 apps/booking/models.py:282
+#: apps/booking/models.py:270 apps/booking/models.py:283
 msgid "Breakout Escape Room | Order: "
 msgstr ""
 
-#: apps/booking/models.py:307 apps/booking/utils.py:164
+#: apps/booking/models.py:308 apps/booking/utils.py:164
 msgid "gift_voucher_"
 msgstr ""
 
-#: apps/booking/models.py:320
+#: apps/booking/models.py:340
 msgid "slot"
 msgstr ""
 
-#: apps/booking/models.py:324
+#: apps/booking/models.py:344
 msgid "cart_items"
 msgstr ""
 
-#: apps/booking/models.py:325
+#: apps/booking/models.py:345
 msgid "created"
 msgstr ""
 
-#: apps/booking/models.py:326 apps/booking/models.py:835
+#: apps/booking/models.py:346 apps/booking/models.py:859
 msgid "Price"
 msgstr ""
 
-#: apps/booking/models.py:327
+#: apps/booking/models.py:347
 msgid "coupons"
 msgstr ""
 
-#: apps/booking/models.py:328
+#: apps/booking/models.py:348
 msgid "Shipped"
 msgstr ""
 
-#: apps/booking/models.py:430
+#: apps/booking/models.py:452
 msgid "Cart Coupon"
 msgstr ""
 
-#: apps/booking/models.py:431
+#: apps/booking/models.py:453
 msgid "cart_coupons"
 msgstr ""
 
-#: apps/booking/models.py:432
+#: apps/booking/models.py:454
 msgid "Discount"
 msgstr ""
 
-#: apps/booking/models.py:435
+#: apps/booking/models.py:457
 msgid "CartCoupon"
 msgstr ""
 
-#: apps/booking/models.py:436
+#: apps/booking/models.py:458
 msgid "CartCoupons"
 msgstr ""
 
-#: apps/booking/models.py:458
+#: apps/booking/models.py:480
 #, python-format
 msgid ""
 "The coupon with the code \"%(code)s\" is already being applied to your "
 "purchase."
 msgstr ""
 
-#: apps/booking/models.py:465
+#: apps/booking/models.py:487
 #, python-format
 msgid "The coupon \"%(code)s\" is expired"
 msgstr ""
 
-#: apps/booking/models.py:473
+#: apps/booking/models.py:495
 #, python-format
 msgid "The \"%(code)s\" has exceeded its usage limit"
 msgstr ""
 
-#: apps/booking/models.py:480
+#: apps/booking/models.py:502
 #, python-format
 msgid "Coupon \"%(code)s\" successfully added to your cart"
 msgstr ""
 
-#: apps/booking/models.py:528
+#: apps/booking/models.py:550
 msgid "reference"
 msgstr ""
 
-#: apps/booking/models.py:529
+#: apps/booking/models.py:551
 msgid "code"
 msgstr ""
 
-#: apps/booking/models.py:530
+#: apps/booking/models.py:552
 msgid "discount amount"
 msgstr ""
 
-#: apps/booking/models.py:531
+#: apps/booking/models.py:553
 msgid "is percent"
 msgstr ""
 
-#: apps/booking/models.py:532
+#: apps/booking/models.py:554
 msgid "entire basket"
 msgstr ""
 
-#: apps/booking/models.py:533 apps/booking/models.py:534
+#: apps/booking/models.py:555 apps/booking/models.py:556
 msgid "can be combined"
 msgstr ""
 
-#: apps/booking/models.py:535
+#: apps/booking/models.py:557
 msgid "Upgrades the item"
 msgstr ""
 
-#: apps/booking/models.py:536
+#: apps/booking/models.py:558
 msgid " include families"
 msgstr ""
 
-#: apps/booking/models.py:537
+#: apps/booking/models.py:559
 msgid " exclude families"
 msgstr ""
 
-#: apps/booking/models.py:538
+#: apps/booking/models.py:560
 msgid "include product"
 msgstr ""
 
-#: apps/booking/models.py:539
+#: apps/booking/models.py:561
 msgid "exclude product"
 msgstr ""
 
-#: apps/booking/models.py:540
+#: apps/booking/models.py:562
 msgid "Used times"
 msgstr ""
 
-#: apps/booking/models.py:541
+#: apps/booking/models.py:563
 msgid "Usage limit"
 msgstr ""
 
-#: apps/booking/models.py:542
+#: apps/booking/models.py:564
 msgid "Created"
 msgstr ""
 
-#: apps/booking/models.py:543
+#: apps/booking/models.py:565
 msgid "Expiration date"
 msgstr ""
 
-#: apps/booking/models.py:544
+#: apps/booking/models.py:566
 msgid "Minimum spend"
 msgstr ""
 
-#: apps/booking/models.py:545
+#: apps/booking/models.py:567
 msgid "Days Valid"
 msgstr ""
 
-#: apps/booking/models.py:548
+#: apps/booking/models.py:570
 #: apps/booking/templates/booking/ajax_item-list.html:10
 msgid "Coupon"
 msgstr ""
 
-#: apps/booking/models.py:549
+#: apps/booking/models.py:571
 #: apps/booking/templates/booking/view_checkout.html:44
 #: apps/wagtail/home/templates/home/section_main-header.html:21
 msgid "Coupons"
 msgstr ""
 
-#: apps/booking/models.py:719 apps/booking/models.py:897
+#: apps/booking/models.py:741 apps/booking/models.py:921
 #: apps/wagtail/streams/models.py:7 apps/wagtail/streams/models.py:21
 #: apps/wagtail/streams/models.py:41
 msgid "Name"
 msgstr ""
 
-#: apps/booking/models.py:720
+#: apps/booking/models.py:742
 #: apps/wagtail/streams/templates/streams/contact_block.html:52
 msgid "Phone"
 msgstr ""
 
-#: apps/booking/models.py:721
+#: apps/booking/models.py:743
 msgid "Email"
 msgstr ""
 
-#: apps/booking/models.py:722
+#: apps/booking/models.py:744
 msgid "Street"
 msgstr ""
 
-#: apps/booking/models.py:723
+#: apps/booking/models.py:745
 msgid "Post code"
 msgstr ""
 
-#: apps/booking/models.py:724
+#: apps/booking/models.py:746
 msgid "City"
 msgstr ""
 
-#: apps/booking/models.py:725
+#: apps/booking/models.py:747
 msgid "Company name"
 msgstr ""
 
-#: apps/booking/models.py:726
+#: apps/booking/models.py:748
 msgid "Payment Method"
 msgstr ""
 
-#: apps/booking/models.py:727
+#: apps/booking/models.py:749
 msgid "Accept terms"
 msgstr ""
 
-#: apps/booking/models.py:728
+#: apps/booking/models.py:750
 msgid "Accept privacy"
 msgstr ""
 
-#: apps/booking/models.py:729
+#: apps/booking/models.py:751
 msgid "Order Placed"
 msgstr ""
 
-#: apps/booking/models.py:730 apps/booking/models.py:731
+#: apps/booking/models.py:752 apps/booking/models.py:753
 msgid "Order Number"
 msgstr ""
 
-#: apps/booking/models.py:769
+#: apps/booking/models.py:791
 msgid "Invoices"
 msgstr ""
 
-#: apps/booking/models.py:818
+#: apps/booking/models.py:842
 msgid "display name"
 msgstr ""
 
-#: apps/booking/models.py:819
+#: apps/booking/models.py:843
 msgid "method"
 msgstr ""
 
-#: apps/booking/models.py:822
+#: apps/booking/models.py:846
 msgid "PaymentMethod"
 msgstr ""
 
-#: apps/booking/models.py:823
+#: apps/booking/models.py:847
 msgid "PaymentMethods"
 msgstr ""
 
-#: apps/booking/models.py:834 apps/booking/models.py:842
+#: apps/booking/models.py:858 apps/booking/models.py:866
 msgid "Product"
 msgstr ""
 
-#: apps/booking/models.py:836
+#: apps/booking/models.py:860
 msgid "upgrade"
 msgstr ""
 
-#: apps/booking/models.py:837
+#: apps/booking/models.py:861
 msgid "Family"
 msgstr ""
 
-#: apps/booking/models.py:843
+#: apps/booking/models.py:867
 msgid "Products"
 msgstr ""
 
-#: apps/booking/models.py:850
+#: apps/booking/models.py:874
 #: apps/booking/templates/booking/ajax_item-list.html:8
 #: apps/booking/templates/booking/ajax_item-list.html:10
 msgid "Player"
 msgstr "Spieler"
 
-#: apps/booking/models.py:875
+#: apps/booking/models.py:899
 msgid "Product Family"
 msgstr ""
 
-#: apps/booking/models.py:878
+#: apps/booking/models.py:902
 msgid "Is coupon"
 msgstr ""
 
-#: apps/booking/models.py:879
+#: apps/booking/models.py:903
 msgid "Shipping cost"
 msgstr ""
 
-#: apps/booking/models.py:880
+#: apps/booking/models.py:904
 msgid "Room"
 msgstr ""
 
-#: apps/booking/models.py:883 apps/booking/models.py:924
-#: apps/booking/models.py:1091
+#: apps/booking/models.py:907 apps/booking/models.py:948
+#: apps/booking/models.py:1117
 msgid "ProductFamily"
 msgstr ""
 
-#: apps/booking/models.py:884
+#: apps/booking/models.py:908
 msgid "ProductFamilies"
 msgstr ""
 
-#: apps/booking/models.py:898
+#: apps/booking/models.py:922
 msgid "Active"
 msgstr ""
 
-#: apps/booking/models.py:899
+#: apps/booking/models.py:923
 msgid "Description"
 msgstr ""
 
-#: apps/booking/models.py:900
+#: apps/booking/models.py:924
 msgid "Image"
 msgstr ""
 
-#: apps/booking/models.py:901
+#: apps/booking/models.py:925
 msgid "Alt text"
 msgstr ""
 
-#: apps/booking/models.py:902
+#: apps/booking/models.py:926
 msgid "Colour Hexagesimal"
 msgstr ""
 
-#: apps/booking/models.py:916
+#: apps/booking/models.py:940
 msgid "Start Date"
 msgstr ""
 
-#: apps/booking/models.py:917
+#: apps/booking/models.py:941
 msgid "End Date"
 msgstr ""
 
-#: apps/booking/models.py:918
+#: apps/booking/models.py:942
 msgid "Day of Week"
 msgstr ""
 
-#: apps/booking/models.py:919
+#: apps/booking/models.py:943
 msgid "Start Time"
 msgstr ""
 
-#: apps/booking/models.py:920
+#: apps/booking/models.py:944
 msgid "Interval"
 msgstr ""
 
-#: apps/booking/models.py:921 apps/booking/models.py:1086
+#: apps/booking/models.py:945 apps/booking/models.py:1112
 msgid "Duration"
 msgstr ""
 
-#: apps/booking/models.py:923
+#: apps/booking/models.py:947
 msgid "Instances"
 msgstr ""
 
-#: apps/booking/models.py:1085
+#: apps/booking/models.py:1111
 msgid "Start"
 msgstr ""
 
-#: apps/booking/models.py:1087
+#: apps/booking/models.py:1113
 msgid "interval"
 msgstr ""
 
-#: apps/booking/models.py:1088
+#: apps/booking/models.py:1114
 msgid "room"
 msgstr ""
 
-#: apps/booking/models.py:1089
+#: apps/booking/models.py:1115
 msgid "schedule"
 msgstr ""
 
-#: apps/booking/models.py:1090
+#: apps/booking/models.py:1116
 msgid "protect"
 msgstr ""
 
@@ -507,7 +507,7 @@ msgstr ""
 
 #: apps/booking/templates/booking/form_checkout-form.html:67
 msgid "In order to continue you have to agree with our terms and conditions"
-msgstr "Bitte warten Sie ein paar Sekunden..."
+msgstr "Um fortzufahren, müssen Sie unseren Allgemeinen Geschäftsbedingungen zustimmen"
 
 #: apps/booking/templates/booking/form_slot-booking.html:11
 msgid "Cancel"
@@ -534,7 +534,7 @@ msgstr "Ordernummer:"
 msgid "You have selected \"Bank Transfer\" as the payment method."
 msgstr "\"Überweisung\" wurde als Zahlungsmethode ausgewählt."
 
-#: apps/booking/templates/booking/section-completed_order.html:9
+#: apps/booking/templates/booking/section-completed_order.html:8
 #, python-format
 msgid ""
 "\n"
@@ -546,7 +546,7 @@ msgstr ""
 "Bitte den Betrag von €%(transfer_amout)s vor Deinem Termin auf unserer "
 "Bankkonto Überweisen"
 
-#: apps/booking/templates/booking/section-completed_order.html:13
+#: apps/booking/templates/booking/section-completed_order.html:14
 msgid "See our bank account details below:"
 msgstr "Unsere Bankverbingung:"
 
@@ -676,8 +676,8 @@ msgid "PDF Coupon Templates"
 msgstr ""
 
 #: apps/booking/templates/booking/view-order.html:9
-msgid "Order Completed"
-msgstr "Bestellung abgeschlossen"
+msgid "Thank you!"
+msgstr "Vielen Dank!"
 
 #: apps/booking/templates/booking/view-order.html:15
 msgid ""
@@ -1114,3 +1114,6 @@ msgstr "Tel:"
 #: breakout/templates/navbar.html:9
 msgid "Go to home"
 msgstr ""
+
+#~ msgid "Order Completed"
+#~ msgstr "Bestellung abgeschlossen"

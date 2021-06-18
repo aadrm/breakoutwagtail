@@ -37,12 +37,13 @@ def prepare_calendar_base(year, month, room):
             slots_in_day = Slot.objects.filter(start__date=day)
         available_slots = 0
         for slot in slots_in_day:
+            slot_num += 1
             if slot.is_available:
                 available_slots += 1
         day_data = {}
         day_data.update({
             'date': day,
-            # 'slots': slots_in_day,
+            'slots': slot_num,
             'available_slots': available_slots,
         })
         return day_data
@@ -54,6 +55,7 @@ def prepare_calendar_base(year, month, room):
             slots = slots.exclude(start__gt=booking_limit_date())
         else:
             slots = Slot.objects.filter(start__month=month, start__year=year) 
+            return [s.start.date() for s in slots]
         slots = slots.filter(start__gte=datetime.now())
         available_dates = []
         for slot in slots:
