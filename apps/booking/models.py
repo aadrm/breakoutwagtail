@@ -568,7 +568,7 @@ class Coupon(models.Model):
                 if len(coupons_same_slug) == 0:
                     unique = True
 
-    name = models.CharField(_("reference"), max_length=32, blank=True, null=True)
+    name = models.CharField(_("reference"), max_length=255, blank=True, null=True)
     code = models.SlugField(_("code"), max_length=32, blank=True, unique=True)
     amount = models.DecimalField(_("discount amount"), max_digits=5, decimal_places=2, default=0)
     is_percent = models.BooleanField(_("is percent"), default=False)
