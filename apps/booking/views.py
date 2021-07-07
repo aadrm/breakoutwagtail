@@ -139,7 +139,10 @@ def purchase(request):
             cart.invoice = invoice
             cart.save()
             if cart.process_purchase():
-                send_cart_emails(cart)
+                try:
+                    send_cart_emails(cart)
+                except Exception as e:
+                    traceback.print_exc()
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
                 return HttpResponse('success')
             else:

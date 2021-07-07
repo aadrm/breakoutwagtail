@@ -248,12 +248,6 @@ class Cart(models.Model):
             print('invoice')
             self.invoice.commit_order()
             self.create_cart_coupons()
-            try:
-                self.send_cart_emails()
-            except Exception as e:
-                print('emails not sent')
-                print(e)
-                traceback.print_exc()
             return True
         except Exception as e:
             print(e)
