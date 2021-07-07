@@ -50,6 +50,8 @@ from .utils import (
     calendar_from_room,
     getProductsFromProductFamily,
     attach_cart_coupons_to_email,
+    get_notification_emails_list,
+    send_cart_emails,
 )
 
 from .models import (
@@ -137,6 +139,7 @@ def purchase(request):
             cart.invoice = invoice
             cart.save()
             if cart.process_purchase():
+                send_cart_emails(cart)
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
                 return HttpResponse('success')
             else:

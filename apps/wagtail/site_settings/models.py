@@ -15,6 +15,7 @@ class BookingSettings(BaseSetting):
     prevent_bookings_after_days = models.IntegerField(blank=True, null=False, default=90)
     prevent_bookings_after_date = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     slot_buffer_time = models.IntegerField(blank=True, null=True, default=2)
+    booking_notification_emails = models.CharField(max_length=1024, null=True, blank=True)
 
 
     panels = [
@@ -24,6 +25,7 @@ class BookingSettings(BaseSetting):
                 FieldPanel("prevent_bookings_after_days"),
                 FieldPanel("prevent_bookings_after_date"),
                 FieldPanel("slot_buffer_time"),
+                FieldPanel("booking_notification_emails"),
             ], 
         heading="Booking settings")
     ]

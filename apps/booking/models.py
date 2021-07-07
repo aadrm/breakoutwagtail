@@ -404,7 +404,7 @@ class CartItem(models.Model):
         a related slot and status is 0 
         """
         if self.slot:
-            return self.created + timedelta(seconds=get_booking_settings().slot_reservation_hold_minutes)
+            return self.created + timedelta(minutes=get_booking_settings().slot_reservation_hold_minutes)
         else:
             False
 

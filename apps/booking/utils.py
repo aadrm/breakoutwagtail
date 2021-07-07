@@ -1,4 +1,5 @@
 # form python
+import re
 
 from calendar import monthrange, Calendar, MONDAY
 from datetime import datetime, timedelta, date
@@ -9,11 +10,66 @@ from django.template.loader import render_to_string
 from django.db.models import Q
 from django.utils import timezone
 from django.utils.translation import gettext as _
-from breakout.utils import get_booking_settings, booking_limit_date
+from django.core.mail import send_mail, EmailMultiAlternatives
+
+from breakout.utils import get_booking_settings, booking_limit_date, textify
 
 from weasyprint import HTML, CSS
 
 from .models import Slot, ProductFamily, Room, Cart
+
+def get_notification_emails_list():
+    """returns a list of email addresses from the booking_settings email list"""
+    email_str = get_booking_settings().booking_notification_emails
+    if email_str:
+        email_list = re.split(r', *', email_str)
+        return email_list 
+    else:
+        return ''
+
+def send_cart_emails(cart):
+    invoice = cart.invoice
+    context = {
+        'invoice': invoice,
+        'cart': cart,
+        'domain': 'breakout-escaperoom.de',
+        'appointments': cart.get_appointment_items(),
+        'coupons': cart.get_coupon_items(),
+        'payment': invoice.payment.method,
+    }
+
+    html_message = render_to_string(
+        'email/order_confirmation.html', context)
+    message = textify(html_message)
+    to_email = invoice.email
+    mail_subject = _('Breakout Escape Room | Order: ') + \
+        invoice.order_number
+    email = EmailMultiAlternatives(
+        subject=mail_subject,
+        body=message,
+        from_email='info@breakout-escaperoom.de',
+        to=[to_email, ],
+    )
+
+    email.attach_alternative(html_message, mimetype='text/html')
+    cart.attach_cart_coupons_to_email(email)
+    email.send(fail_silently=True)
+
+    mail_subject = _('Breakout Escape Room | Order: ') + \
+        invoice.order_number
+    html_message = render_to_string(
+        'email/order_confirmation_alert.html', context)
+    message = textify(html_message)
+
+    email = EmailMultiAlternatives(
+        subject=mail_subject,
+        body=message,
+        from_email='info@breakout-escaperoom.de',
+        to=get_notification_emails_list(),
+    )
+    email.attach_alternative(html_message, mimetype='text/html')
+    email.send(fail_silently=True)
+
 
 def calendar_from_room(year, month, room):
     """returns a dictionary with slots data of the given calendar month for a room"""
