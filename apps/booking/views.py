@@ -105,6 +105,7 @@ def checkout(request):
     invoice_form = InvoiceForm(cart=cart)
     remove_from_cart_form = RemoveFromCartForm()
     apply_coupon_form = ApplyCouponForm()
+
     coupons_page = CouponsPage.objects.first()
     booknow_page = BooknowPage.objects.first()
     context = {
@@ -456,6 +457,7 @@ def ajax_checkout_buttons(request):
     if request.method == 'POST':
         print('is_post')
         cart = get_cart(request)
+        cart.extend_items_expiration()
         data = json.loads(request.body)
         email = data.get('email')
         payment_id = data.get('payment')

@@ -40,6 +40,7 @@
     <th> Room <br> Players </th>
     <th> Order <br> Name</th>
     <th>Email<br>Phone</th>
+    <th>Payment Method<br>Amount</th>
     {% comment %} <th>Discounts</th>
     <th>Appointments</th>
     <th>Couponse</th> {% endcomment %}
@@ -68,6 +69,7 @@
         <td>{{appointment.product.family.room}} <br> {{appointment.product.players}} players</td>
         <td>Nr.:{{appointment.cart.invoice.order_number}} <br> {{appointment.cart.invoice.full_name}} </td>
         <td>{{appointment.cart.invoice.email}} <br>{{appointment.cart.invoice.phone}} </td>
+        <td>{{appointment.cart.invoice.payment}} <br>{{appointment.price}} </td>
     </tr>
     {% endfor %}
     </table>

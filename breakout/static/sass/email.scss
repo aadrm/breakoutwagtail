@@ -45,3 +45,29 @@ body {
 h2 {
   font-size: 24px; 
 }
+
+.email-table {
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.email-cell {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+.email-border-top-broad {
+  border-top: 4px solid #ccc;
+}
+
+.c-top-wide {
+  border-width: 4px 1px 1px;
+}
+
+.c-center {
+  text-align: center;
+}
+
+.c-right {
+  text-align: right;
+}

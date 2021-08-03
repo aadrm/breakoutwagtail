@@ -20,17 +20,34 @@
     <br>
     {% endif %}
 
-    <h4 class="">{% trans "Summary" %}</h4>
-    <table class="form-remove__table">
+    {% comment %} <h4 class="">{% trans "Summary" %}</h4> {% endcomment %}
+    <table cellspacing="0" class="form-remove__table email-table">
         <tbody>
+            <tr>
+                <th class="email-cell">{% trans "Product" %}</th> 
+                <th class="email-cell">{% trans "Price" %}</th>
+            </tr>
             {% for item in cart.get_valid_items %}
             <tr class="js-cart-item">
-                <td>{{item.product}}</td> <td>€{{item.price}}</td>
+                <td class="email-cell">{{item.product}}</td> <td class="email-cell">€{{item.base_price}}</td>
             </tr>
             {% endfor %}
         </tbody>
         <tfoot>
-            <td><b>{% trans "Total:" %} €{{cart.total_after_coupons}}</b></td>
+            {% if cart.discount > 0 %}
+            <tr>
+                <td class="email-cell c-top-wide"><b>{% trans "Subtotal:" %}</b></td>
+                <td class="email-cell c-top-wide"> €{{cart.total}}</td>
+            </tr>
+            <tr>
+                <td class="email-cell"><b>{% trans "Discount:" %}</b> </td>
+                <td class="email-cell">-€{{cart.discount}}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="email-cell"><b>{% trans "Total:" %} </b></td>
+                <td class="email-cell"><b>€{{cart.total_after_coupons}}</b></td>
+            </tr>
         </tfoot>
     </table>
 
@@ -43,13 +60,18 @@
     <h4 class="">{% trans "You have the following appointment" %}</h4>
     {% endif %}
     {% if appointments %}
-    <table class="form-remove__table">
+    <table cellspacing="0" class="form-remove__table email-table">
         <tbody>
+            <tr>
+                <th class="email-cell">{% trans "Date" %}</th> 
+                <th class="email-cell">{% trans "Time" %}</th>
+                <th class="email-cell">{% trans "Room" %}</th>
+            </tr>
             {% for appointment in appointments %}
             <tr>
-                <td>
-                {{appointment.slot.start|date:'d F Y'}} {% trans "at" %} {{appointment.slot.start|date:'G:i'}} {% trans "for the room" %} {{appointment.slot.room}}
-                </td>
+                <td class="c-center email-cell">{{appointment.slot.start|date:'d F Y'}}  </td>
+                <td class="c-center email-cell">{{appointment.slot.start|date:'G:i'}}</td>
+                <td class="c-center email-cell">{{appointment.slot.room}}</td>
             </tr>
             {% endfor %}
         </tbody> 

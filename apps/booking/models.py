@@ -381,10 +381,10 @@ class CartItem(models.Model):
             print('expiry', self.slot_expiry)
 
             if self.status > 0:
-                print ('status > 0')
+                print('status > 0')
                 return True
             elif self.status == 0 and this_moment < self.slot_expiry:
-                print ('time?', this_moment < self.slot_expiry)
+                print('time?', this_moment < self.slot_expiry)
                 return True
             else:
                 return False
@@ -408,7 +408,7 @@ class CartItem(models.Model):
         this item is not expired
         """
         print(self.slot_expiry_seconds())
-        if self.slot and self.status == 0  and self.slot_expiry_seconds() < 1:
+        if self.slot and self.status == 0 and self.slot_expiry_seconds() < 1:
             return False
         elif self.status < 0:
             return False
@@ -419,7 +419,7 @@ class CartItem(models.Model):
     def slot_expiry_seconds(self):
         if self.slot and self.status == 0:
             this_moment = timezone.now()
-            expiry = self.slot_expiry 
+            expiry = self.slot_expiry
             # this condition allows some extra time for orders carried out via paypal IPN
             if self.cart.status > 0:
                 return ((expiry + timedelta(minutes=40)) - this_moment).total_seconds()

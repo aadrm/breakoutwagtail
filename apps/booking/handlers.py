@@ -2,6 +2,7 @@ from paypal.standard.models import ST_PP_COMPLETED, ST_PP_PENDING
 from paypal.standard.ipn.signals import valid_ipn_received, invalid_ipn_received
 from .models import Cart, PaymentMethod, Invoice, Payment
 from .forms import InvoiceForm
+from .utils import send_cart_emails
 from django.conf import settings
 from django.dispatch import receiver
 
@@ -66,6 +67,7 @@ def show_me_the_money(sender, **kwargs):
 
             print('processing purchase')
             cart.process_purchase()
+            send_cart_emails(cart)
         else:
             print('invalid payment')
 
