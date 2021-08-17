@@ -51,8 +51,9 @@ class Cart(models.Model):
         return reverse("Cart_detail", kwargs={"pk": self.pk})
 
     def apply_coupons(self):
-        cart_items = self.get_valid_items()
+
         self.reset_cart_items()
+        cart_items = self.get_valid_items()
 
         for coupon in self.cart_coupons.all():
             cp = coupon.coupon
