@@ -307,8 +307,7 @@ def ajax_slot_enable(request):
 
 # pdf
 
-def pdf_coupon_code(request):
-    code = 'snthaoeusnnth'
+def pdf_coupon_code(request, code=''):
     context = {
         'code': code
     }

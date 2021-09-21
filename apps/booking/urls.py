@@ -23,6 +23,7 @@ urlpatterns = [
     path('day_availability/', views.ajax_day_available_slots, name='ajax_day_availability'),
 
     path('pdf_coupon_code/', views.pdf_coupon_code, name='pdf_coupon_code'),
+    path('pdf_coupon_code/<str:code>/', views.pdf_coupon_code, name='pdf_coupon_code'),
 
     path('calendar/', views.ajax_calendar, name='ajax_calendar'),
     path('ajax_admin_calendar/', views.ajax_admin_calendar, name='ajax_admin_calendar'),
