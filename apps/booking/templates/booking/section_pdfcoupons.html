@@ -3,9 +3,8 @@
 
 {% get_documents "coupon-templates" as docs %}
 {% if docs %}
-{% for doc in docs.documents.all %}
-
 <h2 class="text-center">{% trans "PDF Coupon Templates" %}</h2>
+{% for doc in docs.documents.all %}
 <br>
 <div class="coupon-pdf-links">
     <div class="coupon-pdf-link">
