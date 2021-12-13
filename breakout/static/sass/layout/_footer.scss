@@ -53,7 +53,7 @@ footer {
         fill: $brand-light;
         &:hover {
             fill: $brand-primary;
-            filter: drop-shadow(0 0 8px $brand-primary);
+            filter: drop-shadow(0 0 2px $brand-primary-8);
         }
     }
 }

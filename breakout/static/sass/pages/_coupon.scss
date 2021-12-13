@@ -238,52 +238,7 @@ paypal button
 pdf templates 
 */
 
-.coupon-pdf-links {
-    margin-top: 2rem;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-}
-
 .coupon-pdf-link {
-    margin: 2rem;
-    border: 2px solid $brand-dark;
-    border-radius: 8px;
-    align-content: center;
-    background: $brand-light;
-    display: grid;
-    max-width: 300px;
-    width: 90%;
-    height: 76px;
-    position: relative;
-    padding: 8px;
-    &:hover {
-        cursor: pointer;
-    }
-    a {
-        line-height: 50px;
-        font-size: $font--lg;
-        font-weight: bold;
-        text-decoration: none;
-    }
     svg {
-        position: absolute;
-        width: 64px;
-        height: 64px;
-        right: 6px;
-        top: 6px;
-    }
-    &:hover {
-        background: $brand-emphasis;
-        color: $brand-light;
-        img{
-            animation: bounce 1;
-        }
-        a {
-            color: $brand-light;
-        }
     }
 }
-

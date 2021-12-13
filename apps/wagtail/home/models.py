@@ -192,6 +192,28 @@ class CouponsPage(RoutablePageMixin, MyPage):
     max_count = 1
     template = "booking/view_coupon.html"
 
+    content = StreamField(
+        [
+            ('section', myblocks.SectionBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+
+    content_after = StreamField(
+
+        [
+            ('section', myblocks.SectionBlock()),
+        ],
+        null=True,
+        blank=True,
+    )
+ 
+    content_panels = MyPage.content_panels + [
+        StreamFieldPanel('content'),
+        StreamFieldPanel('content_after'),
+    ]
+
     @route(r'^$')
     def coupons_page_route(self, request, *args, **kwargs):
         context = self.get_context(request, *args, **kwargs)

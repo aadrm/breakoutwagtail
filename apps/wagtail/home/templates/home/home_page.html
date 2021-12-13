@@ -5,12 +5,12 @@
 
 {% block content %}
 {% include 'home/section_main-header.html' %}
-{% include 'home/corona_banner.html' %}
+{% include 'corona_banner.html' %}
 <main>
 <section class="c-section-dark">
 
     <span id="rooms" class="c-id-offset"></span>
-    <div class="text-center c-color-primary c-wrapper--md">
+    <div class="text-center c-color-primary c-wrapper--lg">
         {% if page.our_rooms_header %}
         <h2 class="breakout-font">{{ page.our_rooms_header }}</h2>
         <br>
@@ -25,9 +25,28 @@
     </div> 
 </section>
 
+<section class="c-section-light">
+    <span id="offers" class="c-id-offset"></span>
+    <div class=" text-center c-wrapper--lg">
+        {% if page.offers_header %}
+        <h2 class="text-primary breakout-font">{{ page.offers_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.offers_text %}
+        <div class="c-color-secondary">
+        {{ page.offers_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    </div> 
+    <div class="c-wrapper--lg mt-3">
+    {% include 'home/section_offers.html' %}
+    </div>
+</section>
+
 <section class="c-section-dark">
     <span id="online" class="c-id-offset"></span>
-    <div class=" c-wrapper--md">
+    <div class=" c-wrapper--lg">
         {% if page.online_header %}
         <h2 class="breakout-font text-center c-color-primary">{{ page.online_header }}</h2>
         <br>
@@ -43,51 +62,15 @@
 </section>
 
 <section class="c-section-primary">
-    <span id="offers" class="c-id-offset"></span>
-    <div class=" text-center c-color-emphasis c-wrapper--md">
-        {% if page.offers_header %}
-        <h2 class="breakout-font">{{ page.offers_header }}</h2>
-        <br>
-        {% endif %}
-        {% if page.offers_text %}
-        <div class="c-color-secondary">
-        {{ page.offers_text|safe}}
-        </div>
-        <br>
-        {% endif %}
-    </div> 
-    <div class="c-wrapper--md">
-    {% include 'home/section_offers.html' %}
-    </div>
-</section>
-
-<section class="c-section-dark">
-    <span id="video" class="c-id-offset"></span>
-    <div class=" text-center c-color-primary c-wrapper--md">
-        {% if page.video_header %}
-        <h2 class="breakout-font">{{ page.video_header }}</h2>
-        <br>
-        {% endif %}
-        {% if page.video_text %}
-        <div class="c-color-light">
-        {{ page.video_text|safe}}
-        </div>
-        <br>
-        {% endif %}
-        {% include 'home/section_video.html' %}
-    </div>
-</section>
-
-<section class="c-section-primary">
     <span id="prices" class="c-id-offset"></span>
-    <div class=" text-center c-wrapper--md">
+    <div class=" text-center c-wrapper--lg">
         {% if page.prices_header %}
-        <h2 class="breakout-font">{{ page.prices_header }}</h2>
+        <h2 class="text-light breakout-font">{{ page.prices_header }}</h2>
         <br>
         {% endif %}
         {% if page.prices_text %}
-        <div class="c-color-light">
-        {{ page.prices_text|safe}}
+        <div class="text-dark">
+            {{ page.prices_text|safe}}
         </div>
         <br>
         {% endif %}
@@ -95,20 +78,29 @@
     </div>
 </section>
 
-<section class="c-section-light">
-    <span id="context-centert" class="c-id-offset"></span>
-    {% comment %} {% include 'home/section_context-centert.html' %} {% endcomment %}
-    {% comment %} <br><br><br> {% endcomment %}
-    <div class="c-wrapper--md">
-    {% include 'home/section_location.html' %}
+<section class="c-section-dark">
+    <span id="video" class="c-id-offset"></span>
+    <div class=" text-center c-color-primary c-wrapper--lg">
+        {% if page.video_header %}
+        <h2 class="breakout-font">{{ page.video_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.video_text %}
+        <div class="c-color-light">
+            {{ page.video_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+        {% include 'home/section_video.html' %}
     </div>
 </section>
 
+
 {% if page.reviews %}
-<section class="c-section-primary">
-    <div class=" text-center c-wrapper--md">
+<section class="c-section-light">
+    <div class=" text-center c-wrapper--lg">
         {% if page.reviews_header %}
-        <h2 class="breakout-font c-color-emphasis">{{ page.reviews_header }}</h2>
+        <h2 class="breakout-font text-primary">{{ page.reviews_header }}</h2>
         <br>
         {% endif %}
         {% if page.reviews_text %}
@@ -126,7 +118,7 @@
 
 <section class="c-section-dark">
     <span id="faq" class="c-id-offset"></span>
-    <div class="c-wrapper--md">
+    <div class="c-wrapper--lg">
         <h2 class="breakout-font text-center c-color-primary">{% trans "Frequently Asked Questions" %}</h2>
         <br>
         <div class="faq-wrapper">
@@ -137,6 +129,16 @@
     </div>
     {% comment %} {% include 'section_faq.html' %} {% endcomment %}
 </section>
+
+<section class="c-section-light">
+    <span id="context-centert" class="c-id-offset"></span>
+    {% comment %} {% include 'home/section_context-centert.html' %} {% endcomment %}
+    {% comment %} <br><br><br> {% endcomment %}
+    <div class="c-wrapper--lg">
+    {% include 'home/section_location.html' %}
+    </div>
+</section>
+
 </main>
 
 {% endblock content %}
@@ -144,6 +146,7 @@
 {% block extra_js %}
     {{ block.super }}
     <script defer type="module" src=" {% static 'js/accordion.js' %}"></script>
+    <script defer type="module" src=" {% static 'js/snow.js' %}"></script>
     <script defer type="module" src =" {% static 'js/deffer.js' %}" ></script>
 
 {% endblock extra_js %}

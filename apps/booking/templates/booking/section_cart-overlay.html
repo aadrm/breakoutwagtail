@@ -1,5 +1,4 @@
 {% load i18n %}
-{% if cart.number_of_valid_items > 0 %}
 <aside class="cart-overlay">
 
     <div class="cart-overlay__inner">
@@ -7,10 +6,14 @@
             <div class="cart-overlay__icon-wrapper">
                 {% include 'svg/cart.svg' %}
             </div>
+            {% if cart.number_of_valid_items > 0 %}
             <p class="cart-overlay__items-amount">
+            {% else %}
+            <p class="cart-overlay__items-amount cart-overlay__items-amount--empty">
+            {% endif %}
                 {{cart.number_of_valid_items}}
             </p>
         </a>
+        
     </div>
 </aside>
-{% endif %}

@@ -1,30 +1,38 @@
 {% load i18n %}
 {% load static %}
-<div class="section-online c-inner-width--md">
-    <div class="online-wrapper">
-        <div class="online-image-wrapper">
+
+<div class="container c-inner-width--md">
+
+    <div class="row justify-content-center g-0">
+
+        <div class="col-8 col-lg-5 overflow-hidden img-container">
             <a rel="noopener" href="https://breakout-escaperoom-de.cluequest.co.uk">
-                <img title="Online Games" loading="lazy" src="{% static 'img/cluequest/pce-collection.webp' %}" alt="Printable Games Collection">
+                <img class="img-cover" title="Online Games" loading="lazy" src="{% static 'img/cluequest/pce-collection.webp' %}" alt="Printable Games Collection">
             </a>
         </div>
-        <div class="online-text-wrapper">
-            <div class="  -left">
-                <h3>{% trans "Online Game Series: Print+Cut+Escape" %}</h3>
-            </div>
+
+        <div class="col-8 col-lg-5 bg-secondary bg-opacity-75 p-3">
+            <h3 class="h4">{% trans "Online Game Series: Print+Cut+Escape" %}</h3>
             <br>
             <p>{% trans "Unique puzzles with a great balance of difficutlty. The story gets told through the puzzles and entertaining videos." %}</p>
+
             <div class="c-list-block">
-                <ul>
+                <ul class="list-check-primary">
                     <li>{% trans "1.5-2 hours game play" %}</li> 
                     <li>{% trans "Play at home or via zoom" %}</li> 
                     <li>{% trans "Online game interface" %}</li> 
                     <li>{% trans "Fun for friends and families" %}</li> 
                 </ul>
             </div>
+
             <p>{% trans "*Series in English only." %}</p>
-            <div class="online-button-wrapper">
-                <a rel="noopener" href="https://breakout-escaperoom-de.cluequest.co.uk" class="c-anchor-primary c-anchor c-text-md online-button" target="_blank">{% trans "See offer" %}</a>
+
+            <div>
+                <a rel="noopener" href="https://breakout-escaperoom-de.cluequest.co.uk" target="_blank">
+                    <button class="btn btn-primary px-5">{% trans "See offer" %}</button>
+                </a>
             </div>
         </div>
+
     </div>
 </div>

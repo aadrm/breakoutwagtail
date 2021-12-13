@@ -1,8 +1,6 @@
 {% load i18n %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<div class="offersplay">
-        {% for group in page.group_offers %}
-            {% include_block group %}
-        {% endfor %} 
-</div>
+{% for group in page.group_offers %}
+    {% include_block group %}
+{% endfor %} 

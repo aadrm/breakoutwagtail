@@ -1,6 +1,6 @@
 .nav-wrapper {
     background: $brand-dark-e;
-    height: 100px;
+    height: 72px;
     position: fixed;
     top: 0;
     width: 100%;
@@ -8,31 +8,23 @@
     font-weight: 500;
 }
 
-.extra-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    display: flex;
-    flex-direction: row;
-}
-
 .nav-items {
     color: $brand-font-light;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-    list-style: none;
-    top: 0;
-    width: 100%;
-    padding: 0;
+    position: absolute;
+    // display: grid;
+    // grid-template-columns: 1fr;
+    // grid-template-rows: 1fr;
+    // list-style: none;
+    top: 72px;
+    width: 100vw;
 }
 
 .nav-item_container {
-    position: relative;
+//     position: relative;
     max-height: 0;
-    text-align: center;
-    background: $brand-dark-d;
-    overflow: hidden;
+//     text-align: center;
+    background: $brand-dark-e;
+//     overflow: hidden;
     transition: all .3s ease-out;
 }
 
@@ -60,19 +52,12 @@
 
 
 .logo {
-    position: absolute;
-    left: 1rem;
-    height: 96px;
-    width: 150px;
-    max-width: 40vw;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
     z-index:  98;
+    max-width: 33vw;
     svg, img {
-        width: 100%;
-        max-width: 33vw;
-        left: 0;
+        display: block;
+        height: 100%;
+        max-width: 100%;
     }
 }
 
@@ -81,15 +66,7 @@ nav items toogle
 */
 
 .nav-toggle-label {
-    margin: 0 auto;
-    position: relative;
-    justify-self: center;
     cursor: pointer;
-    height: 96px;
-    width: 96px;
-    display: grid;
-    align-items: center;
-    justify-items: center;
     z-index: 999;
     max-width: 20vw;
 
@@ -98,12 +75,10 @@ nav items toogle
     span::before {
         display: block;
         background: $brand-light;
-        height: 5px;
-        width: 2em;
+        height: 3px;
+        width: 32px;
         border-radius: 5px;
-        transition: bottom 0.5s, top 0.5s, background 0.5s, -webkit-transform 0.5s;
         transition: transform 0.5s, bottom 0.5s, top 0.5s, background 0.5s;
-        transition: transform 0.5s, bottom 0.5s, top 0.5s, background 0.5s, -webkit-transform 0.5s;
     }
 
     span::after,
@@ -134,7 +109,7 @@ nav items toogle
                 transform: rotate(405deg);
             }
             span::after{
-                top: -5px;
+                top: -3px;
                 transform: rotate(-405deg);
             }
         }
@@ -150,28 +125,16 @@ nav items toogle
 @include break--lg {
     .nav-toggle-label {
         display: none;
-    
     }
 
     .nav-items {
         position: relative;
-        display: flex;
-        height: 100px;
-        justify-content: space-evenly;
-        list-style: none;
-        position: fixed;
-        right: 0;
-        width: calc(100% - 150px);
-        z-index: 99;
-        padding-right: 3rem;
+        top: 0;
         
     
         .nav-item_container {
-            padding: 0;
-            background: none;
-            max-height: none;
-            height: 100%;
-            line-height: 100px;
+            max-height: unset;
+            background: transparent;
         }
 
         .nav-item_book {
@@ -218,83 +181,65 @@ nav items toogle
 }
 
 
-/*
- banner 
-*/
 
-.banner {
-    @include break--md {
-    display: flow-root;
-    }
-    display: none;
-    z-index: 91;
-    background: $brand-primary;
-    position: absolute;
-    top: 100px;
-    left: 8vw;
-    height: 200px;
-    box-shadow: inset 0 5px 12px $brand-dark;
-    &::before,
-    &::after {
-        content: '';
+
+.language-flag {
+    height: 32px;
+    width: 32px;
+    opacity: .8;
+    transition: .3s all;
+    svg {
+        height: 100%;
         display: block;
-        height: 0;
-        width: 0;
-        border-top: 50px solid transparent;
-        border-bottom: 50px solid transparent;
-        position: absolute;
-        z-index: 1;
+        margin: auto;
+        position: relative;
+        left: -50%;
     }
-    &::before {
-        border-right: 101px solid $brand-primary;
-        bottom: -50px;
+    &:hover {
+        opacity: 1;
     }
-    &::after {
-        border-left: 101px solid $brand-primary;
-        bottom: -50px;
-        right: 0;
-    }   width: 200px;
 }
 
-.banner-inner {
-    color: $brand-dark;
+
+.cart-overlay {
+    height: 32px;
+    width: 48px;
+    position: relative;
+    color: $brand-light;
+    transition: .3s all;
+    opacity: .8;
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+    }
+}
+
+.cart-overlay__icon-wrapper {
+    height: 100%;
+    svg {
+        height: 100%;
+        fill: $brand-light;
+    }
+}
+
+.cart-overlay__items-amount {
     position: absolute;
-    border-left: 3px dashed $brand-secondary;
-    border-right: 3px dashed $brand-secondary;
-    height: calc(100% - 1rem);
-    margin: .5rem;
-    padding: .5rem;
+    color: white;
+    left: 26px;
+    top: -11px;
+    background: red;
+    border-radius: 50%;
     text-align: center;
-    z-index: 3;
-    p {
-        font-size: medium;
-        font-weight: bold;
-    }
-    &::before,
-    &::after {
-        content: '';
-        border-bottom: 3px dashed $brand-secondary;
-        display: block;
-        height: 2px;
-        width: 48%;
-        position: absolute;
-        bottom: -25px;
-    z-index: 2;
-    }
-    &::before {
-        left: 4px;
-        transform: skewY(25deg);
-    }
-    &::after {
-        right: 4px;
-        transform: skewY(-25deg);
-    }
-    a {
-        padding: .5rem;
-        display: block;
-        width: 100%;
-        line-height: 1em;
-        text-shadow: none;
-        margin: .5rem auto;
-    }
+    line-height: 22px;
+    font-size: 16px;
+    height: 22px;
+    width: 22px;
+    margin: 2px auto;
+    display: block;
+    text-decoration: none;
+    opacity: 80%;
+}
+
+.cart-overlay__items-amount--empty {
+    background: $brand-secondary;
 }

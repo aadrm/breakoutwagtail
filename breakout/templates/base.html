@@ -93,6 +93,12 @@
         <link rel="preload" href="{% static 'css/main.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="{% static 'css/main.css' %}"></noscript>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        {% comment %} font awesome  {% endcomment %}
+        <script src="https://kit.fontawesome.com/48b06d0d3d.js" crossorigin="anonymous"></script>
+
         {% comment %} cookie consent {% endcomment %}
         {% if request|cookie_group_accepted:"analytics" %}
             <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
@@ -123,7 +129,7 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
         {% include 'navbar.html' %}
-        {% include 'language_switcher.html' %}
+            {% comment %} {% include 'navbar.html' %} {% endcomment %}
         {% block content %}{% endblock content %}
         <footer>
             {% include 'footer.html' %} 

@@ -3,20 +3,18 @@
 {% load i18n %}
 {% load menus_tags %}
 {% get_menu "main-menu" as navigation %}
-<nav class="nav-main">
-    <div class="nav-wrapper">
-            <div class="nav-item logo c-stamp-fine">
-                <a aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
-                    {% comment %} <img src="{% static 'img/brand/logo_small_white.png' %}" alt="Breakout Escape Room" width="119" height="52"> {% endcomment %}
-                    {% include 'svg/logo_breakout_nav.svg' %}
-                </a>
-            </div>
+<nav class="navbar">
+    <div class="nav-wrapper d-flex justify-content-between">
+        <a class="p-2 logo" aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
+            {% comment %} <img src="{% static 'img/brand/logo_small_white.png' %}" alt="Breakout Escape Room" width="119" height="52"> {% endcomment %}
+            {% include 'svg/logo_breakout_nav.svg' %}
+        </a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
-        <label for="nav-toggle" class="nav-toggle-label"><span></span> </label>
-        <ul class="nav-items">
+        <label for="nav-toggle" class="nav-toggle-label order-last d-lg-none d-flex flex-column justify-content-center p-2"><span></span> </label>
+        <ul class="nav-items d-lg-flex justify-content-around p-0 p-lg-2 m-0">
             {% for item in navigation.menu_items.all %}
             {% if not item.fixed %}
-            <li class="nav-item_container">
+            <li class="nav-item_container overflow-hidden d-flex align-items-center">
                 <a class="nav-link nav-link-anchor c-nav-anchor" 
                 href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                     {{ item.title }}
@@ -24,22 +22,45 @@
             </li>
             {% endif %}
             {% endfor %}
-            {% for item in navigation.menu_items.all %}
+            {% comment %} {% for item in navigation.menu_items.all %}
             {% if item.fixed %}
             <li class="nav-item_book ">
-                <a class="nav-book-anchor nav-link nav-link-anchor c-nav-anchor c-anchor-primary" 
+                <a class="btn btn-outline-primary nav-book-anchor nav-link nav-link-anchor c-nav-anchor" 
                 href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                 {{item.title}}
                 </a>
             </li>
             {% endif %}
-            {% endfor %}
+            {% endfor %} {% endcomment %}
+            {% if language_all|length > 1 %}
+            <li class="nav-item_container overflow-hidden d-flex align-items-center">
+                {% for language in language_all %}
+                {% language language.language_code %}
+
+                {% if forloop.counter > 1 %}
+                <a href="{{page.url}}" title="{{language.language_name}}">
+                    <div class="d-flex">
+                        {% if language.svg_flag %}
+                        <span class="language-flag rounded-circle overflow-hidden">
+                            {{language.svg_flag|safe}}
+                        {% else %}
+                        <span>{{language}}</span>
+                        {% endif %}                    
+                        </span> 
+                    </div>
+                </a>
+                {% endif %}
+
+                {% endlanguage %}
+                {% endfor %}
+                {% if not nocart %}
+                    <div class="ms-4">
+                        {% include 'booking/section_cart-overlay.html' %}
+                    </div>
+                {% endif %}
+            </li>
+            {% endif %}
 
         </ul>
-        <div class="extra-nav">
-            {% if not nocart %}
-                {% include 'booking/section_cart-overlay.html' %}
-            {% endif %}
-        </div>
     </div>
 </nav>

@@ -60,25 +60,23 @@
 .c-section-dark {
     background: $brand-dark;
     color: $brand-font-light;
-    -webkit-box-shadow: 0 21px 15px $brand-dark;
-            box-shadow: 0 21px 15px $brand-dark;
     z-index: 4;
 }
 
 .c-section-primary {
     background: $brand-primary;
     color: $brand-font-dark;
-    -webkit-box-shadow: 0 21px 15px $brand-primary;
-            box-shadow: 0 21px 15px $brand-primary;
     z-index: 2;
 }
 
 .c-section-secondary {
     background: $brand-secondary;
     color: $brand-font-light;
-    -webkit-box-shadow: 0 21px 15px $brand-dark;
-            box-shadow: 0 21px 15px $brand-dark;
     z-index: 3;
+}
+
+.c-section-grey {
+    background: $brand-grey;
 }
 
 .c-section-light{

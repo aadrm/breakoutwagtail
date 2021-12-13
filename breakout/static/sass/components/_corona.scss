@@ -24,9 +24,9 @@
     animation: 1s ease-out 0s slideInFromRight;
     box-shadow: 2px -2px 4px $brand-dark;
     z-index: 11;
-    opacity: .95;
+    opacity: .9;
+    border-radius: 16px 0 0 16px;
     input {
-        display: none;
         &:checked {
             &~label,
             &~a {
@@ -34,17 +34,38 @@
             }
         }
     }
+
     label   {
-        display: block;
         background: $brand-secondary;
-        color: $brand-primary;
-        width: 100%;
-        text-align: center;
-        font-weight: bold;
-        padding: .5rem;
-        font-size: 28px;
+        position: relative;
+        height: 40px;
+        display: flex;
+        border-radius: 16px 0 0 0px;
+        span {
+            &::after,
+            &::before {
+                margin: auto;
+                position: relative;
+                display: block;
+                background: $brand-light;
+                height: 3px;
+                width: 32px;
+                border-radius: 5px;
+                transition: transform 0.5s, bottom 0.5s, top 0.5s, background 0.5s;
+                content: '';
+            }
+            &::before {
+                top: 3px;
+                transform: rotate(405deg);
+            }
+                
+            &::after {
+                bottom: 0px;
+                transform: rotate(-405deg);
+            }
+        }
         &:hover {
-            background: $brand-light;
+            background: $brand-primary;
             cursor: pointer;
         }
     }
@@ -68,6 +89,7 @@
             svg {
                 width: 32px;
                 height: 32px;
+                transition: 0s linear all;
                 path {
                     fill: $brand-primary;
                 }
@@ -76,5 +98,11 @@
     }
     &:hover {
         opacity: 1;
+        .corona-icon {
+            svg {
+                transform: rotate(7200deg);
+                transition: 60s linear all;
+            }
+        }
     }
 }

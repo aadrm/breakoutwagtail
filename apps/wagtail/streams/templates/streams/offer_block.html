@@ -1,17 +1,24 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<div class="offercards">
-    {% for block in self.cards %}
-    <div class="offercard">
-        <div class="offercard__head">
-            {{block.icon}}
-        </div>
-        <div class="offercard__body">
-            <h3>{{ block.title }}</h3>
-            {{ block.text }}
-            <div class="offercard__link">
-                {% include_block block.link %}
+<div class="container">
+    <div class="row gx-3 gy-5 justify-content-center">
+
+        {% for block in self.cards %}
+        <div class="col-sm-6 col-md-4 offercard">
+            <div class="row justify-content-center ">
+        {% comment %} <div class="col offercard__head__background rounded-circle d-flex w-75"> {% endcomment %}
+                <div class="offercard__head rounded-circle">
+                    {{block.icon}}
+                </div>
+            </div>
+            <div class="offercard__body text-center mt-3">
+                <h3 class="text-secondary h4">{{ block.title }}</h3>
+                {{ block.text }}
+                <div class="d-flex justify-content-center">
+                    {% include_block block.link %}
+                </div>
             </div>
         </div>
-    </div>
     {% endfor %}
+    </div> 
+
 </div>

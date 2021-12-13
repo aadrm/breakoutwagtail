@@ -57,10 +57,10 @@
 
 .main-header {
   position: relative;
-  min-height: 100%;
+  min-height: 600px;
+  max-height: 100vh;
+  height: 60vw;
   min-width: 100%;
-  height: 100vh;
-  width: 100vw;
   align-items: center;
   color: $brand-light;
   background-image: url(../img/photos/escape-room-lock.jpg);
@@ -68,7 +68,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   // background-size: 100%;
-  background-attachment: fixed;
+  // background-attachment: fixed;
 
   top: 0;
   left: 0;
@@ -142,4 +142,86 @@ Main header
     display: inline-block;
     float: right;
    }
+}
+
+
+/*
+ banner 
+*/
+
+.banner {
+  @include break--lg {
+    // display: flow-root;
+  }
+  display: none;
+  z-index: 91;
+  background: $brand-primary;
+  position: absolute;
+  top: 72px;
+  left: 8vw;
+  height: 200px;
+  box-shadow: inset 0 5px 12px $brand-dark;
+  &::before,
+  &::after {
+      content: '';
+      display: block;
+      height: 0;
+      width: 0;
+      border-top: 50px solid transparent;
+      border-bottom: 50px solid transparent;
+      position: absolute;
+      z-index: 1;
+  }
+  &::before {
+      border-right: 101px solid $brand-primary;
+      bottom: -50px;
+  }
+  &::after {
+      border-left: 101px solid $brand-primary;
+      bottom: -50px;
+      right: 0;
+  }   width: 200px;
+}
+
+.banner-inner {
+  color: $brand-dark;
+  position: absolute;
+  border-left: 3px dashed $brand-secondary-2;
+  border-right: 3px dashed $brand-secondary-2;
+  height: calc(100% - 1rem);
+  margin: .5rem;
+  padding: .5rem;
+  text-align: center;
+  z-index: 3;
+  p {
+      font-size: medium;
+      font-weight: bold;
+  }
+  &::before,
+  &::after {
+      content: '';
+      border-bottom: 3px dashed $brand-secondary;
+      display: block;
+      height: 2px;
+      width: 48%;
+      position: absolute;
+      bottom: -25px;
+  z-index: 2;
+  }
+  &::before {
+      left: 4px;
+      transform: skewY(25deg);
+  }
+  &::after {
+      right: 4px;
+      transform: skewY(-25deg);
+  }
+  a {
+      padding: .5rem;
+      display: block;
+      width: 100%;
+      line-height: 1em;
+      text-shadow: none;
+      margin: .5rem auto;
+  }
 }

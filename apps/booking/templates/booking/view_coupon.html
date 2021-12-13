@@ -1,6 +1,7 @@
 {% extends 'base_secondary.html' %}
 {% load static %}
 {% load i18n %}
+{% load wagtailcore_tags %}
 {% load wagtailroutablepage_tags %}
 
 
@@ -12,7 +13,7 @@
 {{ block.super }}
 <main class="coupons-main">
     <section class="c-section-light">
-        <div class="c-section-inner-sm">
+        <div class="c-section-inner-sm c-wrapper--md">
             <div class="coupons-intro"> 
                 <div class="coupons-pictures">
                     <img loading="lazy" src="{% static 'img/coupons/coupon-back.jpg' %}" alt="{% trans "Image of the back side of our coupons" %}" class="coupons-pictures_pic1">
@@ -40,11 +41,18 @@
                     </p>
                 </div> 
             </div>
+            {% for block in page.content %}
+                {% include_block block %}
+            {% endfor %}
         </div>
+        
         {% include 'booking/section_coupons.html' %}
     </section>
     <section id="pdf-templates" class="c-section-light">
         <div class="c-wrapper--md">
+            {% for block in page.content_after %}
+                {% include_block block %}
+            {% endfor %}
             {% include 'booking/section_pdfcoupons.html' %}
         </div>
     </section>

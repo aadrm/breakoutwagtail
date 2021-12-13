@@ -12,16 +12,19 @@ from .models import ReviewFamily, Review, Colour
 
 class ElementBlock(blocks.StructBlock):
 
-    style = blocks.StructBlock(
-        [
-            ('font_colour', blocks.ChoiceBlock(
-                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-            ('bg_colour', blocks.ChoiceBlock(
-                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-            ('shadow', blocks.IntegerBlock(required=False)),
-            ('max_width_outer', blocks.IntegerBlock(required=False)),
-        ], form_classname='inline_struct'
-    )
+    try:
+        style = blocks.StructBlock(
+            [
+                ('font_colour', blocks.ChoiceBlock(
+                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+                ('bg_colour', blocks.ChoiceBlock(
+                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+                ('shadow', blocks.IntegerBlock(required=False)),
+                ('max_width_outer', blocks.IntegerBlock(required=False)),
+            ], form_classname='inline_struct'
+        )
+    except Exception as e:
+        print('no database table yet')
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
@@ -42,33 +45,39 @@ class ElementBlock(blocks.StructBlock):
 
 
 class ElementBlockExtended(ElementBlock):
-    style = blocks.StructBlock(
-        [
-            ('font_colour', blocks.ChoiceBlock(
-                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-            ('bg_colour', blocks.ChoiceBlock(
-                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-            ('shadow', blocks.IntegerBlock(required=False)),
-            ('max_width_inner', blocks.IntegerBlock(required=False)),
+    try:
+        style = blocks.StructBlock(
+            [
+                ('font_colour', blocks.ChoiceBlock(
+                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+                ('bg_colour', blocks.ChoiceBlock(
+                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+                ('shadow', blocks.IntegerBlock(required=False)),
+                ('max_width_inner', blocks.IntegerBlock(required=False)),
 
-        ], form_classname='inline_struct'
-    )
+            ], form_classname='inline_struct'
+        )
+    except Exception as e:
+        print('no colours database table yet')
 
 
 class SubtitleBlock(blocks.StructBlock):
     """ Title block with shord description """
 
-    title = blocks.StructBlock(
-        [
-            ('subtitle', blocks.CharBlock(required=False)),
-            ('uri_fragment', blocks.CharBlock(required=False)),
-            ('center_title', blocks.BooleanBlock(default=False, required=False)),
-            ('decorate_title', blocks.BooleanBlock(default=False, required=False)),
-            ('title_level', blocks.ChoiceBlock(required=False, choices=(('h2','h2'),('h3','h3'),('h4','h4')))),
-            ('title_colour', blocks.ChoiceBlock(
-                choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-        ], form_classname='inline_struct', label="Properties"
-    )
+    try:
+        title = blocks.StructBlock(
+            [
+                ('subtitle', blocks.CharBlock(required=False)),
+                ('uri_fragment', blocks.CharBlock(required=False)),
+                ('center_title', blocks.BooleanBlock(default=False, required=False)),
+                ('decorate_title', blocks.BooleanBlock(default=False, required=False)),
+                ('title_level', blocks.ChoiceBlock(required=False, choices=(('h2','h2'),('h3','h3'),('h4','h4')))),
+                ('title_colour', blocks.ChoiceBlock(
+                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+            ], form_classname='inline_struct', label="Properties"
+        )
+    except Exception as e:
+        print('no colours database table yet')
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)

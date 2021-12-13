@@ -1,5 +1,10 @@
 $brand-primary:             #abca44;
+$brand-primary:             #a8cc32;
+// $brand-primary:             #9ac50d;
+// $brand-primary:             #97cc04;
 $brand-secondary:           #464839;
+$brand-secondary:           #394253;
+$brand-grey:                #75777A;
 
 $brand-emphasis:            #006d8f;
 $brand-light:               #fffffa;
@@ -98,19 +103,19 @@ $brand-dark-e: rgba($brand-dark, .88);
 $brand-dark-f: rgba($brand-dark, .94);
 
 
-$width--ll: 1920px;
-$width--xl: 1600px;
-$width--lg: 1200px;
-$width--md: 1024px;
-$width--sm: 768px;
-$width--xs: 480px;
-$width--ss: 400px;
+$width--ll: 1320px;
+$width--xl: 1140px;
+$width--lg: 960px;
+$width--md: 720px;
+$width--sm: 540px;
+$width--xs: 440px;
+$width--ss: 360px;
 
-$break--ll: 1920px;
-$break--xl: 1600px;
-$break--lg: 1200px;
-$break--md: 1024px;
-$break--sm: 768px;
+$break--ll: 1400px;
+$break--xl: 1200px;
+$break--lg: 992px;
+$break--md: 768px;
+$break--sm: 576px;
 $break--xs: 480px;
 $break--ss: 400px;
 
@@ -147,7 +152,7 @@ $font--ss--soft: responsive 10px 11px;
 
 $font--md--fix: 24px;
 
-$fonts: sans-serif; // GF Quicksand 
+$fonts: 'Open Sans' sans-serif; // GF Quicksand 
 
 $fonts-space: 'Breakout', sans-serif; // GF Quicksand 
 $fonts-wanted: "Im Fell English", sans-serif; // GF Quicksand 

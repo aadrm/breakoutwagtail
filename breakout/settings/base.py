@@ -20,7 +20,7 @@ try:
     with open('/etc/breakout_config.json') as config_file:
         config = json.load(config_file)
 except Exception:
-    with open('/sto/srv/breakoutdjango/breakout_config.json') as config_file:
+    with open('~/Documents/dev/srv/breakout/breakout_config.json') as config_file:
         config = json.load(config_file)
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
