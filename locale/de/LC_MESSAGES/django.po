@@ -678,7 +678,7 @@ msgstr "Gutschein Abholen"
 
 #: apps/booking/templates/booking/section_coupons.html:163
 msgid "Make an appointment"
-msgstr "Termin vereinaren"
+msgstr "Termin vereinbaren"
 
 #: apps/booking/templates/booking/section_coupons.html:164
 #: apps/wagtail/home/templates/home/section_location.html:5
