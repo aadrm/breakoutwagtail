@@ -219,10 +219,22 @@ class CouponsPage(RoutablePageMixin, MyPage):
         null=True,
         blank=True,
     )
+
+    coupons_pdf_title = models.CharField(max_length=32, null=True, blank=True)
+    coupons_pdf_body = RichTextField(null=True, blank=True)
  
     content_panels = MyPage.content_panels + [
         StreamFieldPanel('content'),
         StreamFieldPanel('content_after'),
+        MultiFieldPanel (
+            heading="PDF Coupons Image",
+            children = [
+                FieldPanel("coupons_pdf_title"),
+                FieldPanel("coupons_pdf_body"),
+                ImageChooserPanel("coupons_image"),
+                FieldPanel("coupons_image_alt"),
+            ]
+        )
     ]
 
     @route(r'^$')
