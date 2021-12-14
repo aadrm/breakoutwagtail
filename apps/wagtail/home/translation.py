@@ -53,6 +53,8 @@ class HomePageTR(TranslationOptions):
 @register(CouponsPage)
 class HomePageTR(TranslationOptions):
     fields = (
+        'content',
+        'content_after',
     )
 
 @register(BooknowPage)
