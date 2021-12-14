@@ -46,14 +46,13 @@
 .c-section-primary,
 .c-section-secondary,
 .c-section-color {
-    padding: 0.6rem;
     position: relative;
     overflow: hidden;
     &::before,
     &::after{
         content: '';
         display: block;
-        height: 30px;
+        height: 24px;
     }
 }
 

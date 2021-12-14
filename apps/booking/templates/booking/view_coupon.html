@@ -12,52 +12,25 @@
 {% block content %}
 {{ block.super }}
 <main class="coupons-main">
+
     <section class="c-section-light">
+
         <div class="container"> 
-                {% comment %} <div class="col-8 text-center">
-                    <h2>
-                        {% trans "Looking for an original gift idea?" %} 
-                    </h2>
-                </div>
-            </div>
-            <div class="row g-4 justify-content-center">
-                <div class="coupons-pictures col-lg-5 position-relative">
-                    <img loading="lazy" src="{% static 'img/coupons/coupon-back.jpg' %}" alt="{% trans "Image of the back side of our coupons" %}" class="coupons-pictures_pic1">
-                    <img loading="lazy" src="{% static 'img/coupons/coupon-front.jpg' %}" alt="{% trans "Image of the front side of our coupons" %}" class="coupons-pictures_pic2">
-                </div>
-                <div class="col-lg-5">
-                    <br> 
-                    <p class="c-text-sm"> 
-                    {% trans "Then gift that special person a voucher for" %}
-                    <b>
-                    {% trans "Breakout Escape Room Augsburg" %}!
-                    </b>
-                    </br>
-                    <br>
-                    <b>{% trans "It's quick and easy:" %}</b>
-                    {% blocktranslate trimmed%}
-                    You can have your <b>Christmass</b> or <b>birthday</b> present ready in less than a Minute.
-                    {% endblocktranslate %}
-                    {% blocktranslate trimmed%}
-                    Coupons remain valid three years for all rooms and redeemable <b>online</b>.
-                    {% endblocktranslate %}
-                    </p>
-                </div> 
-            </div>
-        </div> {% endcomment %}
-        </div>
         {% for block in page.content %}
             {% include_block block %}
         {% endfor %}
-        
+        </div>
+
         {% include 'booking/section_coupons.html' %}
     </section>
+
     <section id="pdf-templates" class="c-section-light">
             {% for block in page.content_after %}
                 {% include_block block %}
             {% endfor %}
             {% include 'booking/section_pdfcoupons.html' %}
     </section>
+
 </main>
 
 {% endblock content %}

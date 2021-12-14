@@ -8,14 +8,20 @@
 
 <div class="container">
     <div class="row mb-5">
-        <h2 class="breakout-font text-center">{% trans "Templates" %}{{ page.coupons_pdf_title }}</h2>
+        {% if page.coupons_pdf_title %}
+        <h2 class="breakout-font text-center">{{ page.coupons_pdf_title }}</h2>
+        {% endif %}
     </div>
     <div class="coupon-pdf-links row g-4 justify-content-center">
+        {% if self.coupons_image %}
         <div class="col-lg-6">
             {% image self.coupons_image width-600 as coupons_img%}    
             <img class="img-cover"src="{{ coupons_img.url }}" alt="">
         </div>
         <div class="col-lg-6">
+        {% else %}
+        <div class="col-lg-7">
+        {% endif %}
             <div class="row">
                 <div class="col-12 mb-4">
                     <div class="richtext">
