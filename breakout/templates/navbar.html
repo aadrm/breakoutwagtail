@@ -23,7 +23,6 @@
             {% endif %}
             {% endfor %}
 
-            {% if language_all|length > 1 %}
             <li class="nav-item_container overflow-hidden d-flex align-items-center">
                 {% for language in language_all %}
                 {% language language.language_code %}
@@ -48,7 +47,6 @@
                     {% include 'booking/section_cart-overlay.html' %}
                 </div>
             </li>
-            {% endif %}
         </ul>
     </div>
 </nav>

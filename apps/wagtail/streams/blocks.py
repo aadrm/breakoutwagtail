@@ -180,6 +180,7 @@ class LinkBlock(blocks.StructBlock):
         label = 'Link'
         icon = 'user'
 
+
 class RichTextBoxBlock(blocks.StructBlock):
     """ Rich text block with all the features."""
     BOX_CHOICES = [
@@ -199,6 +200,7 @@ class RichTextBoxBlock(blocks.StructBlock):
         template = 'streams/richtextbox_block.html'
         icon = 'doc-full'
         label = 'Text Box'
+
 
 class RichTextBlock(blocks.RichTextBlock):
     """ Rich text block with all the features."""
