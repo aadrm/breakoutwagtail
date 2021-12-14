@@ -209,7 +209,7 @@ class Cart(models.Model):
             else:
                 coupon = Coupon()
 
-            value = item.base_price - item.product.family.shipping_cost
+            value = item.product.value
             coupon_ref = ''
             coupon_ref += self.invoice.order_number
             coupon_ref = ' | '
@@ -549,7 +549,7 @@ class Coupon(models.Model):
         return datetime.today() + timedelta(days=1095)
 
     def code_in_bulk(objs):
-        allowed_chars = ('ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789')
+        allowed_chars = ('ABCDEFGHJKMNPRTWXYZ2346789')
         # allowed_chars = ('AB')
         unique = False
         while not unique:
@@ -873,6 +873,7 @@ class Product(models.Model):
     """An item that can be added to the cart using the model cart item"""
     name = models.CharField(_("Product"), max_length=32)    
     price = models.DecimalField(_("Price"), max_digits=8, decimal_places=2)
+    value = models.DecimalField(_(""), max_digits=8, decimal_places=2, default=0)
     upgrade = models.OneToOneField("booking.Product", verbose_name=_("upgrade"), related_name='degrade', on_delete=models.SET_NULL, null=True, blank=True)
     family = models.ForeignKey("booking.ProductFamily", verbose_name=_("Family"), related_name='products', on_delete=models.CASCADE, null=True, blank=False)
     players = models.SmallIntegerField(_("Players"), blank=True, null=True)
