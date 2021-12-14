@@ -17,6 +17,7 @@
     // list-style: none;
     top: 72px;
     width: 100vw;
+    max-height: 100vh;
 }
 
 .nav-item_container {
@@ -116,7 +117,7 @@ nav items toogle
         & ~ .nav-items {
             .nav-item_container {
                 max-height: 100px;
-                padding: 2rem;
+                padding: 1rem 2rem;
             }
         }
     }

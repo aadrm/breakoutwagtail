@@ -22,16 +22,7 @@
             </li>
             {% endif %}
             {% endfor %}
-            {% comment %} {% for item in navigation.menu_items.all %}
-            {% if item.fixed %}
-            <li class="nav-item_book ">
-                <a class="btn btn-outline-primary nav-book-anchor nav-link nav-link-anchor c-nav-anchor" 
-                href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
-                {{item.title}}
-                </a>
-            </li>
-            {% endif %}
-            {% endfor %} {% endcomment %}
+
             {% if language_all|length > 1 %}
             <li class="nav-item_container overflow-hidden d-flex align-items-center">
                 {% for language in language_all %}
@@ -53,14 +44,11 @@
 
                 {% endlanguage %}
                 {% endfor %}
-                {% if not nocart %}
-                    <div class="ms-4">
-                        {% include 'booking/section_cart-overlay.html' %}
-                    </div>
-                {% endif %}
+                <div class="ms-4">
+                    {% include 'booking/section_cart-overlay.html' %}
+                </div>
             </li>
             {% endif %}
-
         </ul>
     </div>
 </nav>
