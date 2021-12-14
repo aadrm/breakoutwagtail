@@ -192,6 +192,17 @@ class CouponsPage(RoutablePageMixin, MyPage):
     max_count = 1
     template = "booking/view_coupon.html"
 
+    coupons_image = models.ForeignKey(
+        "wagtailimages.Image", 
+        null=True,
+        blank=True,
+        verbose_name=_("Header Image"), 
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    coupons_image_alt = models.CharField(max_length=128, null=True, blank=True)
+
     content = StreamField(
         [
             ('section', myblocks.SectionBlock()),
