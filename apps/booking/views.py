@@ -84,7 +84,8 @@ def coupons(request):
     try:
         online_coupon_family = ProductFamily.objects.get(slug='coupon-online')
         online_coupon_form = AddProductToCartForm(family=online_coupon_family)
-    except Exeption:
+    except Exeption as e:
+        print(e)
         online_coupon_form = False
     try:
         voucher_family = ProductFamily.objects.get(name='coupon-voucher')

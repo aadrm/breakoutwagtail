@@ -3,12 +3,12 @@
 <div class="container">
     <div class="row gy-5 justify-content-center">
         <div class="col-9 col-md-7 col-lg-4">
-            <div class="px-4 py-5 shadow text-secondary h-100">
+            <div class="px-4 py-5 shadow text-secondary h-100 bg-light">
                 <div class="svg-fill-secondary w-25 m-auto">
                     {% include 'svg/cp-via_email.svg' %}
                 </div>
                 <div class="my-2 fw-bold text-center">
-                    <h3>{% trans "Email coupon" %}</h3>
+                    <h3 class="h5">{% trans "Online coupon" %}</h3>
                     <hr class="my-2 border border-light "/>
                     <br>
                 </div>
@@ -52,7 +52,7 @@
                         </span>
                         <br>
                         <p class="h6">
-                            {% trans "Immediately get your code" %}
+                            {% trans "Immediately get your coupon code" %}
                         </p>
                       </div>
                     </div>
@@ -76,19 +76,19 @@
         </div>
 
         <div class="col-9 col-md-7 col-lg-4">
-            <div class="px-4 py-5 shadow text-secondary h-100">
+            <div class="px-4 py-5 shadow text-secondary h-100 bg-light">
                 <div class="svg-fill-secondary w-25 m-auto">
                     {% include 'svg/cp-via_post.svg' %}
                 </div>
                 <div class="my-2 fw-bold text-center">
-                    <h3>{% trans "Email coupon" %}</h3>
+                    <h3 class="h5">{% trans "Coupon by mail" %}</h3>
                     <hr class="my-2 border border-light "/>
                     <br>
                 </div>
                 <form class="coupon_form d-flex flex-column w-100" action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
-                    {% if online_coupon_form %}
-                        {{online_coupon_form.product}}
+                    {% if voucher_form %}
+                        {{voucher_form.product}}
                     {% else %}
                         [register coupon-online in product family]
                     {% endif %}
@@ -150,17 +150,17 @@
 
 
         <div class="col-9 col-md-7 col-lg-4">
-            <div class="px-4 py-5 shadow text-secondary h-100">
+            <div class="px-4 py-5 shadow text-secondary h-100 bg-light">
                 <div class="svg-fill-secondary w-25 m-auto">
                     {% include 'svg/cp-via_fetch.svg' %}
                 </div>
             <div class="my-2 fw-bold text-center">
-                <h3>{% trans "Pick it up" %}</h3>
+                <h3 class="h5">{% trans "Pick it up" %}</h3>
                 <hr class="my-2 border border-light "/>
                 <br>
             </div>
-            <form class="coupon_form d-flex flex-column w-100" action="{% url 'booking:add_product' %}" method="POST">
-                <input class="form-control rounded-0" disabled type="text" value="Not available online">
+            <form class="coupon_form d-flex flex-column w-100" method="POST">
+                <input class="form-control rounded-0" disabled type="text" value="{% trans "Make an appointment" %} ">
                 <a href="/#contact" class="my-2 btn btn-primary rounded-0">{% trans "Contact" %}</a> 
             </form>
             

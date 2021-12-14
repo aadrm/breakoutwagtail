@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-18 01:04+0200\n"
+"POT-Creation-Date: 2021-12-14 18:02+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,17 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps/booking/forms.py:25 apps/booking/models.py:862
+#: apps/booking/forms.py:25 apps/booking/models.py:879
+#: apps/booking/models.py:906
 #: apps/booking/templates/booking/form_slot-booking.html:5
-#: apps/wagtail/home/templates/home/section_prices.html:14
-#: apps/wagtail/home/templates/home/section_prices.html:19
-#: apps/wagtail/home/templates/home/section_prices.html:24
-#: apps/wagtail/home/templates/home/section_prices.html:29
-#: apps/wagtail/home/templates/home/section_prices.html:34
+#: apps/wagtail/home/templates/home/section_prices.html:11
+#: apps/wagtail/home/templates/home/section_prices.html:16
+#: apps/wagtail/home/templates/home/section_prices.html:21
+#: apps/wagtail/home/templates/home/section_prices.html:26
+#: apps/wagtail/home/templates/home/section_prices.html:31
+#: apps/wagtail/home/templates/home/section_rooms.html:16
 msgid "Players"
 msgstr "Spieler"
 
-#: apps/booking/models.py:34 apps/booking/models.py:343
+#: apps/booking/models.py:34 apps/booking/models.py:350
 msgid "status"
 msgstr ""
 
@@ -36,12 +38,12 @@ msgstr ""
 msgid "items before purchase"
 msgstr ""
 
-#: apps/booking/models.py:36 apps/booking/models.py:790
+#: apps/booking/models.py:36 apps/booking/models.py:806
 msgid "Invoice"
 msgstr ""
 
-#: apps/booking/models.py:47 apps/booking/models.py:344
-#: apps/booking/models.py:453
+#: apps/booking/models.py:47 apps/booking/models.py:351
+#: apps/booking/models.py:469
 msgid "Cart"
 msgstr ""
 
@@ -49,342 +51,350 @@ msgstr ""
 msgid "Carts"
 msgstr ""
 
-#: apps/booking/models.py:270 apps/booking/models.py:283
+#: apps/booking/models.py:273 apps/booking/models.py:286
+#: apps/booking/utils.py:45 apps/booking/utils.py:58
 msgid "Breakout Escape Room | Order: "
 msgstr ""
 
-#: apps/booking/models.py:308 apps/booking/utils.py:164
+#: apps/booking/models.py:314 apps/booking/utils.py:222
 msgid "gift_voucher_"
 msgstr ""
 
-#: apps/booking/models.py:340
+#: apps/booking/models.py:346
 msgid "slot"
 msgstr ""
 
-#: apps/booking/models.py:344
+#: apps/booking/models.py:352
 msgid "cart_items"
 msgstr ""
 
-#: apps/booking/models.py:345
+#: apps/booking/models.py:353
 msgid "created"
 msgstr ""
 
-#: apps/booking/models.py:346 apps/booking/models.py:859
+#: apps/booking/models.py:355 apps/booking/models.py:875
+#: apps/booking/templates/booking/section-completed_order.html:29
 msgid "Price"
 msgstr ""
 
-#: apps/booking/models.py:347
+#: apps/booking/models.py:357
 msgid "coupons"
 msgstr ""
 
-#: apps/booking/models.py:348
+#: apps/booking/models.py:359
 msgid "Shipped"
 msgstr ""
 
-#: apps/booking/models.py:452
+#: apps/booking/models.py:468
 msgid "Cart Coupon"
 msgstr ""
 
-#: apps/booking/models.py:453
+#: apps/booking/models.py:469
 msgid "cart_coupons"
 msgstr ""
 
-#: apps/booking/models.py:454
+#: apps/booking/models.py:470
 msgid "Discount"
 msgstr ""
 
-#: apps/booking/models.py:457
+#: apps/booking/models.py:473
 msgid "CartCoupon"
 msgstr ""
 
-#: apps/booking/models.py:458
+#: apps/booking/models.py:474
 msgid "CartCoupons"
 msgstr ""
 
-#: apps/booking/models.py:480
+#: apps/booking/models.py:496
 #, python-format
 msgid ""
 "The coupon with the code \"%(code)s\" is already being applied to your "
 "purchase."
 msgstr ""
 
-#: apps/booking/models.py:487
+#: apps/booking/models.py:503
 #, python-format
 msgid "The coupon \"%(code)s\" is expired"
 msgstr ""
 
-#: apps/booking/models.py:495
+#: apps/booking/models.py:511
 #, python-format
 msgid "The \"%(code)s\" has exceeded its usage limit"
 msgstr ""
 
-#: apps/booking/models.py:502
+#: apps/booking/models.py:518
 #, python-format
 msgid "Coupon \"%(code)s\" successfully added to your cart"
 msgstr ""
 
-#: apps/booking/models.py:550
+#: apps/booking/models.py:566
 msgid "reference"
 msgstr ""
 
-#: apps/booking/models.py:551
+#: apps/booking/models.py:567
 msgid "code"
 msgstr ""
 
-#: apps/booking/models.py:552
+#: apps/booking/models.py:568
 msgid "discount amount"
 msgstr ""
 
-#: apps/booking/models.py:553
+#: apps/booking/models.py:569
 msgid "is percent"
 msgstr ""
 
-#: apps/booking/models.py:554
+#: apps/booking/models.py:570
 msgid "entire basket"
 msgstr ""
 
-#: apps/booking/models.py:555 apps/booking/models.py:556
+#: apps/booking/models.py:571 apps/booking/models.py:572
 msgid "can be combined"
 msgstr ""
 
-#: apps/booking/models.py:557
+#: apps/booking/models.py:573
 msgid "Upgrades the item"
 msgstr ""
 
-#: apps/booking/models.py:558
+#: apps/booking/models.py:574
 msgid " include families"
 msgstr ""
 
-#: apps/booking/models.py:559
+#: apps/booking/models.py:575
 msgid " exclude families"
 msgstr ""
 
-#: apps/booking/models.py:560
+#: apps/booking/models.py:576
 msgid "include product"
 msgstr ""
 
-#: apps/booking/models.py:561
+#: apps/booking/models.py:577
 msgid "exclude product"
 msgstr ""
 
-#: apps/booking/models.py:562
+#: apps/booking/models.py:578
 msgid "Used times"
 msgstr ""
 
-#: apps/booking/models.py:563
+#: apps/booking/models.py:579
 msgid "Usage limit"
 msgstr ""
 
-#: apps/booking/models.py:564
+#: apps/booking/models.py:580
 msgid "Created"
 msgstr ""
 
-#: apps/booking/models.py:565
+#: apps/booking/models.py:581
 msgid "Expiration date"
 msgstr ""
 
-#: apps/booking/models.py:566
+#: apps/booking/models.py:582
 msgid "Minimum spend"
 msgstr ""
 
-#: apps/booking/models.py:567
+#: apps/booking/models.py:583
 msgid "Days Valid"
 msgstr ""
 
-#: apps/booking/models.py:570
+#: apps/booking/models.py:586
 #: apps/booking/templates/booking/ajax_item-list.html:10
 msgid "Coupon"
 msgstr ""
 
-#: apps/booking/models.py:571
+#: apps/booking/models.py:587
 #: apps/booking/templates/booking/view_checkout.html:44
-#: apps/wagtail/home/templates/home/section_main-header.html:21
+#: apps/wagtail/home/templates/home/section_main-header.html:20
 msgid "Coupons"
 msgstr ""
 
-#: apps/booking/models.py:741 apps/booking/models.py:921
+#: apps/booking/models.py:757 apps/booking/models.py:955
 #: apps/wagtail/streams/models.py:7 apps/wagtail/streams/models.py:21
 #: apps/wagtail/streams/models.py:41
 msgid "Name"
 msgstr ""
 
-#: apps/booking/models.py:742
+#: apps/booking/models.py:758
 #: apps/wagtail/streams/templates/streams/contact_block.html:52
 msgid "Phone"
 msgstr ""
 
-#: apps/booking/models.py:743
+#: apps/booking/models.py:759
 msgid "Email"
 msgstr ""
 
-#: apps/booking/models.py:744
+#: apps/booking/models.py:760
 msgid "Street"
 msgstr ""
 
-#: apps/booking/models.py:745
+#: apps/booking/models.py:761
 msgid "Post code"
 msgstr ""
 
-#: apps/booking/models.py:746
+#: apps/booking/models.py:762
 msgid "City"
 msgstr ""
 
-#: apps/booking/models.py:747
+#: apps/booking/models.py:763
 msgid "Company name"
 msgstr ""
 
-#: apps/booking/models.py:748
+#: apps/booking/models.py:764
 msgid "Payment Method"
 msgstr ""
 
-#: apps/booking/models.py:749
+#: apps/booking/models.py:765
 msgid "Accept terms"
 msgstr ""
 
-#: apps/booking/models.py:750
+#: apps/booking/models.py:766
 msgid "Accept privacy"
 msgstr ""
 
-#: apps/booking/models.py:751
+#: apps/booking/models.py:767
 msgid "Order Placed"
 msgstr ""
 
-#: apps/booking/models.py:752 apps/booking/models.py:753
+#: apps/booking/models.py:768 apps/booking/models.py:769
 msgid "Order Number"
 msgstr ""
 
-#: apps/booking/models.py:791
+#: apps/booking/models.py:807
 msgid "Invoices"
 msgstr ""
 
-#: apps/booking/models.py:842
+#: apps/booking/models.py:858
 msgid "display name"
 msgstr ""
 
-#: apps/booking/models.py:843
+#: apps/booking/models.py:859
 msgid "method"
 msgstr ""
 
-#: apps/booking/models.py:846
+#: apps/booking/models.py:862
 msgid "PaymentMethod"
 msgstr ""
 
-#: apps/booking/models.py:847
+#: apps/booking/models.py:863
 msgid "PaymentMethods"
 msgstr ""
 
-#: apps/booking/models.py:858 apps/booking/models.py:866
+#: apps/booking/models.py:874 apps/booking/models.py:883
+#: apps/booking/templates/booking/section-completed_order.html:28
 msgid "Product"
 msgstr ""
 
-#: apps/booking/models.py:860
+#: apps/booking/models.py:876
+msgid "Value"
+msgstr ""
+
+#: apps/booking/models.py:877
 msgid "upgrade"
 msgstr ""
 
-#: apps/booking/models.py:861
+#: apps/booking/models.py:878
 msgid "Family"
 msgstr ""
 
-#: apps/booking/models.py:867
+#: apps/booking/models.py:884
 msgid "Products"
 msgstr ""
 
-#: apps/booking/models.py:874
+#: apps/booking/models.py:908
 #: apps/booking/templates/booking/ajax_item-list.html:8
 #: apps/booking/templates/booking/ajax_item-list.html:10
 msgid "Player"
 msgstr "Spieler"
 
-#: apps/booking/models.py:899
+#: apps/booking/models.py:933
 msgid "Product Family"
 msgstr ""
 
-#: apps/booking/models.py:902
+#: apps/booking/models.py:936
 msgid "Is coupon"
 msgstr ""
 
-#: apps/booking/models.py:903
+#: apps/booking/models.py:937
 msgid "Shipping cost"
 msgstr ""
 
-#: apps/booking/models.py:904
+#: apps/booking/models.py:938
+#: apps/booking/templates/booking/section-completed_order.html:69
 msgid "Room"
 msgstr ""
 
-#: apps/booking/models.py:907 apps/booking/models.py:948
-#: apps/booking/models.py:1117
+#: apps/booking/models.py:941 apps/booking/models.py:982
+#: apps/booking/models.py:1151
 msgid "ProductFamily"
 msgstr ""
 
-#: apps/booking/models.py:908
+#: apps/booking/models.py:942
 msgid "ProductFamilies"
 msgstr ""
 
-#: apps/booking/models.py:922
+#: apps/booking/models.py:956
 msgid "Active"
 msgstr ""
 
-#: apps/booking/models.py:923
+#: apps/booking/models.py:957
 msgid "Description"
 msgstr ""
 
-#: apps/booking/models.py:924
+#: apps/booking/models.py:958
 msgid "Image"
 msgstr ""
 
-#: apps/booking/models.py:925
+#: apps/booking/models.py:959
 msgid "Alt text"
 msgstr ""
 
-#: apps/booking/models.py:926
+#: apps/booking/models.py:960
 msgid "Colour Hexagesimal"
 msgstr ""
 
-#: apps/booking/models.py:940
+#: apps/booking/models.py:974
 msgid "Start Date"
 msgstr ""
 
-#: apps/booking/models.py:941
+#: apps/booking/models.py:975
 msgid "End Date"
 msgstr ""
 
-#: apps/booking/models.py:942
+#: apps/booking/models.py:976
 msgid "Day of Week"
 msgstr ""
 
-#: apps/booking/models.py:943
+#: apps/booking/models.py:977
 msgid "Start Time"
 msgstr ""
 
-#: apps/booking/models.py:944
+#: apps/booking/models.py:978
 msgid "Interval"
 msgstr ""
 
-#: apps/booking/models.py:945 apps/booking/models.py:1112
+#: apps/booking/models.py:979 apps/booking/models.py:1146
 msgid "Duration"
 msgstr ""
 
-#: apps/booking/models.py:947
+#: apps/booking/models.py:981
 msgid "Instances"
 msgstr ""
 
-#: apps/booking/models.py:1111
+#: apps/booking/models.py:1145
 msgid "Start"
 msgstr ""
 
-#: apps/booking/models.py:1113
+#: apps/booking/models.py:1147
 msgid "interval"
 msgstr ""
 
-#: apps/booking/models.py:1114
+#: apps/booking/models.py:1148
 msgid "room"
 msgstr ""
 
-#: apps/booking/models.py:1115
+#: apps/booking/models.py:1149
 msgid "schedule"
 msgstr ""
 
-#: apps/booking/models.py:1116
+#: apps/booking/models.py:1150
 msgid "protect"
 msgstr ""
 
@@ -507,7 +517,9 @@ msgstr ""
 
 #: apps/booking/templates/booking/form_checkout-form.html:67
 msgid "In order to continue you have to agree with our terms and conditions"
-msgstr "Um fortzufahren, müssen Sie unseren Allgemeinen Geschäftsbedingungen zustimmen"
+msgstr ""
+"Um fortzufahren, müssen Sie unseren Allgemeinen Geschäftsbedingungen "
+"zustimmen"
 
 #: apps/booking/templates/booking/form_slot-booking.html:11
 msgid "Cancel"
@@ -550,40 +562,40 @@ msgstr ""
 msgid "See our bank account details below:"
 msgstr "Unsere Bankverbingung:"
 
-#: apps/booking/templates/booking/section-completed_order.html:23
-#: apps/booking/templates/booking/section-order_summary.html:3
-#: breakout/templates/email/bu.order_confirmation.txt:11
-msgid "Summary"
-msgstr "Zusammenfassung"
+#: apps/booking/templates/booking/section-completed_order.html:40
+msgid "Subtotal:"
+msgstr "Zwischensumme:"
 
-#: apps/booking/templates/booking/section-completed_order.html:33
+#: apps/booking/templates/booking/section-completed_order.html:44
+msgid "Discount:"
+msgstr "Rabatt"
+
+#: apps/booking/templates/booking/section-completed_order.html:49
 #: apps/booking/templates/booking/section-order_summary.html:14
 #: breakout/templates/email/bu.order_confirmation.txt:15
 #: breakout/templates/email/order_confirmation_alert.txt:11
 msgid "Total:"
 msgstr "Gesamt:"
 
-#: apps/booking/templates/booking/section-completed_order.html:41
+#: apps/booking/templates/booking/section-completed_order.html:59
 #: breakout/templates/email/bu.order_confirmation.txt:18
 msgid "You have the following appointments"
 msgstr "Termine"
 
-#: apps/booking/templates/booking/section-completed_order.html:43
+#: apps/booking/templates/booking/section-completed_order.html:61
 #: breakout/templates/email/bu.order_confirmation.txt:20
 msgid "You have the following appointment"
 msgstr "Termin"
 
-#: apps/booking/templates/booking/section-completed_order.html:51
-#: breakout/templates/email/bu.order_confirmation.txt:25
-msgid "at"
-msgstr "um"
+#: apps/booking/templates/booking/section-completed_order.html:67
+msgid "Date"
+msgstr "Datum"
 
-#: apps/booking/templates/booking/section-completed_order.html:51
-#: breakout/templates/email/bu.order_confirmation.txt:25
-msgid "for the room"
-msgstr "für den Raum"
+#: apps/booking/templates/booking/section-completed_order.html:68
+msgid "Time"
+msgstr "Zeit"
 
-#: apps/booking/templates/booking/section-completed_order.html:58
+#: apps/booking/templates/booking/section-completed_order.html:81
 msgid ""
 "\n"
 "    Remember that you have to arrive 15 minutes before your session begins "
@@ -597,83 +609,93 @@ msgstr ""
 "Erklärung geben können\n"
 "    "
 
-#: apps/booking/templates/booking/section-completed_order.html:64
+#: apps/booking/templates/booking/section-completed_order.html:87
 #: breakout/templates/email/bu.order_confirmation.txt:36
 msgid "Your Coupon Codes"
 msgstr "Gutschein-Codes"
 
-#: apps/booking/templates/booking/section-completed_order.html:66
+#: apps/booking/templates/booking/section-completed_order.html:89
 #: breakout/templates/email/bu.order_confirmation.txt:38
 msgid "Your Coupon Code"
 msgstr "Gutschein-Code"
 
-#: apps/booking/templates/booking/section-completed_order.html:75
+#: apps/booking/templates/booking/section-completed_order.html:98
 #: breakout/templates/email/bu.order_confirmation.txt:43
 msgid "valued at"
 msgstr "wert"
 
-#: apps/booking/templates/booking/section-completed_order.html:83
+#: apps/booking/templates/booking/section-completed_order.html:106
 msgid ""
 "\n"
 "\n"
 "    "
 msgstr ""
 
-#: apps/booking/templates/booking/section_coupons.html:12
-msgid "Email coupon"
-msgstr "Per E-Mail"
+#: apps/booking/templates/booking/section-order_summary.html:3
+#: breakout/templates/email/bu.order_confirmation.txt:11
+msgid "Summary"
+msgstr "Zusammenfassung"
 
-#: apps/booking/templates/booking/section_coupons.html:23
-#: apps/booking/templates/booking/section_coupons.html:79
+#: apps/booking/templates/booking/section_coupons.html:11
+#| msgid "Email coupon"
+msgid "Online coupon"
+msgstr "Online Gutschein"
+
+#: apps/booking/templates/booking/section_coupons.html:22
+#: apps/booking/templates/booking/section_coupons.html:95
 msgid "Add to cart"
 msgstr "Jetzt Kaufen"
 
-#: apps/booking/templates/booking/section_coupons.html:33
-#: apps/booking/templates/booking/section_coupons.html:89
+#: apps/booking/templates/booking/section_coupons.html:39
+#: apps/booking/templates/booking/section_coupons.html:112
 msgid "Order online"
 msgstr "Online Bestellen"
 
-#: apps/booking/templates/booking/section_coupons.html:45
-#: apps/booking/templates/booking/section_coupons.html:100
-msgid "Immediately get your code"
-msgstr "Code sofort erhalten"
+#: apps/booking/templates/booking/section_coupons.html:55
+#| msgid "Immediately get your code"
+msgid "Immediately get your coupon code"
+msgstr "Gutscheincode sofort erhalten"
 
-#: apps/booking/templates/booking/section_coupons.html:56
+#: apps/booking/templates/booking/section_coupons.html:70
 msgid "Print a pdf template"
 msgstr "PDF Vorlage drucken"
 
-#: apps/booking/templates/booking/section_coupons.html:68
-msgid "Get by mail"
-msgstr "Per Post"
+#: apps/booking/templates/booking/section_coupons.html:84
+msgid "Coupon by mail"
+msgstr "Gutschein per Post"
 
-#: apps/booking/templates/booking/section_coupons.html:111
+#: apps/booking/templates/booking/section_coupons.html:128
+msgid "Immediately get your code"
+msgstr "Gutscheincode sofort erhalten"
+
+#: apps/booking/templates/booking/section_coupons.html:143
 msgid "Receive at home"
 msgstr "Geschenkkarte empfangen"
 
-#: apps/booking/templates/booking/section_coupons.html:122
+#: apps/booking/templates/booking/section_coupons.html:158
 msgid "Pick it up"
-msgstr "Vor Ort"
+msgstr "Gutschein Abholen"
 
-#: apps/booking/templates/booking/section_coupons.html:129
+#: apps/booking/templates/booking/section_coupons.html:163
+msgid "Make an appointment"
+msgstr "Termin vereinaren"
+
+#: apps/booking/templates/booking/section_coupons.html:164
 #: apps/wagtail/home/templates/home/section_location.html:5
 msgid "Contact"
 msgstr "Kontaktiere uns"
 
-#: apps/booking/templates/booking/section_coupons.html:140
-msgid "Get in touch"
-msgstr "Termin vereinbaren"
+#: apps/booking/templates/booking/section_coupons.html:180
+msgid "Contact us"
+msgstr "Kontaktiere uns"
 
-#: apps/booking/templates/booking/section_coupons.html:151
-msgid "Pay us a visit"
-msgstr "Vorbei kommen"
+#: apps/booking/templates/booking/section_coupons.html:196
+msgid "Come to the Escape Room"
+msgstr "Zum Escape Room kommen"
 
-#: apps/booking/templates/booking/section_coupons.html:161
+#: apps/booking/templates/booking/section_coupons.html:211
 msgid "Receive your coupon"
 msgstr "Gutschein abholen"
-
-#: apps/booking/templates/booking/section_pdfcoupons.html:8
-msgid "PDF Coupon Templates"
-msgstr ""
 
 #: apps/booking/templates/booking/view-order.html:9
 msgid "Thank you!"
@@ -754,56 +776,17 @@ msgstr "Zum Guscheine"
 msgid "Your shopping cart is empty!"
 msgstr "Warenkorb leer!"
 
-#: apps/booking/templates/booking/view_coupon.html:18
-msgid "Image of the back side of our coupons"
-msgstr "Gutschein ruckseite"
-
-#: apps/booking/templates/booking/view_coupon.html:19
-msgid "Image of the front side of our coupons"
-msgstr "Gutschein vorne"
-
-#: apps/booking/templates/booking/view_coupon.html:23
-msgid "Looking for an original gift idea?"
-msgstr "Du suchst nach etwas andere Geschenkidee?"
-
-#: apps/booking/templates/booking/view_coupon.html:27
-msgid "Then gift that special person a voucher for"
-msgstr "Dann schenk deinen Lieben doch einen Gutschein für"
-
-#: apps/booking/templates/booking/view_coupon.html:29
-msgid "Breakout Escape Room Augsburg"
-msgstr ""
-
-#: apps/booking/templates/booking/view_coupon.html:33
-msgid "It's quick and easy:"
-msgstr "Schnell und unkompliziert:"
-
-#: apps/booking/templates/booking/view_coupon.html:34
-msgid ""
-"You can have your <b>Christmass</b> or <b>birthday</b> present ready in less "
-"than a Minute."
-msgstr ""
-"Erhalte deinen Gutschein für <b>Weihnachten</b> oder ein <b>Geburtstag</b> "
-"in nerWenigen Augenblicken."
-
-#: apps/booking/templates/booking/view_coupon.html:37
-msgid ""
-"Coupons remain valid three years for all rooms and redeemable <b>online</b>."
-msgstr ""
-"Unsere Gutscheine sind für alle Räume drei Jahre gültig, nicht "
-"termingebunden und <b>online</b> einlösbar. "
-
-#: apps/booking/views.py:369 apps/booking/views.py:412
+#: apps/booking/views.py:377 apps/booking/views.py:420
 #, python-format
 msgid "The coupon with the code \"%(code)s\" does not exist"
 msgstr "Der Gutschein \"%(code)s\" existiert nicht"
 
-#: apps/booking/views.py:386 apps/booking/views.py:438
+#: apps/booking/views.py:394 apps/booking/views.py:446
 #, python-format
 msgid "The coupon with code \"%(code)s\" has been removed from your purchase"
 msgstr "Gutschein \"%(code)s\" entfernt"
 
-#: apps/booking/views.py:517
+#: apps/booking/views.py:530
 #, python-format
 msgid "Created %(amount)s coupons"
 msgstr ""
@@ -832,7 +815,7 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: apps/wagtail/home/models.py:36
+#: apps/wagtail/home/models.py:36 apps/wagtail/home/models.py:199
 msgid "Header Image"
 msgstr ""
 
@@ -840,7 +823,7 @@ msgstr ""
 msgid "Seo Image"
 msgstr ""
 
-#: apps/wagtail/home/templates/home/home_page.html:132
+#: apps/wagtail/home/templates/home/home_page.html:122
 msgid "Frequently Asked Questions"
 msgstr "FAQs"
 
@@ -897,19 +880,19 @@ msgstr "Telefonnumer"
 msgid "Address:"
 msgstr "Adresse"
 
-#: apps/wagtail/home/templates/home/section_main-header.html:20
+#: apps/wagtail/home/templates/home/section_main-header.html:19
 msgid "Complete your order in just a minute"
 msgstr "Bestelle in einem Augenblick"
 
-#: apps/wagtail/home/templates/home/section_main-header.html:22
+#: apps/wagtail/home/templates/home/section_main-header.html:21
 msgid "Book"
 msgstr "Buchen"
 
-#: apps/wagtail/home/templates/home/section_online.html:12
+#: apps/wagtail/home/templates/home/section_online.html:15
 msgid "Online Game Series: Print+Cut+Escape"
 msgstr "Online Series: Print+Cut+Escape"
 
-#: apps/wagtail/home/templates/home/section_online.html:15
+#: apps/wagtail/home/templates/home/section_online.html:17
 msgid ""
 "Unique puzzles with a great balance of difficutlty. The story gets told "
 "through the puzzles and entertaining videos."
@@ -917,44 +900,49 @@ msgstr ""
 "Einzigartige Rätsel mit ausgewogener Schwierigkeitsgrad. Die Geschichte wird "
 "durch die Rätsel und unterhaltsamen Videos erzählt. "
 
-#: apps/wagtail/home/templates/home/section_online.html:18
+#: apps/wagtail/home/templates/home/section_online.html:21
 msgid "1.5-2 hours game play"
 msgstr "1.5-2 Stunde Spielzeit"
 
-#: apps/wagtail/home/templates/home/section_online.html:19
+#: apps/wagtail/home/templates/home/section_online.html:22
 msgid "Play at home or via zoom"
 msgstr "Zu hause oder via Zoom mit freunde Spielen"
 
-#: apps/wagtail/home/templates/home/section_online.html:20
+#: apps/wagtail/home/templates/home/section_online.html:23
 msgid "Online game interface"
 msgstr "Online-Spieloberfläche"
 
-#: apps/wagtail/home/templates/home/section_online.html:21
+#: apps/wagtail/home/templates/home/section_online.html:24
 msgid "Fun for friends and families"
 msgstr "Spaß für Freunde und Familie "
 
-#: apps/wagtail/home/templates/home/section_online.html:24
+#: apps/wagtail/home/templates/home/section_online.html:28
 msgid "*Series in English only."
 msgstr "Im Moment können wir diese Serie nur auf Englisch anbieten."
 
-#: apps/wagtail/home/templates/home/section_online.html:26
+#: apps/wagtail/home/templates/home/section_online.html:32
 msgid "See offer"
 msgstr "Zum Angebot"
 
-#: apps/wagtail/home/templates/home/section_prices.html:16
-#: apps/wagtail/home/templates/home/section_prices.html:21
-#: apps/wagtail/home/templates/home/section_prices.html:26
-#: apps/wagtail/home/templates/home/section_prices.html:31
-#: apps/wagtail/home/templates/home/section_prices.html:36
+#: apps/wagtail/home/templates/home/section_prices.html:13
+#: apps/wagtail/home/templates/home/section_prices.html:18
+#: apps/wagtail/home/templates/home/section_prices.html:23
+#: apps/wagtail/home/templates/home/section_prices.html:28
+#: apps/wagtail/home/templates/home/section_prices.html:33
 msgid "per person"
 msgstr "pro Person"
 
-#: apps/wagtail/home/templates/home/section_prices.html:116
-#: apps/wagtail/home/templates/home/section_rooms.html:7
+#: apps/wagtail/home/templates/home/section_prices.html:43
+#: apps/wagtail/home/templates/home/section_rooms.html:8
+#: apps/wagtail/home/templates/home/section_rooms.html:36
 msgid "Book Now"
 msgstr "Jetzt Buchen"
 
-#: apps/wagtail/home/templates/home/section_rooms.html:16
+#: apps/wagtail/home/templates/home/section_rooms.html:22
+msgid "Minutes"
+msgstr "Minuten"
+
+#: apps/wagtail/home/templates/home/section_rooms.html:37
 msgid "Book now"
 msgstr "Jetzt Buchen"
 
@@ -1026,11 +1014,11 @@ msgstr "zum Aktivieren der Karte anklicken"
 msgid "See more"
 msgstr "Mehr"
 
-#: breakout/settings/base.py:200
+#: breakout/settings/base.py:201
 msgid "German"
 msgstr ""
 
-#: breakout/settings/base.py:201
+#: breakout/settings/base.py:202
 msgid "English"
 msgstr ""
 
@@ -1081,16 +1069,23 @@ msgstr ""
 "verwendet werden, und warum wir sie verwenden."
 
 #: breakout/templates/email/bu.order_confirmation.txt:4
-#: breakout/templates/email/order_confirmation.html:6
 msgid "Dear"
 msgstr "Liebe"
 
 #: breakout/templates/email/bu.order_confirmation.txt:6
-#: breakout/templates/email/order_confirmation.html:9
+#: breakout/templates/email/order_confirmation.html:6
 msgid "We have received your order. You can see a summary below."
 msgstr ""
 "Wir haben deine Bestellung erhalten. Du kannst unten eine Zusammenfassung "
 "sehen."
+
+#: breakout/templates/email/bu.order_confirmation.txt:25
+msgid "at"
+msgstr "um"
+
+#: breakout/templates/email/bu.order_confirmation.txt:25
+msgid "for the room"
+msgstr "für den Raum"
 
 #: breakout/templates/email/bu.order_confirmation.txt:45
 msgid ""
@@ -1111,9 +1106,44 @@ msgstr "Mit uns verbinden"
 msgid "Tel: "
 msgstr "Tel:"
 
-#: breakout/templates/navbar.html:9
+#: breakout/templates/navbar.html:8
 msgid "Go to home"
 msgstr ""
+
+#~ msgid "Get in touch"
+#~ msgstr "Termin vereinbaren"
+
+#~ msgid "Pay us a visit"
+#~ msgstr "Vorbei kommen"
+
+#~ msgid "Image of the back side of our coupons"
+#~ msgstr "Gutschein ruckseite"
+
+#~ msgid "Image of the front side of our coupons"
+#~ msgstr "Gutschein vorne"
+
+#~ msgid "Looking for an original gift idea?"
+#~ msgstr "Du suchst nach etwas andere Geschenkidee?"
+
+#~ msgid "Then gift that special person a voucher for"
+#~ msgstr "Dann schenk deinen Lieben doch einen Gutschein für"
+
+#~ msgid "It's quick and easy:"
+#~ msgstr "Schnell und unkompliziert:"
+
+#~ msgid ""
+#~ "You can have your <b>Christmass</b> or <b>birthday</b> present ready in "
+#~ "less than a Minute."
+#~ msgstr ""
+#~ "Erhalte deinen Gutschein für <b>Weihnachten</b> oder ein <b>Geburtstag</"
+#~ "b> in nerWenigen Augenblicken."
+
+#~ msgid ""
+#~ "Coupons remain valid three years for all rooms and redeemable <b>online</"
+#~ "b>."
+#~ msgstr ""
+#~ "Unsere Gutscheine sind für alle Räume drei Jahre gültig, nicht "
+#~ "termingebunden und <b>online</b> einlösbar. "
 
 #~ msgid "Order Completed"
 #~ msgstr "Bestellung abgeschlossen"
