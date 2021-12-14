@@ -1,13 +1,12 @@
 .list-check-primary {
     li {
-        margin: 12px 0;
-        left: 24px;
+        margin: .5em 0;
         position: relative;
         &::before {
             content: '✓';
-            font-size: 1.5em;
+            font-size: 1.4em;
             display: block;
-            left: -24px;
+            left: -1.2em;
             top: calc(50%);
             transform: translateY(-50%);
             color: $brand-primary;
