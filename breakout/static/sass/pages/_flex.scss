@@ -54,6 +54,7 @@
   /* blog post*/
   
   .richtext {
+    font-size: $font--sm;
     h1, h2, h3, h4, h5, h6 {
       font-family: $fonts;
       b {
@@ -63,21 +64,22 @@
     }
     margin: 1.5rem auto 0;
     line-height: 1.15;
-    ul {
-      list-style: disc;
-    }
     p {
-      font-size: $font--sm;
       margin: 1rem auto;
     }
     li {
-      font-size: $font--sm;
+      margin: 12px 0;
+      left: 24px;
       position: relative;
-      left: 16px;
-      margin-top: 8px;
-      margin-bottom: 8px;
-      &::marker {
-        font-size: .8rem;
+      &::before {
+          content: '✓';
+          font-size: 1.5em;
+          display: block;
+          left: -24px;
+          top: calc(50%);
+          transform: translateY(-50%);
+          color: $brand-primary;
+          position: absolute;
       }
     }
     hr {
@@ -124,10 +126,6 @@
   }
   
   
-  .d-block {
-      display: block;
-  }
-  
   .info-content {
       background: #eee;
       border-radius: 2rem;
@@ -163,4 +161,4 @@
   
   .info-paragraph {
       margin-bottom: 3rem;
-  }
+    }

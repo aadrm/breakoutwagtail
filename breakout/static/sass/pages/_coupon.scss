@@ -1,36 +1,8 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
-.coupons-intro {
-    max-width: $width--sm;
-    text-align: center;
-    margin: 48px auto;
-    h2 {
-        font-size: $font--lg;
-    }
-    img {
-        margin: 0 auto;
-        max-width: 90vw;
-    }
-    @include break--sm {
-        display: flex;
-        flex-direction: row;
-        gap: 3rem;
-    }
-}
 
 .coupons-pictures {
-    flex: 1;
     position: relative;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 400px;
-    max-height: 400px;
-    height: 100vw;
+    max-width: 480px;
+    min-height: 480px;
     img {
         width: 60%;
         position: absolute;
@@ -38,13 +10,6 @@
         top: 0;
         box-shadow: 3px 3px 5px $brand-dark;
     }    
-}
-
-.coupons-info {
-    flex: 1;
-    margin-top: 1rem;
-    max-width: 1200px;
-    text-align: center;
 }
 
 .coupons-pictures_pic1 {
@@ -56,189 +21,56 @@
 
 }
 
-.coupons-wrapper {
-    margin: 2rem auto;
-    max-width: $width--md;
-}
-
-.coupons-columns {
-    display: flex;
-    gap: 2rem;
-    flex-direction: column;
-    @include break--md {
-        flex-direction: row;
-    }
-}
-
-/*
-methods
-*/
-
 .coupon-method {
-    width: 100%;
-    max-width: 400px;
     counter-reset: stepnum;
-    flex: 1;
-    background: $brand-secondary;
-    color: $brand-light;
-    text-align: center;
-    padding: 2rem .6rem;
-    margin: 0 auto;
-    border-radius: 1rem;
-    box-shadow: 5px 5px 10px $brand-dark;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-direction: column;
-}
-
-.coupon-method_mainico {
-    margin: 0 auto;
-    max-width: 120px;
-    width: 25%;
-    fill: $brand-light;
-    filter: drop-shadow(2px 2px 15px $brand-dark-5);
-}
-
-.coupon-title {
-    width: 100%;
-    display: block;
-    margin: .5rem auto 0;
-    text-align: center;
-    h3 {
-        font-family: $fonts;
-        font-weight: 900;
-        text-transform: uppercase;
-        color: $brand-light;
-        text-shadow: 3px 3px 15px $brand-dark-5;
-        &::after {
-            margin: .5rem auto;
-            content: '';
-            display: block;
-            height: 3px;
-            width: 100%;
-            background: $brand-light;
-            box-shadow: 3px 3px 15px $brand-dark-5;
-            border-radius: .3rem;
-        }
-    }
-    p {
-        font-size: 1.2rem;
-        font-weight: bold;
-    }
-}
-
-.coupon-intrastep {
-    position: absolute;
-    bottom: -2.1rem;
-    width: 6px;
-    height: 2.2rem;
-    background: $brand-dark-9;
-    left: calc(50% - 3px);
-}
-
-.coupon-step {
-    margin: 0 1rem 2rem;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 1rem;
-    flex-direction: row;
-    align-items: center;
 }
 
 .coupon-step_icon {
-    position: relative;
-    height: 64px;
-    width: 64px;
-    background: $brand-secondary;
-    border-radius: 50%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    margin-right: auto;
     svg {
-        height: 32px;
-        width: 32px;
-        margin: 0 auto;
-        fill: $brand-light;
-        stroke: none;
-
-    }
-    &::before {
-        font-family: arial, sans-serif;
-        font-weight: bold;
-        text-align: center;
-        line-height: 24px;
-        font-size: 14px;
-        counter-increment: stepnum;
-        content: counter(stepnum);
-        display: block;
-        position: absolute;
-        left: -8px;
-        top: -8px;
-        height: 24px;
-        width: 24px;
-        border: 2px solid $brand-primary;
-        background: $brand-secondary;
-        border-radius: 50%;
+        height: 38px;
+        width: 38px;
     }
 }
 
-.coupon-step_instruction {
-    flex-grow: 1;
-    text-align: left;
-    p {
-        font-weight: bold;
-        text-shadow: 2px 2px 2px $brand-dark-4;
-    }
-}
 
-/*
-paypal button
-*/
 
-.paypal-multi-button {
-    padding: 1rem;
-    display: -ms-grid;
-    display: grid;
-    text-align: center;
-    width: 100%;
-    margin: 0 auto 32px; 
-    background: $brand-secondary-9;
-    border-radius: .6rem;
-    align-self: flex-end;
-    min-height: 120px;
-    line-height: 1.15;
-    form {
-        width: 100%;
-        display: -ms-grid;
-        display: grid;
-        grid-gap: .5rem;
-        tr {
-            td {
-                text-align: center;
-            }
-        }
-    }
+.coupon_form {
+    line-height: 2rem;
     input,
     select {
         width: 100%;
-        -webkit-box-shadow: 3px 3px 5px $brand-dark;
-                box-shadow: 3px 3px 5px $brand-dark;
+            border: 1px solid #ced4da;
     }
     select {
+        line-height: 2rem;
+        height: 36px;
+        cursor: pointer;
         padding: .3rem 2rem;
     }
 }
 
-/*
-pdf templates 
-*/
-
-.coupon-pdf-link {
-    svg {
+.stepper {
+    counter-reset: stepnum;
+    .line {
+      width: 2px;
+      min-height: 64px;
+      background-color: lightgrey !important;
     }
-}
+    .lead {
+      font-size: 1.1rem;
+    }
+    .step {
+        counter-increment: stepnum;
+        border-radius: 50%;
+        min-height: 38px;
+        min-width: 38px;
+        line-height: 38px;
+        text-align: center;
+        font-size: 24px;
+        margin-bottom: 8px;
+        
+        &::before {
+            content: counter(stepnum);
+        }
+    }
+  }

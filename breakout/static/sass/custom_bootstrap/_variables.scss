@@ -16,6 +16,7 @@ $yellow:  #ffc107 !default;
 $green:   #28a745 !default;
 $teal:    #20c997 !default;
 $cyan:    #17a2b8 !default;
+$black:   #010101 !default;
 
 $primary:       $brand-primary;
 $secondary:     $brand-secondary;
@@ -154,12 +155,12 @@ $secondary:     $brand-secondary;
 // //
 // // Define the maximum width of `.container` for different screen sizes.
 
-// $container-max-widths: (
-//   sm: 540px,
-//   md: 720px,
-//   lg: 960px,
-//   xl: 1140px
-// ) !default;
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 961px
+) !default;
 
 // @include _assert-ascending($container-max-widths, "$container-max-widths");
 
@@ -183,15 +184,15 @@ $secondary:     $brand-secondary;
 // $border-width:                1px !default;
 // $border-color:                $gray-300 !default;
 
-// $border-radius:               .25rem !default;
-// $border-radius-lg:            .3rem !default;
-// $border-radius-sm:            .2rem !default;
+$border-radius:               .6rem !default;
+$border-radius-lg:            .9rem !default;
+$border-radius-sm:            .3rem !default;
 
 // $rounded-pill:                50rem !default;
 
-// $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
-// $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
-// $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-sm:               .125rem .125rem .25rem rgba($black, .075) !default;
+$box-shadow:                  .5rem .5rem 1rem rgba($black, .15) !default;
+$box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 
 // $component-active-color:      $white !default;
 // $component-active-bg:         theme-color("primary") !default;

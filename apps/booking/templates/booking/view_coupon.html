@@ -13,16 +13,20 @@
 {{ block.super }}
 <main class="coupons-main">
     <section class="c-section-light">
-        <div class="c-section-inner-sm c-wrapper--md">
-            <div class="coupons-intro"> 
-                <div class="coupons-pictures">
+        <div class="container"> 
+            <div class="row justify-content-center mb-4">
+                {% comment %} <div class="col-8 text-center">
+                    <h2>
+                        {% trans "Looking for an original gift idea?" %} 
+                    </h2>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="coupons-pictures col-lg-5 position-relative">
                     <img loading="lazy" src="{% static 'img/coupons/coupon-back.jpg' %}" alt="{% trans "Image of the back side of our coupons" %}" class="coupons-pictures_pic1">
                     <img loading="lazy" src="{% static 'img/coupons/coupon-front.jpg' %}" alt="{% trans "Image of the front side of our coupons" %}" class="coupons-pictures_pic2">
                 </div>
-                <div class="coupons-info">
-                    <h2 class="">
-                    {% trans "Looking for an original gift idea?" %} 
-                    </h2>
+                <div class="col-lg-5">
                     <br> 
                     <p class="c-text-sm"> 
                     {% trans "Then gift that special person a voucher for" %}
@@ -41,10 +45,10 @@
                     </p>
                 </div> 
             </div>
-            {% for block in page.content %}
-                {% include_block block %}
-            {% endfor %}
-        </div>
+        </div> {% endcomment %}
+        {% for block in page.content %}
+            {% include_block block %}
+        {% endfor %}
         
         {% include 'booking/section_coupons.html' %}
     </section>

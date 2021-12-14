@@ -1,186 +1,220 @@
 {% load static %}
 {% load i18n %}
-<div class="coupons-wrapper c-section-inner-sm">
-    <div class="coupons-columns c-text-md">
-
-        <div class="coupon-method">
-            <!-- <div class="coupon-method__header"> -->
-            <div class="coupon-method_mainico">
-                {% include 'svg/cp-via_email.svg' %}
-            </div>
-            <div class="coupon-title">
-                <h3>{% trans "Email coupon" %}</h3>
-                <br>
-            </div>
-            <div class="paypal-multi-button">
-                <form action="{% url 'booking:add_product' %}" method="POST">
+<div class="container">
+    <div class="row gy-5 justify-content-center">
+        <div class="col-9 col-md-7 col-lg-4">
+            <div class="px-4 py-5 shadow text-secondary h-100">
+                <div class="svg-fill-secondary w-25 m-auto">
+                    {% include 'svg/cp-via_email.svg' %}
+                </div>
+                <div class="my-2 fw-bold text-center">
+                    <h3>{% trans "Email coupon" %}</h3>
+                    <hr class="my-2 border border-light "/>
+                    <br>
+                </div>
+                <form class="coupon_form d-flex flex-column w-100" action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
                     {% if online_coupon_form %}
                         {{online_coupon_form.product}}
                     {% else %}
                         [register coupon-online in product family]
                     {% endif %}
-                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
+                    <button class="my-2 btn btn-primary rounded-0" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
+
+
+                <div class="stepper d-flex flex-column mt-5 ml-2">
+                    
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-order_online.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Order online" %}
+                        </p>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-code.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Immediately get your code" %}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100 d-none"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-print.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Print a pdf template" %}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
             </div>
-                <div class="coupon-step">
-                    <div class="coupon-step_icon">
-                        {% include 'svg/cp-order_online.svg' %}
-                        <div class="coupon-intrastep"></div>
-                    </div>
-                    <div class="coupon-step_instruction">
-                        <p>
-                        {% trans "Order online" %}
-                        </p>
-                    </div>
-                </div>
-                <!-- <div class="coupon-intrastep"></div> -->
-                <div class="coupon-step">
-                    <div class="coupon-step_icon">
-                        {% include 'svg/cp-code.svg' %}
-                        <div class="coupon-intrastep"></div>
-                    </div>
-                    <div class="coupon-step_instruction">
-                        <p>
-                        {% trans "Immediately get your code" %}
-                        </p>
-                    </div>
-                </div>
-                <!-- <div class="coupon-intrastep"></div> -->
-                <div class="coupon-step">
-                    <div class="coupon-step_icon">
-                    {% include 'svg/cp-print.svg' %}
-                    </div>
-                    <div class="coupon-step_instruction">
-                        <p>
-                        {% trans "Print a pdf template" %}
-                        </p>
-                    </div>
-                </div>
-                
         </div>
 
-        <div class="coupon-method">
-            <div class="coupon-method_mainico">
-            {% include 'svg/cp-via_post.svg' %}
-            </div>
-            <div class="coupon-title">
-                <h3>{% trans "Get by mail" %}</h3>
-                <br>
-            </div>
-            <div class="paypal-multi-button">
-                <form action="{% url 'booking:add_product' %}" method="POST">
+        <div class="col-9 col-md-7 col-lg-4">
+            <div class="px-4 py-5 shadow text-secondary h-100">
+                <div class="svg-fill-secondary w-25 m-auto">
+                    {% include 'svg/cp-via_post.svg' %}
+                </div>
+                <div class="my-2 fw-bold text-center">
+                    <h3>{% trans "Email coupon" %}</h3>
+                    <hr class="my-2 border border-light "/>
+                    <br>
+                </div>
+                <form class="coupon_form d-flex flex-column w-100" action="{% url 'booking:add_product' %}" method="POST">
                     {% csrf_token %}
-                    {% if voucher_form %}
-                    {{voucher_form.product}}
+                    {% if online_coupon_form %}
+                        {{online_coupon_form.product}}
                     {% else %}
-                        [register coupon-voucher in product family]
+                        [register coupon-online in product family]
                     {% endif %}
-                    <button class="c-anchor c-anchor-primary" type="submit">{% trans "Add to cart" %}</button> 
+                    <button class="my-2 btn btn-primary rounded-0" type="submit">{% trans "Add to cart" %}</button> 
                 </form>
-            </div>
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-order_online.svg' %}
-                    <div class="coupon-intrastep"></div>
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                    {% trans "Order online" %}
-                    </p>
-                </div>
-            </div>
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-code.svg' %}
-                    <div class="coupon-intrastep"></div>
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                    {% trans "Immediately get your code" %}
-                    </p>
-                </div>
-            </div>
-            <!-- <div class="coupon-intrastep"></div> -->
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-mailbox.svg' %}
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                    {% trans "Receive at home" %}
-                    </p>
-                </div>
+
+
+                <div class="stepper d-flex flex-column mt-5 ml-2">
+                    
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-order_online.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Order online" %}
+                        </p>
+                      </div>
+                      
+                    </div>
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-code.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Immediately get your code" %}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="d-flex mb-1">
+                      <div class="d-flex flex-column pr-4 align-items-center">
+                        <div class="step bg-primary text-light mt-1"></div>
+                        <div class="line h-100 d-none"></div>
+                      </div>
+                      <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                        <span class="coupon-step_icon svg-fill-secondary">
+                            {% include 'svg/cp-mailbox.svg' %}
+                        </span>
+                        <br>
+                        <p class="h6">
+                            {% trans "Receive at home" %}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
             </div>
         </div>
 
-        <div class="coupon-method">
-            <div class="coupon-method_mainico">
-                {% include 'svg/cp-via_fetch.svg' %}
-            </div>
-            <div class="coupon-title">
-                <h3>{% trans "Pick it up" %}</h3>
 
-                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et maxime impedit eos at.</p> -->
+        <div class="col-9 col-md-7 col-lg-4">
+            <div class="px-4 py-5 shadow text-secondary h-100">
+                <div class="svg-fill-secondary w-25 m-auto">
+                    {% include 'svg/cp-via_fetch.svg' %}
+                </div>
+            <div class="my-2 fw-bold text-center">
+                <h3>{% trans "Pick it up" %}</h3>
+                <hr class="my-2 border border-light "/>
                 <br>
             </div>
-            <div class="paypal-multi-button">
-                <p class="c-text-sm">
-                    <a href="/#contact" class="c-anchor c-anchor-primary" type="submit">{% trans "Contact" %}</a> 
-                </form>
-                </p>
-            </div>
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-phone.svg' %}
-                    <div class="coupon-intrastep"></div>
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                     {% trans "Get in touch" %}
-                    </p>
-                </div>
-            </div>
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-visit.svg' %}
-                    <div class="coupon-intrastep"></div>
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                    {% trans "Pay us a visit" %}
-                    </p>
-                </div>
-            </div>
-            <div class="coupon-step">
-                <div class="coupon-step_icon">
-                    {% include 'svg/cp-handed.svg' %}
-                </div>
-                <div class="coupon-step_instruction">
-                    <p>
-                    {% trans "Receive your coupon" %}
-                    </p>
-                </div>
-            </div>
-        </div>
-  
-        <!-- <div class="coupon-method">
-            <div class="coupon-title">
-                <h3>Gutschein per post bekommen</br>(+ 5.00 EUR Versand)</h3>
-            </div>
-            <div class="coupon-info">
-                <img src="/static/img/icon/escaperoom-post.svg" alt="Escape room gutscheine via post">
-                <p>Wenn Du den Gutschein auch als Geschenkkarte per Post erhalten möchtest, wähle diese Option. Wir senden diese innerhalb von 3 Tagen zu (Versandkosten: 5 Euro). Sie erhalten außerdem eine E-Mail mit Ihrem Gutscheincode, der sofort gültig ist.
-                </p>
-            </div>
-            <div class="paypal-multi-button">
-                <?php 
-                // include_once $_SERVER['DOCUMENT_ROOT'] . '/static/includes/paypal-buttons/' . 'paypal-button-coupon.php'
-                ?>
-            </div>
+            <form class="coupon_form d-flex flex-column w-100" action="{% url 'booking:add_product' %}" method="POST">
+                <input class="form-control rounded-0" disabled type="text" value="Not available online">
+                <a href="/#contact" class="my-2 btn btn-primary rounded-0">{% trans "Contact" %}</a> 
+            </form>
             
-        </div> -->
-        
+            <div class="stepper d-flex flex-column mt-5 ml-2">
+                
+                <div class="d-flex mb-1">
+                  <div class="d-flex flex-column pr-4 align-items-center">
+                    <div class="step bg-primary text-light mt-1"></div>
+                    <div class="line h-100"></div>
+                  </div>
+                  <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                    <span class="coupon-step_icon svg-fill-secondary">
+                        {% include 'svg/cp-phone.svg' %}
+                    </span>
+                    <br>
+                    <p class="h6">
+                        {% trans "Contact us" %}
+                    </p>
+                  </div>
+                  
+                </div>
+                <div class="d-flex mb-1">
+                  <div class="d-flex flex-column pr-4 align-items-center">
+                    <div class="step bg-primary text-light mt-1"></div>
+                    <div class="line h-100"></div>
+                  </div>
+                  <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                    <span class="coupon-step_icon svg-fill-secondary">
+                        {% include 'svg/cp-visit.svg' %}
+                    </span>
+                    <br>
+                    <p class="h6">
+                        {% trans "Come to the Escape Room" %}
+                    </p>
+                  </div>
+                </div>
+                <div class="d-flex mb-1">
+                  <div class="d-flex flex-column pr-4 align-items-center">
+                    <div class="step bg-primary text-light mt-1"></div>
+                    <div class="line h-100 d-none"></div>
+                  </div>
+                  <div class="d-flex flex-column align-items-center text-center w-100 me-4 ">
+                    <span class="coupon-step_icon svg-fill-secondary">
+                        {% include 'svg/cp-handed.svg' %}
+                    </span>
+                    <br>
+                    <p class="h6">
+                        {% trans "Receive your coupon" %}
+                    </p>
+                  </div>
+                </div>
+            </div>
+
+        </div>
             
     </div>
 </div>
