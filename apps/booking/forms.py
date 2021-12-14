@@ -50,7 +50,13 @@ class InvoiceForm(forms.ModelForm):
         fields = '__all__'
 
 
+class MyModelChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, obj):
+        return obj.player_price_str()
+
 class AddProductToCartForm(forms.Form):
+    
+
     def __init__(self, *args, **kwargs):
         family = kwargs.pop('family', '')
         if family:
@@ -58,7 +64,7 @@ class AddProductToCartForm(forms.Form):
         else:
             products = Product.objects.all()
         super().__init__(*args, **kwargs)
-        self.fields['product'] = forms.ModelChoiceField(
+        self.fields['product'] = MyModelChoiceField(
             products,
             required=True,
             # widget=forms.RadioSelect

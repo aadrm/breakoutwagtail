@@ -873,7 +873,7 @@ class Product(models.Model):
     """An item that can be added to the cart using the model cart item"""
     name = models.CharField(_("Product"), max_length=32)    
     price = models.DecimalField(_("Price"), max_digits=8, decimal_places=2)
-    value = models.DecimalField(_(""), max_digits=8, decimal_places=2, default=0)
+    value = models.DecimalField(_("Value"), max_digits=8, decimal_places=2, default=0)
     upgrade = models.OneToOneField("booking.Product", verbose_name=_("upgrade"), related_name='degrade', on_delete=models.SET_NULL, null=True, blank=True)
     family = models.ForeignKey("booking.ProductFamily", verbose_name=_("Family"), related_name='products', on_delete=models.CASCADE, null=True, blank=False)
     players = models.SmallIntegerField(_("Players"), blank=True, null=True)
@@ -885,13 +885,28 @@ class Product(models.Model):
 
     def __str__(self):
         name_str = ''
-        if self.players:
-            name_str += str(self.players)
-            name_str += ' ' 
-            name_str += _('Player')
+        name_str += self.players_str()
         name_str += ' | ' + self.family.__str__() 
-
         return name_str
+
+    def player_price_str(self):
+        player_price_str = ''
+        player_price_str += self.players_str()
+        player_price_str += ' | €' + str(self.price)
+        return player_price_str
+
+        
+
+    def players_str(self):
+        players_str = ''
+        if self.players:
+            players_str += str(self.players)
+            players_str += ' ' 
+            if self.players > 1:
+                players_str += _('Players')
+            else:
+                players_str += _('Player')
+        return players_str
 
     def get_absolute_url(self):
         return reverse("Product_detail", kwargs={"pk": self.pk})
@@ -903,6 +918,8 @@ class Product(models.Model):
         except Product.DoesNotExist:
             pass
         return has
+
+
 
 
 class ProductFamily(models.Model):
