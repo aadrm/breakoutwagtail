@@ -204,6 +204,13 @@ def add_product(request):
     else:
         return HttpResponseRedirect(reverse(''))
 
+def add_product_by_id(request, product_id):
+    cart = get_cart(request)
+    product = Product.objects.get(pk=product_id)
+    cart_item = CartItem(product=product, cart=cart)
+    cart_item.save()
+    return HttpResponseRedirect(reverse('booking:checkout'))
+
 def slot_to_cart(request):
     if request.method == 'POST':
         cart = get_cart(request)
