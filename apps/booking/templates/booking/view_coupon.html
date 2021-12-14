@@ -14,7 +14,6 @@
 <main class="coupons-main">
     <section class="c-section-light">
         <div class="container"> 
-            <div class="row justify-content-center mb-4">
                 {% comment %} <div class="col-8 text-center">
                     <h2>
                         {% trans "Looking for an original gift idea?" %} 
@@ -46,6 +45,7 @@
                 </div> 
             </div>
         </div> {% endcomment %}
+        </div>
         {% for block in page.content %}
             {% include_block block %}
         {% endfor %}
@@ -53,12 +53,10 @@
         {% include 'booking/section_coupons.html' %}
     </section>
     <section id="pdf-templates" class="c-section-light">
-        <div class="c-wrapper--md">
             {% for block in page.content_after %}
                 {% include_block block %}
             {% endfor %}
             {% include 'booking/section_pdfcoupons.html' %}
-        </div>
     </section>
 </main>
 
