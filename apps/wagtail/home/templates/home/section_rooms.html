@@ -7,7 +7,7 @@
             <div class="card w-100 h-100 bg-transparent">
                 <a title="{% trans "Book Now" %} {{room.name}}" href="{% if room.get_page %}{{room.get_page.url}}{% else %}#{% endif %}">
                     <div class='hover-effect-to-primary'>
-                        <img class="card-img-top" loading="lazy" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">
+                        <img height="300" width="450" class="card-img-top img-cover" loading="lazy" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">
                         <ul class="text-light h3">
                             <li>
                                 <span class="text-primary">
