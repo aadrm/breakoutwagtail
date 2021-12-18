@@ -45,7 +45,7 @@
     right: .5rem;
     padding: .3rem;
     line-height: 100px;
-    @include break--lg {
+    @include break--xl {
         font-size: medium;
     }
 
@@ -123,7 +123,7 @@ nav items toogle
     }
 }   
 
-@include break--lg {
+@include break--xl {
     .nav-toggle-label {
         display: none;
     }
