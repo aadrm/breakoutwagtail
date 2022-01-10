@@ -90,23 +90,26 @@
             {# Override this in templates to add extra stylesheets #}
         {% endblock %}
         {% comment %} thin.css is render blocking css {% endcomment %}
-        <link defer rel="stylesheet" type="text/css" href="{% static 'css/thin.css' %}">
-        <link rel="preload" href="{% static 'css/main.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="{% static 'css/main.css' %}"></noscript>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/thin.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static 'css/main.css' %}" media="print" onload="this.media='all'"> {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="{% static 'css/main.css' %}" media="print" onload="this.media='all'"> {% endcomment %}
+        {% comment %} <link async rel="preload" href="{% static 'css/main.css' %}" as="style" onload="this.onload=null;this.rel='stylesheet'"> {% endcomment %}
+        {% comment %} <noscript><link rel="stylesheet" href="{% static 'css/main.css' %}"></noscript> {% endcomment %}
 
         {% comment %} <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet"> {% endcomment %}
         {% comment %} font awesome  {% endcomment %}
-        <script defer src="https://kit.fontawesome.com/48b06d0d3d.js" crossorigin="anonymous"></script>
 
         {% comment %} cookie consent {% endcomment %}
+        <script data-varname="analytics" async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
+        <script data-varname="analytics" async src="https://kit.fontawesome.com/48b06d0d3d.js" crossorigin="anonymous"></script>
         {% if request|cookie_group_accepted:"analytics" %}
-            <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
-            <script>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
+            <script async>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
+            <script async>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
         {% endif %} 
 
-        <script data-varname="analytics" async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
         <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
         <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
 

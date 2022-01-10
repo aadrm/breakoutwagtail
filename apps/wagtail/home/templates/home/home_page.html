@@ -145,7 +145,7 @@
 
 {% block extra_js %}
     {{ block.super }}
-    <script defer type="module" src=" {% static 'js/accordion.js' %}"></script>
-    <script defer type="module" src =" {% static 'js/deffer.js' %}" ></script>
+    <script async type="module" src=" {% static 'js/accordion.js' %}"></script>
+    <script async type="module" src =" {% static 'js/deffer.js' %}" ></script>
 
 {% endblock extra_js %}
