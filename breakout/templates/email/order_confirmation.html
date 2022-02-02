@@ -2,9 +2,16 @@
 {% load i18n %}
 {% block email_title %}{% trans "Order Confirmation" %}{% endblock email_title %}
 {% block email_body %}
-<p>
-{% trans "We have received your order. You can see a summary below." %}
+<p class="email-font-md">
+{% trans "Thank you very much for your order!" %}
 </p>
 {% include 'booking/section-completed_order.html' %}
+<p>
+    {% trans "Best regards" %}
+    <br>
+    <b>
+    {% trans "The Breakout Escape Room Team" %}
+    </b>
+</p>
 {% endblock email_body %}
 

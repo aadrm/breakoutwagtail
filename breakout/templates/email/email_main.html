@@ -1,41 +1,63 @@
 {% load static %}
 {% load inlinecss %}
-{% inlinecss "css/email.css" %}
+{% inlinecss "css/email/email.css" %}
 <html>
   <body style="margin=0;">
-    <table align="center" cellpadding="0" border="0" cellspacing="0" class="email-base">
+    <table class="email-main" align="center" cellpadding="0" border="0" cellspacing="0">
       <tr>
         <td>
-          <br>
-          <table align="center" cellpadding="0" border="0" cellspacing="0" class="email-main">
+          <div class="email-ribbon"></div>
+          <table class="email-header" align="left" cellpadding="0" border="0" cellspacing="0">
             <tr>
               <td>
-                <table align="center" cellpadding="0" border="0" cellspacing="0" class="email-header">
-                  <tr>
-                    <td>
-                      <h1 class="email-title">{% block email_title %}Title{% endblock email_title %}</h1> 
-                    </td>
-                  </tr>
-                </table>
-                <table align="center" cellpadding="0" border="0" cellspacing="0" class="email-body">
-                  <tr>
-                    <td>
-                      {% block email_body %}{% endblock email_body %} <br>
-                    </td>
-                  </tr>
-                </table>
-                <table align="center" cellpadding="0" border="0" cellspacing="0" class="email-footer">
-                  <tr>
-                    <td>
-                      Breakout Escape Room GmbH
-                      Riedingerstrasse 26C, 86153 Augsburg
-                    </td>
-                  </tr>
-                </table>
-                <br>
+                <img height="64px" als="Logo" src="{% include "email/pngbase_breakout_logo" %}">
+                <h1 class="email-title">{% block email_title %}Title{% endblock email_title %}</h1> 
               </td>
             </tr>
           </table>
+          <table class="email-body" align="center" cellpadding="0" border="0" cellspacing="0">
+            <tr>
+              <td>
+                {% block email_body %}Content{% endblock email_body %} <br>
+              </td>
+            </tr>
+          </table>
+          <table class="email-footer" align="center" cellpadding="0" border="0" cellspacing="0">
+            <tr>
+              <td class="email-text-center">
+                <a class="email-icon-link" href="https://www.instagram.com/breakoutaugsburg/">
+                  <img height="48px" als="Instagram icon" src="{% include "email/pngbase_instagram_icon" %}">
+                </a>
+                <a class="email-icon-link" href="https://www.facebook.com/breakoutaugsburg/">
+                  <img height="48px" als="facebook icon" src="{% include "email/pngbase_facebook_icon" %}">
+                </a>
+                <a class="email-icon-link" href="https://www.youtube.com/channel/UCPKBo3nLDMGYEd4t_bkhTOQ">
+                  <img height="48px" als="youtube icon" src="{% include "email/pngbase_youtube_icon" %}">
+                </a>
+                <a class="email-icon-link" href="https://de.linkedin.com/company/breakout-escape-room">
+                  <img height="48px" als="linkedin icon" src="{% include "email/pngbase_linkedin_icon" %}">
+                </a>
+              </td>
+            </tr>
+          </table>
+
+          <table class="email-notice" align="center" cellpadding="0" border="0" cellspacing="0">
+            <tr>
+              <td>
+                copyright Ⓒ 2022 Breakout Escape Room GmbH
+                <br>
+                Riedingerstrasse 26C, 86153 Augsburg
+              </td>
+            <tr>
+              <td>
+                <a href="https://breakout-escaperoom.de">
+                  www.breakout-escaperoom.de
+                </a>
+              </td>
+            </tr>
+            </tr>
+          </table>
+          <br>
         </td>
       </tr>
     </table>
