@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-14 18:02+0100\n"
+"POT-Creation-Date: 2022-02-02 18:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,9 +73,9 @@ msgid "created"
 msgstr ""
 
 #: apps/booking/models.py:355 apps/booking/models.py:875
-#: apps/booking/templates/booking/section-completed_order.html:29
+#: apps/booking/templates/booking/section-completed_order.html:12
 msgid "Price"
-msgstr ""
+msgstr "Preis"
 
 #: apps/booking/models.py:357
 msgid "coupons"
@@ -197,23 +197,24 @@ msgstr ""
 
 #: apps/booking/models.py:586
 #: apps/booking/templates/booking/ajax_item-list.html:10
+#: apps/booking/templates/booking/section-completed_order.html:127
 msgid "Coupon"
-msgstr ""
+msgstr "Gutschein"
 
 #: apps/booking/models.py:587
+#: apps/booking/templates/booking/section-completed_order.html:125
 #: apps/booking/templates/booking/view_checkout.html:44
 #: apps/wagtail/home/templates/home/section_main-header.html:20
 msgid "Coupons"
-msgstr ""
+msgstr "Gutscheine"
 
 #: apps/booking/models.py:757 apps/booking/models.py:955
 #: apps/wagtail/streams/models.py:7 apps/wagtail/streams/models.py:21
 #: apps/wagtail/streams/models.py:41
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: apps/booking/models.py:758
-#: apps/wagtail/streams/templates/streams/contact_block.html:52
 msgid "Phone"
 msgstr ""
 
@@ -278,11 +279,11 @@ msgid "PaymentMethods"
 msgstr ""
 
 #: apps/booking/models.py:874 apps/booking/models.py:883
-#: apps/booking/templates/booking/section-completed_order.html:28
 msgid "Product"
 msgstr ""
 
 #: apps/booking/models.py:876
+#: apps/booking/templates/booking/section-completed_order.html:137
 msgid "Value"
 msgstr ""
 
@@ -317,9 +318,9 @@ msgid "Shipping cost"
 msgstr ""
 
 #: apps/booking/models.py:938
-#: apps/booking/templates/booking/section-completed_order.html:69
+#: apps/booking/templates/booking/section-completed_order.html:99
 msgid "Room"
-msgstr ""
+msgstr "Raum"
 
 #: apps/booking/models.py:941 apps/booking/models.py:982
 #: apps/booking/models.py:1151
@@ -537,99 +538,230 @@ msgstr "besuche unsere Webseite unter:"
 msgid "and book your game with the code:"
 msgstr "und buche dein Spiel mit dem Code"
 
-#: apps/booking/templates/booking/section-completed_order.html:3
-#: breakout/templates/email/bu.order_confirmation.txt:8
-msgid "Order Number: "
+#: apps/booking/templates/booking/section-completed_order.html:8
+msgid "Order Number:"
 msgstr "Ordernummer:"
 
-#: apps/booking/templates/booking/section-completed_order.html:7
-msgid "You have selected \"Bank Transfer\" as the payment method."
-msgstr "\"Überweisung\" wurde als Zahlungsmethode ausgewählt."
+#: apps/booking/templates/booking/section-completed_order.html:11
+msgid "Items"
+msgstr "Artikel"
 
-#: apps/booking/templates/booking/section-completed_order.html:8
-#, python-format
-msgid ""
-"\n"
-"    Please transfer the amount of €%(transfer_amout)s to our bank account "
-"before your appointment.\n"
-"    "
-msgstr ""
-"\n"
-"Bitte den Betrag von €%(transfer_amout)s vor Deinem Termin auf unserer "
-"Bankkonto Überweisen"
-
-#: apps/booking/templates/booking/section-completed_order.html:14
-msgid "See our bank account details below:"
-msgstr "Unsere Bankverbingung:"
-
-#: apps/booking/templates/booking/section-completed_order.html:40
+#: apps/booking/templates/booking/section-completed_order.html:23
 msgid "Subtotal:"
 msgstr "Zwischensumme:"
 
-#: apps/booking/templates/booking/section-completed_order.html:44
+#: apps/booking/templates/booking/section-completed_order.html:27
 msgid "Discount:"
 msgstr "Rabatt"
 
-#: apps/booking/templates/booking/section-completed_order.html:49
+#: apps/booking/templates/booking/section-completed_order.html:32
 #: apps/booking/templates/booking/section-order_summary.html:14
 #: breakout/templates/email/bu.order_confirmation.txt:15
 #: breakout/templates/email/order_confirmation_alert.txt:11
 msgid "Total:"
 msgstr "Gesamt:"
 
-#: apps/booking/templates/booking/section-completed_order.html:59
-#: breakout/templates/email/bu.order_confirmation.txt:18
-msgid "You have the following appointments"
-msgstr "Termine"
+#: apps/booking/templates/booking/section-completed_order.html:43
+msgid "Payment Information"
+msgstr "Zahlungsinformationen"
+
+#: apps/booking/templates/booking/section-completed_order.html:48
+msgid "Payment method"
+msgstr "Zahlungsmethode"
+
+#: apps/booking/templates/booking/section-completed_order.html:52
+msgid "Order Total"
+msgstr "Gesamtbetrag"
+
+#: apps/booking/templates/booking/section-completed_order.html:57
+msgid ""
+"Please note that for the time being it's not possible to accept payments via "
+"credit card."
+msgstr "Derzeit ist keine Kartenzahlung möglich."
+
+#: apps/booking/templates/booking/section-completed_order.html:60
+msgid "You have selected \"Bank Transfer\" as the payment method."
+msgstr "\"Überweisung\" wurde als Zahlungsmethode ausgewählt."
 
 #: apps/booking/templates/booking/section-completed_order.html:61
-#: breakout/templates/email/bu.order_confirmation.txt:20
-msgid "You have the following appointment"
+#, fuzzy, python-format
+msgid ""
+"\n"
+"                    Please transfer the amount of €%(transfer_amout)s to our "
+"bank account before your appointment.\n"
+"                    "
+msgstr ""
+"\n"
+"Bitte den Betrag von €%(transfer_amout)s vor Deinem Termin auf unserer "
+"Bankkonto Überweisen"
+
+#: apps/booking/templates/booking/section-completed_order.html:65
+msgid "See our bank account details below:"
+msgstr "Unsere Bankverbingung:"
+
+#: apps/booking/templates/booking/section-completed_order.html:89
+msgid "Appointments"
+msgstr "Termine"
+
+#: apps/booking/templates/booking/section-completed_order.html:91
+msgid "Appointment"
 msgstr "Termin"
 
-#: apps/booking/templates/booking/section-completed_order.html:67
+#: apps/booking/templates/booking/section-completed_order.html:97
 msgid "Date"
 msgstr "Datum"
 
-#: apps/booking/templates/booking/section-completed_order.html:68
+#: apps/booking/templates/booking/section-completed_order.html:98
 msgid "Time"
 msgstr "Zeit"
 
-#: apps/booking/templates/booking/section-completed_order.html:81
-msgid ""
-"\n"
-"    Remember that you have to arrive 15 minutes before your session begins "
-"to allow enough time for you to prepare and to give you a short "
-"explanation.\n"
-"    "
-msgstr ""
-"\n"
-"Denke daran, dass du 15 Minuten vor Beginn deiner Sitzung eintreffen musst,"
-"damit du genug Zeit hast, dich vorzubereiten und wir dir eine kurze "
-"Erklärung geben können\n"
-"    "
-
-#: apps/booking/templates/booking/section-completed_order.html:87
-#: breakout/templates/email/bu.order_confirmation.txt:36
-msgid "Your Coupon Codes"
-msgstr "Gutschein-Codes"
-
-#: apps/booking/templates/booking/section-completed_order.html:89
-#: breakout/templates/email/bu.order_confirmation.txt:38
-msgid "Your Coupon Code"
+#: apps/booking/templates/booking/section-completed_order.html:134
+msgid "Coupon code"
 msgstr "Gutschein-Code"
 
-#: apps/booking/templates/booking/section-completed_order.html:98
-#: breakout/templates/email/bu.order_confirmation.txt:43
-msgid "valued at"
-msgstr "wert"
+#: apps/booking/templates/booking/section-completed_order.html:158
+msgid "Remarks:"
+msgstr "Anmerkungen:"
 
-#: apps/booking/templates/booking/section-completed_order.html:106
+#: apps/booking/templates/booking/section-completed_order.html:162
+msgid "It is important to be there 15 minutes before the game starts."
+msgstr "Es ist wichtig 15 Minuten vor Spielbeginn da zu sein."
+
+#: apps/booking/templates/booking/section-completed_order.html:163
 msgid ""
-"\n"
-"\n"
-"    "
+"The game master needs this time to explain everything worth knowing about "
+"the game."
 msgstr ""
+"Diese Zeit benötigt der Gamemaster, um alles Wissenswerte über das Spiel zu "
+"erklären. "
+
+#: apps/booking/templates/booking/section-completed_order.html:166
+msgid "Please take note of the current"
+msgstr "Bitte beachten die aktuelle"
+
+#: apps/booking/templates/booking/section-completed_order.html:167
+msgid "Measures against Covid-19"
+msgstr "Corona-Maßnahmen"
+
+#: apps/booking/templates/booking/section-completed_order.html:170
+msgid "How to get there"
+msgstr "Anfahrtsbeschreibung"
+
+#: apps/booking/templates/booking/section-completed_order.html:172
+msgid ""
+"We are located in Riedingerpark.We are easily accessible by public transport "
+"(bus stop MAN or Dieselbrucke) or by car."
+msgstr ""
+"Wir befinden uns im Riedingerpark und sind mit öffentlichen Verkehrsmitteln "
+"(Haltestelle MAN oder Dieselbrucke) oder mit dem Auto gut zu erreichen."
+
+#: apps/booking/templates/booking/section-completed_order.html:173
+msgid ""
+"We offer free parking for our customers directly in front of the entrance."
+msgstr ""
+"Für unsere Kunden bieten wir kostenlose Parkplätze direkt vor dem Eingang"
+
+#: apps/booking/templates/booking/section-completed_order.html:174
+msgid "Address"
+msgstr "Adresse"
+
+#: apps/booking/templates/booking/section-completed_order.html:174
+msgid "2nd floor"
+msgstr "2. Stock"
+
+#: apps/booking/templates/booking/section-completed_order.html:176
+msgid "Changes, cancellations"
+msgstr "Änderungen, Stornierungen"
+
+#: apps/booking/templates/booking/section-completed_order.html:178
+msgid "It is no problem if the number of players changes at short notice."
+msgstr ""
+"Es ist kein Problem, wenn sich die Anzahl der Spieler kurzfristig ändert."
+
+#: apps/booking/templates/booking/section-completed_order.html:179
+msgid ""
+"Bookings can be changed or cancelled free of charge up to 24 hours before "
+"the appointment."
+msgstr ""
+"Buchungen können bis zu 24 Stunden vor dem Termin kostenlos geändert oder "
+"storniert werden."
+
+#: apps/booking/templates/booking/section-completed_order.html:180
+msgid ""
+"For a cancellation or room change less than 24 hours before the appointment, "
+"a fee of €30 applies"
+msgstr ""
+"Bei einer Stornierung oder Raumänderung weniger als 24 Stunden vor dem "
+"Termin wird eine Gebühr von 30 € erhoben."
+
+#: apps/booking/templates/booking/section-completed_order.html:181
+msgid ""
+"If the group does not show up or gives less than 3 hours notice, we "
+"unfortunately have to charge the full amount."
+msgstr ""
+"Wenn die Gruppe nicht erscheint oder weniger als 3 Stunden vorher Bescheid "
+"gibt, müssen wir leider den vollen Betrag berechnen."
+
+#: apps/booking/templates/booking/section-completed_order.html:182
+msgid ""
+"We are sorry, but the room was blocked and unfortunately we cannot rebook or "
+"change our roster at such short notice."
+msgstr ""
+"Es tut uns leid, aber der Raum wurde blockiert und wir können leider nicht "
+"umbuchen oder unseren Dienstplan so kurzfristig ändern."
+
+#: apps/booking/templates/booking/section-completed_order.html:185
+#: apps/booking/templates/booking/section_coupons.html:180
+msgid "Contact us"
+msgstr "Kontaktiere uns"
+
+#: apps/booking/templates/booking/section-completed_order.html:186
+msgid "and we will be happy to help you."
+msgstr "und wir werden Ihnen gerne weiterhelfen."
+
+#: apps/booking/templates/booking/section-completed_order.html:190
+#, fuzzy
+#| msgid "Receive your coupon"
+msgid "About your coupon"
+msgstr "Gutschein abholen"
+
+#: apps/booking/templates/booking/section-completed_order.html:192
+msgid ""
+"As an attachment to the email there's a digital version of the coupon in A5 "
+"format."
+msgstr ""
+"Im Anhang der E-Mail befindet sich eine digitale Version des Gutscheins im "
+"A5-Format."
+
+#: apps/booking/templates/booking/section-completed_order.html:195
+msgid ""
+"There are additional coupon templates for special occasions available for "
+"download at our website."
+msgstr ""
+"Weitere Gutscheinvorlagen für besondere Anlässe stehen auf unserer Website "
+"zum Download verfügbar."
+
+#: apps/booking/templates/booking/section-completed_order.html:197
+msgid "Just visit our coupons page"
+msgstr "Besuchen Sie einfach unsere Gutscheinseite"
+
+#: apps/booking/templates/booking/section-completed_order.html:201
+msgid ""
+"It's possible to book appointments for more people than those that the "
+"coupon is for, simply pay the difference either at the time of booking or "
+"just before the game."
+msgstr ""
+"Es ist möglich, Termine für mehr Personen zu buchen, als für den Gutschein "
+"vorgesehen sind. Bezahlen Sie einfach die Differenz entweder bei der Buchung "
+"oder kurz vor dem Spiel."
+
+#: apps/booking/templates/booking/section-completed_order.html:204
+msgid "Best Regards"
+msgstr "Viele Grüße"
+
+#: apps/booking/templates/booking/section-completed_order.html:205
+msgid "The Breakout Escape Room Team"
+msgstr "Das Breakout Escape Room Team"
 
 #: apps/booking/templates/booking/section-order_summary.html:3
 #: breakout/templates/email/bu.order_confirmation.txt:11
@@ -637,7 +769,6 @@ msgid "Summary"
 msgstr "Zusammenfassung"
 
 #: apps/booking/templates/booking/section_coupons.html:11
-#| msgid "Email coupon"
 msgid "Online coupon"
 msgstr "Online Gutschein"
 
@@ -652,7 +783,6 @@ msgid "Order online"
 msgstr "Online Bestellen"
 
 #: apps/booking/templates/booking/section_coupons.html:55
-#| msgid "Immediately get your code"
 msgid "Immediately get your coupon code"
 msgstr "Gutscheincode sofort erhalten"
 
@@ -685,10 +815,6 @@ msgstr "Termin vereinbaren"
 msgid "Contact"
 msgstr "Kontaktiere uns"
 
-#: apps/booking/templates/booking/section_coupons.html:180
-msgid "Contact us"
-msgstr "Kontaktiere uns"
-
 #: apps/booking/templates/booking/section_coupons.html:196
 msgid "Come to the Escape Room"
 msgstr "Zum Escape Room kommen"
@@ -701,30 +827,28 @@ msgstr "Gutschein abholen"
 msgid "Thank you!"
 msgstr "Vielen Dank!"
 
-#: apps/booking/templates/booking/view-order.html:15
-msgid ""
-"Your paypal purchase is being processed. As soon as Paypal sends us your "
-"payment confirmation you will receive an email with the information in this "
-"page, if you don't receive any e-mail within 15 minutes please contact us to "
-"confirm everything is fine with your order, remember to check your spam "
-"folder."
-msgstr ""
-"Deine Paypal-zahlung wird gerade bearbeitet. Sobald Paypal uns deineZalung "
-"bestätigt, wirds du eine E-Mail mit den Informationen auf dieser Seite "
-"erhaltenWenn du innerhalb von 15 Minuten keine E-Mail erhaltest, bitte uns "
-"kontaktieren"
+#: apps/booking/templates/booking/view-order.html:16
+msgid "We are awaiting Paypal's payment confirmation."
+msgstr "Wir warten auf die Zahlungsbestätigung von Paypal."
 
 #: apps/booking/templates/booking/view-order.html:17
 msgid ""
-"An email with the information in this page has been sent to the email you "
-"provided during the booking process, if you don't see it in your inbox it "
-"might be on it's way so please allow a couple of minutes, also make sure to "
-"check your spam folder."
+"As soon as we receive it we will send via email the information on this page."
 msgstr ""
-"Eine E-Mail mit den Informationen auf dieser Seite wurde an die E-Mail "
-"Adressegesendet, die du während des Buchungsprozesses angegeben hast.Wenn du "
-"sie nicht in deinem Posteingang siehst, könnte sie auf dem Weg sein, oder "
-"auf Deinen Spam-Ordner gelandet."
+"Sobald wir sie erhalten, senden wir die Informationen auf dieser Seite per E-"
+"Mail zu."
+
+#: apps/booking/templates/booking/view-order.html:18
+#: apps/booking/templates/booking/view-order.html:23
+msgid "Remember to check your spam folder in case you can't find it."
+msgstr ""
+"Vergiss nicht, deinen Spam-Ordner zu überprüfen, falls du sie nicht finden "
+"kannst."
+
+#: apps/booking/templates/booking/view-order.html:22
+msgid "We have sent an email with the information on this page."
+msgstr ""
+"Wir haben eine E-Mail mit den Informationen auf dieser Seite verschickt."
 
 #: apps/booking/templates/booking/view_calendar_test.html:8
 msgid "Book Online"
@@ -776,17 +900,17 @@ msgstr "Zum Guscheine"
 msgid "Your shopping cart is empty!"
 msgstr "Warenkorb leer!"
 
-#: apps/booking/views.py:377 apps/booking/views.py:420
+#: apps/booking/views.py:384 apps/booking/views.py:427
 #, python-format
 msgid "The coupon with the code \"%(code)s\" does not exist"
 msgstr "Der Gutschein \"%(code)s\" existiert nicht"
 
-#: apps/booking/views.py:394 apps/booking/views.py:446
+#: apps/booking/views.py:401 apps/booking/views.py:453
 #, python-format
 msgid "The coupon with code \"%(code)s\" has been removed from your purchase"
 msgstr "Gutschein \"%(code)s\" entfernt"
 
-#: apps/booking/views.py:530
+#: apps/booking/views.py:537
 #, python-format
 msgid "Created %(amount)s coupons"
 msgstr ""
@@ -827,17 +951,17 @@ msgstr ""
 msgid "Frequently Asked Questions"
 msgstr "FAQs"
 
-#: apps/wagtail/home/templates/home/room_page.html:12
+#: apps/wagtail/home/templates/home/room_page.html:14
+msgid "Overview"
+msgstr ""
+
+#: apps/wagtail/home/templates/home/room_page.html:26
 msgid "Promo Video"
 msgstr ""
 
-#: apps/wagtail/home/templates/home/room_page.html:16
+#: apps/wagtail/home/templates/home/room_page.html:30
 msgid "Image Gallery"
 msgstr "Bildgallerie"
-
-#: apps/wagtail/home/templates/home/room_page.html:21
-msgid "Overview"
-msgstr ""
 
 #: apps/wagtail/home/templates/home/section_location.html:12
 msgid "Opening hours:"
@@ -1073,11 +1197,22 @@ msgid "Dear"
 msgstr "Liebe"
 
 #: breakout/templates/email/bu.order_confirmation.txt:6
-#: breakout/templates/email/order_confirmation.html:6
 msgid "We have received your order. You can see a summary below."
 msgstr ""
 "Wir haben deine Bestellung erhalten. Du kannst unten eine Zusammenfassung "
 "sehen."
+
+#: breakout/templates/email/bu.order_confirmation.txt:8
+msgid "Order Number: "
+msgstr "Ordernummer:"
+
+#: breakout/templates/email/bu.order_confirmation.txt:18
+msgid "You have the following appointments"
+msgstr "Termine"
+
+#: breakout/templates/email/bu.order_confirmation.txt:20
+msgid "You have the following appointment"
+msgstr "Termin"
 
 #: breakout/templates/email/bu.order_confirmation.txt:25
 msgid "at"
@@ -1086,6 +1221,18 @@ msgstr "um"
 #: breakout/templates/email/bu.order_confirmation.txt:25
 msgid "for the room"
 msgstr "für den Raum"
+
+#: breakout/templates/email/bu.order_confirmation.txt:36
+msgid "Your Coupon Codes"
+msgstr "Gutschein-Codes"
+
+#: breakout/templates/email/bu.order_confirmation.txt:38
+msgid "Your Coupon Code"
+msgstr "Gutschein-Code"
+
+#: breakout/templates/email/bu.order_confirmation.txt:43
+msgid "valued at"
+msgstr "wert"
 
 #: breakout/templates/email/bu.order_confirmation.txt:45
 msgid ""
@@ -1098,6 +1245,10 @@ msgstr ""
 msgid "Order Confirmation"
 msgstr "Bestellbestätigung"
 
+#: breakout/templates/email/order_confirmation.html:6
+msgid "Thank you very much for your order!"
+msgstr "Vielen dank vielen Dank für Deine Bestellung"
+
 #: breakout/templates/footer.html:8
 msgid "Connect with us:"
 msgstr "Mit uns verbinden"
@@ -1109,6 +1260,31 @@ msgstr "Tel:"
 #: breakout/templates/navbar.html:8
 msgid "Go to home"
 msgstr ""
+
+#~ msgid ""
+#~ "Your paypal purchase is being processed. As soon as Paypal sends us your "
+#~ "payment confirmation you will receive an email with the information in "
+#~ "this page, if you don't receive any e-mail within 15 minutes please "
+#~ "contact us to confirm everything is fine with your order, remember to "
+#~ "check your spam folder."
+#~ msgstr ""
+#~ "Deine Paypal-zahlung wird gerade bearbeitet. Sobald Paypal uns "
+#~ "deineZalung bestätigt, wirds du eine E-Mail mit den Informationen auf "
+#~ "dieser Seite erhaltenWenn du innerhalb von 15 Minuten keine E-Mail "
+#~ "erhaltest, bitte uns kontaktieren"
+
+#~ msgid ""
+#~ "\n"
+#~ "    Remember that you have to arrive 15 minutes before your session "
+#~ "begins to allow enough time for you to prepare and to give you a short "
+#~ "explanation.\n"
+#~ "    "
+#~ msgstr ""
+#~ "\n"
+#~ "Denke daran, dass du 15 Minuten vor Beginn deiner Sitzung eintreffen "
+#~ "musst,damit du genug Zeit hast, dich vorzubereiten und wir dir eine kurze "
+#~ "Erklärung geben können\n"
+#~ "    "
 
 #~ msgid "Get in touch"
 #~ msgstr "Termin vereinbaren"
