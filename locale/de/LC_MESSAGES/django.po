@@ -20,7 +20,7 @@ msgstr ""
 
 #: apps/booking/forms.py:25
 msgid "Number of players"
-msgstr ""
+msgstr "Anzahl der Spieler"
 
 #: apps/booking/forms.py:41
 msgid "Phone number"
