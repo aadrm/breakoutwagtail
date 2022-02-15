@@ -3,7 +3,9 @@
     height: 100%;
     width: 100%;
 }
-
+.object-fit-cover {
+    object-fit: cover;
+}
 
 .svg-fill-primary {
     fill: $brand-primary;
@@ -11,4 +13,34 @@
 
 .svg-fill-secondary {
     fill: $brand-secondary;
+}
+
+.svg-btn--light-primary {
+   svg {
+       fill: $brand-light;
+       &:hover {
+           fill: $brand-primary;
+       }
+   } 
+}
+
+svg-lg {
+    svg {
+        height: 96px;
+        width: 96px;
+    }
+}
+
+.svg-md {
+    svg {
+        height: 48px;
+        width: 48px;
+    }
+}
+
+.svg-sm {
+    svg {
+        height: 32px;
+        width: 32px;
+    }
 }

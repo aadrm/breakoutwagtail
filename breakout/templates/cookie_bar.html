@@ -1,0 +1,19 @@
+{% load i18n %}
+<div class=""> 
+    <p>
+        {% trans "This site uses" %} 
+        {{cookie_groups}} 
+        {% trans "cookies for better performance and user experience. Do you agree to using cookies other than only the essential cookies?" %}
+    </p>
+    <div class="cookie-bar__buttons">
+        <a href="{{ url_accept }}" class="cc-cookie-accept">
+            {% trans "Accept" %}
+        </a>
+        <a href="{{ url_decline }}" class="cc-cookie-decline">
+            {% trans "Decline" %}
+        </a>
+        <a href="{{ url_cookies }}" >
+            {% trans "Cookies info" %}
+        </a>
+    </div>
+</div>

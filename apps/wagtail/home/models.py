@@ -13,7 +13,6 @@ from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, MultiField
 from wagtail.images.edit_handlers import ImageChooserPanel, ImageFieldComparison
 from wagtail.core.fields import StreamField, StreamBlock, BlockField, RichTextField
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
-from apps.wagtail.streams import blocks as myblocks
 from modelcluster.fields import ParentalManyToManyField
 from wagtail.admin.edit_handlers import TabbedInterface, ObjectList
 from wagtailyoast.edit_handlers import YoastPanel
@@ -25,6 +24,7 @@ from apps.wagtail.menus.models import WagtailLanguage
 from apps.booking.models import Room, ProductFamily
 from apps.booking.forms import AddProductToCartForm 
 from apps.booking.utils import get_cart
+from apps.wagtail.streams import blocks as myblocks
 
 class MyPage(Page):
 

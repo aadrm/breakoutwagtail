@@ -1,73 +1,76 @@
 {% load i18n %}
 {% load menus_tags %}
 {% get_menu "footer-links" as links %}
-
-<div class="footer-content">
-
-    <div class="footer__social">
-        <h2 class="text-center">{% trans "Connect with us:" %}</h2>
-        <br>
-        <div class="footer__social__icons">
-            <div class="footer__social__icon">
-                <a target="_blank" rel="noopener" href="https://www.facebook.com/breakoutaugsburg">
-                    {% include 'svg/icon-facebook.svg' %}
-                </a>
-            </div>
-            {% comment %} <div class="footer__social__icon">
-                <a rel="noopener" href="https://twitter.com/flypeakheli">
-                    {% include 'svg/icon-twitter.svg' %}
-                </a>
-            </div> {% endcomment %}
-            <div class="footer__social__icon">
-                <a target="_blank" rel="noopener" href="https://www.instagram.com/bereakoutaugsburgr">
-                    {% include 'svg/icon-instagram.svg' %}
-                </a>
-            </div>
-            <div class="footer__social__icon">
-                <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCPKBo3nLDMGYEd4t_bkhTOQ">
-                    {% include 'svg/icon-youtube.svg' %}
-                </a>
-            </div>
-            <div class="footer__social__icon">
-                <a target="_blank" rel="noopener" href="https://www.linkedin.com/company/breakout-escaperoom">
-                    {% include 'svg/icon-linkedin.svg' %}
-                </a>
+<footer class="bg-secondary w-100 text-light" >
+    <div class="container">
+        <div class="row py-3">
+            <div class="col">
+                <h2 class="text-center">{% trans "Connect with us:" %}</h2>
             </div>
         </div>
-    </div> 
-    <div class="footer__links">
-        <ul>
-        {% for link in links.menu_items.all %}
-            <li>
-                <a class="c-anchor-standard" 
-                {% if link.noopener %}rel="noopener"{% endif %}
-                {% if link.new_tab %}target="_blank"{% endif %}
-                href="{{ link.link }}">{{ link.title }}</a>
-            </li>
-        {% endfor %}
-        </ul>
+
+        <div class="row py-3">
+            <div class="col">
+                <div class="d-flex flex-wrap justify-content-evenly">
+                    <a class="svg-btn--light-primary svg-md" target="_blank" rel="noopener" href="https://www.facebook.com/breakoutaugsburg">
+                        {% include 'svg/icon-facebook.svg' %}
+                    </a>
+                    <a class="svg-btn--light-primary svg-md" target="_blank" rel="noopener" href="https://www.instagram.com/bereakoutaugsburgr">
+                        {% include 'svg/icon-instagram.svg' %}
+                    </a>
+                    <a class="svg-btn--light-primary svg-md" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCPKBo3nLDMGYEd4t_bkhTOQ">
+                        {% include 'svg/icon-youtube.svg' %}
+                    </a>
+                    <a class="svg-btn--light-primary svg-md" target="_blank" rel="noopener" href="https://www.linkedin.com/company/breakout-escaperoom">
+                        {% include 'svg/icon-linkedin.svg' %}
+                    </a>
+                        {% comment %} <a rel="noopener" href="https://twitter.com/flypeakheli">
+                            {% include 'svg/icon-twitter.svg' %}
+                        </a> {% endcomment %}
+                </div>
+            </div>
+        </div> 
+
+        <div class="row py-3">
+            <div class="col">
+            <ul class="d-flex flex-wrap justify-content-evenly m-auto">
+                {% for link in links.menu_items.all %}
+                    <li class="m-3">
+                        <a class="nav-item" 
+                        {% if link.noopener %}rel="noopener"{% endif %}
+                        {% if link.new_tab %}target="_blank"{% endif %}
+                        href="{{ link.link }}">{{ link.title }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row pt-3">
+            <div class="col text-center">
+                <p class="">
+                <span> email: <a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="context-centert-link">info@breakout-escaperoom.de</a></span>
+                |
+                    <span>{% trans "Tel: " %}<a target="_blank" href="tel:+4915777853955" class="contact-link">+49 157 7785 3955</a></span>
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row pb-3">
+            <div class="col text-center">
+                <p class="">
+                    <span>
+                        © Breakout Escape Room GmbH 
+                    </span> 
+                    |
+                    <span>
+                        <a href="https://antonioadrian.dev" rel="noopener">Site by Antonio Adrian</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+
     </div>
-
-
-    <div class="footer__info">
-        <p class="font--md">
-           <span> email: <a target="_blank" href="mailto:info@breakout-escaperoom.de?Subject=Anfrage" class="context-centert-link">info@breakout-escaperoom.de</a></span>
-           |
-            <span>{% trans "Tel: " %}<a target="_blank" href="tel:+4915777853955" class="contact-link">+49 157 7785 3955</a></span>
-        </p>
-    </div>
-
-
-    <div class="footer__info">
-        <p class="font--sm">
-            <span>
-                © Breakout Escape Room GmbH 
-            </span> 
-            |
-            <span>
-                <a href="https://antonioadrian.dev" rel="noopener">Site by Antonio Adrian</a>
-            </span>
-        </p>
-    </div>
-
-</div>
+</footer>

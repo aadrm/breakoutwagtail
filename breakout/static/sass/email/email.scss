@@ -72,6 +72,8 @@ h2 {
   border-collapse: collapse;
   border: 1px solid #ccc;
   width: 100%;
+  max-width: 440px;
+  min-width: 440px;
 }
 
 .email-row-header {

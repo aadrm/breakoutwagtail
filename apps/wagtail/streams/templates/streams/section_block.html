@@ -2,7 +2,7 @@
 {% load wagtailcore_tags %}
 
 {% block element_content %}
-<div class="standard-page">
+<div class="container">
 {% include_block self.title %}
 {% for block in self.stream %}
     {% include_block block %}

@@ -11,11 +11,13 @@
         {% for block in page.content %}
             {% include_block block %}
         {% endfor %}
-    <section class="c-section-light">
-        <div class="c-wrapper--lg">
-            <div class="calendars">
+    <section class="bg-light">
+        <div class="container">
+            <div class="row">
                 {% for room in rooms %}
-                <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
+                <div class="col-lg-6 my-4">
+                    <div id="{{room.pk}}" class="calendar-frame overflow-hidden js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
+                </div>
                 {% endfor %}
             </div>
         </div>

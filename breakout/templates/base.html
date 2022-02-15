@@ -135,9 +135,8 @@
         {% include 'navbar.html' %}
             {% comment %} {% include 'navbar.html' %} {% endcomment %}
         {% block content %}{% endblock content %}
-        <footer>
-            {% include 'footer.html' %} 
-        </footer>
+
+        {% include 'footer.html' %} 
         {# Global javascript #}
         {% include 'cookie_consent.html' %}
         {% comment %} <script  src="{% static 'js/peak.js' %}"></script> {% endcomment %}

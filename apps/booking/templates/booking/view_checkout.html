@@ -10,50 +10,38 @@
     <h2 class="">{% trans "Checkout" %}</h2>
 </header>
 {% if cart.number_of_valid_items > 0 %}
-<section class="checkout-form__wrapper">
-    <h2 class="">{% trans "Shopping Cart" %}</h2>
-    <br>
-    <div id="js-item-list-wrapper">
-    {% include 'booking/ajax_item-list.html' %}
-    </div>
-</section>
-
-{% comment %} Redeem Coupons {% endcomment %}
-
-<section class="checkout-form__wrapper">
-    <h2 class="">{% trans "Redeem Coupons" %}</h2>
-    <div class="coupons_form">
-    {% include 'booking/form_apply-coupon.html' %}
-    </div>
-    <div id="js-coupon-list-wrapper" class="coupons__applied">
-    {% include 'booking/ajax_coupon-list.html' %} 
-    </div> 
-</section>
-
-{% comment %} Continue shopping buttons {% endcomment %}
-<br>
 <section>
-    <div class="continue-shopping__wrapper c-inner-width--sm">
-        <h2 class="">{% trans "Continue Shopping" %}</h2>
+
+    <div class="container bg-dark bg-opacity-10 my-3 p-3">
+        <h2 class="">{% trans "Shopping Cart" %}</h2>
         <br>
-        <div class="continue-shopping__buttons">
-            <a class="c-anchor c-anchor-secondary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a>
-            <a class="c-anchor c-anchor-secondary" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons" %}</a>
+        <div id="js-item-list-wrapper">
+        {% include 'booking/ajax_item-list.html' %}
         </div>
-    
+        <h3 class="h4">{% trans "Continue Shopping" %}</h3>
+        <div class="d-flex gap-3">
+            <a class="btn btn-outline-secondary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a>
+            <a class="btn btn-outline-secondary" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons" %}</a>
+        </div>
     </div>
 
-</section>
-<br>
+    <div class="container bg-dark bg-opacity-10 my-3 p-3">
+        <h2 class="">{% trans "Redeem Coupons" %}</h2>
+        <div class="coupons_form">
+        {% include 'booking/form_apply-coupon.html' %}
+        </div>
+        <div id="js-coupon-list-wrapper" class="coupons__applied">
+        {% include 'booking/ajax_coupon-list.html' %} 
+        </div> 
+    </div>
 
-{% comment %} Invoice Details {% endcomment %}
-
-<section class="checkout-form__wrapper">
-    <div id="js-invoice-div">
-        <div>
-            <h2 class="">{% trans "Customer Details" %}</h2>
-            <div class="standard-form__body invoice-form__body">
-                {% include 'booking/form_checkout-form.html' %}
+    <div class="container bg-dark bg-opacity-10 my-3 p-3">
+        <div id="js-invoice-div">
+            <div>
+                <h2 class="">{% trans "Customer Details" %}</h2>
+                <div class="standard-form__body invoice-form__body">
+                    {% include 'booking/form_checkout-form.html' %}
+                </div>
             </div>
         </div>
     </div>
@@ -80,23 +68,23 @@
 
 {% else %}
 
-<section class="c-section-light">
-<div class="c-inner-width--sm">
-<h3 class="">{% trans "Your shopping cart is empty!" %}</h3>
-<br>
-<p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} 
-<u>
-<a class="" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a> 
-</u>
-</p>
-<br>
-<br>
-<p>{% trans "Or if you wish to buy a special gift for someone visit our" %} 
-<u>
-<a class="" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons Shop" %}</a>
-</u>
-</p>
-</div>
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="">{% trans "Your shopping cart is empty!" %}</h3>
+                <br>
+                <p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} 
+                    <a class="btn btn-outline-primary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a> 
+                </p>
+                <br>
+                <br>
+                <p>{% trans "Or if you wish to buy a special gift for someone visit our" %} 
+                    <a class="btn btn-outline-primary" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons Shop" %}</a>
+                </p>
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endif %}

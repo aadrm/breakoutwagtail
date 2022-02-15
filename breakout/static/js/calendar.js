@@ -196,9 +196,8 @@ function addEventToDay() {
 }
 
 function addEventToSlot() {
-    let slots = document.getElementsByClassName('available-slots__data__slot');
+    let slots = document.getElementsByClassName('js-available-slot');
     for (i = 0; i < slots.length; i++) {
-        console.log('added')
         slots[i].addEventListener("click", showBookingForm);
     }
     slots = document.getElementsByClassName('admin-slot__extra-button');

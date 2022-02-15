@@ -2,20 +2,36 @@
 <div class="booking-form-response">
     <div class="booking-form-blocker js-close-onclick"></div>
     <div action="" class="booking-form-wrapper">
-        <div class="standard-form">
-            <div class="standard-form__header">
-                <span>{% trans "Book Session" %}</span>
-                <div class="booking-form__exit-cross js-close-onclick">
-                    <div class="booking-form__exit-cross__inner"></div>
+        <div class="bg-light">
+            <div class="bg-secondary bg-opacity-10">
+                <div class="bg-primary d-flex p-3 justify-content-between">
+                    <span class="fs-3">{% trans "Choose game" %}</span>
+                    <div class="booking-form__exit-cross js-close-onclick">
+                        <div class="btn remove-button"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="standard-form__body">
-                <div class="booking-form__slot-info">
-                    <p class="-sm">{{slot.room}}</p>
-                    <p>{{slot.start|date:"M"}} {{slot.start|date:"d"}} - {{slot.start|date:"H:i"}}</p>
-                    <p>{{slot.duration}} {% trans "minutes" %}</p>
+                <div class="pt-3 px-5 pb-5">
+                    <div class="text-center w-100 bg-light">
+                        <table class="table">
+                            <tr>
+                                <th>{% trans "Room" %}</th>
+                                <td>{{ slot.room }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Date" %}</th>
+                                <td>{{ slot.start|date:"M d" }}</td>
+                            </tr>
+                            <tr>
+                                <th>{% trans "Time" %}</th>
+                                <td>{{ slot.start|date:"H:i" }}</td>
+                            </tr>
+                        </table>
+                        {% comment %} <p class="fs-4">{{slot.room}}</p>
+                        <p class="fs-5">{{slot.start|date:"M"}} {{slot.start|date:"d"}} - {{slot.start|date:"H:i"}}</p>
+                        <p class="fs-5">{{slot.duration}} {% trans "minutes" %}</p> {% endcomment %}
+                    </div>
+                    {% include 'booking/form_slot-booking.html' %}
                 </div>
-                {% include 'booking/form_slot-booking.html' %}
             </div>
         </div>
     </div>

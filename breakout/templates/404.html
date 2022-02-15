@@ -4,12 +4,12 @@
 {% block body_class %}template-404{% endblock %}
 
 {% block content %}
-<header class="secondary-header">
+<header class="header-secondary">
     {% if header_img %}
-    <div class="secondary-header__mask"></div>
-    <div class="secondary-header__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
+    <div class="header-secondary__mask"></div>
+    <div class="header-secondary__image" style="background-image: url(' {{header_img.url}}'); background-size: cover;">
     {% else %}
-    <div class="secondary-header__solid">
+    <div class="header-secondary__solid">
     {% endif %}
         <h1 font--xl>{% trans "404 - Page not found " %}</h1>
     </div>

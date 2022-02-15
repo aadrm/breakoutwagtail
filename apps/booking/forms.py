@@ -22,7 +22,7 @@ class SlotBookingForm(forms.Form):
         super(SlotBookingForm, self).__init__(*args, **kwargs)
 
         self.fields['product'] = forms.ModelChoiceField(
-            label=_('Players'),
+            label=_('Number of players'),
             queryset=Product.objects.filter(family=self.slot.product_family),
         )
         self.fields['slot_id'] = forms.IntegerField(required=False, initial=self.slot_id) 
@@ -38,12 +38,16 @@ class InvoiceForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['is_terms'].required = True
         self.fields['is_privacy'].required = True
-        self.fields['phone'] = forms.CharField(label="phone", max_length=31, required=True)
+        self.fields['phone'] = forms.CharField(label=_("Phone number"), max_length=31, required=True)
         self.fields['payment'] = forms.ModelChoiceField(
             payment_methods,
             required=True,
             widget=forms.RadioSelect,
         )
+
+        self.fields['is_terms'].label = _('I accept the terms and conditions')
+        self.fields['is_privacy'].label = _('I accept the privacy policy')
+        self.fields['payment'].label = _('Payment method')
 
     class Meta:
         model = Invoice
@@ -125,11 +129,8 @@ class CustomPaypal(PayPalPaymentsForm):
 
     def render(self):
         return format_html(u"""<form action="{0}" method="post">
-
     {1}
-    <button class="standard-button standard-button--emphasis"
-    type="sumbit"  name="submit" />Pay Pal<button>
-</form>""", self.get_endpoint(), self.as_p(), self.get_image())
+""", self.get_endpoint(), self.as_p(), self.get_image())
 
 
 class FilterAppointmentsForm(forms.Form):

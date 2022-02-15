@@ -123,18 +123,16 @@
   gap: 2rem;
 }
 
-.offercard {
-  .offercard__head {
-    width: 128px;
-    height: 128px;
-    background: $brand-primary;
-    svg {
-      padding: 16%;
-      fill: $brand-secondary;
-      height: 100%;
-      width: 100%;
-      // filter: drop-shadow(4px 4px 3px $brand-dark-a);
-    }
+.offercard__head {
+  width: 128px;
+  height: 128px;
+  background: $brand-primary;
+  svg {
+    padding: 16%;
+    fill: $brand-secondary;
+    height: 100%;
+    width: 100%;
+    // filter: drop-shadow(4px 4px 3px $brand-dark-a);
   }
 }
 
@@ -310,7 +308,7 @@
 //   }
 // }
 
-.mystream {
+.ystream {
 
   .section-block-tittle {
     font-family: $fonts;

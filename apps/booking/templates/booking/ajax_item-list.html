@@ -1,73 +1,73 @@
     {% load i18n %}
 <div id="js-items-in-cart">
-<table class="form-remove__table c-text-sm">
-<tbody>
-{% for item in cart.get_valid_items %}
-<tr class="js-cart-item">
-    {% if item.product.family.room %}
-    <td>{{item.product.players}} {% trans "Player" %} | {{item.product.family.room}}</td>
-    {% elif item.product.family.is_coupon%}
-    <td>{{item.product.players}} {% trans "Player" %} | {% trans "Coupon" %}</td>
-    {% else %}
-    <td>{{item.product.name}}</td>
-    {% endif %}
-    <td>
-        {{item.slot.start|date:"D d M"}} {{item.slot.start|date:"H:i"}}
-    </td>
-    {% if item.slot %}
-    <td class="js-expiry-counter" data-remaining="{{item.slot_expiry_seconds}}" data-prefix="{% trans "Expires in:" %}">
-    {% trans "Expires: " %} -:--
-    </td>
-    {% else %}
-    <td></td>
-    {% endif %}
+    <table class="table">
+        <tbody>
+        {% for item in cart.get_valid_items %}
+        <tr class="js-cart-item">
+            {% if item.product.family.room %}
+            <td>{{item.product.players}} {% trans "Player" %} | {{item.product.family.room}}</td>
+            {% elif item.product.family.is_coupon%}
+            <td>{{item.product.players}} {% trans "Player" %} | {% trans "Coupon" %}</td>
+            {% else %}
+            <td>{{item.product.name}}</td>
+            {% endif %}
+            <td>
+                {{item.slot.start|date:"D d M"}} {{item.slot.start|date:"H:i"}}
+            </td>
+            {% if item.slot %}
+            <td class="js-expiry-counter" data-remaining="{{item.slot_expiry_seconds}}" data-prefix="{% trans "Expires in:" %}">
+            {% trans "Expires: " %} -:--
+            </td>
+            {% else %}
+            <td></td>
+            {% endif %}
 
-    <td class="s-tar"><span id="js-price" data-price={{item.price}}>€{{item.base_price}}</span></td>
-    <td>
-        <button
-        data-cart="{{cart.pk}}"
-        data-item="{{item.pk}}"
-        onclick="removeItem(this)"
-        class="remove-button">
-        </button> 
-    </td>
-</tr>
-{% endfor %}
-</tbody>
-<tfoot>
-    {% if cart.total == cart.total_after_coupons %}
-    <tr>
-        <td><b>{% trans "Total: " %}</b></td> 
-        <td></td>
-        <td></td>
-        <td class="s-tar"><b>€{{cart.total}}</b></td> 
-        <td></td>
-    </tr>
-    {% else %}
-    <tr>
-        <td>{% trans "Subtotal: " %}</td> 
-        <td></td>
-        <td></td>
-        <td class="s-tar">€{{cart.total}}</td> 
-        <td></td>
-    </tr>
-    <tr>
-        <td>{% trans "Discount: " %}</td> 
-        <td></td>
-        <td></td>
-        <td class="s-tar" style="color: green">-€{{cart.discount}}</td> 
-        <td></td>
-    </tr>
-    <tr>
-        <td><b>{% trans "Total: " %}</b></td> 
-        <td></td>
-        <td></td>
-        <td class="s-tar"><b>€{{cart.total_after_coupons}}</b></td> 
-        <td></td>
-    </tr>
+            <td class="s-tar"><span id="js-price" data-price={{item.price}}>€{{item.base_price}}</span></td>
+            <td>
+                <button
+                data-cart="{{cart.pk}}"
+                data-item="{{item.pk}}"
+                onclick="removeItem(this)"
+                class="remove-button btn">
+                </button> 
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+            {% if cart.total == cart.total_after_coupons %}
+            <tr>
+                <td><b>{% trans "Total: " %}</b></td> 
+                <td></td>
+                <td></td>
+                <td class="s-tar"><b>€{{cart.total}}</b></td> 
+                <td></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{% trans "Subtotal: " %}</td> 
+                <td></td>
+                <td></td>
+                <td class="s-tar">€{{cart.total}}</td> 
+                <td></td>
+            </tr>
+            <tr>
+                <td>{% trans "Discount: " %}</td> 
+                <td></td>
+                <td></td>
+                <td class="s-tar" style="color: green">-€{{cart.discount}}</td> 
+                <td></td>
+            </tr>
+            <tr>
+                <td><b>{% trans "Total: " %}</b></td> 
+                <td></td>
+                <td></td>
+                <td class="s-tar"><b>€{{cart.total_after_coupons}}</b></td> 
+                <td></td>
+            </tr>
 
-    {% endif %}
+            {% endif %}
 
-</tfoot>
-</table>
+        </tfoot>
+    </table>
 </div>

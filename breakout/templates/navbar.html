@@ -3,10 +3,9 @@
 {% load i18n %}
 {% load menus_tags %}
 {% get_menu "main-menu" as navigation %}
-<nav class="navbar">
-    <div class="nav-wrapper d-flex justify-content-between">
-        <a class="p-2 logo" aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
-            {% comment %} <img src="{% static 'img/brand/logo_small_white.png' %}" alt="Breakout Escape Room" width="119" height="52"> {% endcomment %}
+<nav class="navbar position-absolute">
+    <div class="nav-wrapper d-flex justify-content-between" style="display: flex;">
+        <a class="p-2 logo" title="Live escape games" aria-label="{% trans "Go to home" %}" id="main-logo" href="/">
             {% include 'svg/logo_breakout_nav.svg' %}
         </a>
         <input type="checkbox" id="nav-toggle" class="nav-toggle">
@@ -15,7 +14,8 @@
             {% for item in navigation.menu_items.all %}
             {% if not item.fixed %}
             <li class="nav-item_container overflow-hidden d-flex align-items-center">
-                <a class="nav-link nav-link-anchor c-nav-anchor" 
+                <a class="nav-item c-nav-anchor" 
+                {% comment %} <a class="nav-link nav-link-anchor c-nav-anchor"  {% endcomment %}
                 href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                     {{ item.title }}
                 </a>

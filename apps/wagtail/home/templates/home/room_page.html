@@ -7,34 +7,36 @@
 {% block content %}
 {{ block.super }}
 <main>
-    <div class="room-page-content c-wrapper--lg">
-        <aside class="aside_gallery">
-            <h2 class="font--md">{% trans "Promo Video" %}</h2>
-            <div class="video-wrapper">
-                <iframe title="Youtube Promo Video {{page.title}}" loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ page.video }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="room-mai col-12 col-lg-6 order-lg-2">
+                <div class="room-description">
+                <h2 class="fs-3">{% trans "Overview" %}</h2>
+                <p>
+                {{ page.room.description }}
+                </p>
+                </div>
+                {% comment %} <h2 class="font--lg">{% trans "Book your game." %}</h2> {% endcomment %}
+                <div class="calendars">
+                    <div id="{{page.room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ page.room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
+                </div>
             </div>
-            <h2 class="font--md">{% trans "Image Gallery" %}</h2>
-            {% include_block page.gallery %} 
-        </aside>
-        <div class="room-main">
-            <div class="room-description">
-            <h2 class="font--lg">{% trans "Overview" %}</h2>
-            <p>
-            {{ page.room.description }}
-            </p>
-            </div>
-            {% comment %} <h2 class="font--lg">{% trans "Book your game." %}</h2> {% endcomment %}
-            <div class="calendars">
-                <div id="{{page.room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ page.room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
-            </div>
+            <aside class="col-12 col-lg-3 order-lg-1">
+                <h2 class="fs-3">{% trans "Promo Video" %}</h2>
+                <div class="video-wrapper mb-3">
+                    <iframe title="Youtube Promo Video {{page.title}}" loading="lazy" width="560" height="315" src="https://www.youtube-nocookie.com/embed/{{ page.video }}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <h2 class="fs-3">{% trans "Image Gallery" %}</h2>
+                {% include_block page.gallery %} 
+            </aside>
+            <aside class="col-12 col-lg-3 order-lg-3">
+            {% if page.reviews %}
+                {% for block in page.reviews %}
+                    {% include_block block%}
+                {% endfor %}
+            {% endif %}
+            </aside>
         </div>
-        <aside class="room-reviews">
-        {% if page.reviews %}
-            {% for block in page.reviews %}
-                {% include_block block%}
-            {% endfor %}
-        {% endif %}
-        </aside>
     </div>
 </main>
 

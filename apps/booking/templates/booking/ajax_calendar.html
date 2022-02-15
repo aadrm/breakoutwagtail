@@ -1,13 +1,13 @@
 {% load i18n %}
-<table class="calendar" cellpadding="0" cellspacing="0" width="100%">
-    <caption class="text-center" style="background: #{{calendar.room.theme_colour}};">
-        <div class="cal-title breakout-font text-center">
+<table class="calendar caption-top" cellpadding="0" cellspacing="0" width="100%">
+    <caption class="text-center text-light text-shadow p-0" style="background: #{{calendar.room.theme_colour}};">
+        <div class="cal-title breakout-font text-center py-2">
             <h3 class="h2 mt-2">{{calendar.room}}</h3>
         </div>
         <div class="cal-image">
-            <img loading="lazy" src="{{calendar.room.photo.url}}" alt="{{calendar.room.photo.alt}}">
+            <img class="img-cover" loading="lazy" src="{{calendar.room.photo.url}}" alt="{{calendar.room.photo.alt}}">
         </div>
-        <div class="row">
+        <div class="d-flex">
             <div 
                 class="p-0 col cal-nav__btn js-cal-button" 
                 data-room="{{calendar.room.pk}}" 
@@ -35,14 +35,14 @@
             </div>
         </div>
     </caption>
-    <tr class="text-center weekdays-row">
-        <th>{% trans "Mo" %}</th>
-        <th>{% trans "Tu" %}</th>
-        <th>{% trans "We" %}</th>
-        <th>{% trans "Th" %}</th>
-        <th>{% trans "Fr" %}</th>
-        <th>{% trans "Sa" %}</th>
-        <th>{% trans "Su" %}</th>
+    <tr class="text-center text-light bg-secondary">
+        <th class="p-1">{% trans "Mo" %}</th>
+        <th class="p-1">{% trans "Tu" %}</th>
+        <th class="p-1">{% trans "We" %}</th>
+        <th class="p-1">{% trans "Th" %}</th>
+        <th class="p-1">{% trans "Fr" %}</th>
+        <th class="p-1">{% trans "Sa" %}</th>
+        <th class="p-1">{% trans "Su" %}</th>
     </tr>
     {% for week in calendar.month_days %}
     <tr class="data-row">

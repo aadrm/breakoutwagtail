@@ -1,45 +1,42 @@
 {% load i18n %}
-
-<div class="container c-inner-width-md">
-    <div class="row justify-content-center">
-        {% for room in rooms %}
-        <div class="col-sm-6 ">
-            <div class="card w-100 h-100 bg-transparent">
-                <a title="{% trans "Book Now" %} {{room.name}}" href="{% if room.get_page %}{{room.get_page.url}}{% else %}#{% endif %}">
-                    <div class='hover-effect-to-primary'>
-                        <img height="300" width="450" class="card-img-top img-cover" loading="lazy" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">
-                        <ul class="text-light h3">
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 g-3">
+            {% for room in rooms %}
+            <div class=" d-flex align-items-stretch">
+                <div class="card w-100 bg-secondary bg-opacity-25 rounded-0">
+                    <div class="hover-effect-to-primary">
+                        <img height="200" class="card-img-top object-fit-cover" loading="lazy" src="{% if room.photo %}{{room.photo.url}}{% endif %}" alt="Escape Room {{room.name}}">
+                        <ul class="text-light fs-5">
                             <li>
-                                <span class="text-primary">
-                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                <span>
+                                    <i class="bi-alarm text-primary"></i>
+                                    60 {% trans "Minutes" %}
                                 </span>
-                                2-6 {% trans "Players" %}
                             </li>
                             <li>
-                                <span class="text-primary">
-                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                <span>
+                                    <i class="bi-people-fill text-primary"></i>
+                                    1-6 {% trans "Players" %}
                                 </span>
-                                60 {% trans "Minutes" %}
                             </li>
                             <li>
-                                <span class="text-primary">
-                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                <span>
+                                    <i class="bi-forward-fill text-primary"></i>
+                                    70%
                                 </span>
-                                70%
                             </li>
                         </ul>
                     </div>
-                </a>
-                <div class="card-body d-flex flex-column">
-                    <h2 class="breakout-font">{{room.name}}</h2>
-                    <p class="font--md text-light">{{room.description|truncatechars:80}}</p>
-                    <a class="mt-auto" title="{% trans "Book Now" %} {{room.name}}" href="{% if room.get_page %}{{room.get_page.url}}{% else %}#{% endif %}">
-                        <button class="btn btn-outline-primary">{% trans "Book now" %}</button>
-                    </a>
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="breakout-font">{{room.name}}</h2>
+                        <p class="font--md text-light">{{room.description|truncatechars:80}}</p>
+                        <a class="mt-auto" title="{% trans "Book Now" %} {{room.name}}" href="{% if room.get_page %}{{room.get_page.url}}{% else %}#{% endif %}">
+                            <button class="btn btn-outline-primary rounded-0">{% trans "Book now" %}</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
 
-        </div>
-        {% endfor %}
+            </div>
+            {% endfor %}
     </div>
 </div>

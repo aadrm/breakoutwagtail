@@ -20,6 +20,8 @@ $black:   #010101 !default;
 
 $primary:       $brand-primary;
 $secondary:     $brand-secondary;
+$dark: $brand-dark;
+
 
 // $theme-colors: map-merge(
 //   (
@@ -120,9 +122,10 @@ $secondary:     $brand-secondary;
 // //
 // // Style anchor elements.
 
-// $link-color:                              theme-color("primary") !default;
-// $link-decoration:                         none !default;
-// $link-hover-color:                        darken($link-color, 15%) !default;
+// $link-color:                              theme-color("light") !default;
+$link-color:                              $brand-light !default;
+$link-decoration:                         none !default;
+$link-hover-color:                        darken($link-color, 30%) !default;
 // $link-hover-decoration:                   underline !default;
 // // Darken percentage for links with `.text-*` class (e.g. `.text-success`)
 // $emphasized-link-hover-darken-percentage: 15% !default;
@@ -159,7 +162,8 @@ $container-max-widths: (
   sm: 540px,
   md: 720px,
   lg: 960px,
-  xl: 961px
+  xl: 961px,
+  xxl: 962px
 ) !default;
 
 // @include _assert-ascending($container-max-widths, "$container-max-widths");

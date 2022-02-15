@@ -8,20 +8,22 @@
 {{ block.super }}
 
 <main>
-        {% for block in page.content %}
-            {% include_block block %}
-        {% endfor %}
-    <section class="c-section-light">
-        <div class="c-wrapper--lg">
-            <br>
-            <div class="c-wrapper--sm richtext">
-                {{ self.content|richtext }}
+    {% for block in page.content %}
+        {% include_block block %}
+    {% endfor %}
+    <section class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="c-wrapper--sm richtext">
+                    {{ self.content|richtext }}
+                </div>
             </div>
-            <br>
-            <div class="calendars">
-                {% for room in rooms %}
-                <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
-                {% endfor %}
+            <div class="row">
+                <div class="calendars">
+                    {% for room in rooms %}
+                    <div id="{{room.pk}}" class="calendar-frame js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </section>

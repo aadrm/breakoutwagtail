@@ -33,7 +33,7 @@
 
         ready(function() {
             showCookieBar({
-            content: "{% filter escapejs %}{% with cookie_groups=cookie_groups|join:", " %}<div class="cookie-bar"> <p>{% trans "This site uses" %} {{cookie_groups}} {% trans "cookies for better performance and user experience. Do you agree to using cookies other than only the essential cookies?" %}</p><div class="cookie-bar__buttons"><a href="{{ url_accept }}" class="cc-cookie-accept">{% trans "Accept" %}</a> <a href="{{ url_decline }}" class="cc-cookie-decline">{% trans "Decline" %}</a> <a href="{{ url_cookies }}" >{% trans "Cookies info" %} </a></div> </div>{% endwith %}{% endfilter %}",
+            content: "{% filter escapejs %}{% with cookie_groups=cookie_groups|join:", " %}<div class="cookie-bar opacity-90 position-fixed zindex-fixed w-100 text-center bottom-0 px-5 py-3 text-light bg-dark"> <p>{% trans "This site uses" %} {{cookie_groups}} {% trans "cookies for better performance and user experience. Do you agree to using cookies other than only the essential cookies?" %}</p><div class="cookie-bar__buttons"><a href="{{ url_accept }}" class="cc-cookie-accept btn btn-primary m-2">{% trans "Accept" %}</a> <a href="{{ url_decline }}" class="cc-cookie-decline btn btn-secondary m-2">{% trans "Decline" %}</a> <a href="{{ url_cookies }}" class="btn btn-secondary m-2" >{% trans "Cookies info" %} </a></div> </div>{% endwith %}{% endfilter %}",
             cookie_groups: cookie_groups,
             cookie_decline: "{% get_decline_cookie_groups_cookie_string request cookie_groups %}",
             beforeDeclined: function() {

@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load bootstrap5 %}
 <form
     onchange="changeInCheckoutForm()"
     data-url="{% url 'booking:ajax_checkout_buttons' %}"
@@ -6,64 +7,28 @@
     method="post"
     id="js-checkout-form">
     {% csrf_token %}
-
+    {% bootstrap_field invoice_form.full_name %}
+    {% bootstrap_field invoice_form.phone %}
+    {% bootstrap_field invoice_form.email %}
+    {% bootstrap_field invoice_form.payment form_check_class='form-check-inline' %}
     <p>
-        {{ invoice_form.full_name.label_tag }}
-        {{ invoice_form.full_name.errors}}
-        {{ invoice_form.full_name }}
-    </p>
-    <p>
-        {{ invoice_form.phone.label_tag }}
-        {{ invoice_form.phone.errors}}
-        {{ invoice_form.phone }}
-    </p>
-    <p>
-        {{ invoice_form.email.label_tag }}
-        {{ invoice_form.email.errors}}
-        {{ invoice_form.email }}
-    </p>
-    <p>
-    {{invoice_form.payment.label_tag}}
-    </p>
-    <ul id="id_payment" class="payment-methods">
-        {{invoice_form.payment.queryset}}
-        {% for choice in invoice_form.payment.field.queryset %}
-            <li>
-                <label for="id_payment_{{choice.id}}">
-                    <input id="id_payment_{{ choice.id }}" value="{{choice.id}}" type="radio" name="payment" required=""> 
-                    <span>{{choice.name}}</span>
-                </label>
-            </li>
-        
-        {% endfor %}
-    </ul>
-    <p>
-        {{ invoice_form.is_terms.label_tag.label_for }}
-        <label class="required" for="id_is_terms">
-        {% trans "I have read and accept Breakout Escape Room's " %} 
-        <a class="c-anchor-standard" taget="_blank" href="/terms-and-conditions">{% trans "Terms and Conditions" %}</a>
-        </label>
-        {{ invoice_form.is_terms.errors}}
-        {{ invoice_form.is_terms }}
-    </p>
-    <p>
-        <label class="required" for="id_is_privacy">
-        {% trans "I have read and accept Breakout Escape Room's " %} 
-        <a class="c-anchor-standard" target="_blank" href="/privacy-policy">{% trans "Privacy Policy" %}</a>
-        </label>
-        {{ invoice_form.is_privacy.errors}}
-        {{ invoice_form.is_privacy }}
+        {% trans "Please read Breakout Escape Room's " %}
+        <a class="link-info text-decoration-underline" target="_blank" href="/privacy-policy">{% trans "Privacy Policy" %}</a>
+        {% trans "and" %}
+        <a class="link-info text-decoration-underline" taget="_blank" href="/terms-and-conditions">{% trans "Terms and Conditions" %}</a>
     </p>
 
-    {% comment %} {{invoice_form.as_p}} {% endcomment %}
-    <div class="standard-form__buttons" id='js-checkout-button-div'>
+    {% bootstrap_field invoice_form.is_terms %}
+    {% bootstrap_field invoice_form.is_privacy %}
+
+    <div id='js-checkout-button-div'>
         <div id="js-disabled-button" 
-            class="c-anchor-disabled checkout-button--disabled"
-            data-msgfill="{% trans "Please fill in all the fields marked with an * in order to continue" %}"
+            class="btn btn-secondary disabled w-100"
+            data-msgfill="{% trans "Please fill in the form to continue" %}"
             data-msgemail="{% trans "Please enter a valid email address" %}"
             data-msgpayment="{% trans "Please select a payment method" %}"
             data-msgwait="{% trans "Please wait a few seconds..." %}"
-            data-msgterms="{% trans "In order to continue you have to agree with our terms and conditions" %}">
+            data-msgterms="{% trans "Please accept our terms and conditions" %}">
         </div>
     </div>
 </form>

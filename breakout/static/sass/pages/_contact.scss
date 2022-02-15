@@ -1,29 +1,8 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
-.contact-methods {
-    width: 100%;
-    margin: 2rem auto;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-}
-
-.contact-link {
-    flex: 1;
-}
-
 .contact-method {
     position: relative;
     background: $brand-primary;
     padding: 1rem;
     border-radius: 50%;
-    color: $brand-light;
-    text-align: center;
     height: 64px;
     width: 64px;
     transition: color .3s, background .3s;
@@ -38,7 +17,7 @@
     &:hover {
         background: $brand-emphasis;
         svg {
-            // fill: $brand-primary;
+            fill: $brand-light;
         }
     }
     @include break--xs {

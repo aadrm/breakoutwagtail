@@ -1,34 +1,20 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
-.calendar {
-    box-shadow: 3px 3px 8px $brand-dark-a;
-    
-    caption {
-        text-shadow: 0 0 10px $brand-dark;
-        box-shadow: 3px 3px 8px $brand-dark-a;;
-        caption-side: top;
-        color: $brand-light;
-        padding: 0;
-    }
-    margin: 0 auto;
+.calendar-frame {
     position: relative;
-    max-width: 660px;
     width: 100%;
+    height: 590px;
+}
+
+.text-shadow {
+    text-shadow: 0 0 10px $brand-dark;
+    box-shadow: 3px 3px 8px $brand-dark-a;;
+    caption-side: top;
+    color: $brand-light;
+    padding: 0;
 }
 
 .cal-image {
     height: 150px;
     overflow: hidden;
-    img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
 }
 
 .cal-nav__btn {
@@ -37,15 +23,6 @@
         background: $brand-light-5;
     }
 
-}
-
-
-.weekdays-row {
-    background: $brand-secondary;
-    color: $brand-light;
-    th {
-        padding: .5rem;
-    }
 }
 
 .cell {
@@ -90,6 +67,7 @@
 }
 
 .cell__available-data {
+    border: none;
     padding-top: 4px;
     position: absolute;
     background: $brand-light;
@@ -132,53 +110,6 @@
     }
 }
 
-.available-slots__data {
-    padding: 1rem;
-    border-radius: .5rem;
-    background: $brand-light;
-    height: 100%;
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
-
-.available-slots__data__slot,
-.available-slots__data__slot__disabled,
-.available-slots__data__slot__unavailable {
-    display: block;
-    color: $brand-light;
-    font-size: 1rem;
-    margin: .6rem auto;
-    padding: 1rem;
-    max-width: 800px;
-    width: 80%;
-    border-radius: 5px;
-    border: none;
-    flex: 5;
-
-}
-
-
-
-.available-slots__data__slot {
-    background: $brand-primary;
-    cursor: pointer;
-    &:hover {
-        background: $brand-primary-9;
-    }
-}
-
-.available-slots__data__slot__disabled {
-    border: 2px solid $brand-secondary-9;
-    color: $brand-light;
-    background: tomato;
-} 
-
-.available-slots__data__slot__unavailable {
-    border: 2px solid $brand-secondary-9;
-    color: $brand-secondary-9;
-    background: $brand-secondary-3;
-} 
 
 #available-spinner {
     display: none;
@@ -220,41 +151,6 @@
     }
 }
 
-.booking-form__exit-cross {
-    height: 32px;
-    width: 32px;
-    cursor: pointer;
-}
-
-.booking-form__exit-cross__inner {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    &::before,
-    &::after {
-        content: '';
-        display: block;
-        background: $brand-light-a;
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        border-radius: 3px;
-        top: 50%;
-        transition: all $t--quick;
-    }
-    &::before {
-        transform: rotate(45deg);
-    }
-    &::after{
-        transform: rotate(-45deg);
-    }
-    &:hover {
-        &::before,
-        &::after {
-            background: $brand-light;
-        }
-    }
-}
 
 .booking-form-spinner {
     height: 100vh;

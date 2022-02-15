@@ -1,24 +1,28 @@
+{% load i18n %}
 <table>
-<tr class="available-slots-response">
-    <td colspan="7">
-        <div class="available-slots__data">
-            <h2 class="available-slots__data__title">{{slots.0.start|date}}</h2>
-            {% for slot in slots %}
-            {% if slot.is_available %}
-            <button 
-                data-slot="{{slot.pk}}"
-                data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                class="available-slots__data__slot"
-            >
-            {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
-            </button> 
-            {% else %}
-            <div class="available-slots__data__slot__unavailable">
-            {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+    <tr class="available-slots-response">
+        <td colspan="7">
+            <div class="p-3 bg-light">
+                <div class="text-center">
+                    <h2>{{slots.0.start|date}}</h2>
+                    <span class="fs-5">{% trans "Choose a time slot to book" %}</span> 
+                </div>
+                {% for slot in slots %}
+                {% if slot.is_available %}
+                <button 
+                    data-slot="{{slot.pk}}"
+                    data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
+                    class="js-available-slot w-100 btn btn-primary rounded-0 my-1 p-2 text-light fs-5"
+                >
+                {{ slot.start|date:"H:i" }} - {{ slot.session_end|date:"H:i" }}
+                </button> 
+                {% else %}
+                <div class="w-100 btn btn-secondary disabled rounded-0 my-1 p-2 fs-5">
+                {{ slot.start|date:"H:i" }} - {{ slot.session_end|date:"H:i" }}
+                </div>
+                {% endif %}
+                {% endfor %}
             </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-    </td>
-</tr>
+        </td>
+    </tr>
 </table>

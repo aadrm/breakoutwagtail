@@ -1,13 +1,15 @@
 {% load i18n %}
+{% load bootstrap5 %}
 <form action="{% url 'booking:slot_to_cart' %}" method="post">
     {% csrf_token %}
-    <p>
-        <label for="id_product">{% trans "Players" %}</label>
-        {{slot_booking_form.product}}            
-    </p>
-    {{slot_booking_form.slot_id.as_hidden}}
-    <div class="standard-form__buttons">
-        <button class="standard-button standard-button--emphasis" type="submit">{% trans "Book Session" %}</button> 
-        <button class="standard-button js-close-onclick" >{% trans "Cancel" %}</button>
+    {{ slot_booking_form.slot_id.as_hidden }}
+    {% bootstrap_field slot_booking_form.product%}
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-light w-100 js-close-onclick" >{% trans "Cancel" %}</button>
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary w-100" type="submit">{% trans "To Checkout" %}</button> 
+        </div>
     </div>
 </form>

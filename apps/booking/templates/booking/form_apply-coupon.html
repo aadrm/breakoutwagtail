@@ -1,15 +1,19 @@
 {% load i18n %}
-<div class="redeem-form__body">
+{% load bootstrap5 %}
 <form action="javascript:void(0);">
-    <br>
-    <p>
-    {{apply_coupon_form.code}}
-    <button
-    type="" 
-    id="js-apply-coupon-button" 
-    data-applycouponurl="{% url 'booking:ajax_apply_coupon' %}"
-    onclick="applyCoupon()">
-    {% trans "Redeem" %}</button> 
-    </p>
+    {% url 'booking:ajax_apply_coupon' as btn_url %}
+    {% trans "Redeem" as btntxt %}
+    {% with btntype='type="" '  %}
+    {% with btnurl='data-applycouponurl="'|add:btn_url|add:'" '  %}
+    {% with btnclass='class="btn btn-primary rounded-0" '  %}
+    {% with btnid='id="js-apply-coupon-button" '  %}
+    {% with btnonclick='onclick="applyCoupon()" '  %}
+    {% with redeem_button='<button '|add:btntype|add:btnclass|add:btnid|add:btnonclick|add:'>'|add:btntxt|add:'</button>'  %}
+    {% bootstrap_field apply_coupon_form.code show_label=False addon_after=redeem_button addon_after_class=None %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
+    {% endwith %}
 </form>
-</div>

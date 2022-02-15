@@ -1,204 +1,201 @@
-    {% load i18n %}
- <div class="c-inner-width--sm">
-    {% comment %} <h4 class="">{% trans "Summary" %}</h4> {% endcomment %}
-    <table cellspacing="0" class="table email-table">
-        <tbody>
-            <tr class="email-row-header">
-                <th class="email-text-center" colspan="2">{% trans "Order Number:" %} {{invoice.order_number}}</th> 
-            </tr>
-            <tr>
-                <th>{% trans "Items" %}</th>
-                <th>{% trans "Price" %}</th>
-            </tr>
-            {% for item in cart.get_valid_items %}
-            <tr class="js-cart-item">
-                <td>{{item.product}}</td> <td>€{{item.base_price}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-        <tfoot class="email-border-top-broad">
-            {% if cart.discount > 0 %}
-            <tr>
-                <td class="email-cell c-top-broad"><b>{% trans "Subtotal:" %}</b></td>
-                <td> €{{cart.total}}</td>
-            </tr>
-            <tr>
-                <td><b>{% trans "Discount:" %}</b> </td>
-                <td>-€{{cart.discount}}</td>
-            </tr>
-            {% endif %}
-            <tr class="email-row-last">
-                <td><b>{% trans "Total:" %} </b></td>
-                <td><b>€{{cart.total_after_coupons}}</b></td>
-            </tr>
-        </tfoot>
-    </table>
+{% load i18n %}
+<table cellspacing="0" class="table email-table">
+    <tbody>
+        <tr class="email-row-header">
+            <th class="email-text-center" colspan="2">{% trans "Order Number:" %} {{invoice.order_number}}</th> 
+        </tr>
+        <tr>
+            <th>{% trans "Items" %}</th>
+            <th>{% trans "Price" %}</th>
+        </tr>
+        {% for item in cart.get_valid_items %}
+        <tr class="js-cart-item">
+            <td>{{item.product}}</td> <td>€{{item.base_price}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot class="email-border-top-broad">
+        {% if cart.discount > 0 %}
+        <tr>
+            <td class="email-cell c-top-broad"><b>{% trans "Subtotal:" %}</b></td>
+            <td> €{{cart.total}}</td>
+        </tr>
+        <tr>
+            <td><b>{% trans "Discount:" %}</b> </td>
+            <td>-€{{cart.discount}}</td>
+        </tr>
+        {% endif %}
+        <tr class="email-row-last">
+            <td><b>{% trans "Total:" %} </b></td>
+            <td><b>€{{cart.total_after_coupons}}</b></td>
+        </tr>
+    </tfoot>
+</table>
 
-    <br>
+<br>
 
-    <table cellspacing="0" class="table email-table">
-        <thead>
-            <tr class="email-row-header">
-                <th class="email-text-center"colspan="2">{% trans "Payment Information" %}</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{% trans "Payment method" %}:</td>
-                <td>{{ payment.name }}</td>
-            </tr>
-            <tr>
-                <td>{% trans "Order Total" %}:</td>
-                <td>€{{ cart.total_after_coupons }}</td>
-            </tr>
-            <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
-            {% if payment.method == 'cash' %}
-                <td colspan="2">{% trans "Please note that for the time being it's not possible to accept payments via credit card." %}</td>
-            {% elif payment.method == 'transfer' %}
-                <td colspan="2">
-                    {% trans 'You have selected "Bank Transfer" as the payment method.' %}
-                    {% blocktrans with transfer_amout=cart.total_after_coupons %}
-                    Please transfer the amount of €{{transfer_amout}} to our bank account before your appointment.
-                    {% endblocktrans %}
-                    <br>
-                    {% trans "See our bank account details below:" %}
-                    <br>
-                    <b>Breakout Escape Room GmbH</b>
-                    <br>
-                    <b>Deutche Bank</b>
-                    <br>
-                    <b>IBAN:</b> DE42 7207 0024 0035 3821 00
-                    <br>
-                    <b>BIC:</b> DEUTDEDB720
-                </td>
-            {% endif %}
-            </tr>
-            
-            
-            
-        </tbody>
-    </table>
-    <br>
-
-    {% if appointments %}
-    <table cellspacing="0" class="table email-table">
-        <thead>
-            <tr class="email-row-header">
-                {% if appointments|length > 1 %}
-                <th class="email-text-center" colspan="3">{% trans "Appointments" %}</th>
-                {% else %}
-                <th class="email-text-center" colspan="3">{% trans "Appointment" %}</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>{% trans "Date" %}</th> 
-                <th>{% trans "Time" %}</th>
-                <th>{% trans "Room" %}</th>
-            </tr>
-            {% for appointment in appointments %}
-            <tr>
-                <td>{{appointment.slot.start|date:'d F Y'}}  </td>
-                <td>{{appointment.slot.start|date:'G:i'}}</td>
-                <td>{{appointment.slot.room}}</td>
-            </tr>
-            {% endfor %}
-            {% comment %} <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
-                <td colspan="3">
-                {% blocktrans %}
-                Remember that you have to arrive 15 minutes before your session begins to allow enough time for you to prepare and to give you a short explanation.
+<table cellspacing="0" class="table email-table">
+    <thead>
+        <tr class="email-row-header">
+            <th class="email-text-center"colspan="2">{% trans "Payment Information" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{% trans "Payment method" %}:</td>
+            <td>{{ payment.name }}</td>
+        </tr>
+        <tr>
+            <td>{% trans "Order Total" %}:</td>
+            <td>€{{ cart.total_after_coupons }}</td>
+        </tr>
+        <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
+        {% if payment.method == 'cash' %}
+            <td colspan="2">{% trans "Please note that for the time being it's not possible to accept payments via credit card." %}</td>
+        {% elif payment.method == 'transfer' %}
+            <td colspan="2">
+                {% trans 'You have selected "Bank Transfer" as the payment method.' %}
+                {% blocktrans with transfer_amout=cart.total_after_coupons %}
+                Please transfer the amount of €{{transfer_amout}} to our bank account before your appointment.
                 {% endblocktrans %}
-                </td>
-            </tr> {% endcomment %}
-        </tbody> 
-    </table>
-    <br>
+                <br>
+                {% trans "See our bank account details below:" %}
+                <br>
+                <b>Breakout Escape Room GmbH</b>
+                <br>
+                <b>Deutche Bank</b>
+                <br>
+                <b>IBAN:</b> DE42 7207 0024 0035 3821 00
+                <br>
+                <b>BIC:</b> DEUTDEDB720
+            </td>
         {% endif %}
-        {% if coupons %}
-    <table cellspacing="0" class="table email-table">
-        <thead>
-            <tr class="email-row-header">
-                {% if coupons|length > 1 %}
-                <th class="email-text-center" colspan="2">{% trans "Coupons" %}</th>
-                {% else %}
-                <th class="email-text-center" colspan="2">{% trans "Coupon" %}</th>
-                {% endif %}
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th>
-                    {% trans "Coupon code" %}
-                </th>
-                <th>
-                    {% trans "Value" %}
-                </th>
-            </tr>
-            {% for coupon in coupons %}
-            <tr>
-                <td>
-                {{coupon.coupon.code}}
-                </td>
-                <td>
-                €{{coupon.coupon.amount}}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody> 
-    </table>
+        </tr>
+        
+        
+        
+    </tbody>
+</table>
+
+<br>
+
+{% if appointments %}
+<table cellspacing="0" class="table email-table">
+    <thead>
+        <tr class="email-row-header">
+            {% if appointments|length > 1 %}
+            <th class="email-text-center" colspan="3">{% trans "Appointments" %}</th>
+            {% else %}
+            <th class="email-text-center" colspan="3">{% trans "Appointment" %}</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>{% trans "Date" %}</th> 
+            <th>{% trans "Time" %}</th>
+            <th>{% trans "Room" %}</th>
+        </tr>
+        {% for appointment in appointments %}
+        <tr>
+            <td>{{appointment.slot.start|date:'d F Y'}}  </td>
+            <td>{{appointment.slot.start|date:'G:i'}}</td>
+            <td>{{appointment.slot.room}}</td>
+        </tr>
+        {% endfor %}
+        {% comment %} <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
+            <td colspan="3">
+            {% blocktrans %}
+            Remember that you have to arrive 15 minutes before your session begins to allow enough time for you to prepare and to give you a short explanation.
+            {% endblocktrans %}
+            </td>
+        </tr> {% endcomment %}
+    </tbody> 
+</table>
+
+<br>
+{% endif %}
+
+{% if coupons %}
+<table cellspacing="0" class="table email-table">
+    <thead>
+        <tr class="email-row-header">
+            {% if coupons|length > 1 %}
+            <th class="email-text-center" colspan="2">{% trans "Coupons" %}</th>
+            {% else %}
+            <th class="email-text-center" colspan="2">{% trans "Coupon" %}</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                {% trans "Coupon code" %}
+            </th>
+            <th>
+                {% trans "Value" %}
+            </th>
+        </tr>
+        {% for coupon in coupons %}
+        <tr>
+            <td>
+            {{coupon.coupon.code}}
+            </td>
+            <td>
+            €{{coupon.coupon.amount}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody> 
+</table>
+{% endif %}
+
+<div>
+    {% if appointments or coupons %}
+    <h4>{% trans "Remarks:" %}</h4>
     {% endif %}
-{% comment %} 
-Important details from which depending if the order has an appointments
-{% endcomment %}
-    <div>
-        {% if appointments or coupons %}
-        <h4>{% trans "Remarks:" %}</h4>
-        {% endif %}
-        {% if appointments %}
-        <p>
-            {% trans "It is important to be there 15 minutes before the game starts." %}
-            {% trans "The game master needs this time to explain everything worth knowing about the game." %}
-        </p>
-        <p>
-            {% trans "Please take note of the current" %} 
-            <a href="https://breakout-escaperoom.de/covid" target="_blank">{% trans "Measures against Covid-19" %}</a>
-            .
-        </p>
-        <h4>{% trans "How to get there" %}</h4>
-        <p>
-            {% trans "We are located in Riedingerpark.We are easily accessible by public transport (bus stop MAN or Dieselbrucke) or by car." %}
-            {% trans "We offer free parking for our customers directly in front of the entrance." %}
-            {% trans "Address" %}: Riedingestraße 26c,{% trans "2nd floor" %}
-        </p>
-        <h4>{% trans "Changes, cancellations" %}</h4>
-        <p>
-            {% trans "It is no problem if the number of players changes at short notice." %}
-            {% trans "Bookings can be changed or cancelled free of charge up to 24 hours before the appointment." %}
-            {% trans "For a cancellation or room change less than 24 hours before the appointment, a fee of €30 applies" %}
-            {% trans "If the group does not show up or gives less than 3 hours notice, we unfortunately have to charge the full amount." %}
-            {% trans "We are sorry, but the room was blocked and unfortunately we cannot rebook or change our roster at such short notice." %}
-        </p>
-        <p>
-            <a href="https://breakout-escaperoom.de#contact" target="_blank">{% trans "Contact us" %}</a>
-            {% trans "and we will be happy to help you." %}
-        </p>
-        {% endif %}
-        {% if coupons %}
-        <h4>{% trans "About your coupon" %}</h4>
-        <p>
-            {% trans "As an attachment to the email there's a digital version of the coupon in A5 format." %}
-        </p>
-        <p>
-            {% trans "There are additional coupon templates for special occasions available for download at our website." %}
-            <a href="https://breakout-escaperoom.de/coupons/#coupon-templates" target="_blank">
-                {% trans "Just visit our coupons page" %}
-            </a>
-        </p>
-        <p>
-            {% trans "It's possible to book appointments for more people than those that the coupon is for, simply pay the difference either at the time of booking or just before the game." %}
-        </p>
-        {% endif %}
-    </div>
-    <br>
-    </div>
+    {% if appointments %}
+    <p>
+        {% trans "It is important to be there 15 minutes before the game starts." %}
+        {% trans "The game master needs this time to explain everything worth knowing about the game." %}
+    </p>
+    <p>
+        {% trans "Please take note of the current" %} 
+        <a href="https://breakout-escaperoom.de/covid" target="_blank">{% trans "Measures against Covid-19" %}</a>
+        .
+    </p>
+    <h4>{% trans "How to get there" %}</h4>
+    <p>
+        {% trans "We are located in Riedingerpark.We are easily accessible by public transport (bus stop MAN or Dieselbrucke) or by car." %}
+        {% trans "We offer free parking for our customers directly in front of the entrance." %}
+        {% trans "Address" %}: Riedingestraße 26c,{% trans "2nd floor" %}
+    </p>
+    <h4>{% trans "Changes, cancellations" %}</h4>
+    <p>
+        {% trans "It is no problem if the number of players changes at short notice." %}
+        {% trans "Bookings can be changed or cancelled free of charge up to 24 hours before the appointment." %}
+        {% trans "For a cancellation or room change less than 24 hours before the appointment, a fee of €30 applies" %}
+        {% trans "If the group does not show up or gives less than 3 hours notice, we unfortunately have to charge the full amount." %}
+        {% trans "We are sorry, but the room was blocked and unfortunately we cannot rebook or change our roster at such short notice." %}
+    </p>
+    <p>
+        <a class="link-info" href="https://breakout-escaperoom.de#contact" target="_blank">{% trans "Contact us" %}</a>
+        {% trans "and we will be happy to help you." %}
+    </p>
+    {% endif %}
+    {% if coupons %}
+    <h4>{% trans "About your coupon" %}</h4>
+    <p>
+        {% trans "As an attachment to the email there's a digital version of the coupon in A5 format." %}
+    </p>
+    <p>
+        {% trans "There are additional coupon templates for special occasions available for download at our website." %}
+        <a href="https://breakout-escaperoom.de/coupons/#coupon-templates" target="_blank">
+            {% trans "Just visit our coupons page" %}
+        </a>
+    </p>
+    <p>
+        {% trans "It's possible to book appointments for more people than those that the coupon is for, simply pay the difference either at the time of booking or just before the game." %}
+    </p>
+    {% endif %}
+</div>

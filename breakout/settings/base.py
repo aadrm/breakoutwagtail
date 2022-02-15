@@ -15,6 +15,7 @@ import os
 import json
 from pathlib import Path
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.messages import constants as messages
 
 try:
     with open('/etc/breakout_config.json') as config_file:
@@ -90,6 +91,7 @@ THIRD_PARTY_APPS = [
     'wagtailyoast',
     'wagtail.locales',
     'django_inlinecss',
+    'bootstrap5',
 ]
 
 MY_APPS = [
@@ -256,3 +258,11 @@ NOCAPTCHA = True
 CRONJOBS = [
     ('0 3 * * *', 'apps.booking.cron.delete_unused_carts')
 ]
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+ }
