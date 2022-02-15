@@ -484,7 +484,7 @@ msgstr "Gutschein gilt nicht für deinen Warenkorb"
 
 #: apps/booking/templates/booking/ajax_date-availability.html:8
 msgid "Choose a time slot to book"
-msgstr ""
+msgstr "Termin wählen"
 
 #: apps/booking/templates/booking/ajax_item-list.html:18
 msgid "Expires in:"
