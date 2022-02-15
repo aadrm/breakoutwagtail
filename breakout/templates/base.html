@@ -104,7 +104,6 @@
 
         {% comment %} cookie consent {% endcomment %}
         <script data-varname="analytics" async src="https://www.googletagmanager.com/gtag/js?id=UA-155197583-1"></script>
-        <script data-varname="analytics" async src="https://kit.fontawesome.com/48b06d0d3d.js" crossorigin="anonymous"></script>
         {% if request|cookie_group_accepted:"analytics" %}
             <script async>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
             <script async>function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
