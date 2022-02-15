@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-15 18:33+0100\n"
+"POT-Creation-Date: 2022-02-15 20:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -468,15 +468,15 @@ msgstr "Kunden-Details"
 
 #: apps/booking/templates/booking/ajax_checkout-buttons.html:4
 msgid "Continue to PayPal"
-msgstr ""
+msgstr "Weiter zu Paypal"
 
 #: apps/booking/templates/booking/ajax_checkout-buttons.html:7
-msgid "Complete Booking"
-msgstr ""
+msgid "Confirm Booking"
+msgstr "Buchung bestätigen"
 
 #: apps/booking/templates/booking/ajax_coupon-list.html:18
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 #: apps/booking/templates/booking/ajax_coupon-list.html:30
 msgid "Coupon not applicable to your cart"
@@ -535,7 +535,7 @@ msgstr "Datenschutzbestimmungen"
 
 #: apps/booking/templates/booking/form_checkout-form.html:17
 msgid "and"
-msgstr ""
+msgstr "und"
 
 #: apps/booking/templates/booking/form_checkout-form.html:18
 msgid "Terms and Conditions"
@@ -543,9 +543,7 @@ msgstr "allgemeine Geschäftsbedingungen"
 
 #: apps/booking/templates/booking/form_checkout-form.html:27
 msgid "Please fill in the form to continue"
-msgstr ""
-"Bitte füllen die Felder aus, um "
-"fortzufahren"
+msgstr "Bitte füllen die Felder aus, um fortzufahren"
 
 #: apps/booking/templates/booking/form_checkout-form.html:28
 msgid "Please enter a valid email address"
@@ -557,7 +555,7 @@ msgstr "Bitte wählen Sie eine Zahlungsmethode"
 
 #: apps/booking/templates/booking/form_checkout-form.html:30
 msgid "Please wait a few seconds..."
-msgstr ""
+msgstr "Bitte warten..."
 
 #: apps/booking/templates/booking/form_checkout-form.html:31
 msgid "Please accept our terms and conditions"
@@ -568,7 +566,6 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: apps/booking/templates/booking/form_slot-booking.html:12
-#| msgid "Checkout"
 msgid "To Checkout"
 msgstr "Zur Kasse"
 
@@ -626,6 +623,7 @@ msgid "You have selected \"Bank Transfer\" as the payment method."
 msgstr "\"Überweisung\" wurde als Zahlungsmethode ausgewählt."
 
 #: apps/booking/templates/booking/section-completed_order.html:58
+#, python-format
 msgid ""
 "\n"
 "                Please transfer the amount of €%(transfer_amout)s to our "
@@ -753,7 +751,6 @@ msgid "and we will be happy to help you."
 msgstr "und wir werden Ihnen gerne weiterhelfen."
 
 #: apps/booking/templates/booking/section-completed_order.html:188
-#| msgid "Receive your coupon"
 msgid "About your coupon"
 msgstr "Gutschein Infos"
 
@@ -1208,7 +1205,6 @@ msgid "Cookies info"
 msgstr "Cookies info"
 
 #: breakout/templates/cookie_consent/cookie_group.html:48
-#| msgid "Accept"
 msgid "Accepted"
 msgstr "Angenomen"
 

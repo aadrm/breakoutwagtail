@@ -14,7 +14,7 @@
             {% for item in navigation.menu_items.all %}
             {% if not item.fixed %}
             <li class="nav-item_container overflow-hidden d-flex align-items-center">
-                <a class="nav-item c-nav-anchor" 
+                <a class="nav-item c-nav-anchor link-light" 
                 {% comment %} <a class="nav-link nav-link-anchor c-nav-anchor"  {% endcomment %}
                 href="{{ item.link }}{% if item.uri_fragment %}#{{item.uri_fragment}}{% endif %}">
                     {{ item.title }}

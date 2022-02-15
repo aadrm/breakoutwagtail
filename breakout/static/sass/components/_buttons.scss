@@ -4,6 +4,12 @@
     color: $brand-primary;
 }
 
+.c-link-light-primary {
+    color: $brand-light;
+    &:hover {
+        color: $brand-primary;
+    }
+}
 
 .c-nav-anchor {
     text-decoration: none;
