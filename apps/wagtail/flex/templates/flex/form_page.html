@@ -28,11 +28,11 @@
                         <form class="form" action="{% pageurl page %}" method="POST">
                             {% csrf_token %}
                             {% for field in form %}
-                            <p>
-                                <label for="{{field.auto_id}}" class="{% if field.field.required %}required{% endif %}">{{ field.label }}</label> 
+                            <div class="mb-3">
+                                <label for="{{field.auto_id}}" class="d-block {% if field.field.required %}required{% endif %}">{{ field.label }}</label> 
                                 {% if field.field.help_text %}<span>({{ field.field.help_text }})</span>{% endif %}
                                 {{ field }}
-                            </p> 
+                            </div>
                             {% endfor %}
                             <button class="btn btn-outline-primary fw-bolder" type="submit">{% trans "Submit" %}</button>
                         </form>
