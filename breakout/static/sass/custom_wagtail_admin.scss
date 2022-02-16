@@ -4,42 +4,42 @@
 @import "layout/0layout-admin-dir";
 // @import "layout/0layout-dir";
 @import "apps/admin/0admin-dir";
-.field {
-    label {
-        padding-top: .3em;
-    }
-    .input, .choice_field {
-        input, select {
-            padding: 4px 1.2em;
-            &~span {
-                &::after {
-                line-height: 90%;
-                }
-            }
-        }
-    }
-}
+// .field {
+//     label {
+//         padding-top: .3em;
+//     }
+//     .input, .choice_field {
+//         input, select {
+//             padding: 4px 1.2em;
+//             &~span {
+//                 &::after {
+//                 line-height: 90%;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 
-.date_field, .time_field, .url_field, .date_time_field {
-    .input {
-        &::before {
-            font-size: 1.5em;
-        }
-    }
-}
+// .date_field, .time_field, .url_field, .date_time_field {
+//     .input {
+//         &::before {
+//             font-size: 1.5em;
+//         }
+//     }
+// }
 
-.inline_struct {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    .field {
-        width: 150px;
-        display: inline-block;
-        padding-top: 0;
-        & + .field {
-            padding-top: 0 !important;
-        }
-    }
-}
+// .inline_struct {
+//     display: flex;
+//     flex-wrap: wrap;
+//     gap: 8px;
+//     .field {
+//         width: 150px;
+//         display: inline-block;
+//         padding-top: 0;
+//         & + .field {
+//             padding-top: 0 !important;
+//         }
+//     }
+// }

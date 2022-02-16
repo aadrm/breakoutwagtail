@@ -200,7 +200,7 @@ function addEventToSlot() {
     for (i = 0; i < slots.length; i++) {
         slots[i].addEventListener("click", showBookingForm);
     }
-    slots = document.getElementsByClassName('admin-slot__extra-button');
+    slots = document.getElementsByClassName('js-admin-slot__extra-button');
     for (i = 0; i < slots.length; i++) {
         slots[i].addEventListener("click", showBookingForm);
     }

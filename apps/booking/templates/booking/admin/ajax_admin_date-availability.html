@@ -2,22 +2,22 @@
 <tr class="available-slots-response">
     <td colspan="7">
         <div class="available-slots__data">
-            <h2 class="available-slots__data__title">{{slots.0.start|date}}</h2>
+            <h2 class="text-center">{{slots.0.start|date}}</h2>
             {% for slot in slots %}
-            <div class="admin-slot">
-                {% if slot.is_not_reserved %}
+            <div class="d-flex w-100">
+                {% if slot.is_not_reserved and slot.is_future_of_buffer %}
                     {% if slot.is_disabled %}
-                    <div 
+                    <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                        class="available-slots__data__slot__disabled"
+                        class="button btn-danger w-100"
                     >
                     {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
-                    </div> 
+                    </button> 
                     <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_enable' %}"
-                        class="book-slot-admin admin-slot__extra-button"
+                        class="js-admin-slot__extra-button btn color-grey-3 rounded-0"
                     >
                     Enable 
                     </button> 
@@ -26,23 +26,35 @@
                     <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                        class="available-slots__data__slot"
+                        class="button btn-primary w-100"
                     >
                     {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
                     </button> 
                     <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_disable' %}"
-                        class="book-slot-admin admin-slot__extra-button"
+                        class="js-admin-slot__extra-button btn-light btn rounded-0 "
                     >
                     Disable
                     </button> 
                     {% endif %}
+
                 {% else %}
-                <div class="available-slots__data__slot__unavailable">
-                    {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
-                </div>
+                        <div class="p-3 w-100 btn-light text-center">
+                        {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+                        {% for item in slot.booking.all %}
+                            {% if item.cart.status == 1 %}
+                                <br>
+                            <small>
+                                {{ item.cart.invoice.full_name }} | 
+                                {{ item.cart.invoice.email }} | 
+                                {{ item.cart.invoice.phone }}
+                            </small>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
                 {% endif %}
+
             </div>
             {% endfor %}
         </div>

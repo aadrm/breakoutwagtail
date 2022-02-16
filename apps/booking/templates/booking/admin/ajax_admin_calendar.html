@@ -1,28 +1,25 @@
 {% load i18n %}
 <table class="calendar" cellpadding="0" cellspacing="0" width="100%">
     <caption class="text-center" style="background: #007d7e;">
-        <div class="cal-title breakout-font text-center">
-            <h3 class="h2 mt-2">{{calendar.room}}</h3>
-        </div>
-        <div class="row">
+        <div class="d-flex justify-content-evenly fs-4">
             <div 
-                class="p-0 col cal-nav__btn js-cal-button" 
+                class="js-cal-button w-100 btn fs-1" 
                 data-room="{{calendar.room.pk}}" 
                 data-month="{{calendar.previous_month}}"
                 data-year="{{calendar.previous_year}}"
             >
-                <span class="display-4">‹</span>
+                <span class="">‹</span>
             </div>
-            <div class="p-0 col justify-content-center align-content-center flex-grow-1 row">
-                <p class="m-0 h4">{{ calendar.first_day_month|date:"F Y"}}</p>
+            <div class="">
+                <p class="p-3">{{ calendar.first_day_month|date:"F Y"}}</p>
             </div> 
             <div 
-                class="p-0 col cal-nav__btn js-cal-button" 
+                class="js-cal-button btn w-100 fs-1 text-light" 
                 data-room="{{calendar.room.pk}}" 
                 data-month="{{calendar.next_month}}"
                 data-year="{{calendar.next_year}}"
             >
-                <span class="display-4">›</span>
+                <span class="text-light">›</span>
             </div>
         </div>
     </caption>

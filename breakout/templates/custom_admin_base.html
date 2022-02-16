@@ -4,8 +4,8 @@
 {% block extra_css %}
     {{ block.super }}
 
-    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" />
-    <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" />
+    {% comment %} <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/home.css' %}" type="text/css" /> {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="{% versioned_static 'wagtailadmin/css/layouts/page-editor.css' %}" /> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
 
 {% endblock %}
