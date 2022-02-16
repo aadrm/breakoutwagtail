@@ -9,32 +9,34 @@
 {{ block.super }}
     <main>
         {% if form_submission %}
-            <div class="c-wrapper--sm">
+            <div class="container my-5 mx-3">
             {{ page.submitted_text|richtext }}
             </div>
         {% else %}
             {% for block in page.content %}
                 {% include_block block %}
             {% endfor %}
-            <div class="form-wrapper c-wrapper--sm">
-            {% if page.intro %}
-                <div class="form-intro">
-                {{ page.intro|richtext }}
-                </div>
-                <br>
-            {% endif %}
-                <div class="">
-                    <form class="form-fields" action="{% pageurl page %}" method="POST">
-                        {% csrf_token %}
-                        {% for field in form %}
-                        <p>
-                            <label for="{{field.auto_id}}" class="{% if field.field.required %}required{% endif %}">{{ field.label }}</label> 
-                            {% if field.field.help_text %}<span>({{ field.field.help_text }})</span>{% endif %}
-                            {{ field }}
-                        </p> 
-                        {% endfor %}
-                        <button type="submit">{% trans "Submit" %}</button>
-                    </form>
+            <div class="container">
+                <div class="card p-3 my-5 mx-3">
+                {% if page.intro %}
+                    <div class="">
+                    {{ page.intro|richtext }}
+                    </div>
+                    <br>
+                {% endif %}
+                    <div class="">
+                        <form class="form" action="{% pageurl page %}" method="POST">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <p>
+                                <label for="{{field.auto_id}}" class="{% if field.field.required %}required{% endif %}">{{ field.label }}</label> 
+                                {% if field.field.help_text %}<span>({{ field.field.help_text }})</span>{% endif %}
+                                {{ field }}
+                            </p> 
+                            {% endfor %}
+                            <button class="btn btn-outline-primary fw-bolder" type="submit">{% trans "Submit" %}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             {% for block in page.content_2 %}
