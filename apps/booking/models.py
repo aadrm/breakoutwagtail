@@ -56,27 +56,30 @@ class Cart(models.Model):
         cart_items = self.get_valid_items()
 
         for coupon in self.cart_coupons.all():
-            cp = coupon.coupon
-            applicable_products = cp.products_applicable_queryset()
-            applied = False
-            #  used for cases where a fixed amount discount that applies to the entire basquet
-            #  has more value than the current item of the basquet, so the rest of the coupon
-            #  will be applied to the next item
-            cumulative_discount = 0
-            for item in cart_items:
-                applicable_to_product = cp.is_applicable(item.product, applicable_products)
-                applicable_to_slot = True
-                if item.slot:
-                    applicable_to_slot = False
-                    if item.slot.start.weekday() in cp.dow_as_integerlist:
-                        applicable_to_slot = True
-                if applicable_to_product and applicable_to_slot:
-                    if coupon.no_coupon_conflict(item):
-                        cumulative_discount = coupon.add_to_cart_item(item, cumulative_discount)
-                        applied = True
-                        if not(cp.is_apply_to_basket) or not(cp.is_percent) and cumulative_discount >= cp.amount:
-                            break
-            self.print_items_prices()
+            try:
+                cp = coupon.coupon
+                applicable_products = cp.products_applicable_queryset()
+                applied = False
+                #  used for cases where a fixed amount discount that applies to the entire basquet
+                #  has more value than the current item of the basquet, so the rest of the coupon
+                #  will be applied to the next item
+                cumulative_discount = 0
+                for item in cart_items:
+                    applicable_to_product = cp.is_applicable(item.product, applicable_products)
+                    applicable_to_slot = True
+                    if item.slot:
+                        applicable_to_slot = False
+                        if item.slot.start.weekday() in cp.dow_as_integerlist:
+                            applicable_to_slot = True
+                    if applicable_to_product and applicable_to_slot:
+                        if coupon.no_coupon_conflict(item):
+                            cumulative_discount = coupon.add_to_cart_item(item, cumulative_discount)
+                            applied = True
+                            if not(cp.is_apply_to_basket) or not(cp.is_percent) and cumulative_discount >= cp.amount:
+                                break
+                self.print_items_prices()
+            except Exception:
+                pass
 
     @transaction.atomic
     def reset_cart_items(self):
@@ -96,8 +99,11 @@ class Cart(models.Model):
     
     def reset_cart_coupons(self):
         for coupon in self.cart_coupons.all():
-            coupon.discount = 0
-            coupon.save()
+            try:
+                coupon.discount = 0
+                coupon.save()
+            except Exception:
+                coupon.delete()
 
 
     def get_valid_items(self):
@@ -568,7 +574,7 @@ class Coupon(models.Model):
     amount = models.DecimalField(_("discount amount"), max_digits=5, decimal_places=2, default=0)
     is_percent = models.BooleanField(_("is percent"), default=False)
     is_apply_to_basket = models.BooleanField(_("entire basket"), default=False)
-    is_individual_use = models.BooleanField(_("can be combined"), default=True)
+    is_individual_use = models.BooleanField(_("can't be combined"), default=True)
     is_overrule_individual_use = models.BooleanField(_("can be combined"), default=False)
     is_upgrade = models.BooleanField(_("Upgrades the item"), default=False)
     product_families_included = models.ManyToManyField("booking.ProductFamily", related_name="product_family_include", verbose_name=_(" include families"), blank=True)
@@ -694,12 +700,6 @@ class Coupon(models.Model):
 
         return products.distinct()
 
-    def products_cant_degrade_queryset(self):
-        """
-        a list of products where coupons that upgrade a product cannot be applied 
-        """
-        return Product.objects.filter(degrade=None)
-
     def products_applicable_queryset(self):
         """returns a queryset to with the products to which the coupon is applicable to"""
         if self.products_included_queryset():
@@ -708,10 +708,6 @@ class Coupon(models.Model):
             products = Product.objects.all()
 
         excluded_products = self.products_excluded_queryset()
-        if self.is_upgrade:
-            # excluded_products = excluded_products.union(self.products_cant_degrade_queryset())
-            excluded_products = (excluded_products | self.products_cant_degrade_queryset()).distinct()
-        products = products.exclude(pk__in=excluded_products)
         return products
 
     def is_applicable(self, product, products):
@@ -736,7 +732,7 @@ class Coupon(models.Model):
             price = (1 - self.amount / 100) * price
             used = True
         elif self.is_upgrade:
-            price = item.product.degrade.price
+            price = item.product.upgrade_price
             used = True
         else:
             price = price - (self.amount - cumulative_discount)
@@ -873,10 +869,11 @@ class Product(models.Model):
     """An item that can be added to the cart using the model cart item"""
     name = models.CharField(_("Product"), max_length=32)    
     price = models.DecimalField(_("Price"), max_digits=8, decimal_places=2)
+    upgrade_price = models.DecimalField(_("Upgrade Price"), max_digits=8, decimal_places=2, default=120.00)
     value = models.DecimalField(_("Value"), max_digits=8, decimal_places=2, default=0)
-    upgrade = models.OneToOneField("booking.Product", verbose_name=_("upgrade"), related_name='degrade', on_delete=models.SET_NULL, null=True, blank=True)
     family = models.ForeignKey("booking.ProductFamily", verbose_name=_("Family"), related_name='products', on_delete=models.CASCADE, null=True, blank=False)
     players = models.SmallIntegerField(_("Players"), blank=True, null=True)
+    is_selectable = models.BooleanField(_("Is selectable in calendar"), default=True)
 
     class Meta:
         ordering = ['price']
@@ -911,13 +908,6 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("Product_detail", kwargs={"pk": self.pk})
 
-    def has_degrade(self):
-        has = False
-        try:
-            has = (self.degrade is not None)
-        except Product.DoesNotExist:
-            pass
-        return has
 
 
 

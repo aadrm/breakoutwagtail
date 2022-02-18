@@ -389,17 +389,20 @@ def ajax_refresh_coupon(request):
 
         # delete coupon
         if data.get('cart_coupon'):
-            cart_coupon_id = data.get('cart_coupon')
-            cart_id = data.get('cart')
-            cart = Cart.objects.get(pk=cart_id)
-            cart_coupon = cart.cart_coupons.get(pk=cart_coupon_id)
-            code = cart_coupon.coupon.code
-            cart_coupon.delete()
-            messages.add_message(
-                request,
-                messages.ERROR, 
-                _('The coupon with code "%(code)s" has been removed from your purchase') % {'code': code}
-            )
+            try:
+                cart_coupon_id = data.get('cart_coupon')
+                cart_id = data.get('cart')
+                cart = Cart.objects.get(pk=cart_id)
+                cart_coupon = cart.cart_coupons.get(pk=cart_coupon_id)
+                code = cart_coupon.coupon.code
+                cart_coupon.delete()
+                messages.add_message(
+                    request,
+                    messages.ERROR, 
+                    _('The coupon with code "%(code)s" has been removed from your purchase') % {'code': code}
+                )
+            except:
+                pass
 
     context = {
         'cart': cart,

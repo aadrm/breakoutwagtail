@@ -49,7 +49,7 @@ class SlotAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'family', 'upgrade', 'degrade')
+    list_display = ('__str__', 'family')
     pass 
 
 @admin.register(ProductFamily)
@@ -112,7 +112,7 @@ class ProductAdmin(ModelAdmin):
     model = Product 
     menu_label = 'Products'
     menu_icon = 'fa-object-ungroup'
-    list_display = ('pk', 'family', 'name', 'price', 'upgrade')
+    list_display = ('pk', 'family', 'name', 'price')
 
 
 class CouponAdmin(ModelAdmin):

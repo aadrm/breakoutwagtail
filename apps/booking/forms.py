@@ -23,7 +23,7 @@ class SlotBookingForm(forms.Form):
 
         self.fields['product'] = forms.ModelChoiceField(
             label=_('Number of players'),
-            queryset=Product.objects.filter(family=self.slot.product_family),
+            queryset=Product.objects.filter(family=self.slot.product_family, is_selectable=True),
         )
         self.fields['slot_id'] = forms.IntegerField(required=False, initial=self.slot_id) 
 

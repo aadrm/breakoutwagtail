@@ -10,7 +10,6 @@
 {% endif %}
 {% if cart.cart_coupons.all.count > 0 %}
 <table class="table">
-{% for cart_coupon in cart.cart_coupons.all %}
     <thead>
         <tr>
             <th>{% trans "Coupon" %}</th>
@@ -18,6 +17,7 @@
             <th class="text-end">{% trans "Remove" %}</th>
         </tr>
     </thead>
+    {% for cart_coupon in cart.cart_coupons.all %}
     <tbody>
 
         <tr>
