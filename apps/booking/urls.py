@@ -43,6 +43,7 @@ urlpatterns = [
     path('ajax_remove_coupon', views.ajax_remove_coupon, name='ajax_remove_coupon'),
 
     path('test_email_template/', views.test_email_template, name='test_email_template'),
-    path('test_email_template/<int:is_html_or_text>', views.test_email_template, name='test_email_template'),
+    path('test_email_template/<str:mailto>', views.test_email_template, name='test_email_template'),
+    path('test_email_template/<str:mailto>/<int:is_html_or_text>', views.test_email_template, name='test_email_template'),
     path('test_email_order/<str:order>', views.test_email_order, name='test_email_order'),
 ]

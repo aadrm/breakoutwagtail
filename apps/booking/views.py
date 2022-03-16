@@ -7,6 +7,7 @@ import json
 from datetime import datetime, timedelta, date
 from calendar import monthrange
 from dateutil.parser import parse
+from email.mime.image import MIMEImage
 # from weasyprint import HTML, CSS
 
 from django.conf import settings
@@ -21,7 +22,7 @@ from django.utils.translation import gettext as _
 from django.template.loader import render_to_string, get_template
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import FormView, View
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy, reverse, path
 from django.http import HttpResponseRedirect, HttpResponse, Http404, JsonResponse
 from django.forms import modelformset_factory
 
@@ -796,11 +797,34 @@ def slots_calendar(request):
     }
     return render(request, 'booking/admin/view-slots_calendar.html', context)
 
-def test_email_template(request, is_html_or_text=True):
-    email = render_to_string('email/test_mail.html')
-    if not is_html_or_text:
-        email = textify(email)
+def test_email_template(request, mailto, is_html_or_text=True):
+    html_message = render_to_string('email/test_mail.html')
+    message = textify(html_message)
+    to_email = mailto
+    mail_subject = 'Test email'
 
+    email = EmailMultiAlternatives(
+        subject=mail_subject,
+        body=message,
+        from_email='info@breakout-escaperoom.de',
+        to=[to_email, ],
+    )
+    email.attach_alternative(html_message, mimetype='text/html')
+    email.content_subtype = 'html'
+    email.mixed_subtype = 'related'
+    
+    img_path = settings.STATIC_ROOT + 'img/icons/yt.png'
+    image_name = 'yt.png'
+    with open(img_path, 'rb') as f:
+        image = MIMEImage(f.read(), _subtype="png")
+        email.attach(image)
+        image.add_header('Content-ID', "<{}>".format(image_name))
+
+    email.send
+    print(email.to)
+
+    if is_html_or_text: 
+        return HttpResponse(email)
     return HttpResponse(email)
 
 def test_email_order(request, order):
@@ -817,3 +841,4 @@ def test_email_order(request, order):
     email = render_to_string('email/order_confirmation.html', context)
     # email = textify(email)
     return HttpResponse(email)
+
