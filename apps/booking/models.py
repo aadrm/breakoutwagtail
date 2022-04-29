@@ -420,7 +420,6 @@ class CartItem(models.Model):
         elif self.status < 0:
             return False
         else:
-            print('in_cart')
             return True
 
     def slot_expiry_seconds(self):

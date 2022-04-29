@@ -547,8 +547,7 @@ def coupon_generator(request):
 
 @staff_member_required
 def order_summary(request):
-    orders = Cart.objects.filter(status=1)
-    orders.order_by('invoice__order_date')
+    orders = Cart.objects.filter(status=1).order_by('-invoice__order_date')
     start_date_filter = date.today() - timedelta(28)
     end_date_filter = date.today()
     if request.method == 'POST':
@@ -579,9 +578,21 @@ def order_summary(request):
         end_date_filter = end_date_filter + timedelta(days=1)
         orders = orders.filter(invoice__order_date__lt=end_date_filter)
 
+    order_count = 0
+    order_total_price = 0 
+    for order in orders:
+        order_count += 1
+        order_total_price += order.total_after_coupons()
+    
+    order_average = order_total_price / order_count
+        
+
     context = {
         'form': form,
         'orders': orders,
+        'order_count': order_count,
+        'order_total_price': order_total_price,
+        'order_average': order_average,
     }
     return render(request, 'booking/admin/view-order_summary.html', context)
 

@@ -53,6 +53,7 @@ DJANGO_CORE_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.sites',
+    'django.contrib.admindocs'
 ]
 
 THIRD_PARTY_APPS = [
