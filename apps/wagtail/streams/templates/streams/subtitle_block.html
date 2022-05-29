@@ -2,20 +2,10 @@
 
 {% if self.title.uri_fragment %}<span id="{{ self.title.uri_fragment }}" class="c-section-id-offset"></span>{% endif %}
 {% if self.title.subtitle %}
-<{% if self.title.title_level %}{{ self.title.title_level }}{% else %}h2{% endif %}
-class="
-{% if self.title.decorate_title %} breakout-font {% endif %}
-{% if self.title.center_title%} text-center {% endif %}
-"
-style="
-{% if self.title.title_colour %}color: #{{ self.title.title_colour }};{% endif %}
-"
->
-{{ self.title.subtitle }}
-</{% if self.title.title_level %}{{ self.title.title_level }}{% else %}h2{% endif %}>
-{% endif %}
-{% if self.richtext %}
-<div class="richtext">
-{{ self.richtext|richtext}}
-</div>
+<h2 
+  class="text-center"
+  style="{% if self.title.title_colour %}color: #{{ self.title.title_colour }};{% endif %}"
+  >
+  {{ self.title.subtitle }}
+</h2>
 {% endif %}

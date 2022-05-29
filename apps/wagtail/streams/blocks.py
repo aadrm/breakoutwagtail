@@ -10,55 +10,55 @@ from wagtail.contrib.table_block.blocks import TableBlock
 from .models import ReviewFamily, Review, Colour
 
 
-class ElementBlock(blocks.StructBlock):
+# class ElementBlock(blocks.StructBlock):
 
-    try:
-        style = blocks.StructBlock(
-            [
-                ('font_colour', blocks.ChoiceBlock(
-                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-                ('bg_colour', blocks.ChoiceBlock(
-                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-                ('shadow', blocks.IntegerBlock(required=False)),
-                ('max_width_outer', blocks.IntegerBlock(required=False)),
-            ], form_classname='inline_struct'
-        )
-    except Exception as e:
-        print('no database table yet')
+#     try:
+#         style = blocks.StructBlock(
+#             [
+#                 ('font_colour', blocks.ChoiceBlock(
+#                     choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+#                 ('bg_colour', blocks.ChoiceBlock(
+#                     choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+#                 ('shadow', blocks.IntegerBlock(required=False)),
+#                 ('max_width_outer', blocks.IntegerBlock(required=False)),
+#             ], form_classname='inline_struct'
+#         )
+#     except Exception as e:
+#         print('no database table yet')
 
-    def get_context(self, value, parent_context=None):
-        context = super().get_context(value, parent_context=parent_context)
-        try:
-            context['value']['style']['font_colour'] = Colour.objects.get(
-                pk=context['value']['style']['font_colour']).hex_code
-        except Exception:
-            pass
-        try:
-            context['value']['style']['bg_colour'] = Colour.objects.get(
-                pk=context['value']['style']['bg_colour']).hex_code
-        except Exception:
-            pass
-        return context
+#     def get_context(self, value, parent_context=None):
+#         context = super().get_context(value, parent_context=parent_context)
+#         try:
+#             context['value']['style']['font_colour'] = Colour.objects.get(
+#                 pk=context['value']['style']['font_colour']).hex_code
+#         except Exception:
+#             pass
+#         try:
+#             context['value']['style']['bg_colour'] = Colour.objects.get(
+#                 pk=context['value']['style']['bg_colour']).hex_code
+#         except Exception:
+#             pass
+#         return context
 
-    class Meta:
-        template = 'streams/element_block.html'
+#     class Meta:
+#         template = 'streams/element_block.html'
 
 
-class ElementBlockExtended(ElementBlock):
-    try:
-        style = blocks.StructBlock(
-            [
-                ('font_colour', blocks.ChoiceBlock(
-                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-                ('bg_colour', blocks.ChoiceBlock(
-                    choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
-                ('shadow', blocks.IntegerBlock(required=False)),
-                ('max_width_inner', blocks.IntegerBlock(required=False)),
+# class ElementBlockExtended(ElementBlock):
+#     try:
+#         style = blocks.StructBlock(
+#             [
+#                 # ('font_colour', blocks.ChoiceBlock(
+#                 #     choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+#                 # ('bg_colour', blocks.ChoiceBlock(
+#                 #     choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
+#                 # ('shadow', blocks.IntegerBlock(required=False)),
+#                 # ('max_width_inner', blocks.IntegerBlock(required=False)),
 
-            ], form_classname='inline_struct'
-        )
-    except Exception as e:
-        print('no colours database table yet')
+#             ], form_classname='inline_struct'
+#         )
+#     except Exception as e:
+#         print('no colours database table yet')
 
 
 class SubtitleBlock(blocks.StructBlock):
@@ -69,9 +69,9 @@ class SubtitleBlock(blocks.StructBlock):
             [
                 ('subtitle', blocks.CharBlock(required=False)),
                 ('uri_fragment', blocks.CharBlock(required=False)),
-                ('center_title', blocks.BooleanBlock(default=False, required=False)),
-                ('decorate_title', blocks.BooleanBlock(default=False, required=False)),
-                ('title_level', blocks.ChoiceBlock(required=False, choices=(('h2','h2'),('h3','h3'),('h4','h4')))),
+                # ('center_title', blocks.BooleanBlock(default=False, required=False)),
+                # ('decorate_title', blocks.BooleanBlock(default=False, required=False)),
+                # ('title_level', blocks.ChoiceBlock(required=False, choices=(('h2','h2'),('h3','h3'),('h4','h4')))),
                 ('title_colour', blocks.ChoiceBlock(
                     choices=Colour.objects.all().values_list('pk', 'name'), required=False)),
             ], form_classname='inline_struct', label="Properties"
@@ -97,15 +97,9 @@ class SubtitleBlock(blocks.StructBlock):
 class SubtitleTextBlock(SubtitleBlock):
     richtext = blocks.RichTextBlock(required=False)
 
-class CollectionBlock(ElementBlockExtended):
-    title = SubtitleTextBlock(required=False, help_text='Block title')
-    children = blocks.ListBlock(
-        blocks.StructBlock(
-            [
-                ('children', ElementBlock()),
-            ]
-        )
-    )
+class CollectionBlock(blocks.StructBlock):
+    column_width = blocks.IntegerBlock(
+        help_text='Full width is 12. For example, for two columns enter 6')
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
@@ -116,8 +110,10 @@ class CollectionBlock(ElementBlockExtended):
         template = 'streams/collection_block.html'
 
 
-class ImageTextBlock(ElementBlock):
+class ImageTextBlock(blocks.StructBlock):
     image = images_blocks.ImageChooserBlock(required=True)
+    image_full_height = blocks.BooleanBlock(required=False)
+    image_to_right = blocks.BooleanBlock(required=False)
     text = blocks.RichTextBlock()
 
     class Meta:
@@ -142,7 +138,7 @@ class LinkBlock(blocks.StructBlock):
 
     properties = blocks.StructBlock([
         ('page_link', blocks.PageChooserBlock(required=False)),
-        ('url_link', blocks.URLBlock(required=False)),
+        ('url_link', blocks.CharBlock(required=False)),
         ('button_text', blocks.CharBlock(max_length=64, required=False)),
         ('noopener', blocks.BooleanBlock(required=False,
                                          help_text="Select this for links that point to other websites")),
@@ -258,7 +254,7 @@ class ImageGalleryBlock(blocks.StructBlock):
         label = 'Image Gallery'
 
 
-class CardBlock(ElementBlockExtended):
+class CardBlock(blocks.StructBlock):
     image = images_blocks.ImageChooserBlock(
         required=True,
         help_text='Use a 400x300px picture,'
@@ -267,6 +263,7 @@ class CardBlock(ElementBlockExtended):
     title = blocks.CharBlock(max_length=48, required=False)
     subtitle = blocks.CharBlock(max_length=48, required=False)
     text = blocks.TextBlock(required=False)
+    footer = blocks.TextBlock(required=False)
     link = LinkBlock()
 
     class Meta:
@@ -290,7 +287,7 @@ class VerticalCardsBlock(CollectionBlock):
         label = 'Vertical Cards'
 
 
-class HorizontalCardsBlock(CollectionBlock):
+class HorizontalCardsBlock(blocks.StructBlock):
     """ Cards with image and title else """
 
     children = blocks.ListBlock(
@@ -434,14 +431,15 @@ class CustomTableBlock(TableBlock):
         template = 'streams/tableblock_custom.html'
 
 
-class SectionBlock(ElementBlockExtended):
+class SectionBlock(blocks.StructBlock):
     title = SubtitleBlock(
         required=False, help_text='Add a suitable section title')
     is_section = True
+    dark_mode = blocks.BooleanBlock(required=False)
     stream = blocks.StreamBlock(
         [
             # ('subtitle_block', SubtitleBlock()),
-            ('collection_test', CollectionBlock()),
+            # ('collection_test', CollectionBlock()),
             ('rich_text', RichTextBlock()),
             ('text_box', RichTextBoxBlock()),
             ('mymaps', MyMapsBlock()),
@@ -450,7 +448,7 @@ class SectionBlock(ElementBlockExtended):
             ('image_text', ImageTextBlock()),
             ('horizontal_cards', HorizontalCardsBlock()),
             # ('contact_block', ContactBlock()),
-            ('table', TableBlock()),
+            ('table', TableBlock(template='streams/custom-table.html')),
         ],
     )
 

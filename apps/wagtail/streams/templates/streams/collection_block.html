@@ -1,11 +1,13 @@
-{% extends 'streams/element_block.html' %}
+{% comment %} {% extends 'streams/element_block.html' %} {% endcomment %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block element_content %}
 {% include_block self.title %}
-<div class="{% block collection_class %}{% endblock collection_class %}">
+<div class="row{% block collection_class %}{% endblock collection_class %}">
 {% for block in self.children %}
+  <div class="col-md-{{ self.column_width }}">
     {% include_block block %}
+  </div> 
 {% endfor %}
 </div>
 {% endblock element_content %}

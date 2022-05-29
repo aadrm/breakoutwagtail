@@ -1,36 +1,43 @@
-{% extends 'streams/cards/card_base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
-{% block element_class %}card {% if self.flip %}card-flex-reverse{% endif %}{% endblock element_class %}
-{% block element_content %}
-<div class="card__head">
-    {% image self.image width-460  as card_image %}
-    <img 
-        src="{{ card_image.url }}" 
-        alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}"
-    >
-</div>
-<div class="card__content">
-    {% comment %} <p class="card__content__title">{{ self.title}}</p> {% endcomment %}
+<div class="card h-100 overflow-hidden">
+
+  {% if self.image %}
+  {% image self.image width-460  as card_image %}
+  <img 
+    style="height: 200px; object-fit: cover;"
+    class="img-fluid"
+    src="{{ card_image.url }}" 
+    alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}">
+  {% endif %}
+
+  <div class="card-body d-flex flex-column">
     {% if self.title %}
-        <div class="card__content__title">
-            {% include_block self.title %}
-        </div>
+    <h4 class="text-center">
+      {% include_block self.title %}
+    </h4>
     {% endif %}
+
     {% if self.subtitle %}
-        <p class="card__content__subtitle"><b>{{ self.subtitle}}</b></p>
+    <h5 class="text-center">
+      {% include_block self.title %}
+    </h5>
     {% endif %}
+
     {% if self.text %}
-        <p class="card__content__text">{{ self.text }}</p>
+    <p class="text-center">
+      {% include_block self.text %}
+    </p>
     {% endif %}
-    {% if self.link %}
-    <div class="card__content__cta">
-    {% include_block self.link %}
+
+
+    <div class="mt-auto">
+      {% include_block self.link %}
     </div>
-    {% endif %}
-    {% if self.link_stream %}
-    <div class="card__content__cta">
-        {% include_block self.link_stream %}
-    </div>
+
+  </div>
+  {% if self.footer %}
+  <div class="card-footer">
+    {{ self.footer }}
+  </div>
+  {% endif %}
 </div>
-{% endif %}
-{% endblock element_content %}

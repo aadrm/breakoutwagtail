@@ -30,16 +30,16 @@
 //     }
 // }
 
-// .inline_struct {
-//     display: flex;
-//     flex-wrap: wrap;
-//     gap: 8px;
-//     .field {
-//         width: 150px;
-//         display: inline-block;
-//         padding-top: 0;
-//         & + .field {
-//             padding-top: 0 !important;
-//         }
-//     }
-// }
+.inline_struct {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    .field {
+        width: 150px;
+        display: inline-block;
+        padding-top: 0;
+        & + .field {
+            padding-top: 0 !important;
+        }
+    }
+}

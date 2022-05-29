@@ -8,7 +8,7 @@ style="
 style = "{% if self.properties.full_width %}display: block;{% endif %}"
 {% if self.properties.noopener %}rel="noopener"{% endif %}
 {% if self.properties.new_tab %}target="_blank"{% endif %}
-href="{% if self.properties.page_link %}{{self.properties.page_link.url}}{% elif self.properties.url_link%}{{self.properties.url_link}}{% else %}#{% endif %}"
+href="{{ self.properties.page_link.url }}{{ self.properties.url_link }}"
 >
 {{self.properties.button_text}}
 </a>

@@ -1,12 +1,10 @@
-{% extends 'streams/element_block.html' %}
 {% load wagtailcore_tags %}
 
-{% block element_content %}
-<div class="container py-5 px-3">
-{% include_block self.title %}
-{% for block in self.stream %}
-    {% include_block block %}
-{% endfor %}
-</div>
-
-{% endblock element_content %}
+<section class="{% if self.dark_mode %}bg-dark text-light{% endif %}">
+  <div class="container py-5 px-3">
+  {% include_block self.title %}
+  {% for block in self.stream %}
+      {% include_block block %}
+  {% endfor %}
+  </div>
+</section>

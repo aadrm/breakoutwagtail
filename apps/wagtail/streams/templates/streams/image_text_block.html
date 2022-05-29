@@ -1,16 +1,15 @@
-{% extends 'streams/element_block.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
-
-{% block element_class %}image-text{% endblock element_class %}
-{% block element_content %}
-<div class="image-text__image">
+<div class="row {% if self.image_to_right %}d-md-flex flex-row-reverse{% endif %}">
+  <div class="col-md-6">
     {% image self.image width-754  as card_image %}
     <img 
-        src="{{ card_image.url }}" 
-        alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}"
-    >
+      style="object-fit: cover"
+      class="img-fluid {% if self.image_full_height %}h-100{% endif %}"
+      src="{{ card_image.url }}" 
+      alt="{% if self.image_alt %}{{ self.image_alt }}{% else %}{{ card_image.alt }}{% endif %}">
+    </img>
+  </div>
+  <div class="col-md-6">
+      {{self.text}}
+  </div>
 </div>
-<div class="image-text__text richtext">
-    {{self.text}}
-</div>
-{% endblock element_content %}

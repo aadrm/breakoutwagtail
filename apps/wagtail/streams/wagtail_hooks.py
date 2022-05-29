@@ -1,7 +1,9 @@
 from django.utils.html import escape
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
+from wagtail.images.formats import Format, register_image_format, unregister_image_format
+
 from wagtail.core import hooks
-from wagtail.core.rich_text import LinkHandler
+from wagtail.core.rich_text import LinkHandler, EntityHandler
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
     InlineStyleElementHandler,
     BlockElementHandler,
@@ -120,3 +122,13 @@ class NewWindowExternalLinkHandler(LinkHandler):
 @hooks.register('register_rich_text_features')
 def register_external_link(features):
     features.register_link_type(NewWindowExternalLinkHandler)
+
+
+unregister_image_format('fullwidth')
+register_image_format(Format('fullwidth', 'Full width', 'richtext-image full-width img-fluid', 'width-800'))
+
+unregister_image_format('left')
+register_image_format(Format('left', 'Left-aligned', 'richtext-image img-fluid', 'width-500'))
+
+unregister_image_format('right')
+register_image_format(Format('right', 'Right-aligned', 'richtext-image img-fluid', 'width-500'))

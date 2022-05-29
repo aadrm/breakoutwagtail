@@ -1,3 +1,26 @@
+.richtext {
+    li {
+        margin: 12px 0;
+        left: 24px;
+        position: relative;
+    }
+    ul {
+        li {
+            &::before {
+                content: '✓';
+                font-size: 1.5em;
+                display: block;
+                left: -24px;
+                top: calc(50%);
+                transform: translateY(-50%);
+                color: $brand-primary;
+                position: absolute;
+            }
+        }
+    }
+}
+
+
 .block-reviews {
   width: 100%;
   .block-reviews__inner {
@@ -115,312 +138,21 @@
   }
 }
 
-.cards__wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: center;
-  gap: 2rem;
-}
+// .cards__wrapper {
+//   display: flex;
+//   flex-wrap: wrap;
+//   align-items: stretch;
+//   justify-content: center;
+//   gap: 2rem;
+// }
 
-.offercard__head {
-  width: 128px;
-  height: 128px;
+.svg-container {
   background: $brand-primary;
   svg {
     padding: 16%;
     fill: $brand-secondary;
     height: 100%;
     width: 100%;
-    // filter: drop-shadow(4px 4px 3px $brand-dark-a);
-  }
-}
-
-
-// .cards {
-//   display: flex;
-//   .card {
-//     background: $brand-light;
-//     flex: 1;
-//     position: relative;
-//     border-radius: 3px;
-//     flex-direction: column;
-//     box-shadow: 4px 4px 8px $brand-dark-8;
-//     .card__head {
-//       position: relative;
-//       overflow: hidden;
-//       height: auto;
-//       img {
-//         position: absolute;
-//         top: 0;
-//         left: 0;
-//         width: 100%;
-//         height: 100%;
-//         object-fit: cover;
-//       }
-//     }
-//     .card__content {
-//       background: inherit;
-//       position: relative;
-//       padding: 20px;
-//       font-size: $font--sm;
-//       .card__content__title {
-//         font-weight: bold;
-//         font-size: $font--lg;
-//       }
-//       .card__content__subtitle {
-//         font-size: $font--md;
-//       }
-//     }
-//     .card__content__cta {
-//       padding: 0 20px 15px;
-//     }
-//   }
-// }
-
-// .cards--vertical {
-//   flex-wrap: wrap;
-//   align-content: center;
-//   justify-content: center;
-//   .card {
-//     min-width: 300px;
-//     max-width: 400px;
-//     margin: 1rem;
-//     .card__head {
-//       padding-top: 75%;
-//     }
-//     .card__content {
-//       text-align: center;
-//     }
-//   }
-// }
-
-// .cards--horizontal {
-//   flex-direction: column;
-//   &:hover {
-//     .card__head {
-//       img {
-//         transform: scale(1.1) rotate(1deg);
-//       }
-//     }
-//   }
-//   .card {
-//     margin: 2rem 1rem;
-//     display: flex;
-//     flex-direction: column;
-//     .card__head {
-//       img {
-//         transition: transform 0.4s;
-//       }
-//       min-height: 200px;
-//     }
-//     .card__content {
-//       z-index: 1;
-//       .card__content__title {
-//       }
-//       .card__centent__subtitle {
-//       }
-//     }
-//   }
-//   @include break--sm {
-//     .card {
-//       flex-direction: row;
-//       .card__head {
-//         height: auto;
-//         flex-basis: 40%;
-//       }
-//       .card__content {
-//         flex-basis: 60%;
-//         &:before {
-//           transform: skewX(-3deg);
-//           content: "";
-//           background: inherit;
-//           width: 30px;
-//           position: absolute;
-//           left: -10px;
-//           top: 0;
-//           bottom: 0;
-//           z-index: -1;
-//         }
-//         .card__content__title {
-//         }
-//         .card__centent__subtitle {
-//         }
-//       }
-//     }
-//     .card-flex-reverse {
-//       flex-direction: row-reverse;
-//       .card__content {
-//         &:before {
-//           left: inherit;
-//           right: -10px;
-//           transform: skew(3deg);
-//         }
-//       }
-//     }     
-//   }
-// }
-
-.image-text {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  box-shadow: 4px 4px 8px $brand-dark-8;
-  @include break--sm {
-    flex-direction: row;
-    max-width: inherit;
-  }
-  .image-text__image  {
-    flex-basis: 100%;
-    position: relative;
-    width: 100%;
-    img {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
-    }
-  }
-  .image-text__text {
-    flex-basis: 100%;
-    margin: 0;
-    padding: 1.8rem 1rem;
-  }
-
-}
-
-.link-block {
-  text-align: left;
-  text-decoration: none;
-}
-
-
-// /*cards skeleton*/
-// .cards {
-//   .card {
-//     .card__head {
-//     }
-//     .card__content {
-//       .card__content__title {
-//       }
-//       .card__centent__subtitle {
-//       }
-//     }
-//   }
-// }
-
-.ystream {
-
-  .section-block-tittle {
-    font-family: $fonts;
-  }
-  .section-block-title--decorated {
-    font-family: $fonts-space;
-  }
-  padding: .5rem;
-  table {
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 100%;
-    white-space: nowrap;
-    background-color: white;
-  }
-
-  table td,
-  table th {
-    text-align: center;
-    padding: 8px;
-  }
-
-  table td {
-    border-right: 1px solid #f8f8f8;
-    font-size: 12px;
-  }
-
-  table thead th {
-    color: #ffffff;
-    background: $brand-secondary-6;
-  }
-
-  table thead th:nth-child(odd) {
-    color: #ffffff;
-    background: $brand-secondary-a;
-  }
-
-  table tr:nth-child(even) {
-    background: #f8f8f8;
-  }
-
-  /* Responsive */
-
-  @media (max-width: 767px) {
-    table {
-      display: block;
-      width: 100%;
-    }
-    .table-wrapper:before {
-      content: "Scroll horizontally >";
-      display: block;
-      text-align: right;
-      font-size: 11px;
-      color: white;
-      padding: 0 0 10px;
-    }
-    table thead,
-    table tbody,
-    table thead th {
-      display: block;
-    }
-    table thead th:last-child {
-      border-bottom: none;
-    }
-    table thead {
-      float: left;
-    }
-    table tbody {
-      width: auto;
-      position: relative;
-      overflow-x: auto;
-    }
-    table td,
-    table th {
-      padding: 20px 0.625em 0.625em 0.625em;
-      height: 60px;
-      vertical-align: middle;
-      box-sizing: border-box;
-      overflow-x: hidden;
-      overflow-y: auto;
-      width: 120px;
-      font-size: 13px;
-      text-overflow: ellipsis;
-    }
-    table thead th {
-      text-align: left;
-      border-bottom: 1px solid #f7f7f9;
-    }
-    table tbody tr {
-      display: table-cell;
-    }
-    table tbody tr:nth-child(odd) {
-      background: none;
-    }
-    table tr:nth-child(even) {
-      background: transparent;
-    }
-    table tr td:nth-child(odd) {
-      background: #f8f8f8;
-      border-right: 1px solid #e6e4e4;
-    }
-    table tr td:nth-child(even) {
-      border-right: 1px solid #e6e4e4;
-    }
-    table tbody td {
-      display: block;
-      text-align: center;
-    }
   }
 }
 

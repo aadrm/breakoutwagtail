@@ -1,7 +1,5 @@
 {% load wagtailcore_tags wagtailimages_tags %}
-<aside>
-<div class="c-section-banner-separator">
-    {% image self.image fill-1200x400 as img%}
-<img alt="img.alt" src="{{img.url}}" loading="lazy">
-</div>
+<aside style="max-height: 250px;" class="bg-primary overflow-hidden">
+      {% image self.image fill-1200x400 as img%}
+  <img class="img-fluid w-100 opacity-50" alt="img.alt" src="{{img.url}}" loading="lazy">
 </aside>

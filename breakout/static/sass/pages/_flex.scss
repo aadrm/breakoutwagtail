@@ -53,20 +53,8 @@
   
   /* blog post*/
   
-  .richtext {
-    font-size: $font--sm;
+.richtext {
     h1, h2, h3, h4, h5, h6 {
-      font-family: $fonts;
-      b {
-        font-family: $fonts-space;
-        font-weight: 100;
-      }
-    }
-    margin: 1.5rem auto 0;
-    line-height: 1.15;
-    p {
-      margin: 1rem auto;
-    }
     ol, ul {
       padding: 0;
     }
@@ -89,84 +77,5 @@
         }
       }
     }
-    hr {
-      border: 0; 
-      height: 1px; 
-      background: linear-gradient(to left, #f0f0f0, #8c8b8b, #f0f0f0);
-    }
-    .richtext-image {
-      min-width: 100%;
-      max-width: 100%;
-      width: auto;
-      height: auto;
-      object-fit: cover;
-    }
-  
-    .richtext-image.left {
-      @include break--sm {
-        float: left;
-        margin-right: 1rem;
-        min-width: 48%;
-        max-width: 50%;
-        width: auto;
-        height: auto;
-      }
-    }
-    a {
-      color: $brand-emphasis;
-      text-decoration: underline;
-      b {
-        text-decoration: none;
-        background: $brand-primary;
-        padding: 0.3rem 1rem;
-        border-radius: 4px;
-        &:hover {
-          text-decoration-color: $brand-light;
-          background: $brand-emphasis;
-          color: $brand-light;
-        }
-      }
-    }
-    .textbox--grey {
-      padding: 1rem;
-      background: #cccccccc;
-    }
   }
-  
-  
-  .info-content {
-      background: #eee;
-      border-radius: 2rem;
-      padding: 2rem;
-      ul, ol {
-          list-style-position: inside;
-      }
-  
-      h2 {margin-bottom: 1.5rem;}
-      h3 {margin-bottom: 1.2rem;}
-      h4 {margin-bottom: 1rem;}
-      h5 {margin-bottom: .8rem;}
-      h6 {margin-bottom: .7rem;}
-  
-      p, li {
-          margin-bottom: .5rem;
-      }
-  
-  }
-  
-  
-  .enumerate-paragraphs {
-      counter-reset: counter-info;
-      .info-paragraph {
-          h2 {
-              &::before{
-                  counter-increment: counter-info;
-                  content: '\00a7' counter(counter-info)'. ';
-              }
-          }
-      }
-  }
-  
-  .info-paragraph {
-      margin-bottom: 3rem;
-    }
+}
