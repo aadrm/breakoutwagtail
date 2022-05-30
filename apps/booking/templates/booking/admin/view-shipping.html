@@ -63,7 +63,7 @@
             <td>{{item.cart.invoice.email}}</td>
             <td>{{item.cart.invoice.payment}}</td>
             <td>{{item.cart.invoice.order_date}}</td>
-            <td>{{item.cart.total}}</td>
+            <td>{{item.cart.subtotal}}</td>
             <td>{{item.cart.total}}</td>
 
             {% comment %} <td>
@@ -112,8 +112,8 @@
         <td>{{item.cart.invoice.email}}</td>
         <td>{{item.cart.invoice.payment}}</td>
         <td>{{item.cart.invoice.order_date}}</td>
+        <td>{{item.cart.subtotal}}</td>
         <td>{{item.cart.total}}</td>
-        <td>{{item.cart.total_after_coupons}}</td>
 
         {% comment %} <td>
             <div class="hover-info">

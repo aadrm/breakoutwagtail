@@ -256,8 +256,8 @@ class ImageGalleryBlock(blocks.StructBlock):
 
 class CardBlock(blocks.StructBlock):
     image = images_blocks.ImageChooserBlock(
-        required=True,
-        help_text='Use a 400x300px picture,'
+        required=False,
+        help_text='Be careful with sizing',
     )
     image_alt = blocks.CharBlock(max_length=128, required=False)
     title = blocks.CharBlock(max_length=48, required=False)
@@ -272,6 +272,8 @@ class CardBlock(blocks.StructBlock):
 
 class HorizontalCardBlock(CardBlock):
     flip = blocks.BooleanBlock(required=False, default=False)
+    class Meta:
+        template = 'streams/cards/card_block-horizontal.html'
 
 
 class VerticalCardsBlock(CollectionBlock):

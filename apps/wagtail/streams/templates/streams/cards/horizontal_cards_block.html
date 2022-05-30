@@ -1,6 +1,7 @@
-{% extends 'streams/collection_block.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block collection_class %}
-cards cards--horizontal
-{% endblock collection_class %}
+<div class="row">
+{% for block in self.children %}
+    {% include_block block %}
+{% endfor %}
+</div>

@@ -3,7 +3,7 @@
 
 {% block element_content %}
 {% include_block self.title %}
-<div class="row{% block collection_class %}{% endblock collection_class %}">
+<div class="row">
 {% for block in self.children %}
   <div class="col-md-{{ self.column_width }}">
     {% include_block block %}

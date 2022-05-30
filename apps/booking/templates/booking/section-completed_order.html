@@ -47,11 +47,15 @@
         </tr>
         <tr>
             <td>{% trans "Order Total" %}:</td>
-            <td>€{{ cart.cart_items.all }}</td>
+            <td>€{{ cart.total }}</td>
         </tr>
         <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
         {% if payment.method == 'cash' %}
-            <td colspan="2">{% trans "Please note that for the time being it's not possible to accept payments via credit card." %}</td>
+            <td colspan="2">
+              <div class="m-0 py-2 px-3 alert alert-warning">
+                {% trans "Please note that for the time being it's not possible to accept payments via credit card." %}
+              </div>
+            </td>
         {% elif payment.method == 'transfer' %}
             <td colspan="2">
                 {% trans 'You have selected "Bank Transfer" as the payment method.' %}
