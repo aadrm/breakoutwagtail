@@ -1,4 +1,5 @@
 import traceback
+from random import randint
 from decimal import Decimal
 from datetime import datetime, timedelta, time, date
 
@@ -820,8 +821,9 @@ class Invoice(models.Model):
         slug = ''
         if self.order_date:
             slug += self.order_date.strftime('%y%W')
+        slug += str(randint(1,9)) + str(randint(1,9))
         if self.order_int:
-            slug += str(self.order_int).zfill(3)
+            slug += str(self.order_int).zfill(2)
         return slug
 
     def get_absolute_url(self):
