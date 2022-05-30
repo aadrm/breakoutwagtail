@@ -9,7 +9,7 @@
       alt="{% if self.image_alt %}{{ self.image_alt }}{% else %}{{ card_image.alt }}{% endif %}">
     </img>
   </div>
-  <div class="col-md-6">
-      {{self.text}}
+  <div class="col-md-6 richtext">
+      {{self.text|richtext}}
   </div>
 </div>

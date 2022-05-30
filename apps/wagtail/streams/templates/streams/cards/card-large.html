@@ -1,0 +1,31 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div class="card h-100 my-3 g-0 overflow-hidden">
+
+  <div class="row g-0">
+
+    <div class="col-md-6 {% if self.flip %}order-md-2{% endif %}">
+      {% if self.image %}
+      {% image self.image width-460  as card_image %}
+      <img 
+        style="height: 100%; width: 100%; object-fit: cover;"
+        src="{{ card_image.url }}" 
+        alt="{% if self.image_alt %}{{self.image_alt}}{% else %}{{card_image.alt}}{% endif %}">
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <div class="card-body h-100 d-flex flex-column row">
+        <div class="row richtext">
+          {% include_block self.text %}
+        </div>
+        <div class="mt-auto">
+          {% include_block self.link %}
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>

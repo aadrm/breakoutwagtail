@@ -253,6 +253,18 @@ class ImageGalleryBlock(blocks.StructBlock):
         icon = 'image'
         label = 'Image Gallery'
 
+class LargeCardBlock(blocks.StructBlock):
+    image = images_blocks.ImageChooserBlock(
+        required=False,
+        help_text='Be careful with sizing',
+    )
+    image_alt = blocks.CharBlock(max_length=128, required=False)
+    text = RichTextBlock()
+    link = LinkBlock()
+    flip = blocks.BooleanBlock(required=False, default=False)
+
+    class Meta:
+        template = 'streams/cards/card-large.html'
 
 class CardBlock(blocks.StructBlock):
     image = images_blocks.ImageChooserBlock(
@@ -449,7 +461,7 @@ class SectionBlock(blocks.StructBlock):
             ('spacer', SpacerBlock()),
             ('image_text', ImageTextBlock()),
             ('horizontal_cards', HorizontalCardsBlock()),
-            # ('contact_block', ContactBlock()),
+            ('large_card', LargeCardBlock()),
             ('table', TableBlock(template='streams/custom-table.html')),
         ],
     )
