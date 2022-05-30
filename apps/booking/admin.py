@@ -1,8 +1,5 @@
 from django.conf.urls import url
-from django.contrib import admin, messages
-from django.contrib.admin import AdminSite
-from django.db import models
-from django.http import HttpResponse
+from django.contrib import admin
 from django.template.response import TemplateResponse
 from django.urls import path
 from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
@@ -35,7 +32,9 @@ class RoomAdmin(admin.ModelAdmin):
     
 @admin.register(Coupon)
 class CouponAdmin(admin.ModelAdmin):
-    list_display = ('name','code','amount')
+    list_display = ('pk','name','code','amount')
+    list_filter = ('name', 'created')
+    search_fields = ['code', 'name']
     
 
 @admin.register(Schedule)
@@ -45,7 +44,9 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 @admin.register(Slot)
 class SlotAdmin(admin.ModelAdmin):
-    list_display = ('start', 'room', 'is_available')    
+    date_hierarchy = 'start'
+    list_display = ('start', 'room')    
+    list_filter = ('room',)
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -117,8 +118,10 @@ class ProductAdmin(ModelAdmin):
 
 class CouponAdmin(ModelAdmin):
     model = Coupon 
+    search_fields = ['code']
     menu_label = 'Coupons'
     menu_icon = 'fa-envelope'
+
     list_display = ('pk', 'name', 'code')
 
 

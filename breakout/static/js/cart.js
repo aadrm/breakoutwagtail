@@ -84,7 +84,8 @@ function removeItem(e) {
 }
 
 function itemListCallback() {
-   if(this.readyState == 4) {
+    console.log('list callback')
+    if(this.readyState == 4) {
         let parser = new DOMParser ();
         let responseDoc = parser.parseFromString(this.responseText, "text/html");
         let itemsInCartDiv = responseDoc.getElementById('js-items-in-cart');

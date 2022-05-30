@@ -16,6 +16,7 @@ from apps.wagtail.search import views as search_views
 
 
 urlpatterns = [
+    path('django-admin/doc/', include('django.contrib.admindocs.urls')),
     path('django-admin/', admin.site.urls),
 
     path('admin/', include(wagtailadmin_urls)),

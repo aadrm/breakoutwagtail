@@ -1,4 +1,5 @@
 import traceback
+from decimal import Decimal
 from datetime import datetime, timedelta, time, date
 
 from django.urls import reverse
@@ -35,10 +36,12 @@ class Cart(models.Model):
     items_before_checkout = models.SmallIntegerField(_("items before purchase"), blank=True, null=True)
     invoice = models.OneToOneField("booking.Invoice", verbose_name=_("Invoice"), on_delete=models.PROTECT, blank=True, null=True)
     timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
+    subtotal = models.DecimalField('Subtotal', max_digits=6, decimal_places=2, blank=True, null=True)
+    total = models.DecimalField('Total', max_digits=6, decimal_places=2, blank=True, null=True)
 
     @property
     def is_require_shipping_address(self):
-        for item in self.get_valid_items():
+        for item in self.cart_items.all():
             if item.product.family.shipping_cost:
                 return True
         return False
@@ -51,10 +54,9 @@ class Cart(models.Model):
         return reverse("Cart_detail", kwargs={"pk": self.pk})
 
     def apply_coupons(self):
-
         self.reset_cart_items()
-        cart_items = self.get_valid_items()
-
+        self.clear_non_valid_items()
+        cart_items = self.cart_items.all()
         for coupon in self.cart_coupons.all():
             try:
                 cp = coupon.coupon
@@ -66,9 +68,8 @@ class Cart(models.Model):
                 cumulative_discount = 0
                 for item in cart_items:
                     applicable_to_product = cp.is_applicable(item.product, applicable_products)
-                    applicable_to_slot = True
+                    applicable_to_slot = False
                     if item.slot:
-                        applicable_to_slot = False
                         if item.slot.start.weekday() in cp.dow_as_integerlist:
                             applicable_to_slot = True
                     if applicable_to_product and applicable_to_slot:
@@ -77,23 +78,23 @@ class Cart(models.Model):
                             applied = True
                             if not(cp.is_apply_to_basket) or not(cp.is_percent) and cumulative_discount >= cp.amount:
                                 break
-                self.print_items_prices()
-            except Exception:
-                pass
+            except Exception as e:
+                print(e)
 
-    @transaction.atomic
     def reset_cart_items(self):
         self.reset_cart_items_price()
         self.reset_cart_items_coupons()
         self.reset_cart_coupons()
 
     def reset_cart_items_price(self):
-        for item in self.get_valid_items():
-            item.price = item.base_price
+        self.clear_non_valid_items()
+        for item in self.cart_items.all():
+            item.set_price()
             item.save()
 
     def reset_cart_items_coupons(self):
-        for item in self.get_valid_items():
+        self.clear_non_valid_items()
+        for item in self.cart_items.all():
             item.cart_coupons.clear()
             item.save()
     
@@ -105,20 +106,15 @@ class Cart(models.Model):
             except Exception:
                 coupon.delete()
 
-
-    def get_valid_items(self):
+    def clear_non_valid_items(self):
         items = self.cart_items.all()
         for item in items:
             if not item.is_in_cart:
                 item.delete()
-        return items 
-
-    # def get_valid_items_queryset(self):
-    #     pks = [item.pk for item in self.get_valid_items()]
-    #     return CartItem.objects.filter(pk__in=pks)
 
     def get_appointment_items(self):
-        valid_items = self.get_valid_items()
+        self.clear_non_valid_items()
+        valid_items = self.cart_items.all()
         appointment_items = []
         for item in valid_items:
             if item.slot:
@@ -126,7 +122,8 @@ class Cart(models.Model):
         return appointment_items
 
     def get_coupon_items(self):
-        valid_items = self.get_valid_items()
+        self.clear_non_valid_items()
+        valid_items = self.cart_items.all()
         coupon_items = []
         for item in valid_items:
             if item.product.family.is_coupon:
@@ -135,13 +132,13 @@ class Cart(models.Model):
 
     def print_items_prices(self):
         print('---items---')
-        for item in self.get_valid_items():
+        for item in self.cart_items.all():
             print(f'{item}: price {item.price} base {item.base_price}')
 
     def get_valid_payment_methods(self):
         methods_prev = PaymentMethod.objects.filter(method='coupon')
-        if self.total_after_coupons() > 0:
-            items = self.get_valid_items()
+        if self.total > 0:
+            items = self.cart_items.all()
             methods_prev = PaymentMethod.objects.all()
             methods_curr = PaymentMethod.objects.all()
             for item in items:
@@ -151,7 +148,7 @@ class Cart(models.Model):
 
     def number_of_valid_items(self):
         """return the number of valid items, useful in the templates"""
-        itemsList = list(self.get_valid_items())
+        itemsList = list(self.cart_items.all())
         return len(itemsList)
 
     def update_valid_items(self):
@@ -162,32 +159,33 @@ class Cart(models.Model):
         self.items_before_checkout = self.number_of_valid_items()
         self.save()
 
-    def total(self):
+    def set_subtotal(self):
         """The sum of the price of the valid items in the cart"""
         total = 0
-        items = self.get_valid_items()
-        for item in items:
+        for item in self.cart_items.all():
             total += item.base_price
-        return total
+        self.subtotal = total
+        self.save()
     
-    def total_after_coupons(self):
+    def set_total(self):
         """The sum of the price of the valid items in the cart
         after the discount of the coupons in the cart is applied"""
         total = 0
-        items = self.get_valid_items()
-        for item in items:
+        for item in self.cart_items.all():
             total += item.price
-        return total
+        self.total = total
+        self.save()
 
     def discount(self):
         """
         Subtraction between total and total_after_coupons
         """
-        return self.total() - self.total_after_coupons()
+        return self.total - self.subtotal
 
     def extend_items_expiration(self):
         """calls the extend expiration method for each of the cart items"""
-        for item in self.get_valid_items():
+        self.clear_non_valid_items()
+        for item in self.cart_items.all():
             item.extend_expiration()
 
     def use_coupons(self):
@@ -202,8 +200,7 @@ class Cart(models.Model):
         sets the status of all the items of the cart to 1 which means that
         each item has ben purchased
         """
-        for item in self.get_valid_items():
-            print('a valid item')
+        for item in self.cart_items.all():
             item.set_approved()
             item.save()
 
@@ -242,7 +239,6 @@ class Cart(models.Model):
         """
         sets the status of the cart to 1 which means that the order should be confirmed
         """
-        print('approving cart')
         self.approve_items()
         self.use_coupons()
         self.status = 1
@@ -250,9 +246,7 @@ class Cart(models.Model):
 
     def process_purchase(self):
         try:
-            print('---------------approve cart')
             self.approve_cart()
-            print('invoice')
             self.invoice.commit_order()
             self.create_cart_coupons()
             return True
@@ -320,7 +314,6 @@ class Cart(models.Model):
             email.attach(_('gift_voucher_') + coupon.coupon.code + '.pdf', pdf)
 
     def remove_item(self, id):
-        print('remove item called')
         items = self.cart_items.all()
         item = items.get(pk=id)
         item.delete()
@@ -348,7 +341,7 @@ class CartItem(models.Model):
     """
     Model that acts as a bridge between products and the cart
     """
-    slot = models.ForeignKey("booking.Slot", related_name="booking", verbose_name=_(
+    slot = models.ForeignKey("booking.Slot", related_name="cart_items", verbose_name=_(
         "slot"), on_delete=models.SET_NULL, null=True, blank=True)
     coupon = models.ForeignKey("booking.Coupon", related_name="booking",
                                on_delete=models.SET_NULL, null=True, blank=True)
@@ -358,7 +351,7 @@ class CartItem(models.Model):
         "cart_items"), on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(_("created"), auto_now_add=True)
     price = models.DecimalField(
-        _("Price"), max_digits=8, decimal_places=2, default=0)
+        _("Price"), max_digits=8, decimal_places=2, default=2)
     cart_coupons = models.ManyToManyField("booking.CartCoupon", verbose_name=_(
         "coupons"), related_name='cart_items', blank=True)
     marked_shipped = models.DateTimeField(
@@ -374,7 +367,15 @@ class CartItem(models.Model):
 
     @property
     def base_price(self):
-        return self.product.price
+        discount = 0
+        if self.slot:
+            discount = self.slot.incentive_discount()
+        return self.product.price - Decimal(discount)
+
+    @property
+    def incentive_discount(self):
+        return
+
 
     @property
     def is_slot_booked(self):
@@ -384,14 +385,9 @@ class CartItem(models.Model):
         """
         if self.slot:
             this_moment = timezone.now()
-            print('now', this_moment)
-            print('expiry', self.slot_expiry)
-
             if self.status > 0:
-                print('status > 0')
                 return True
-            elif self.status == 0 and this_moment < self.slot_expiry:
-                print('time?', this_moment < self.slot_expiry)
+            elif self.status == 0 and this_moment < self.item_expiry():
                 return True
             else:
                 return False
@@ -399,7 +395,36 @@ class CartItem(models.Model):
             return False
 
     @property
-    def slot_expiry(self):
+    def is_in_cart(self):
+        """this means that the item is part of it's related cart, the conditions are if 
+        this item is not expired
+        """
+        print(self.status)
+        if self.slot and self.status == 1:
+            return True
+        elif self.slot and self.status == 0 and self.item_expiry_seconds() < 1:
+            return False
+        elif self.status < 0:
+            return False
+        else:
+            return True
+
+    def set_price(self):
+        self.price = Decimal(self.base_price)
+
+    def save(self, request=None, *args, **kwargs):
+        """
+        Custom save method, sets the price of the CartItem to be the same as the product's
+        This price is the one to be modified by any discounts applied.
+        """
+
+        if self.pk is None:
+            self.set_price()
+
+        super(CartItem, self).save(*args, **kwargs)
+
+
+    def item_expiry(self):
         """
         returns the datetime of expiration for this item, only affects the item if it has 
         a related slot and status is 0 
@@ -409,23 +434,10 @@ class CartItem(models.Model):
         else:
             False
 
-    @property
-    def is_in_cart(self):
-        """this means that the item is part of it's related cart, the conditions are if 
-        this item is not expired
-        """
-        print(self.slot_expiry_seconds())
-        if self.slot and self.status == 0 and self.slot_expiry_seconds() < 1:
-            return False
-        elif self.status < 0:
-            return False
-        else:
-            return True
-
-    def slot_expiry_seconds(self):
+    def item_expiry_seconds(self):
         if self.slot and self.status == 0:
             this_moment = timezone.now()
-            expiry = self.slot_expiry
+            expiry = self.item_expiry()
             # this condition allows some extra time for orders carried out via paypal IPN
             if self.cart.status > 0:
                 return ((expiry + timedelta(minutes=40)) - this_moment).total_seconds()
@@ -434,17 +446,6 @@ class CartItem(models.Model):
         else:
             return 0
 
-    def save(self, request=None, *args, **kwargs):
-        """
-        Custom save method, sets the price of the CartItem to be the same as the product's
-        This price is the one to be modified by any discounts applied.
-        """
-
-        if self.pk is None:
-            self.price == self.product.price
-
-        super(CartItem, self).save(*args, **kwargs)
-
     def extend_expiration(self):
         self.created = timezone.now() 
         self.save()
@@ -452,7 +453,7 @@ class CartItem(models.Model):
     def set_approved(self):
         self.status = 1
         self.save()
-
+    
     def has_individual_use_coupon(self):
         if self.cart_coupons.filter(coupon__is_individual_use=True):
             return True
@@ -492,7 +493,6 @@ class CartCoupon(models.Model):
     def save(self, request=None, *args, **kwargs):
 
         """Custom save method checks if the coupon is not already in the cart"""
-        print(self.coupon.pk)
         if request:
             if self.cart.cart_coupons.filter(coupon__pk=self.coupon.pk).exists():
                 messages.add_message(
@@ -740,7 +740,6 @@ class Coupon(models.Model):
                 price = 0
         if used:
             item.cart_coupons.add(cart_coupon)
-            cart_coupon.discout = cumulative_discount
             item.price = price
             item.save()
             cumulative_discount += (price_before - price)
@@ -774,7 +773,7 @@ class Invoice(models.Model):
     
     def amount_to_pay(self):
         try:
-            return self.cart.total_after_coupons()
+            return self.cart.total
         except Exception:
             return 0
 
@@ -790,7 +789,6 @@ class Invoice(models.Model):
             appointments = self.cart.get_appointment_items()
             if appointments:
                 for item in appointments:
-                    print('date', item.slot.start.date(), date.today(),item.slot.start.date() < date.today() )
                     if item.slot.start.date() < date.today():
                         return True
         except:
@@ -933,6 +931,9 @@ class ProductFamily(models.Model):
     def __str__(self):
         return self.name
 
+    def from_price(self):
+        return self.products.all().order_by('price').first().price
+
     def get_absolute_url(self):
         return reverse("ProductFamily_detail", kwargs={"pk": self.pk})
 
@@ -1036,7 +1037,6 @@ class Schedule(models.Model):
             if schedule.end_time <= self.start_time:
                 pk_intersects.append(schedule.pk)
         
-        print (pk_intersects)
         for pk in pk_intersects:
             schedules = schedules.exclude(pk=pk)
 
@@ -1108,11 +1108,8 @@ class Schedule(models.Model):
             if i < len(slots) - 1:
                 slot_end = slot.start + timedelta(minutes=slot.duration + slot.interval)
                 next_slot = slots[i + 1]
-                print (f'{slot}={next_slot}', end='')
                 if slot.is_same_time(next_slot):
                     collision = True
-                    print ("collision", end='')
-                print ()
         return collision
     
     def delete_slots(self):
@@ -1136,7 +1133,7 @@ class Slot(models.Model):
     interval = models.PositiveSmallIntegerField(_("interval"), default=30)
     room = models.ForeignKey("booking.Room", verbose_name=_("room"), on_delete=models.CASCADE)
     schedule = models.ForeignKey("booking.Schedule", verbose_name=_("schedule"), related_name=("slots"), on_delete=models.SET_NULL, null=True)
-    protect = models.BooleanField(_("protect"), null=True)
+    protect = models.BooleanField("protect", null=True)
     product_family = models.ForeignKey("booking.ProductFamily", verbose_name=_("ProductFamily"), on_delete=models.CASCADE, null=True, blank=True)
     is_disabled = models.BooleanField(default=False)
     
@@ -1153,30 +1150,59 @@ class Slot(models.Model):
         
     @property
     def is_available(self):
-        if self.is_not_reserved and self.is_future_of_buffer and not self.is_disabled:
-            return True
-        else:
-            return False 
+        return not self.is_reserved() and not self.is_affected_by_buffer() and not self.is_disabled
     
-    @property
-    def is_not_reserved(self):
-        is_free = True
-        if self.booking.all().exists():
-            bookings = self.booking.all()            
-            for booking in bookings:
-                if is_free:
-                    is_free = not(booking.is_slot_booked)
-        return is_free
+    def is_reserved(self):
+        for item in self.cart_items.all():
+            if item.status > 0 or (item.status == 0 and item.item_expiry() <= timezone.now()):
+                return True
+        return False 
     
-    @property
+    
+    def is_affected_by_buffer(self):
+        return not self.is_future_of_buffer and not self.is_after_taken_slot
+
     def is_future_of_buffer(self):
         this_moment = make_aware(datetime.today()) 
-        buffer = this_moment + timedelta(hours=get_booking_settings().slot_buffer_time)
+        buffer = this_moment + timedelta(minutes=get_booking_settings().slot_buffer_time)
         if self.start > buffer:
             return True
         else:
             return False
+        
+    def is_adjacent_to_taken_slot(self):
+        slots = self.get_adjacent_slots()
+        for slot in slots:
+            if slot.is_reserved():
+                return True
+        return False
+
+    def is_parallel_to_taken_slot(self):
+        slots = self.get_parallel_slots()
+        for slot in slots:
+            if slot.is_reserved():
+                return True
+        return False
+
+    def get_adjacent_slots(self):
+        upper_bound = self.start + timedelta(minutes=20)
+        lower_bound = self.start - timedelta(minutes=100)
+        return Slot.objects.filter(start__lte=upper_bound, start__gte=lower_bound)
+
+    def get_parallel_slots(self):
+        upper_bound = self.start + timedelta(minutes=20)
+        lower_bound = self.start - timedelta(minutes=20)
+        return Slot.objects.filter(start__lte=upper_bound, start__gte=lower_bound)
     
+    def incentive_discount(self):
+        if self.is_parallel_to_taken_slot():
+            discount = get_booking_settings().incentive_discount_parallel_slots
+        elif self.is_adjacent_to_taken_slot():
+            discount = get_booking_settings().incentive_discount_adjacent_slots
+        else:
+            discount = 0
+        return discount
+
     def __str__(self):
         return self.room.__str__() + ' | ' + self.start.astimezone().strftime("%Y-%m-%d | %H:%M" ) + '(' + str(self.duration) + ')'
     
@@ -1199,10 +1225,12 @@ class Slot(models.Model):
             today_date = datetime(n.year, n.month, n.day, 0, 0, 0, 0)
             today_date = make_aware(today_date)
             # saves if slot is in the future
-            if self.start > today_date or self.booking.all() or self.protect:
+            if self.start > today_date or self.cart_items.all() or self.protect:
                 super(Slot, self).save(*args, **kwargs)
             else:
                 pass
+
+
 
     def is_same_time(self, other):
         """compares a Slot with other Slot, if there is supperpossision in the scheduled times then returns true"""

@@ -8,7 +8,7 @@
             <th>{% trans "Items" %}</th>
             <th>{% trans "Price" %}</th>
         </tr>
-        {% for item in cart.get_valid_items %}
+        {% for item in cart.cart_items.all %}
         <tr class="js-cart-item">
             <td>{{item.product}}</td> <td>€{{item.base_price}}</td>
         </tr>
@@ -27,7 +27,7 @@
         {% endif %}
         <tr class="email-row-last">
             <td><b>{% trans "Total:" %} </b></td>
-            <td><b>€{{cart.total_after_coupons}}</b></td>
+            <td><b>€{{cart.total}}</b></td>
         </tr>
     </tfoot>
 </table>
@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>{% trans "Order Total" %}:</td>
-            <td>€{{ cart.total_after_coupons }}</td>
+            <td>€{{ cart.cart_items.all }}</td>
         </tr>
         <tr class="email-border-top email-font-sm email-fontcolor-highlight email-text-center">
         {% if payment.method == 'cash' %}
@@ -55,7 +55,7 @@
         {% elif payment.method == 'transfer' %}
             <td colspan="2">
                 {% trans 'You have selected "Bank Transfer" as the payment method.' %}
-                {% blocktrans with transfer_amout=cart.total_after_coupons %}
+                {% blocktrans with transfer_amout=cart.total %}
                 Please transfer the amount of €{{transfer_amout}} to our bank account before your appointment.
                 {% endblocktrans %}
                 <br>

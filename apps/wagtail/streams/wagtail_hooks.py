@@ -132,3 +132,4 @@ register_image_format(Format('left', 'Left-aligned', 'richtext-image img-fluid',
 
 unregister_image_format('right')
 register_image_format(Format('right', 'Right-aligned', 'richtext-image img-fluid', 'width-500'))
+

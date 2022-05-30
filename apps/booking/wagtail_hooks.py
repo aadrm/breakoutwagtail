@@ -53,6 +53,7 @@ def urlconf_time():
     path('slots_calendar', views.slots_calendar, name='slots_calendar'),
     path('appointments_list', views.appointments, name='appointments_list'),
     path('orders_list', views.order_summary, name='orders_list'),
+    path('orders_list/<str:search>', views.order_summary, name='orders_list'),
     path('shipping', views.shipping, name='shipping'),
     path('coupon_generator', views.coupon_generator, name='coupon_generator'),
     path('payments', views.record_payment, name='payments'),

@@ -69,14 +69,14 @@ from .models import (
 )
 
 # overriden by routable page
-def booking_calendars(request):
-    cart = get_cart(request)
-    rooms = Room.objects.filter(is_active=True)
-    context = {
-        'cart': cart,
-        'rooms': rooms,
-    }
-    return render(request, 'booking/view_book.html', context)
+# def booking_calendars(request):
+#     cart = get_cart(request)
+#     rooms = Room.objects.filter(is_active=True)
+#     context = {
+#         'cart': cart,
+#         'rooms': rooms,
+#     }
+#     return render(request, 'booking/view_book.html', context)
 
 # overriden by routable page
 def coupons(request):
@@ -103,7 +103,9 @@ def coupons(request):
 def checkout(request):
 
     cart = get_cart(request)
+    cart.set_subtotal()
     cart.apply_coupons()
+    cart.set_total()
     invoice_form = InvoiceForm(cart=cart)
     remove_from_cart_form = RemoveFromCartForm()
     apply_coupon_form = ApplyCouponForm()
@@ -205,6 +207,14 @@ def add_product(request):
     else:
         return HttpResponseRedirect(reverse(''))
 
+
+def add_coupon_by_code(request, coupon_code):
+    cart = get_cart(request)
+    coupon = Coupon.objects.get(code=coupon_code)
+    cart_coupon = CartCoupon(coupon=coupon, cart=cart)
+    cart_coupon.save(request=request)
+    return HttpResponseRedirect(request.build_absolute_uri('/book/'))
+        
 def add_product_by_id(request, product_id):
     cart = get_cart(request)
     product = Product.objects.get(pk=product_id)
@@ -274,10 +284,23 @@ def ajax_day_available_slots(request):
     room = int(request.GET.get('room', ''))
     day_slots = date(year, month, day)
     slots = Slot.objects.filter(start__date=day_slots).order_by('start')
+    small_discount = get_booking_settings().incentive_discount_adjacent_slots
+    big_discount = get_booking_settings().incentive_discount_parallel_slots
     if room:
         slots = slots.filter(room=room)
+    slots_list = []
+    for slot in slots:
+        slots_dict = {}
+        discount = slot.incentive_discount()
+        slots_dict['pk'] = slot.pk
+        slots_dict['is_available'] = slot.is_available
+        slots_dict['start'] = slot.start
+        slots_dict['end'] = slot.session_end
+        slots_dict['discount'] = discount
+        slots_dict['from_price'] = slot.product_family.from_price() - discount 
+        slots_list.append(slots_dict)
     context = {
-        'slots': slots,
+        'slots': slots_list,
     }
     # return JsonResponse({'data': 'test'})
     if room:
@@ -405,10 +428,12 @@ def ajax_refresh_coupon(request):
             except:
                 pass
 
+    cart.set_subtotal()
+    cart.apply_coupons()
+    cart.set_total()
     context = {
         'cart': cart,
     }
-    cart.apply_coupons()
     return render(request, 'booking/ajax_coupon-list.html', context)
 
 @csrf_exempt
@@ -468,6 +493,7 @@ def ajax_checkout_buttons(request):
     if request.method == 'POST':
         print('is_post')
         cart = get_cart(request)
+        cart.clear_non_valid_items()
         cart.extend_items_expiration()
         data = json.loads(request.body)
         email = data.get('email')
@@ -480,7 +506,7 @@ def ajax_checkout_buttons(request):
         cart.apply_coupons
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
-            'amount': cart.total_after_coupons,
+            'amount': cart.total,
             'item_number': cart.pk,
             'item_name': 'Breakout Escape Room',
             'currency_code': 'EUR',
@@ -488,7 +514,7 @@ def ajax_checkout_buttons(request):
             'return': request.build_absolute_uri(reverse('booking:paypal_return', kwargs={'cart': cart.pk, 'email': email},)),
             'cancel': request.build_absolute_uri(reverse('booking:checkout')),
             'no_shipping': shipping,
-            'items': [item.pk for item in cart.get_valid_items()]
+            'items': [item.pk for item in cart.cart_items.all()]
         }
         request.session['paypal_items'] = paypal_dict['items']
 
@@ -546,10 +572,13 @@ def coupon_generator(request):
     return render(request, 'booking/admin/view-coupon_generator.html', context)
 
 @staff_member_required
-def order_summary(request):
+def order_summary(request, search=None):
     orders = Cart.objects.filter(status=1).order_by('-invoice__order_date')
     start_date_filter = date.today() - timedelta(28)
     end_date_filter = date.today()
+    start_date=None
+    end_date=None
+    payment=None
     if request.method == 'POST':
         form = FilterOrdersForm(request.POST)
         if form.is_valid():
@@ -557,34 +586,36 @@ def order_summary(request):
             end_date = form.cleaned_data['end_date']
             search = form.cleaned_data['search']
             payment = form.cleaned_data['payment']
-
-            if start_date or end_date:
-                start_date_filter = start_date
-                end_date_filter = end_date
-            if payment:
-                orders = orders.filter(invoice__payment=payment)
-            if search:
-                orders = orders.filter(
-                    Q(invoice__full_name__icontains=search)
-                    | Q(invoice__email__icontains=search)
-                    | Q(invoice__order_number__icontains=search)
-                )
-
     else:
         form = FilterOrdersForm
-    if start_date_filter:
+
+    if start_date or end_date:
+        start_date_filter = start_date
+        end_date_filter = end_date
+    if payment:
+        orders = orders.filter(invoice__payment=payment)
+    if search:
+        orders = orders.filter(
+            Q(invoice__full_name__icontains=search)
+            | Q(invoice__email__icontains=search)
+            | Q(invoice__order_number__icontains=search)
+        )
+
+
+
+    if start_date_filter and not search:
         orders = orders.filter(invoice__order_date__gte=start_date_filter)
-    if end_date_filter:
+    if end_date_filter and not search:
         end_date_filter = end_date_filter + timedelta(days=1)
         orders = orders.filter(invoice__order_date__lt=end_date_filter)
-
+    orders = orders[:150]
     order_count = 0
     order_total_price = 0 
     for order in orders:
         order_count += 1
-        order_total_price += order.total_after_coupons()
+        order_total_price += order.cart_items.all()()
     
-    order_average = order_total_price / order_count
+    order_average = order_total_price / order_count if order_count else 0
         
 
     context = {
@@ -594,6 +625,7 @@ def order_summary(request):
         'order_total_price': order_total_price,
         'order_average': order_average,
     }
+    print('where')
     return render(request, 'booking/admin/view-order_summary.html', context)
 
 @staff_member_required

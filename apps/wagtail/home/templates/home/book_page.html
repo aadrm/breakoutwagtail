@@ -8,23 +8,30 @@
 {{ block.super }}
 
 <main>
-        {% for block in page.content %}
-            {% include_block block %}
+  {% if messages %}
+    <div class="js-coupon-messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags }}">{{ message }} <span class="message__close-message" onclick="removeMessage(this)"></span> </div>
         {% endfor %}
-    <section class="bg-light">
-        <div class="container">
-            <div class="row">
-                {% for room in rooms %}
-                <div class="col-lg-6 my-4">
-                    <div id="{{room.pk}}" class="calendar-frame overflow-hidden js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
-                </div>
-                {% endfor %}
-            </div>
+    </div>
+  {% endif %}
+  {% for block in page.content %}
+      {% include_block block %}
+  {% endfor %}
+  <section class="bg-light">
+    <div class="container">
+      <div class="row">
+        {% for room in rooms %}
+        <div class="col-lg-6 my-4">
+          <div id="{{room.pk}}" class="calendar-frame overflow-hidden js-calendar-window" data-room="{{ room.pk }}" data-url="{% url 'booking:ajax_calendar' %}"></div>
         </div>
-    </section>
-    {% for block in page.content_after %}
-        {% include_block block %}
-    {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% for block in page.content_after %}
+      {% include_block block %}
+  {% endfor %}
 <main>
 {% endblock content %}
 {% block extra_js %}

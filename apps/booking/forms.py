@@ -9,6 +9,15 @@ from .models import Slot, Product, Invoice, Coupon, Room, Payment, PaymentMethod
 from .utils import getProductsFromProductFamily
 from paypal.standard.forms import PayPalPaymentsForm
 
+class ProductModelChoiceField(forms.ModelChoiceField):
+
+    def __init__(self, *args, **kwargs):
+        self.discount = kwargs.pop('discount', 0)
+        super().__init__(*args, **kwargs)
+
+
+    def label_from_instance(self, product):
+        return f'{product.players} {_("players")} - {product.price - self.discount}€'
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -21,9 +30,10 @@ class SlotBookingForm(forms.Form):
 
         super(SlotBookingForm, self).__init__(*args, **kwargs)
 
-        self.fields['product'] = forms.ModelChoiceField(
+        self.fields['product'] = ProductModelChoiceField(
             label=_('Number of players'),
             queryset=Product.objects.filter(family=self.slot.product_family, is_selectable=True),
+            discount=self.slot.incentive_discount(),
         )
         self.fields['slot_id'] = forms.IntegerField(required=False, initial=self.slot_id) 
 

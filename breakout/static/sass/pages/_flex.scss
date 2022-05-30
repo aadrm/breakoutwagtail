@@ -53,29 +53,3 @@
   
   /* blog post*/
   
-.richtext {
-    h1, h2, h3, h4, h5, h6 {
-    ol, ul {
-      padding: 0;
-    }
-    li {
-      margin: 12px 0;
-      left: 24px;
-      position: relative;
-    }
-    ul {
-      li {
-        &::before {
-          content: '✓';
-          font-size: 1.5em;
-          display: block;
-          left: -24px;
-          top: calc(50%);
-          transform: translateY(-50%);
-          color: $brand-primary;
-          position: absolute;
-        }
-      }
-    }
-  }
-}

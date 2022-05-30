@@ -3,7 +3,7 @@
 <h4 class="">{% trans "Summary" %}</h4>
 <table class="table">
 <tbody>
-{% for item in cart.get_valid_items %}
+{% for item in cart.cart_items.all %}
 <tr class="js-cart-item">
     <td>{{item.product}}</td>
     <td>€{{item.price}}</td>
@@ -11,7 +11,7 @@
 {% endfor %}
 </tbody>
 <tfoot>
-    <td><b>{% trans "Total:" %} €{{cart.total_after_coupons}}</b></td>
+    <td><b>{% trans "Total:" %} €{{cart.total}}</b></td>
 </tfoot>
 </table>
 </div>

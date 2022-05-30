@@ -19,6 +19,7 @@ urlpatterns = [
 
     path('add_product/', views.add_product, name='add_product'),
     path('add_product/<int:product_id>', views.add_product_by_id, name='add_product_by_id'),
+    path('add_coupon/<str:coupon_code>', views.add_coupon_by_code, name='add_coupon_by_code'),
 
     path('paypal_return/<str:cart>/<str:email>', views.paypal_return, name='paypal_return'),
     path('day_availability/', views.ajax_day_available_slots, name='ajax_day_availability'),

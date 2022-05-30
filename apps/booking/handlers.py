@@ -24,7 +24,7 @@ def show_me_the_money(sender, **kwargs):
         # received, `custom` etc. are all what you expect or what
         # is allowed.
         cart = Cart.objects.get(pk=ipn_obj.item_number)
-        price = cart.total_after_coupons()
+        price = cart.total
 
         print(ipn_obj.mc_gross, price)
         if ipn_obj.mc_gross == price and ipn_obj.mc_currency == 'EUR':

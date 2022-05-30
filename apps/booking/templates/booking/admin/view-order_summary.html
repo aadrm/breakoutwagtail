@@ -81,28 +81,25 @@
         <td class="p-2">{{order.invoice.payment}}</td>
         <td class="p-2">{{order.invoice.order_date}}</td>
         <td class="p-2">{{order.total}}</td>
-        <td class="p-2">{{order.total_after_coupons}}</td>
+        <td class="p-2">{{order.total}}</td>
         <td class="p-2">
-            {% comment %} <div class="hover-info"> {% endcomment %}
-                {% comment %} products {% endcomment %}
-                <ul class="">
-                    {% for item in order.get_valid_items %}
-                    <li>
-                        <button
-                            class="js-button-change-product button button-secondary button-small"
-                            data-order={{order.invoice.order_number}}
-                            data-customer={{order.invoice.full_name}}
-                            data-current="{{ item.product.pk }}"
-                            data-cartitem="{{item.pk}}"
-                            data-posturl="{% url 'admin:change_product_list' %}"
-                            data-frompage="orders_list"
-                        >
-                        {{item.product.family}}-{{item.product.players}}
-                        </button>
-                    </li>
-                    {% endfor %}
-                </ul>
-            {% comment %} </div> {% endcomment %}
+          <ul class="">
+              {% for item in order.cart_items.all %}
+              <li>
+                  <button
+                      class="js-button-change-product button button-secondary button-small"
+                      data-order={{order.invoice.order_number}}
+                      data-customer={{order.invoice.full_name}}
+                      data-current="{{ item.product.pk }}"
+                      data-cartitem="{{item.pk}}"
+                      data-posturl="{% url 'admin:change_product_list' %}"
+                      data-frompage="orders_list"
+                  >
+                  {{item.product.family}}-{{item.product.players}}
+                  </button>
+              </li>
+              {% endfor %}
+          </ul>
         </td>
         <td class="p-2">
             {% if order.get_appointment_items %}
@@ -120,7 +117,6 @@
                         >
                             {{item.slot}}
                         </button>
-                    {% comment %} </li> {% endcomment %}
                 {% endfor %}
                 </ul>
             </div>
@@ -133,7 +129,7 @@
                 <ul class="">
                 {% for item in order.cart_coupons.all %}
                     <li>
-                    {{item.coupon.code}}|{{item.discount}}
+                    {{item.coupon.code}}|{{item.discount}}|{{ item.coupon.name|slice:16 }}
                     </li>
                 {% endfor %}
                 </ul>

@@ -61,7 +61,8 @@
                 Change
             </button> 
             <div></div>
-            <a href="{{ appointment.get_admin_url }}" target="_blank" class="button button-secondary button-small">
+            <a href="{% url 'orders_list' appointment.cart.invoice.order_number %}" target="_blank" class="button button-secondary button-small">See Order</a>
+            <a href="{{ appointment.get_admin_url }}" target="_blank">
                 Advanced 
             </a>
         </td>

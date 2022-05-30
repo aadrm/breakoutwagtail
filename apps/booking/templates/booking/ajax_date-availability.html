@@ -12,13 +12,18 @@
                 <button 
                     data-slot="{{slot.pk}}"
                     data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                    class="js-available-slot w-100 btn btn-primary rounded-0 my-1 p-2 text-light fs-5"
+                    class="js-available-slot w-100 btn btn-primary rounded-0 my-1 p-2 text-light fs-4"
                 >
-                {{ slot.start|date:"H:i" }} - {{ slot.session_end|date:"H:i" }}
+                {{ slot.start|date:"H:i" }} - {{ slot.end|date:"H:i" }} |
+                <span class="fs-6 {% if slot.discount %}text-bg-warning {% else %}text-bg-light {% endif %} rounded-pill p-1">
+                  {% trans "from" %}
+                  {{ slot.from_price|floatformat:0 }}
+                  €
+                </span>
                 </button> 
                 {% else %}
                 <div class="w-100 btn btn-secondary disabled rounded-0 my-1 p-2 fs-5">
-                {{ slot.start|date:"H:i" }} - {{ slot.session_end|date:"H:i" }}
+                {{ slot.start|date:"H:i" }} - {{ slot.end|date:"H:i" }}
                 </div>
                 {% endif %}
                 {% endfor %}

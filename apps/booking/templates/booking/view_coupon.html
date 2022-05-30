@@ -13,7 +13,7 @@
 {{ block.super }}
 <main class="coupons-main">
 
-    <section class="c-section-light">
+    <section class="py-5">
 
         <div class="container"> 
         {% for block in page.content %}
@@ -24,7 +24,7 @@
         {% include 'booking/section_coupons.html' %}
     </section>
 
-    <section id="pdf-templates" class="c-section-light">
+    <section id="pdf-templates" class="py-5">
             {% for block in page.content_after %}
                 {% include_block block %}
             {% endfor %}
