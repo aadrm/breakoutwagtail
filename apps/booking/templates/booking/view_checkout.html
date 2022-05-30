@@ -68,20 +68,24 @@
 
 {% else %}
 
-<section class="">
+<section class="my-5">
     <div class="container">
         <div class="row">
             <div class="col">
                 <h3 class="">{% trans "Your shopping cart is empty!" %}</h3>
                 <br>
-                <p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} 
-                    <a class="btn btn-outline-primary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Booking Calendar" %}</a> 
-                </p>
-                <br>
-                <br>
-                <p>{% trans "Or if you wish to buy a special gift for someone visit our" %} 
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <p>{% trans "If you wish to book a game, have a look at our available sessions in our" %} {% trans "Booking Calendar" %} </p>
+                    <a class="btn btn-outline-primary" href="{% routablepageurl booknow_page "booknow_page_route"%}">{% trans "Book Now" %}</a> 
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-body">
+                    <p>{% trans "Or if you wish to buy a special gift for someone visit our" %}</p>
                     <a class="btn btn-outline-primary" href="{% routablepageurl coupons_page "coupons_page_route"%}">{% trans "Coupons Shop" %}</a>
-                </p>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
