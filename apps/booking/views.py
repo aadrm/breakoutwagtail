@@ -671,7 +671,7 @@ def appointments(request):
 
 @staff_member_required
 def shipping(request):
-    if request.method == "POST":
+    if request.method == "POST"
         if 'shipped' in request.POST:
             item_id = request.POST.get('shipped')
             item = CartItem.objects.get(pk=item_id)
@@ -707,6 +707,7 @@ def change_slot_list(request):
         frompage = data.get('frompage')
         from_date = date.today()
         items = Slot.objects.filter(start__gte=from_date)
+        items = [x for x in items if x.is_available_to_staff]
         items = items.order_by('start')
         context = {
             'current': current,

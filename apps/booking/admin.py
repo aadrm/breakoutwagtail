@@ -13,14 +13,17 @@ from .models import (Cart, CartCoupon, CartItem, Coupon, Invoice, Payment,
 
 class TabularInlineCartItems(admin.TabularInline):
     model = CartItem
+    exclude = ['coupon', 'cart_coupons', 'marked_shipped']
+    extra = 0
 
 class TabularInlineCartCoupons(admin.TabularInline):
     model = CartCoupon
+    extra = 0
     
 # Register your models here.
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    pass
+    exclude = ['slot', 'cart_coupons',]
 
 @admin.register(CartCoupon)
 class CartCouponAdmin(admin.ModelAdmin):

@@ -1153,6 +1153,10 @@ class Slot(models.Model):
     @property
     def is_available(self):
         return not self.is_reserved() and not self.is_affected_by_buffer() and not self.is_disabled
+
+    @property
+    def is_available_to_staff(self):
+        return not self.is_reserved()
     
     def is_reserved(self):
         for item in self.cart_items.all():
@@ -1165,11 +1169,8 @@ class Slot(models.Model):
         return not self.is_future_of_buffer() and not self.is_adjacent_after_to_taken_slot()
 
     def is_future_of_buffer(self):
-        print('checking buffer')
         this_moment = timezone.now()
-        print('now', this_moment)
         buffer = this_moment + timedelta(minutes=get_booking_settings().slot_buffer_time)
-        print('buffer', buffer)
         if self.start > buffer:
             return True
         else:
@@ -1213,7 +1214,7 @@ class Slot(models.Model):
         return discount
 
     def __str__(self):
-        return self.room.__str__() + ' | ' + self.start.astimezone().strftime("%Y-%m-%d | %H:%M" ) + '(' + str(self.duration) + ')'
+        return self.start.astimezone().strftime("%Y-%m-%d | %H:%M" )
     
     def save(self, *args, **kwargs):
         # booked_slots = Slot.objects.filter(booking__isnull=False)
