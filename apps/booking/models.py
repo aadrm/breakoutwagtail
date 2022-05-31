@@ -1162,7 +1162,7 @@ class Slot(models.Model):
     
     
     def is_affected_by_buffer(self):
-        return not self.is_future_of_buffer() and not self.is_adjacent_to_taken_slot()
+        return not self.is_future_of_buffer() and not self.is_adjacent_after_to_taken_slot()
 
     def is_future_of_buffer(self):
         print('checking buffer')
@@ -1175,30 +1175,34 @@ class Slot(models.Model):
         else:
             return False
         
+    def is_adjacent_after_to_taken_slot(self):
+        slots = self.get_before_after_minutes_slots(20, 110)
+        for slot in slots:
+            if slot.is_reserved():
+                return True
+        return False
+        
     def is_adjacent_to_taken_slot(self):
-        slots = self.get_adjacent_slots()
+        slots = self.get_before_after_minutes_slots(110, 110)
         for slot in slots:
             if slot.is_reserved():
                 return True
         return False
 
     def is_parallel_to_taken_slot(self):
-        slots = self.get_parallel_slots()
+        slots = self.get_before_after_minutes_slots(20, 20)
         for slot in slots:
             if slot.is_reserved():
                 return True
         return False
 
-    def get_adjacent_slots(self):
-        upper_bound = self.start + timedelta(minutes=20)
-        lower_bound = self.start - timedelta(minutes=110)
+    def get_before_after_minutes_slots(self, before, after):
+        """ Uses the start of sessions as reference
+        """
+        upper_bound = self.start + timedelta(minutes=before)
+        lower_bound = self.start - timedelta(minutes=after)
         return Slot.objects.filter(start__lte=upper_bound, start__gte=lower_bound)
 
-    def get_parallel_slots(self):
-        upper_bound = self.start + timedelta(minutes=20)
-        lower_bound = self.start - timedelta(minutes=20)
-        return Slot.objects.filter(start__lte=upper_bound, start__gte=lower_bound)
-    
     def incentive_discount(self):
         if self.is_parallel_to_taken_slot():
             discount = get_booking_settings().incentive_discount_parallel_slots
