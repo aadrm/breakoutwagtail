@@ -36,7 +36,7 @@ class Cart(models.Model):
     status = models.SmallIntegerField(_("status"), default=0)
     items_before_checkout = models.SmallIntegerField(_("items before purchase"), blank=True, null=True)
     invoice = models.OneToOneField("booking.Invoice", verbose_name=_("Invoice"), on_delete=models.PROTECT, blank=True, null=True)
-    timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
+    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     subtotal = models.DecimalField('Subtotal', max_digits=6, decimal_places=2, default=0)
     total = models.DecimalField('Total', max_digits=6, decimal_places=2, default=0)
 
@@ -58,7 +58,7 @@ class Cart(models.Model):
         self.reset_cart_items()
         self.clear_non_valid_items()
         cart_items = self.cart_items.all()
-        for coupon in self.cart_coupons.all():
+        for coupon in cart_items:
             try:
                 cp = coupon.coupon
                 applicable_products = cp.products_applicable_queryset()
