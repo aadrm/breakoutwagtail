@@ -284,18 +284,20 @@ def ajax_day_available_slots(request):
     room = int(request.GET.get('room', ''))
     day_slots = date(year, month, day)
     slots = Slot.objects.filter(start__date=day_slots).order_by('start')
-    small_discount = get_booking_settings().incentive_discount_adjacent_slots
-    big_discount = get_booking_settings().incentive_discount_parallel_slots
     if room:
         slots = slots.filter(room=room)
     slots_list = []
     for slot in slots:
         slots_dict = {}
-        discount = slot.incentive_discount()
         slots_dict['pk'] = slot.pk
+        print('checking is available----')
         slots_dict['is_available'] = slot.is_available
+        print('end --------checking is available----')
+        slots_dict['is_editable'] = slot.is_available_to_staff
+        slots_dict['is_disabled'] = slot.is_disabled
         slots_dict['start'] = slot.start
         slots_dict['end'] = slot.session_end
+        discount = slot.incentive_discount()
         slots_dict['discount'] = discount
         slots_dict['from_price'] = slot.product_family.from_price() - discount 
         slots_list.append(slots_dict)

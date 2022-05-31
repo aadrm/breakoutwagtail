@@ -23,7 +23,7 @@ class TabularInlineCartCoupons(admin.TabularInline):
 # Register your models here.
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
-    exclude = ['slot', 'cart_coupons',]
+    ...
 
 @admin.register(CartCoupon)
 class CartCouponAdmin(admin.ModelAdmin):

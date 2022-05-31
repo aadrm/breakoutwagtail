@@ -1160,7 +1160,7 @@ class Slot(models.Model):
     
     def is_reserved(self):
         for item in self.cart_items.all():
-            if item.status > 0 or (item.status == 0 and item.item_expiry() <= timezone.now()):
+            if item.status > 0 or (item.status == 0 and item.item_expiry() >= timezone.now()):
                 return True
         return False 
     
