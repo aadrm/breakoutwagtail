@@ -120,21 +120,23 @@ msgid ""
 "The coupon with the code \"%(code)s\" is already being applied to your "
 "purchase."
 msgstr ""
+"Das Gutschein \"%(code)s\" wird bereits "
+"angewendet."
 
 #: apps/booking/models.py:509
 #, python-format
 msgid "The coupon \"%(code)s\" is expired"
-msgstr ""
+msgstr "Das Gutchei \"%(code)s\" ist abgelaufen"
 
 #: apps/booking/models.py:517
 #, python-format
 msgid "The \"%(code)s\" has exceeded its usage limit"
-msgstr ""
+msgstr "Gutschein \"%(code)s\" hat sein Nutzungslimit überschritten."
 
 #: apps/booking/models.py:524
 #, python-format
 msgid "Coupon \"%(code)s\" successfully added to your cart"
-msgstr ""
+msgstr "Gutschein \"%(code)s\" erfolgreich in den Warenkorb gelegt" 
 
 #: apps/booking/models.py:572
 msgid "reference"
