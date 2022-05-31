@@ -613,7 +613,7 @@ def order_summary(request, search=None):
     order_total_price = 0 
     for order in orders:
         order_count += 1
-        order_total_price += order.cart_items.all()()
+        order_total_price += order.cart_items.all()
     
     order_average = order_total_price / order_count if order_count else 0
         
