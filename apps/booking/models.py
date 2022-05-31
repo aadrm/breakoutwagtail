@@ -1162,11 +1162,14 @@ class Slot(models.Model):
     
     
     def is_affected_by_buffer(self):
-        return not self.is_future_of_buffer and not self.is_after_taken_slot
+        return not self.is_future_of_buffer() and not self.is_adjacent_to_taken_slot()
 
     def is_future_of_buffer(self):
-        this_moment = make_aware(datetime.today()) 
+        print('checking buffer')
+        this_moment = timezone.now()
+        print('now', this_moment)
         buffer = this_moment + timedelta(minutes=get_booking_settings().slot_buffer_time)
+        print('buffer', buffer)
         if self.start > buffer:
             return True
         else:
@@ -1188,7 +1191,7 @@ class Slot(models.Model):
 
     def get_adjacent_slots(self):
         upper_bound = self.start + timedelta(minutes=20)
-        lower_bound = self.start - timedelta(minutes=100)
+        lower_bound = self.start - timedelta(minutes=110)
         return Slot.objects.filter(start__lte=upper_bound, start__gte=lower_bound)
 
     def get_parallel_slots(self):
