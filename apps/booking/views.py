@@ -671,7 +671,7 @@ def appointments(request):
 
 @staff_member_required
 def shipping(request):
-    if request.method == "POST"
+    if request.method == "POST":
         if 'shipped' in request.POST:
             item_id = request.POST.get('shipped')
             item = CartItem.objects.get(pk=item_id)
