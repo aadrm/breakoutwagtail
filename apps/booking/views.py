@@ -707,8 +707,8 @@ def change_slot_list(request):
         frompage = data.get('frompage')
         from_date = date.today()
         items = Slot.objects.filter(start__gte=from_date)
-        items = [x for x in items if x.is_available_to_staff]
         items = items.order_by('start')
+        items = [x for x in items if x.is_available_to_staff]
         context = {
             'current': current,
             'cart_item': cart_item,
