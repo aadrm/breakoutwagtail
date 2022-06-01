@@ -10,7 +10,7 @@
         </tr>
         {% for item in cart.cart_items.all %}
         <tr class="js-cart-item">
-            <td>{{item.product}}</td> <td>€{{item.base_price}}</td>
+            <td>{{item.product}}</td> <td>€{{item.price}}</td>
         </tr>
         {% endfor %}
     </tbody>

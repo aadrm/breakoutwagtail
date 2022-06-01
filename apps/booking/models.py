@@ -134,7 +134,7 @@ class Cart(models.Model):
     def print_items_prices(self):
         print('---items---')
         for item in self.cart_items.all():
-            print(f'{item}: price {item.price} base {item.base_price}')
+            print(f'{item}: price {item.price} base {item.price}')
 
     def get_valid_payment_methods(self):
         methods_prev = PaymentMethod.objects.filter(method='coupon')
@@ -1157,6 +1157,11 @@ class Slot(models.Model):
     @property
     def is_available_to_staff(self):
         return not self.is_reserved()
+
+    def is_booked(self):
+        for item in self.cart_items.all():
+            if item.status > 0:
+                return True
     
     def is_reserved(self):
         for item in self.cart_items.all():
@@ -1179,21 +1184,21 @@ class Slot(models.Model):
     def is_adjacent_after_to_taken_slot(self):
         slots = self.get_before_after_minutes_slots(20, 110)
         for slot in slots:
-            if slot.is_reserved():
+            if slot.is_booked():
                 return True
         return False
         
     def is_adjacent_to_taken_slot(self):
         slots = self.get_before_after_minutes_slots(110, 110)
         for slot in slots:
-            if slot.is_reserved():
+            if slot.is_booked():
                 return True
         return False
 
     def is_parallel_to_taken_slot(self):
         slots = self.get_before_after_minutes_slots(20, 20)
         for slot in slots:
-            if slot.is_reserved():
+            if slot.is_booked():
                 return True
         return False
 

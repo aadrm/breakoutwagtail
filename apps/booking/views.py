@@ -144,8 +144,10 @@ def purchase(request):
             cart.invoice = invoice
             cart.save()
             if cart.process_purchase():
+                print('process_purchase', cart.total)
                 try:
                     send_cart_emails(cart)
+                    print('sent emails', cart.total)
                 except Exception as e:
                     traceback.print_exc()
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
@@ -156,6 +158,7 @@ def purchase(request):
             return HttpResponse('errors')
     else:
         return HttpResponseRedirect('booking:book')
+
 
 def order_completed(request, order):
     invoice = Invoice.objects.get(order_number=order)
@@ -695,7 +698,6 @@ def shipping(request):
         'shipped': shipped,
     }
     return render(request, 'booking/admin/view-shipping.html', context)
-
 
 @csrf_exempt
 @staff_member_required
