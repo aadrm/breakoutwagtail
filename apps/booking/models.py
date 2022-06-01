@@ -400,7 +400,6 @@ class CartItem(models.Model):
         """this means that the item is part of it's related cart, the conditions are if 
         this item is not expired
         """
-        print(self.status)
         if self.slot and self.status == 1:
             return True
         elif self.slot and self.status == 0 and self.item_expiry_seconds() < 1:
@@ -645,10 +644,7 @@ class Coupon(models.Model):
 
     def add_used_time(self):
         """Increases the counter that tracks how many times a coupon has been applied"""
-        print('called used time')
-        print(self.used_times)
         self.used_times += 1
-        print(self.used_times)
         self.save()
 
     def get_absolute_url(self):

@@ -4,15 +4,15 @@
         <div class="available-slots__data">
             <h2 class="text-center">{{slots.0.start|date}}</h2>
             {% for slot in slots %}
-            <div class="d-flex w-100">
+            <div class="d-flex w-100 mb-1">
                 {% if slot.is_editable %}
                     {% if slot.is_disabled %}
                     <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                        class="button btn-danger w-100"
+                        class="js-admin-lsot__extra-button btn btn-danger rounded-0 w-100"
                     >
-                    {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+                    {{ slot.slot.room }} | {{ slot.start|date:"H:i" }}
                     </button> 
                     <button 
                         data-slot="{{slot.pk}}"
@@ -26,9 +26,9 @@
                     <button 
                         data-slot="{{slot.pk}}"
                         data-bookingurl="{% url 'booking:ajax_slot_booking' %}"
-                        class="button btn-primary w-100"
+                        class="js-admin-slot__extra-button btn btn-success rounded-0 w-100"
                     >
-                    {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
+                    {{ slot.slot.room }} | {{ slot.start|date:"H:i" }}
                     </button> 
                     <button 
                         data-slot="{{slot.pk}}"
@@ -40,19 +40,23 @@
                     {% endif %}
 
                 {% else %}
-                        <div class="p-3 w-100 btn-light text-center">
-                        {{ slot.room }} - {{ slot.start|date:"H:i" }}-{{ slot.session_end|date:"H:i" }}
-                        {% for item in slot.booking.all %}
+                        <a class="w-100 btn btn-light rounded-0 text-center">
+                        {{ slot.slot.room }} | {{ slot.start|date:"H:i" }}
+                        {% for item in slot.slot.cart_items.all %}
                             {% if item.cart.status == 1 %}
                                 <br>
                             <small>
+                              <span class="text-capitalize">
                                 {{ item.cart.invoice.full_name }} | 
+                              </span>
+                              <span class="text-lowercase">
                                 {{ item.cart.invoice.email }} | 
                                 {{ item.cart.invoice.phone }}
+                              </span>
                             </small>
                             {% endif %}
                         {% endfor %}
-                        </div>
+                        </a>
                 {% endif %}
 
             </div>

@@ -292,10 +292,9 @@ def ajax_day_available_slots(request):
     slots_list = []
     for slot in slots:
         slots_dict = {}
+        slots_dict['slot'] = slot
         slots_dict['pk'] = slot.pk
-        print('checking is available----')
         slots_dict['is_available'] = slot.is_available
-        print('end --------checking is available----')
         slots_dict['is_editable'] = slot.is_available_to_staff
         slots_dict['is_disabled'] = slot.is_disabled
         slots_dict['start'] = slot.start
