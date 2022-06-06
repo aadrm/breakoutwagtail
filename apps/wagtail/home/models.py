@@ -257,7 +257,8 @@ class CouponsPage(RoutablePageMixin, MyPage):
         return render(request, 'booking/view_coupon.html', context)
     # def serve(self, request):
     #     return  HttpResponseRedirect(reverse('booking:coupons'))
-    
+
+
 class CookieSettingsPage(LinkPage):
 
     max_count = 1

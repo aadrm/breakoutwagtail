@@ -1,6 +1,6 @@
 .richtext {
     li {
-        margin: 12px 0;
+        margin: 4px 0;
         left: 24px;
         position: relative;
     }
@@ -63,28 +63,28 @@
         font-size: $font--md;
         font-weight: bold;
       }
-      .review__text {
-        position: relative;
-        font-style: italic;
-        &::before,
-        &::after {
-          position: absolute;
-          content: "'";
-          font-size: $font--ll;
-        }
-        &::before {
-          content: "\201c";
-          top: 0;
-          left: 0;
-          transform: translate(-100%);
-        }
-        &::after {
-          content: "\201d";
-          bottom: 0;
-          right: 0;
-          transform: translate(100%);
-        }
-      }
+    //   .review__text {
+    //     position: relative;
+    //     font-style: italic;
+    //     &::before,
+    //     &::after {
+    //       position: absolute;
+    //       content: "'";
+    //       font-size: $font--ll;
+    //     }
+    //     &::before {
+    //       content: "\201c";
+    //       top: 0;
+    //       left: 0;
+    //       transform: translate(-100%);
+    //     }
+    //     &::after {
+    //       content: "\201d";
+    //       bottom: 0;
+    //       right: 0;
+    //       transform: translate(100%);
+    //     }
+    //   }
     }
     .review-show {
       display: block;

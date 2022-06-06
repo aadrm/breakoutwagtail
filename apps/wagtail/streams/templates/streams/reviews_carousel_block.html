@@ -2,13 +2,13 @@
 {% load static %}
 {% load i18n %}
 
-<div class="block-reviews">
-    <div class="block-reviews__inner">
+<div class="block-reviews w-100">
+    <div class="block-reviews__inner position-relative">
     {% for review in reviews %}
     <div class="review {% if forloop.counter == 1 %}review-show{% endif %}">
-        <div class="review__content">
+        <div>
         {% if review.name %}
-        <p class="review__name">
+        <p class="fw-bold">
         {{review.name}} 
         {% if review.platform.icon %}{% else %}
         ({{review.platform.name}})
@@ -25,7 +25,7 @@
                 {% endfor %}
             </span>
         </div>
-        <p class="review__text">
+        <p class="fst-italic text-muted">
             {{ review.review }}
         </p>
         {% if review.platform.link %}

@@ -2,13 +2,26 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% block stream %}
-    <main>
-        <section class="c-section-light">
-            <div class="c-wrapper--md info-content {% if self.is_numbered %}enumerate-paragraphs{% endif %}">
-                {% for block in page.content %}
-                    {% include_block block %}
-                {% endfor %}
-            </div>
-        </section>
-    </main>
+<style>
+  body {counter-reset: paragraph;}
+  .enumerate-paragraphs {
+    background: #3331;
+    border-radius: 1rem;
+  }
+  .enumerate-paragraphs h2::before {
+    counter-increment: paragraph;
+    content: counter(paragraph)". ";
+  }
+</style>
+<main>
+  <section>
+    <div class="container my-5">
+      <div class="p-4 {% if self.is_numbered %}enumerate-paragraphs{% endif %}">
+          {% for block in page.content %}
+              {% include_block block %}
+          {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
 {% endblock stream %}

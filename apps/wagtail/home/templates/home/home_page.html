@@ -44,7 +44,7 @@
     </div>
 </section>
 
-<section class="bg-dark text-light py-5">
+{% comment %} <section class="bg-dark text-light py-5">
     <span id="online" class="c-id-offset"></span>
     <div class=" container">
         {% if page.online_header %}
@@ -59,24 +59,7 @@
         {% endif %}
         {% include 'home/section_online.html' %}
     </div> 
-</section>
-
-<section class="bg-primary py-5">
-    <span id="prices" class="c-id-offset"></span>
-    <div class="text-center container">
-        {% if page.prices_header %}
-        <h2 class="text-light breakout-font">{{ page.prices_header }}</h2>
-        <br>
-        {% endif %}
-        {% if page.prices_text %}
-        <div class="text-dark">
-            {{ page.prices_text|safe}}
-        </div>
-        <br>
-        {% endif %}
-    {% include 'home/section_prices.html' %}
-    </div>
-</section>
+</section> {% endcomment %}
 
 <section class="bg-dark text-light py-5">
     <span id="video" class="c-id-offset"></span>
@@ -96,8 +79,32 @@
 </section>
 
 
-{% if page.reviews %}
 <section class="bg-light py-5">
+    <span id="contact" class="c-id-offset"></span>
+    <div class="container">
+    {% include 'home/section_location.html' %}
+    </div>
+</section>
+
+<section class="bg-primary py-5">
+    <span id="prices" class="c-id-offset"></span>
+    <div class="text-center container">
+        {% if page.prices_header %}
+        <h2 class="text-light breakout-font">{{ page.prices_header }}</h2>
+        <br>
+        {% endif %}
+        {% if page.prices_text %}
+        <div class="text-dark">
+            {{ page.prices_text|safe}}
+        </div>
+        <br>
+        {% endif %}
+    {% include 'home/section_prices.html' %}
+    </div>
+</section>
+
+{% if page.reviews %}
+<section class="text-bg-light py-5">
     <div class="container text-center">
         {% if page.reviews_header %}
         <h2 class="breakout-font">{{ page.reviews_header }}</h2>
@@ -116,7 +123,7 @@
 </section>
 {% endif %}
 
-<section class="py-5 bg-dark text-light">
+{% comment %} <section class="py-5 bg-dark text-light">
     <span id="faq" class="c-id-offset"></span>
     <div class="container">
         <h2 class="breakout-font text-center">{% trans "Frequently Asked Questions" %}</h2>
@@ -127,17 +134,7 @@
             {% endfor %} 
         </div>
     </div>
-    {% comment %} {% include 'section_faq.html' %} {% endcomment %}
-</section>
-
-<section class="bg-light py-5">
-    <span id="contact" class="c-id-offset"></span>
-    {% comment %} {% include 'home/section_context-centert.html' %} {% endcomment %}
-    {% comment %} <br><br><br> {% endcomment %}
-    <div class="container">
-    {% include 'home/section_location.html' %}
-    </div>
-</section>
+</section> {% endcomment %}
 
 </main>
 
@@ -145,7 +142,7 @@
 
 {% block extra_js %}
     {{ block.super }}
-    <script async type="module" src=" {% static 'js/accordion.js' %}"></script>
+    {% comment %} <script async type="module" src=" {% static 'js/accordion.js' %}"></script> {% endcomment %}
     <script async type="module" src =" {% static 'js/deffer.js' %}" ></script>
 
 {% endblock extra_js %}

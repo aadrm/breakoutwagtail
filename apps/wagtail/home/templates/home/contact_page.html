@@ -1,0 +1,15 @@
+{% extends 'base_secondary.html' %}
+{% load static %}
+{% load i18n %}
+{% load wagtailcore_tags %}
+
+{% block page_title %}{{ page.title }}{% endblock page_title %}
+{% block content %}
+{{ block.super }}
+<section class="bg-light py-5">
+    <span id="contact" class="c-id-offset"></span>
+    <div class="container">
+    {% include 'home/section_location.html' %}
+    </div>
+</section>
+{% endblock content %}

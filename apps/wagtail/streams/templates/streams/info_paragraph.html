@@ -1,8 +1,7 @@
-<div class="info-paragraph">
-    <div class="info-paragraph__header-wrapper">
-        <h2 class="info-paragraph__title">{{self.title}}</h2>
-    </div>
-    <div class="info-paragraph__body-wrapper">
-        {{self.rich_text}}
+{% load wagtailcore_tags %}
+<div class="row text-muted">
+    <h2 class="h4 mb-2">{{self.title}}</h2>
+    <div class="row mb-4 richtext">
+        {{ self.rich_text|richtext }}
     </div>
 </div>
