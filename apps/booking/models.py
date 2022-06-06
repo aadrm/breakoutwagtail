@@ -57,8 +57,9 @@ class Cart(models.Model):
     def apply_coupons(self):
         self.reset_cart_items()
         self.clear_non_valid_items()
+        cart_coupons = self.cart_coupons.all()
         cart_items = self.cart_items.all()
-        for coupon in cart_items:
+        for coupon in cart_coupons:
             try:
                 cp = coupon.coupon
                 applicable_products = cp.products_applicable_queryset()
