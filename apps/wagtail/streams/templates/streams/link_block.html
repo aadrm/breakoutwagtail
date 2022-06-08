@@ -6,7 +6,7 @@ style="
 >
 <a class="btn btn-outline-primary rounded-0"
 style = "{% if self.properties.full_width %}display: block;{% endif %}"
-{% if self.properties.noopener %}rel="noopener"{% endif %}
+{% if self.properties.noopener %}rel="noopener"{% elif self.properties.nofollow %}rel="nofollow"{% endif %}
 {% if self.properties.new_tab %}target="_blank"{% endif %}
 href="{{ self.properties.page_link.url }}{{ self.properties.url_link }}"
 >
