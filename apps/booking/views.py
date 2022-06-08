@@ -213,9 +213,12 @@ def add_product(request):
 
 def add_coupon_by_code(request, coupon_code):
     cart = get_cart(request)
-    coupon = Coupon.objects.get(code=coupon_code)
-    cart_coupon = CartCoupon(coupon=coupon, cart=cart)
-    cart_coupon.save(request=request)
+    try:
+        coupon = Coupon.objects.get(code=coupon_code)
+        cart_coupon = CartCoupon(coupon=coupon, cart=cart)
+        cart_coupon.save(request=request)
+    except Exception as e:
+        pass
     return HttpResponseRedirect(request.build_absolute_uri('/book/'))
         
 def add_product_by_id(request, product_id):
