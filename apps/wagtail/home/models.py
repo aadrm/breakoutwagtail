@@ -133,9 +133,6 @@ class MyPage(Page):
         ])
         return edit_handler.bind_to(model=cls)
 
-
-
-
 class LinkPage(MyPage):
 
     class Meta:
@@ -146,7 +143,6 @@ class LinkPage(MyPage):
         FieldPanel('slug')
 
     ]
-
 
 class BooknowPage(RoutablePageMixin, MyPage):
 

@@ -101,13 +101,22 @@
         <script type="application/ld+json">
             {% include "schema/schema_website.json" %}
         </script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics" async src="https://www.googletagmanager.com/gtag/js?id=G-WRZKSYSX4L"></script>
+        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-WRZKSYSX4L');
+        </script>
+        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">function loadscript(a){var b=document.getelementsbytagname("head")[0],c=document.createelement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendchild(c)}loadscript(function(){betracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
 
         {% if page.extra_schema %}
         <script type="application/ld+json">
             {{ extra_schema }}
         </script>
         {% endif %}
-
 
     </head>
 
@@ -124,7 +133,7 @@
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
-        <noscript>
+        <noscript type="{% js_type_for_cookie_consent request "analytics" %}">
           <img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=771246953533666&ev=PageView&noscript=1"/>
         </noscript>
@@ -140,7 +149,5 @@
             fbq('init', '771246953533666');
             fbq('track', 'PageView');
         </script>
-        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-155197583-1');</script>
-        <script type="{% js_type_for_cookie_consent request "analytics" %}" data-varname="analytics">function loadScript(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.type="text/javascript",c.src="https://tracker.metricool.com/resources/be.js",c.onreadystatechange=a,c.onload=a,b.appendChild(c)}loadScript(function(){beTracker.t({hash:"7536ecf8e99e15c9fe6647b0fa5d9b7f"})});</script>
     </body>
 </html>
