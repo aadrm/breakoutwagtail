@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: apps/wagtail/myblog/templates/myblog/blog_post.html:34
 msgid "Continue reading"
-msgstr "Weiter Kaufen"
+msgstr "Weiter lessen"
 
 #: apps/wagtail/streams/models.py:10
 msgid "Review Family"
