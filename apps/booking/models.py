@@ -905,9 +905,6 @@ class Product(models.Model):
         return reverse("Product_detail", kwargs={"pk": self.pk})
 
 
-
-
-
 class ProductFamily(models.Model):
     """
     The purpose of this class is to provide a way to group products into families.
@@ -1113,7 +1110,7 @@ class Schedule(models.Model):
     
     def delete_slots(self):
         """deletes slots that are part of this Schedule and that have no related booking"""
-        Slot.objects.filter(schedule=self).filter(booking__isnull=True, is_disabled=False).delete()
+        Slot.objects.filter(schedule=self).filter(cart_items__isnull=True, is_disabled=False).delete()
 
                 
 class Slot(models.Model):
