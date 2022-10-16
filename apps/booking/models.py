@@ -1,29 +1,20 @@
-import traceback
-from random import randint
+from datetime import date, datetime, timedelta
 from decimal import Decimal
-from datetime import datetime, timedelta, time, date
+from random import randint
 
-from django.urls import reverse
-from django.utils.crypto import get_random_string
-from django.utils.translation import gettext as _
-from django.utils import timezone
-from django.utils.timezone import make_aware, is_aware
-from django.db import models, transaction
 from django.conf import settings
 from django.contrib import messages
-from django.core.exceptions import ValidationError
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.template.loader import render_to_string, get_template
-from breakout.utils import get_booking_settings, textify
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.urls import reverse
+from django.utils import timezone
+from django.utils.crypto import get_random_string
+from django.utils.timezone import make_aware
+from django.utils.translation import gettext as _
+from weasyprint import CSS, HTML
 
+from breakout.utils import addmins, get_booking_settings, textify
 
-from weasyprint import HTML, CSS
-# from phonenumber_field.modelfields import PhoneNumberField
-
-from breakout.utils import addmins
-
-
-# Create your models here
 
 class Cart(models.Model):
     """
@@ -836,8 +827,6 @@ class Invoice(models.Model):
             self.order_int = self.order_next_int()
             self.order_number = self.create_order_number()
         self.save()
-
-        
 
 
 class Payment(models.Model):
