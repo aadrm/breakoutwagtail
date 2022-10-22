@@ -1,0 +1,4 @@
+# Ignore everything in this directory    Francisco Ceruti, 10 Jun 2019 • Add empty required directories
+*                                                                               
+# Except this file                                                              
+!.gitignore                                                                     
