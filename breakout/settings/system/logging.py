@@ -45,7 +45,7 @@ LOGGERS = (
             "propagate": False,
         },
         "django.request": {
-            "handlers": ["my_handler"],
+            "handlers": ["default_handler"],
             "level": "WARNING",
             "propagate": False,
         },
