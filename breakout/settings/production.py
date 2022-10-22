@@ -78,7 +78,6 @@ LOGGING = {
         },
     }
 }
-Code inside settings.py
 
 FORMATTERS = (
     {
