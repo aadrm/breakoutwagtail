@@ -18,10 +18,10 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.messages import constants as messages
 
 try:
-    with open('/etc/breakout_config.json') as config_file:
+    with open('/etc/breakout_config.json', encoding='utf-8') as config_file:
         config = json.load(config_file)
 except Exception:
-    with open('~/Documents/dev/srv/breakout/breakout_config.json') as config_file:
+    with open('~/Documents/dev/srv/breakout/breakout_config.json', encoding='utf-8') as config_file:
         config = json.load(config_file)
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
