@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.utils.timezone import make_aware, is_aware
 from django.db import models, transaction
 from django.conf import settings
+from django.db.models import Q
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -62,23 +63,20 @@ class Cart(models.Model):
         for coupon in cart_coupons:
             try:
                 cp = coupon.coupon
-                applicable_products = cp.products_applicable_queryset()
-                applied = False
                 #  used for cases where a fixed amount discount that applies to the entire basquet
                 #  has more value than the current item of the basquet, so the rest of the coupon
                 #  will be applied to the next item
                 cumulative_discount = 0
                 for item in cart_items:
-                    applicable_to_product = cp.is_applicable(item.product, applicable_products)
-                    applicable_to_slot = False
+                    applicable_to_product = cp.is_applicable(item.product)
+                    allowed_in_slot_day = True
                     if item.slot:
-                        if item.slot.start.weekday() in cp.dow_as_integerlist:
-                            applicable_to_slot = True
-                    if applicable_to_product and applicable_to_slot:
+                        if not item.slot.start.weekday() in cp.dow_as_integerlist:
+                            allowed_in_slot_day = False
+                    if applicable_to_product and allowed_in_slot_day:
                         if coupon.no_coupon_conflict(item):
                             cumulative_discount = coupon.add_to_cart_item(item, cumulative_discount)
-                            applied = True
-                            if not(cp.is_apply_to_basket) or not(cp.is_percent) and cumulative_discount >= cp.amount:
+                            if not (cp.is_apply_to_basket) or not (cp.is_percent) and cumulative_discount >= cp.amount:
                                 break
             except Exception as e:
                 print(e)
@@ -470,6 +468,7 @@ class CartItem(models.Model):
     def get_admin_url(self):
         return reverse("admin:%s_%s_change" % (self._meta.app_label, self._meta.model_name), args=(self.id,))
 
+
 class CartCoupon(models.Model):
 
     coupon = models.ForeignKey("booking.Coupon", verbose_name=_("Cart Coupon"), null=True, on_delete=models.SET_NULL, )
@@ -657,7 +656,7 @@ class Coupon(models.Model):
         super(Coupon, self).save(*args, **kwargs)
 
     def code_save(obj):
-        allowed_chars = ('ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789')
+        allowed_chars = ('ABCDEFGHJKLMNPQRSTUVWXYZ23456789')
         in_set = type(obj).objects.all()
         
         if not obj.code:
@@ -693,33 +692,24 @@ class Coupon(models.Model):
 
         for family in families:
             family_products = family.products.all()
-            products = (products | family_products).distinct()
+            products = (products | family_products)
 
         return products.distinct()
 
     def products_applicable_queryset(self):
         """returns a queryset to with the products to which the coupon is applicable to"""
         if self.products_included_queryset():
-            products = self.products_included_queryset()
+            included_products = self.products_included_queryset()
         else:
-            products = Product.objects.all()
+            included_products = Product.objects.all()
 
         excluded_products = self.products_excluded_queryset()
+        products = Product.objects.filter(pk__in=included_products).exclude(pk__in=excluded_products)
         return products
 
-    def is_applicable(self, product, products):
+    def is_applicable(self, product):
         """checks wether the may be applied to certain product"""
-        applicable = False
-        applicable = self.is_applicable_by_product(product, products)
-        return applicable
-
-    def is_applicable_by_product(self, product, products):
-        """Checks if the product applicable by taking into consideration the included and excluded
-        products and product families"""
-        applicable = False
-        if product in products:
-            applicable = True
-        return applicable
+        return product in self.products_applicable_queryset()
 
     def apply_to_cart_item(self, item, cumulative_discount, cart_coupon):
         price = item.price
@@ -836,8 +826,6 @@ class Invoice(models.Model):
             self.order_int = self.order_next_int()
             self.order_number = self.create_order_number()
         self.save()
-
-        
 
 
 class Payment(models.Model):
