@@ -64,19 +64,22 @@ class Cart(models.Model):
         for coupon in cart_coupons:
             try:
                 cp = coupon.coupon
+                applicable_products = cp.products_applicable_queryset()
+                applied = False
                 #  used for cases where a fixed amount discount that applies to the entire basquet
                 #  has more value than the current item of the basquet, so the rest of the coupon
                 #  will be applied to the next item
                 cumulative_discount = 0
                 for item in cart_items:
-                    applicable_to_product = cp.is_applicable(item.product)
-                    allowed_in_slot_day = True
+                    applicable_to_product = cp.is_applicable(item.product, applicable_products)
+                    applicable_to_slot = False
                     if item.slot:
-                        if not item.slot.start.weekday() in cp.dow_as_integerlist:
-                            allowed_in_slot_day = False
-                    if applicable_to_product and allowed_in_slot_day:
+                        if item.slot.start.weekday() in cp.dow_as_integerlist:
+                            applicable_to_slot = True
+                    if applicable_to_product and applicable_to_slot:
                         if coupon.no_coupon_conflict(item):
                             cumulative_discount = coupon.add_to_cart_item(item, cumulative_discount)
+                            applied = True
                             if not (cp.is_apply_to_basket) or not (cp.is_percent) and cumulative_discount >= cp.amount:
                                 break
             except Exception as e:
