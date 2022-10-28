@@ -1,7 +1,7 @@
 """Coupon Model
 """
 from datetime import datetime, timedelta
-
+from django.utils.crypto import get_random_string
 from django.db import models
 from django.db.models import QuerySet
 
