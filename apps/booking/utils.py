@@ -16,7 +16,8 @@ from breakout.utils import get_booking_settings, booking_limit_date, textify
 
 from weasyprint import HTML, CSS
 
-from .models import Slot, ProductFamily, Room, Cart
+from .models import Slot, ProductFamily, Room
+from .cart.models import Cart
 
 def get_notification_emails_list():
     """returns a list of email addresses from the booking_settings email list"""

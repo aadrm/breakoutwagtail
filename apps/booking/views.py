@@ -56,17 +56,15 @@ from .utils import (
 )
 
 from .models import (
-    Room,
-    Cart,
     Invoice,
-    CartCoupon,
-    CartItem,
-    Coupon,
     PaymentMethod,
     Product,
     ProductFamily,
     Slot,
 )
+
+from .coupon.models import Coupon
+from .cart.models import Cart, CartCoupon, CartItem
 
 # overriden by routable page
 # def booking_calendars(request):

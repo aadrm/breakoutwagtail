@@ -6,9 +6,12 @@ from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
 from . import views
-from .models import (Cart, CartCoupon, CartItem, Coupon, Invoice, Payment,
+from .models import (Invoice, Payment,
                      PaymentMethod, Product, ProductFamily, Room, Schedule,
                      Slot)
+
+from .cart.models import Cart, CartCoupon, CartItem
+from .coupon.models import Coupon
 
 
 class TabularInlineCartItems(admin.TabularInline):
