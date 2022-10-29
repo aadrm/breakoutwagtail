@@ -4,12 +4,14 @@ from django.utils.translation import gettext as _
 from decimal import Decimal
 
 from django.contrib import messages
+from django.utils import timezone
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
-from breakout.utils import textify
+from breakout.utils import textify, get_booking_settings
 from django.conf import settings
 
 from ..models import PaymentMethod
+from apps.booking.coupon.models import Coupon
 
 from weasyprint import HTML, CSS
 

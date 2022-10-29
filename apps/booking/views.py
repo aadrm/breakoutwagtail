@@ -14,6 +14,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -131,16 +132,23 @@ def purchase(request):
         # choices can be made as the selected option.
         # This hack replaces the original queryset for a new queryset with only the
         # selected option
+        print('before the payment')
         payment = PaymentMethod.objects.filter(pk=request.POST.get('payment'))
         form.fields['payment'].queryset = payment
 
+        print('before form errors')
         print(form.errors)
         if form.is_valid():
+            print('valid form')
             cart.extend_items_expiration()
+            print('after extend expiration')
             invoice = form.save()
+            print(' after form saved')
             cart.update_valid_items()
+            print('cart update')
             cart.invoice = invoice
             cart.save()
+            print('after cart save')
             if cart.process_purchase():
                 print('process_purchase', cart.total)
                 try:
@@ -373,6 +381,7 @@ def ajax_refresh_invoice(request):
 @csrf_exempt
 def ajax_refresh_item(request):
     cart = get_cart(request)
+    print('ajax refresh item')
     if request.method == 'POST':
         data = json.loads(request.body)
         if data.get('item'):
@@ -404,7 +413,7 @@ def ajax_refresh_coupon(request):
             
             try:
                 coupon = Coupon.objects.get(code=code)
-            except Coupon.DoesNotExist:
+            except ObjectDoesNotExist:
                 coupon = None
                 if len(code) > 0:
                     messages.add_message(
