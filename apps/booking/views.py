@@ -758,25 +758,24 @@ def change_slot(request):
         cart_item = CartItem.objects.get(pk=cart_item_id)
         current_product = cart_item.product
 
-        if new_slot.is_available:
-            cart_item.slot = new_slot
-            # change the product to be aligned with the corresponding room
-            # in case it was changed
-            if not (new_slot.room == cart_item.product.family.room):
-                valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
-                valid_products = Product.objects.filter(family__in=valid_families)
-                valid_products = valid_products.order_by('price')
-                new_product = valid_products[0]
-                # search for a suitable product
-                for product in valid_products:
-                    print(product.price, current_product.price)
-                    if product.price > current_product.price:
-                        break
-                    else:
-                        new_product = product
+        cart_item.slot = new_slot
+        # change the product to be aligned with the corresponding room
+        # in case it was changed
+        if not (new_slot.room == cart_item.product.family.room):
+            valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
+            valid_products = Product.objects.filter(family__in=valid_families)
+            valid_products = valid_products.order_by('price')
+            new_product = valid_products[0]
+            # search for a suitable product
+            for product in valid_products:
+                print(product.price, current_product.price)
+                if product.price > current_product.price:
+                    break
+                else:
+                    new_product = product
 
-                cart_item.product = new_product
-            cart_item.save()
+            cart_item.product = new_product
+        cart_item.save()
     return HttpResponseRedirect(redirectto)
 
 @staff_member_required

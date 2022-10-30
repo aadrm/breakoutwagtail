@@ -420,7 +420,10 @@ class Slot(models.Model):
 
     @property
     def is_available(self):
-        return not self.is_reserved() and not self.is_affected_by_buffer() and not self.is_disabled
+        return not self.is_reserved() \
+            and not self.is_affected_by_buffer() \
+            and not self.is_disabled \
+            and self._is_future
 
     @property
     def is_available_to_staff(self):
@@ -443,11 +446,11 @@ class Slot(models.Model):
     def is_future_of_buffer(self):
         this_moment = timezone.now()
         buffer = this_moment + timedelta(minutes=get_booking_settings().slot_buffer_time)
-        if self.start > buffer:
-            return True
-        else:
-            return False
-        
+        return self.start > buffer
+
+    def _is_future(self):
+        return self.start > timezone.now()
+ 
     def is_adjacent_after_to_taken_slot(self):
         slots = self.get_before_after_minutes_slots(20, 110)
         for slot in slots:

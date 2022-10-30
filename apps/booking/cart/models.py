@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from decimal import Decimal
 
 from django.contrib import messages
+from django.urls import reverse
 from django.utils import timezone
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
