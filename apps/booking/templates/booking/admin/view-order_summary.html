@@ -63,17 +63,30 @@
     <tbody>
     <tr>
         <td class="p-2">
-            <span>
-            {{order.invoice.order_number}}
-            </span>
-            <span>
-                <form action="{% url 'admin:delete_order' %}" method="POST">
-                    {% csrf_token %}
-                    <input name="cart_id" value="{{ order.pk }}" type="hidden">
-                    <input name="frompage" value="orders_list" type="hidden">
-                    <button class="button button-small button-secondary no">Delete</button> 
-                </form> 
-              </span>
+          <span>
+            <form action="{% url 'admin:resend_email' %}" method="POST">
+                {% csrf_token %}
+                <input name="cart_id" value="{{ order.pk }}" type="hidden">
+                <input name="frompage" value="orders_list" type="hidden">
+                <button class="button button-small button-primary"  onclick="return confirm('Resend email?')" >Resend</button> 
+            </form> 
+          </span>
+          <span>
+            <form action="{% url 'admin:delete_order' %}" method="POST">
+                {% csrf_token %}
+                <input name="cart_id" value="{{ order.pk }}" type="hidden">
+                <input name="frompage" value="orders_list" type="hidden">
+                <button class="button button-small button-secondary no"  onclick="return confirm('Delete order? All details will be lost')" >Delete</button> 
+            </form> 
+          </span>
+        </td>
+        <td class="p-2">
+          <span>
+            {{ order.invoice.order_number }}
+          </span>
+          <span>
+            id:{{ order.invoice.cart }}
+          </span>
         </td>
         <td class="p-2">{{order.invoice.full_name}}</td>
         <td class="p-2">{{order.invoice.email}}</td>

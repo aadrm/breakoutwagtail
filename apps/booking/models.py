@@ -10,10 +10,6 @@ from django.utils import timezone
 from django.utils.timezone import make_aware, is_aware
 from django.db import models, transaction
 from django.conf import settings
-from django.db.models import Q
-from django.contrib import messages
-from django.core.exceptions import ValidationError
-from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
 from breakout.utils import get_booking_settings, textify
 
@@ -311,7 +307,7 @@ class Schedule(models.Model):
         for schedule in schedules:
             if schedule.end_time <= self.start_time:
                 pk_intersects.append(schedule.pk)
-        
+
         for pk in pk_intersects:
             schedules = schedules.exclude(pk=pk)
 
@@ -342,7 +338,6 @@ class Schedule(models.Model):
         if schedules:
             schedules = self.get_schedules_same_dow(schedules)
         return schedules
-            
 
     def create_new_slots(self):
         """returns a list of Slot objects corresponding to the schedule"""
@@ -366,7 +361,7 @@ class Schedule(models.Model):
                     slot.save()
                     curr_time = addmins(curr_time, self.duration + self.interval)
             curr_date = curr_date + timedelta(days=1)
-    
+
     def dow_as_binarylist(self):
         """returns a list of binary digits from converting the integer that represents the days of the week
         for instance int 1 is 0000001 binary and represents mondays only, 127 is 1111111, which would represent
@@ -386,7 +381,7 @@ class Schedule(models.Model):
                 if slot.is_same_time(next_slot):
                     collision = True
         return collision
-    
+
     def delete_slots(self):
         """deletes slots that are part of this Schedule and that have no related booking"""
         Slot.objects.filter(schedule=self).filter(cart_items__isnull=True, is_disabled=False).delete()
@@ -414,15 +409,15 @@ class Slot(models.Model):
     
     class Meta:
         ordering = ['room', 'start']
-    
+
     @property
     def end(self):
         return self.start + timedelta(minutes=self.duration + self.interval)
-    
+
     @property
     def session_end(self):
         return self.start + timedelta(minutes=self.duration)
-        
+
     @property
     def is_available(self):
         return not self.is_reserved() and not self.is_affected_by_buffer() and not self.is_disabled
@@ -435,14 +430,13 @@ class Slot(models.Model):
         for item in self.cart_items.all():
             if item.status > 0:
                 return True
-    
+ 
     def is_reserved(self):
         for item in self.cart_items.all():
             if item.status > 0 or (item.status == 0 and item.item_expiry() >= timezone.now()):
                 return True
         return False 
-    
-    
+
     def is_affected_by_buffer(self):
         return not self.is_future_of_buffer() and not self.is_adjacent_after_to_taken_slot()
 

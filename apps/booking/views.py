@@ -136,24 +136,16 @@ def purchase(request):
         payment = PaymentMethod.objects.filter(pk=request.POST.get('payment'))
         form.fields['payment'].queryset = payment
 
-        print('before form errors')
         print(form.errors)
         if form.is_valid():
-            print('valid form')
             cart.extend_items_expiration()
-            print('after extend expiration')
             invoice = form.save()
-            print(' after form saved')
             cart.update_valid_items()
-            print('cart update')
             cart.invoice = invoice
             cart.save()
-            print('after cart save')
             if cart.process_purchase():
-                print('process_purchase', cart.total)
                 try:
                     send_cart_emails(cart)
-                    print('sent emails', cart.total)
                 except Exception as e:
                     traceback.print_exc()
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
@@ -614,15 +606,11 @@ def order_summary(request, search=None):
             | Q(invoice__email__icontains=search)
             | Q(invoice__order_number__icontains=search)
         )
-
-
-
     if start_date_filter and not search:
         orders = orders.filter(invoice__order_date__gte=start_date_filter)
     if end_date_filter and not search:
         end_date_filter = end_date_filter + timedelta(days=1)
         orders = orders.filter(invoice__order_date__lt=end_date_filter)
-    orders = orders[:150]
     order_count = 0
     order_total_price = 0 
     for order in orders:
@@ -630,7 +618,6 @@ def order_summary(request, search=None):
         order_total_price += order.total
     
     order_average = order_total_price / order_count if order_count else 0
-        
 
     context = {
         'form': form,
@@ -801,7 +788,17 @@ def delete_order(request):
         cart = Cart.objects.get(pk=cart_id)
         cart.delete_order()
 
-    return HttpResponseRedirect(redirectto)
+        return HttpResponseRedirect(redirectto)
+
+@staff_member_required
+def resend_email(request):
+    if request.method == 'POST':
+        frompage = request.POST.get('frompage')
+        redirectto = reverse(frompage)
+        cart_id = request.POST.get('cart_id')
+        cart = Cart.objects.get(pk=cart_id)
+        cart.send_cart_emails()
+        return HttpResponseRedirect(redirectto)
 
 
 @staff_member_required
@@ -846,6 +843,7 @@ def record_payment(request):
         'inv_list': invoices_list,
     }
     return render(request, 'booking/admin/view-record_payment.html', context)
+
 
 @staff_member_required
 def slots_calendar(request):
