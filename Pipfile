@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "<3.2,>=3.1"
+wagtail = "<2.13,>=2.12"
+docutils = "==0.18.1"
+django-bootstrap-v5 = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

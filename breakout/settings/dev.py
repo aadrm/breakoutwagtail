@@ -1,5 +1,5 @@
 from .base import *
-from .system import *
+# from .system import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True 
@@ -29,6 +29,7 @@ PAYPAL_RECEIVER_EMAIL = 'sb-g47btr4711513@business.example.com'
 RECAPTCHA_PUBLIC_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI' 
 RECAPTCHA_PRIVATE_KEY = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe' 
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
 
 try:
     from .local import *

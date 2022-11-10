@@ -5,7 +5,8 @@ from django.utils.translation import gettext as _
 
 # from phonenumber_field.formfields import PhoneNumberField
 
-from .models import Slot, Product, Invoice, Coupon, Room, Payment, PaymentMethod
+from .models import Slot, Product, Invoice, Room, Payment, PaymentMethod
+from .coupon.models import Coupon
 from .utils import getProductsFromProductFamily
 from paypal.standard.forms import PayPalPaymentsForm
 

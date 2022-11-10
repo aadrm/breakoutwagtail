@@ -1,6 +1,7 @@
 from paypal.standard.models import ST_PP_COMPLETED, ST_PP_PENDING
 from paypal.standard.ipn.signals import valid_ipn_received, invalid_ipn_received
-from .models import Cart, PaymentMethod, Invoice, Payment
+from .models import PaymentMethod, Invoice, Payment
+from .cart.models import Cart
 from .forms import InvoiceForm
 from .utils import send_cart_emails
 from django.conf import settings

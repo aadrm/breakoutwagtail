@@ -14,6 +14,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -56,17 +57,15 @@ from .utils import (
 )
 
 from .models import (
-    Room,
-    Cart,
     Invoice,
-    CartCoupon,
-    CartItem,
-    Coupon,
     PaymentMethod,
     Product,
     ProductFamily,
     Slot,
 )
+
+from .coupon.models import Coupon
+from .cart.models import Cart, CartCoupon, CartItem
 
 # overriden by routable page
 # def booking_calendars(request):
@@ -133,6 +132,7 @@ def purchase(request):
         # choices can be made as the selected option.
         # This hack replaces the original queryset for a new queryset with only the
         # selected option
+        print('before the payment')
         payment = PaymentMethod.objects.filter(pk=request.POST.get('payment'))
         form.fields['payment'].queryset = payment
 
@@ -144,10 +144,8 @@ def purchase(request):
             cart.invoice = invoice
             cart.save()
             if cart.process_purchase():
-                print('process_purchase', cart.total)
                 try:
                     send_cart_emails(cart)
-                    print('sent emails', cart.total)
                 except Exception as e:
                     traceback.print_exc()
                 return HttpResponseRedirect(reverse('booking:order', kwargs={'order': invoice.order_number}))
@@ -218,8 +216,13 @@ def add_coupon_by_code(request, coupon_code):
         cart_coupon = CartCoupon(coupon=coupon, cart=cart)
         cart_coupon.save(request=request)
     except Exception as e:
-        pass
-    return HttpResponseRedirect(request.build_absolute_uri('/book/'))
+        print(e)
+
+    base_uri = request.build_absolute_uri('/')
+    relative_path = request.GET.get('next', '')
+    next_page = f'{base_uri}{relative_path}'
+
+    return HttpResponseRedirect(next_page)
         
 def add_product_by_id(request, product_id):
     cart = get_cart(request)
@@ -375,6 +378,7 @@ def ajax_refresh_invoice(request):
 @csrf_exempt
 def ajax_refresh_item(request):
     cart = get_cart(request)
+    print('ajax refresh item')
     if request.method == 'POST':
         data = json.loads(request.body)
         if data.get('item'):
@@ -406,7 +410,7 @@ def ajax_refresh_coupon(request):
             
             try:
                 coupon = Coupon.objects.get(code=code)
-            except Coupon.DoesNotExist:
+            except ObjectDoesNotExist:
                 coupon = None
                 if len(code) > 0:
                     messages.add_message(
@@ -607,15 +611,11 @@ def order_summary(request, search=None):
             | Q(invoice__email__icontains=search)
             | Q(invoice__order_number__icontains=search)
         )
-
-
-
     if start_date_filter and not search:
         orders = orders.filter(invoice__order_date__gte=start_date_filter)
     if end_date_filter and not search:
         end_date_filter = end_date_filter + timedelta(days=1)
         orders = orders.filter(invoice__order_date__lt=end_date_filter)
-    orders = orders[:150]
     order_count = 0
     order_total_price = 0 
     for order in orders:
@@ -623,7 +623,6 @@ def order_summary(request, search=None):
         order_total_price += order.total
     
     order_average = order_total_price / order_count if order_count else 0
-        
 
     context = {
         'form': form,
@@ -764,25 +763,24 @@ def change_slot(request):
         cart_item = CartItem.objects.get(pk=cart_item_id)
         current_product = cart_item.product
 
-        if new_slot.is_available:
-            cart_item.slot = new_slot
-            # change the product to be aligned with the corresponding room
-            # in case it was changed
-            if not (new_slot.room == cart_item.product.family.room):
-                valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
-                valid_products = Product.objects.filter(family__in=valid_families)
-                valid_products = valid_products.order_by('price')
-                new_product = valid_products[0]
-                # search for a suitable product
-                for product in valid_products:
-                    print(product.price, current_product.price)
-                    if product.price > current_product.price:
-                        break
-                    else:
-                        new_product = product
+        cart_item.slot = new_slot
+        # change the product to be aligned with the corresponding room
+        # in case it was changed
+        if not (new_slot.room == cart_item.product.family.room):
+            valid_families = ProductFamily.objects.filter(room=cart_item.slot.room)
+            valid_products = Product.objects.filter(family__in=valid_families)
+            valid_products = valid_products.order_by('price')
+            new_product = valid_products[0]
+            # search for a suitable product
+            for product in valid_products:
+                print(product.price, current_product.price)
+                if product.price > current_product.price:
+                    break
+                else:
+                    new_product = product
 
-                cart_item.product = new_product
-            cart_item.save()
+            cart_item.product = new_product
+        cart_item.save()
     return HttpResponseRedirect(redirectto)
 
 @staff_member_required
@@ -794,7 +792,17 @@ def delete_order(request):
         cart = Cart.objects.get(pk=cart_id)
         cart.delete_order()
 
-    return HttpResponseRedirect(redirectto)
+        return HttpResponseRedirect(redirectto)
+
+@staff_member_required
+def resend_email(request):
+    if request.method == 'POST':
+        frompage = request.POST.get('frompage')
+        redirectto = reverse(frompage)
+        cart_id = request.POST.get('cart_id')
+        cart = Cart.objects.get(pk=cart_id)
+        cart.send_cart_emails()
+        return HttpResponseRedirect(redirectto)
 
 
 @staff_member_required
@@ -839,6 +847,7 @@ def record_payment(request):
         'inv_list': invoices_list,
     }
     return render(request, 'booking/admin/view-record_payment.html', context)
+
 
 @staff_member_required
 def slots_calendar(request):

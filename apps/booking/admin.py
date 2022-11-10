@@ -6,9 +6,12 @@ from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
 from . import views
-from .models import (Cart, CartCoupon, CartItem, Coupon, Invoice, Payment,
+from .models import (Invoice, Payment,
                      PaymentMethod, Product, ProductFamily, Room, Schedule,
                      Slot)
+
+from .cart.models import Cart, CartCoupon, CartItem
+from .coupon.models import Coupon
 
 
 class TabularInlineCartItems(admin.TabularInline):
@@ -72,6 +75,7 @@ class CartAdmin(admin.ModelAdmin):
             url(r'^change_product_list/$', self.admin_site.admin_view(views.change_product_list), name='change_product_list'),
             url(r'^change_product/$', self.admin_site.admin_view(views.change_product), name='change_product'),
             url(r'^delete_order/$', self.admin_site.admin_view(views.delete_order), name='delete_order'),
+            url(r'^resend_email/$', self.admin_site.admin_view(views.resend_email), name='resend_email'),
         ]
         return my_urls + urls
 
