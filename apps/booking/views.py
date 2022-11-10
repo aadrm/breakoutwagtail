@@ -216,8 +216,13 @@ def add_coupon_by_code(request, coupon_code):
         cart_coupon = CartCoupon(coupon=coupon, cart=cart)
         cart_coupon.save(request=request)
     except Exception as e:
-        pass
-    return HttpResponseRedirect(request.build_absolute_uri('/book/'))
+        print(e)
+
+    base_uri = request.build_absolute_uri('/')
+    relative_path = request.GET.get('next', '')
+    next_page = f'{base_uri}{relative_path}'
+
+    return HttpResponseRedirect(next_page)
         
 def add_product_by_id(request, product_id):
     cart = get_cart(request)
