@@ -35,15 +35,7 @@
         {% endfor %}
         </tbody>
         <tfoot>
-            {% if cart.total == cart.subtotal %}
-            <tr>
-                <td><b>{% trans "Total: " %}</b></td> 
-                <td></td>
-                <td></td>
-                <td class="s-tar"><b>€{{cart.total}}</b></td> 
-                <td></td>
-            </tr>
-            {% else %}
+            {% if cart.total != cart.subtotal %}
             <tr>
                 <td>{% trans "Subtotal: " %}</td> 
                 <td></td>
@@ -58,6 +50,7 @@
                 <td class="s-tar" style="color: green">-€{{cart.discount}}</td> 
                 <td></td>
             </tr>
+            {% endif %}
             <tr>
                 <td><b>{% trans "Total: " %}</b></td> 
                 <td></td>
@@ -66,7 +59,6 @@
                 <td></td>
             </tr>
 
-            {% endif %}
 
         </tfoot>
     </table>

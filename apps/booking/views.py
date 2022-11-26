@@ -201,7 +201,7 @@ def add_product(request):
         if form.is_valid():
             product = form.cleaned_data['product']
             print(product)
-            cart_item = CartItem(product=product, cart=cart)
+            cart_item = CartItem.create(product=product, cart=cart)
             cart_item.save()
 
             return HttpResponseRedirect(reverse('booking:checkout'))
@@ -227,7 +227,7 @@ def add_coupon_by_code(request, coupon_code):
 def add_product_by_id(request, product_id):
     cart = get_cart(request)
     product = Product.objects.get(pk=product_id)
-    cart_item = CartItem(product=product, cart=cart)
+    cart_item = CartItem.create(product=product, cart=cart)
     cart_item.save()
     return HttpResponseRedirect(reverse('booking:checkout'))
 
@@ -242,7 +242,7 @@ def slot_to_cart(request):
             product = form.cleaned_data['product']
             slot = Slot.objects.get(pk=slot_id)
             if slot.is_available:
-                booking = CartItem(slot=slot, product=product, cart=cart)
+                booking = CartItem.create(slot=slot, product=product, cart=cart)
                 booking.save()
                 return redirect(reverse('booking:checkout'))
             else:

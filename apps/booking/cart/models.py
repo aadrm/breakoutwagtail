@@ -260,7 +260,7 @@ class Cart(models.Model):
             'domain': 'breakout-escaperoom.de',
             'appointments': cart.get_appointment_items(),
             'coupons': cart.get_coupon_items(),
-            'payment': invoice.payment.method,
+            'payment': invoice.payment,
         }
 
         html_message = render_to_string(
@@ -338,6 +338,13 @@ class CartItem(models.Model):
     """
     Model that acts as a bridge between products and the cart
     """
+
+    @classmethod
+    def create(cls, product, cart, slot=None):
+        print('creating item')
+        print(product, product.price, cart)
+        return cls(product=product, base_price=product.price, cart=cart, slot=slot)
+
     slot = models.ForeignKey("booking.Slot", related_name="cart_items", verbose_name=_(
         "slot"), on_delete=models.SET_NULL, null=True, blank=True)
     coupon = models.ForeignKey("booking.Coupon", related_name="booking",
@@ -347,12 +354,15 @@ class CartItem(models.Model):
     cart = models.ForeignKey("booking.Cart", verbose_name=_("Cart"), related_name=_(
         "cart_items"), on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(_("created"), auto_now_add=True)
+    base_price = models.DecimalField(
+        _("Price"), max_digits=8, decimal_places=2)
     price = models.DecimalField(
-        _("Price"), max_digits=8, decimal_places=2, default=2)
+        _("Price"), max_digits=8, decimal_places=2)
     cart_coupons = models.ManyToManyField("booking.CartCoupon", verbose_name=_(
         "coupons"), related_name='cart_items', blank=True)
     marked_shipped = models.DateTimeField(
         _("Shipped"), auto_now=False, auto_now_add=False, null=True, blank=True)
+
 
     @property
     def is_appointment(self):
@@ -363,7 +373,7 @@ class CartItem(models.Model):
         True if self.product.family.is_coupon else False
 
     @property
-    def base_price(self):
+    def base_price_at_booking(self):
         discount = 0
         if self.slot:
             discount = self.slot.incentive_discount()
@@ -406,7 +416,7 @@ class CartItem(models.Model):
             return True
 
     def set_price(self):
-        self.price = Decimal(self.base_price)
+        self.price = Decimal(self.base_price_at_booking)
 
     def save(self, request=None, *args, **kwargs):
         """

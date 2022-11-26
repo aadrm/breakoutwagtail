@@ -10,12 +10,12 @@
         </tr>
         {% for item in cart.cart_items.all %}
         <tr class="js-cart-item">
-            <td>{{item.product}}</td> <td>€{{item.price}}</td>
+            <td>{{item.product}}</td> <td>€{{item.base_price}}</td>
         </tr>
         {% endfor %}
     </tbody>
     <tfoot class="email-border-top-broad">
-        {% if cart.discount > 0 %}
+        {% if cart.total != cart.subtotal %}
         <tr>
             <td class="email-cell c-top-broad"><b>{% trans "Subtotal:" %}</b></td>
             <td> €{{cart.total}}</td>
